@@ -9,7 +9,7 @@ IOS App made from scratch that helps users manage their personal expenses and lo
 • Delete one or all items of your transaction history <br />
 • Rename and delete budgets <br />
 
-# Algorithms
+# Design
 • CoreData allows for pertinent information to be stored regardless of whether or not the app is running <br />
 • Buttons enable and disable dynamically based on the validity of input <br />
 &nbsp;&nbsp;&nbsp;&nbsp;– Balance must be between $0 and $1,000,000 <br />
