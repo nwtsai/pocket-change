@@ -24,4 +24,7 @@ IOS App made from scratch that helps users manage their personal expenses and lo
 &nbsp;&nbsp;&nbsp;&nbsp;– If we don't need commas, balance is shown with two decimal places <br />
 &nbsp;&nbsp;&nbsp;&nbsp;– If we do need commas, balance has two decimal places only if needed <br />
 &nbsp;&nbsp;&nbsp;&nbsp;– For instance 999 is displayed as $999.00, 1000 is displayed as $1,000, and 1000.27 is displayed as $1,000.27 <br /> 
-    
+• Programmatically utilized alerts to record user input <br />
+• List of budgets and each budget's history is displayed using a UITableview <br />
+• Used IBOutlets to programmatically interact with user interface elements <br />
+• Defined an IBAction function that corrects button-enabling everytime the user types or deletes a character <br /> 
