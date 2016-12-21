@@ -11,7 +11,7 @@ IOS App made from scratch that helps users manage their personal expenses and lo
 
 # Design
 • CoreData allows for pertinent information to be stored regardless of whether or not the app is running <br />
-• Buttons enable and disable dynamically based on the validity of input <br />
+• Buttons enable and disable dynamically based on the validity of input: <br />
 &nbsp;&nbsp;&nbsp;&nbsp;– Balance must be between $0 and $1,000,000 <br />
 &nbsp;&nbsp;&nbsp;&nbsp;– Withdraw button only enables when your balance is enough based on current input <br />
 &nbsp;&nbsp;&nbsp;&nbsp;– Renaming actions require the new name to be unique <br />
