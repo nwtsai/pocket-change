@@ -17,7 +17,7 @@ class BudgetVariables: UIViewController
     // The current index always gets initialized as the index of the last budget
     static var currentIndex = budgetArray.count - 1
     
-    // This function fetches from coredata
+    // This function fetches from CoreData
     class func getData()
     {
         let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
