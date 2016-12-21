@@ -42,7 +42,7 @@ class BudgetListViewController: UIViewController, UITableViewDataSource, UITable
         super.viewWillAppear(animated)
         
         // Get data from CoreData
-        getData()
+        BudgetVariables.getData()
         
         // Reload the budget table
         self.budgetTable.reloadData()
@@ -96,7 +96,7 @@ class BudgetListViewController: UIViewController, UITableViewDataSource, UITable
                     self.sharedDelegate.saveContext()
                     
                     // Get data and reload the GroceryTable everytime confirm button is pressed
-                    self.getData()
+                    BudgetVariables.getData()
                     
                     // Set the new current index and reload the table
                     BudgetVariables.currentIndex = BudgetVariables.budgetArray.count - 1
@@ -199,21 +199,6 @@ class BudgetListViewController: UIViewController, UITableViewDataSource, UITable
             
             tableView.deleteRows(at: [indexPath], with: .fade)
             BudgetVariables.currentIndex = BudgetVariables.budgetArray.count - 1
-        }
-    }
-    
-    // This function fetches from coredata
-    func getData()
-    {
-        let context = sharedDelegate.persistentContainer.viewContext
-        
-        do
-        {
-            BudgetVariables.budgetArray = try context.fetch(MyBudget.fetchRequest())
-        }
-        catch
-        {
-            print("Fetching Failed")
         }
     }
 }

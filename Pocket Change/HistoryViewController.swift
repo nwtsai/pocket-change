@@ -51,7 +51,7 @@ class HistoryViewController: UIViewController, UITableViewDataSource, UITableVie
         super.viewWillAppear(animated)
         
         // Get data from CoreData
-        getData()
+        BudgetVariables.getData()
         
         // Reload the budget table
         self.historyTable.reloadData()        
@@ -60,10 +60,15 @@ class HistoryViewController: UIViewController, UITableViewDataSource, UITableVie
     // When the clear history button gets pressed, clear the history and disable button
     @IBAction func clearHistoryButtonWasPressed(_ sender: AnyObject)
     {
+        // Empty out arrays
         BudgetVariables.budgetArray[BudgetVariables.currentIndex].historyArray = [String]()
         BudgetVariables.budgetArray[BudgetVariables.currentIndex].descriptionArray = [String]()
+        
+        // Save context and get data
         self.sharedDelegate.saveContext()
-        self.getData()
+        BudgetVariables.getData()
+        
+        // Reload the table and disable the clear history button
         self.historyTable.reloadData()
         clearHistoryButton.isEnabled = false
     }
@@ -92,7 +97,6 @@ class HistoryViewController: UIViewController, UITableViewDataSource, UITableVie
         
         myCell.textLabel?.text = BudgetVariables.budgetArray[BudgetVariables.currentIndex].historyArray[indexPath.row]
         myCell.detailTextLabel?.text = BudgetVariables.budgetArray[BudgetVariables.currentIndex].descriptionArray[indexPath.row]
-        // myCell.imageView?.image = UIImage(named: historyArray)
         
         return myCell
     }
@@ -106,22 +110,7 @@ class HistoryViewController: UIViewController, UITableViewDataSource, UITableVie
             BudgetVariables.budgetArray[BudgetVariables.currentIndex].descriptionArray.remove(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .fade)
             self.sharedDelegate.saveContext()
-            self.getData()
-        }
-    }
-    
-    // This function fetches from coredata
-    func getData()
-    {
-        let context = sharedDelegate.persistentContainer.viewContext
-        
-        do
-        {
-            BudgetVariables.budgetArray = try context.fetch(MyBudget.fetchRequest())
-        }
-        catch
-        {
-            print("Fetching Failed")
+            BudgetVariables.getData()
         }
     }
 }

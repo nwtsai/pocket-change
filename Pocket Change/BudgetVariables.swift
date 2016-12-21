@@ -17,7 +17,21 @@ class BudgetVariables: UIViewController
     // The current index always gets initialized as the index of the last budget
     static var currentIndex = budgetArray.count - 1
     
-    // Universal number formatter function
+    // This function fetches from coredata
+    class func getData()
+    {
+        let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+        
+        do
+        {
+            budgetArray = try context.fetch(MyBudget.fetchRequest())
+        }
+        catch
+        {
+            print("Fetching Failed")
+        }
+    }
+    
     // If we don't need commas, return number as double precision
     // If we do need commas, return number as regular precision unless adding precision is more accurate
     // For instance myNum = 999 returns 999.00 and myNum = 1000 becomes 1,000

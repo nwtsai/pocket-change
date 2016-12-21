@@ -41,7 +41,7 @@ class WithdrawalViewController: UIViewController, UITextFieldDelegate
         super.viewWillAppear(animated)
         
         // Get data from CoreData
-        getData()
+        BudgetVariables.getData()
         
         // Set Navbar title and other labels
         self.navigationItem.title = BudgetVariables.budgetArray[BudgetVariables.currentIndex].name
@@ -93,7 +93,7 @@ class WithdrawalViewController: UIViewController, UITextFieldDelegate
                 self.sharedDelegate.saveContext()
                 
                 // Get data
-                self.getData()
+                BudgetVariables.getData()
             }
         })
         
@@ -140,7 +140,7 @@ class WithdrawalViewController: UIViewController, UITextFieldDelegate
         }
         
         self.sharedDelegate.saveContext()
-        self.getData()
+        BudgetVariables.getData()
         historyButton.isEnabled = true
     }
     
@@ -165,7 +165,7 @@ class WithdrawalViewController: UIViewController, UITextFieldDelegate
         }
         
         self.sharedDelegate.saveContext()
-        self.getData()
+        BudgetVariables.getData()
         historyButton.isEnabled = true
     }
     
@@ -242,21 +242,6 @@ class WithdrawalViewController: UIViewController, UITextFieldDelegate
     @IBAction func historyButtonPressed(_ sender: AnyObject)
     {
         performSegue(withIdentifier: "showHistory", sender: inputAmount.text)
-    }
-    
-    // This function fetches from coredata
-    func getData()
-    {
-        let context = sharedDelegate.persistentContainer.viewContext
-        
-        do
-        {
-            BudgetVariables.budgetArray = try context.fetch(MyBudget.fetchRequest())
-        }
-        catch
-        {
-            print("Fetching Failed")
-        }
     }
 }
 
