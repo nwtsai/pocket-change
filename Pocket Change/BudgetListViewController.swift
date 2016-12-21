@@ -92,10 +92,8 @@ class BudgetListViewController: UIViewController, UITableViewDataSource, UITable
                     budget.descriptionArray = [String]()
                     budget.historyArray = [String]()
                     
-                    // Save data to coredata
+                    // Save and get data to coredata
                     self.sharedDelegate.saveContext()
-                    
-                    // Get data and reload the GroceryTable everytime confirm button is pressed
                     BudgetVariables.getData()
                     
                     // Set the new current index and reload the table
