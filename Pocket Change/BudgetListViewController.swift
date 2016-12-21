@@ -45,7 +45,10 @@ class BudgetListViewController: UIViewController, UITableViewDataSource, UITable
         getData()
         
         // Reload the budget table
-        self.budgetTable.reloadData()        
+        self.budgetTable.reloadData()
+        
+        // Always set current index to reference the most recent budget
+        BudgetVariables.currentIndex = BudgetVariables.budgetArray.count - 1
     }
     
     // Use this variable to enable and disable the Save button
@@ -63,7 +66,7 @@ class BudgetListViewController: UIViewController, UITableViewDataSource, UITable
             textField.placeholder = "Amount from $0 to $1,000,000"
             textField.keyboardType = .decimalPad
             textField.delegate = self
-            textField.addTarget(self, action: #selector(self.textFieldDidChange(_:)), for: .editingChanged)
+            textField.addTarget(self, action: #selector(self.inputAmountDidChange(_:)), for: .editingChanged)
         })
         
         let cancel = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.default, handler: { (_) -> Void in
@@ -79,8 +82,8 @@ class BudgetListViewController: UIViewController, UITableViewDataSource, UITable
                     {
                         inputName = "Untitled Budget"
                     }
-                    // let budget = BudgetVariables(budgetName: inputName!, myBalance: inputAmount, historyArray: [String](), descriptionArray: [String]())
-                    // BudgetVariables.budgetArray.append(budget)
+                    
+                    inputName = BudgetVariables.createName(myName: inputName!, myNum: 0)
                     
                     let context = self.sharedDelegate.persistentContainer.viewContext
                     let budget = MyBudget(context: context)
@@ -95,8 +98,8 @@ class BudgetListViewController: UIViewController, UITableViewDataSource, UITable
                     // Get data and reload the GroceryTable everytime confirm button is pressed
                     self.getData()
                     
-                    // Increment current index and reload the table
-                    BudgetVariables.currentIndex += 1
+                    // Set the new current index and reload the table
+                    BudgetVariables.currentIndex = BudgetVariables.budgetArray.count - 1
                     self.budgetTable.reloadData()
                 }
             }
@@ -111,7 +114,7 @@ class BudgetListViewController: UIViewController, UITableViewDataSource, UITable
     }
     
     // This function disables the save button if the input amount is not valid
-    func textFieldDidChange(_ textField: UITextField)
+    func inputAmountDidChange(_ textField: UITextField)
     {
         // If the input is a number
         if let inputAmount = Double(textField.text!)
@@ -160,8 +163,7 @@ class BudgetListViewController: UIViewController, UITableViewDataSource, UITable
     {
         let myCell:UITableViewCell = self.budgetTable.dequeueReusableCell(withIdentifier: "clickableCell", for: indexPath)
         myCell.textLabel?.text = BudgetVariables.budgetArray[indexPath.row].name
-        myCell.detailTextLabel?.text = "Balance: $" + numFormat(myNum: BudgetVariables.budgetArray[indexPath.row].balance)
-        // myCell.imageView?.image = UIImage(named: historyArray)
+        myCell.detailTextLabel?.text = "Balance: $" + BudgetVariables.numFormat(myNum: BudgetVariables.budgetArray[indexPath.row].balance)
         
         return myCell
     }
@@ -169,6 +171,7 @@ class BudgetListViewController: UIViewController, UITableViewDataSource, UITable
     // When a cell is selected segue to corresponding view controller
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath)
     {
+        // Set current index to row # of cell pressed, then segue
         BudgetVariables.currentIndex = indexPath.row
         performSegue(withIdentifier: "viewBudget", sender: composeButton)
     }
@@ -181,8 +184,6 @@ class BudgetListViewController: UIViewController, UITableViewDataSource, UITable
         // If the deleting swipe motion happens, remove the budget from the budgetArray, decrement the currentIndex, and delete the row
         if editingStyle == .delete
         {
-            BudgetVariables.currentIndex -= 1
-            
             let budget = BudgetVariables.budgetArray[indexPath.row]
             context.delete(budget)
             sharedDelegate.saveContext()
@@ -197,26 +198,7 @@ class BudgetListViewController: UIViewController, UITableViewDataSource, UITable
             }
             
             tableView.deleteRows(at: [indexPath], with: .fade)
-        }
-    }
-    
-    // If we don't need commas, return number as double precision
-    // If we do need commas, return number as regular precision unless adding precision is more accurate
-    // For instance myNum = 999 returns 999.00 and myNum = 1000 becomes 1,000
-    // This saves screen space unless we need more space to be more precise
-    func numFormat(myNum: Double) -> String
-    {
-        let temp = String(format: "%.2f", myNum)
-        if myNum < 1000
-        {
-            return temp
-        }
-        else
-        {
-            let largeNumber = Double(temp)
-            let numberFormatter = NumberFormatter()
-            numberFormatter.numberStyle = NumberFormatter.Style.decimal
-            return numberFormatter.string(from: NSNumber(value: largeNumber!))!
+            BudgetVariables.currentIndex = BudgetVariables.budgetArray.count - 1
         }
     }
     

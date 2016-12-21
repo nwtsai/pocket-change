@@ -54,7 +54,7 @@ class HistoryViewController: UIViewController, UITableViewDataSource, UITableVie
         getData()
         
         // Reload the budget table
-        self.historyTable.reloadData()
+        self.historyTable.reloadData()        
     }
     
     // When the clear history button gets pressed, clear the history and disable button

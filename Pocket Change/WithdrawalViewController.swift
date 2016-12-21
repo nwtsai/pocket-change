@@ -45,7 +45,7 @@ class WithdrawalViewController: UIViewController, UITextFieldDelegate
         
         // Set Navbar title and other labels
         self.navigationItem.title = BudgetVariables.budgetArray[BudgetVariables.currentIndex].name
-        totalBalance.text = "Balance: $" + numFormat(myNum: BudgetVariables.budgetArray[BudgetVariables.currentIndex].balance)
+        totalBalance.text = "Balance: $" + BudgetVariables.numFormat(myNum: BudgetVariables.budgetArray[BudgetVariables.currentIndex].balance)
         if BudgetVariables.budgetArray[BudgetVariables.currentIndex].balance == 0
         {
             withdrawButton.isEnabled = false
@@ -55,7 +55,7 @@ class WithdrawalViewController: UIViewController, UITextFieldDelegate
         inputAmount.text = ""
         descriptionText.text = ""
         depositButton.isEnabled = false
-        withdrawButton.isEnabled = false        
+        withdrawButton.isEnabled = false
     }
     
     // When the action button in the navbar gets pressed
@@ -80,9 +80,12 @@ class WithdrawalViewController: UIViewController, UITextFieldDelegate
         })
         
         let save = UIAlertAction(title: "Save", style: UIAlertActionStyle.default, handler: { (_) -> Void in
-            let inputName = editAlert.textFields![0].text
+            var inputName = editAlert.textFields![0].text
+            
+            // If the input name isn't empty and it isn't the old name
             if inputName != "" && inputName != BudgetVariables.budgetArray[BudgetVariables.currentIndex].name
             {
+                inputName = BudgetVariables.createName(myName: inputName!, myNum: 0)
                 BudgetVariables.budgetArray[BudgetVariables.currentIndex].name = inputName!
                 self.navigationItem.title = BudgetVariables.budgetArray[BudgetVariables.currentIndex].name
                 
@@ -105,8 +108,8 @@ class WithdrawalViewController: UIViewController, UITextFieldDelegate
     // This function disables the save button if the input amount is not valid
     func textFieldDidChange(_ textField: UITextField)
     {
-        // If the input is not empty and not the old name
-        if textField.text != "" && textField.text != BudgetVariables.budgetArray[BudgetVariables.currentIndex].name
+        // If the input is not empty and it doesn't currently exist, enable the Save button
+        if textField.text != "" && BudgetVariables.nameExistsAlready(str: textField.text!) == false
         {
             self.saveButton?.isEnabled = true
         }
@@ -122,7 +125,7 @@ class WithdrawalViewController: UIViewController, UITextFieldDelegate
         if let input = Double(inputAmount.text!)
         {
             BudgetVariables.budgetArray[BudgetVariables.currentIndex].balance += input
-            totalBalance.text = "Balance: $" + numFormat(myNum: BudgetVariables.budgetArray[BudgetVariables.currentIndex].balance)
+            totalBalance.text = "Balance: $" + BudgetVariables.numFormat(myNum: BudgetVariables.budgetArray[BudgetVariables.currentIndex].balance)
             BudgetVariables.budgetArray[BudgetVariables.currentIndex].historyArray.append("+ $" + String(format: "%.2f", input))
             BudgetVariables.budgetArray[BudgetVariables.currentIndex].descriptionArray.append(descriptionText.text!)
             
@@ -147,7 +150,7 @@ class WithdrawalViewController: UIViewController, UITextFieldDelegate
         if let input = Double(inputAmount.text!)
         {
             BudgetVariables.budgetArray[BudgetVariables.currentIndex].balance -= input
-            totalBalance.text = "Balance: $" + numFormat(myNum: BudgetVariables.budgetArray[BudgetVariables.currentIndex].balance)
+            totalBalance.text = "Balance: $" + BudgetVariables.numFormat(myNum: BudgetVariables.budgetArray[BudgetVariables.currentIndex].balance)
             BudgetVariables.budgetArray[BudgetVariables.currentIndex].historyArray.append("– $" + String(format: "%.2f", input))
             BudgetVariables.budgetArray[BudgetVariables.currentIndex].descriptionArray.append(descriptionText.text!)
             
@@ -174,7 +177,7 @@ class WithdrawalViewController: UIViewController, UITextFieldDelegate
         // Else if the input is not a number and isn't empty, disable buttons and print error statement
         if inputAmount.text == ""
         {
-            totalBalance.text = "Balance: $" + numFormat(myNum: BudgetVariables.budgetArray[BudgetVariables.currentIndex].balance)
+            totalBalance.text = "Balance: $" + BudgetVariables.numFormat(myNum: BudgetVariables.budgetArray[BudgetVariables.currentIndex].balance)
             depositButton.isEnabled = false
             withdrawButton.isEnabled = false
         }
@@ -199,7 +202,7 @@ class WithdrawalViewController: UIViewController, UITextFieldDelegate
             }
             else
             {
-                totalBalance.text = "Balance: $" + numFormat(myNum: BudgetVariables.budgetArray[BudgetVariables.currentIndex].balance)
+                totalBalance.text = "Balance: $" + BudgetVariables.numFormat(myNum: BudgetVariables.budgetArray[BudgetVariables.currentIndex].balance)
                 if input == 0
                 {
                     depositButton.isEnabled = false
@@ -232,26 +235,6 @@ class WithdrawalViewController: UIViewController, UITextFieldDelegate
             depositButton.isEnabled = false
             withdrawButton.isEnabled = false
             totalBalance.text = "Only numbers are valid."
-        }
-    }
-    
-    // If we don't need commas, return number as double precision
-    // If we do need commas, return number as regular precision unless adding precision is more accurate
-    // For instance myNum = 999 returns 999.00 and myNum = 1000 becomes 1,000
-    // This saves screen space unless we need more space to be more precise
-    func numFormat(myNum: Double) -> String
-    {
-        let temp = String(format: "%.2f", myNum)
-        if myNum < 1000
-        {
-            return temp
-        }
-        else
-        {
-            let largeNumber = Double(temp)
-            let numberFormatter = NumberFormatter()
-            numberFormatter.numberStyle = NumberFormatter.Style.decimal
-            return numberFormatter.string(from: NSNumber(value: largeNumber!))!
         }
     }
     
