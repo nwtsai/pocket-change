@@ -1,5 +1,5 @@
 # Pocket-Change
-IOS App that helps users manage their personal expenses and log their day-to-day transactions | Developed with Swift
+IOS App made from scratch that helps users manage their personal expenses and log their day-to-day transactions | Developed with Swift
 
 # Features
 • Create a budget with a name and starting balance <br />
