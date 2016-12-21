@@ -2,7 +2,6 @@
 IOS App that helps users manage their personal expenses and log their day-to-day transactions | Developed with Swift
 
 # Features
-This App allows you to:
 • Create a budget with a name and starting balance <br />
 • Withdraw or deposit money from the corresponding budget <br />
 • Manage multiple budgets at once <br />
