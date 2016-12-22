@@ -169,7 +169,7 @@ class BudgetListViewController: UIViewController, UITableViewDataSource, UITable
     {
         let myCell:UITableViewCell = self.budgetTable.dequeueReusableCell(withIdentifier: "clickableCell", for: indexPath)
         myCell.textLabel?.text = BudgetVariables.budgetArray[indexPath.row].name
-        myCell.detailTextLabel?.text = "Balance: $" + BudgetVariables.numFormat(myNum: BudgetVariables.budgetArray[indexPath.row].balance)
+        myCell.detailTextLabel?.text = "$" + BudgetVariables.numFormat(myNum: BudgetVariables.budgetArray[indexPath.row].balance)
         
         return myCell
     }

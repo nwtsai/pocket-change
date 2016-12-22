@@ -69,12 +69,12 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" enablesReturnKeyAutomatically="YES"/>
                             </textField>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="d04-w1-rW6" userLabel="Coins">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="d04-w1-rW6" userLabel="Piggy Bank Icon">
                                 <constraints>
                                     <constraint firstAttribute="width" constant="30" id="T4D-jM-sSt"/>
                                     <constraint firstAttribute="height" constant="30" id="doT-ao-IWp"/>
                                 </constraints>
-                                <state key="normal" title="Button" image="Coins"/>
+                                <state key="normal" title="Button" image="Piggy Bank 2"/>
                             </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5ah-Fv-utU" userLabel="DividerBelowInput">
                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
@@ -97,7 +97,7 @@
                             <constraint firstItem="aJg-CV-vGt" firstAttribute="top" secondItem="M3A-vS-Q4U" secondAttribute="bottom" constant="4" id="7Da-fz-AGo"/>
                             <constraint firstItem="aJg-CV-vGt" firstAttribute="leading" secondItem="nub-g2-jhT" secondAttribute="leadingMargin" id="7SB-bA-ugZ"/>
                             <constraint firstItem="W6f-6S-ocL" firstAttribute="centerY" secondItem="nub-g2-jhT" secondAttribute="centerY" id="7f7-SI-aqL"/>
-                            <constraint firstItem="W6f-6S-ocL" firstAttribute="leading" secondItem="nub-g2-jhT" secondAttribute="leadingMargin" id="8om-5y-FFR"/>
+                            <constraint firstItem="W6f-6S-ocL" firstAttribute="leading" secondItem="nub-g2-jhT" secondAttribute="leadingMargin" constant="-16" id="8om-5y-FFR"/>
                             <constraint firstItem="TRe-by-rFq" firstAttribute="top" secondItem="Iyv-Ff-OpV" secondAttribute="bottom" constant="60" id="KMd-SR-qzA"/>
                             <constraint firstAttribute="trailingMargin" secondItem="ZPn-X5-MWC" secondAttribute="trailing" id="NaG-3k-BZ0"/>
                             <constraint firstItem="d04-w1-rW6" firstAttribute="centerY" secondItem="W6f-6S-ocL" secondAttribute="centerY" id="RkE-el-gjJ"/>
@@ -110,7 +110,7 @@
                             <constraint firstItem="d04-w1-rW6" firstAttribute="centerX" secondItem="W6f-6S-ocL" secondAttribute="centerX" id="p82-tZ-p23"/>
                             <constraint firstItem="5ah-Fv-utU" firstAttribute="leading" secondItem="nub-g2-jhT" secondAttribute="leadingMargin" constant="-16" id="pss-c4-C2k"/>
                             <constraint firstItem="ZPn-X5-MWC" firstAttribute="top" secondItem="5ah-Fv-utU" secondAttribute="bottom" constant="4" id="r7h-Fw-C9z"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="W6f-6S-ocL" secondAttribute="trailing" id="smj-Mq-Wpl"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="W6f-6S-ocL" secondAttribute="trailing" constant="-16" id="smj-Mq-Wpl"/>
                             <constraint firstItem="5tw-ZV-IXc" firstAttribute="centerX" secondItem="nub-g2-jhT" secondAttribute="centerX" id="srX-NA-aMv"/>
                         </constraints>
                     </view>
@@ -269,7 +269,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="Coins" width="512" height="512"/>
+        <image name="Piggy Bank 2" width="512" height="512"/>
         <image name="Square-14-D" width="110" height="32"/>
         <image name="Square-14-H" width="110" height="32"/>
         <image name="Square-14-W" width="110" height="32"/>
