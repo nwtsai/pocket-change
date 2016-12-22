@@ -52,7 +52,7 @@ class BudgetListViewController: UIViewController, UITableViewDataSource, UITable
     }
     
     // Use this variable to enable and disable the Save button
-    weak var saveButton : UIAlertAction?
+    weak var confirmButton : UIAlertAction?
     
     // Function that shows the alert pop-up
     func showAlert()
@@ -72,8 +72,12 @@ class BudgetListViewController: UIViewController, UITableViewDataSource, UITable
         let cancel = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.default, handler: { (_) -> Void in
         })
         
-        let save = UIAlertAction(title: "Save", style: UIAlertActionStyle.default, handler: { (_) -> Void in
+        let confirm = UIAlertAction(title: "Confirm", style: UIAlertActionStyle.default, handler: { (_) -> Void in
             var inputName = alert.textFields![0].text
+            
+            // Trim the inputName first
+            inputName = inputName?.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
+            
             if let inputAmount = Double(alert.textFields![1].text!)
             {
                 if inputAmount >= 0 && inputAmount <= 1000000
@@ -83,6 +87,7 @@ class BudgetListViewController: UIViewController, UITableViewDataSource, UITable
                         inputName = "Untitled Budget"
                     }
                     
+                    // Generate the correct name taking into account repeats
                     inputName = BudgetVariables.createName(myName: inputName!, myNum: 0)
                     
                     let context = self.sharedDelegate.persistentContainer.viewContext
@@ -103,34 +108,37 @@ class BudgetListViewController: UIViewController, UITableViewDataSource, UITable
             }
         })
         
-        alert.addAction(save)
+        alert.addAction(confirm)
         alert.addAction(cancel)
         
-        self.saveButton = save
-        save.isEnabled = false
+        self.confirmButton = confirm
+        confirm.isEnabled = false
         self.present(alert, animated: true, completion: nil)
     }
     
     // This function disables the save button if the input amount is not valid
     func inputAmountDidChange(_ textField: UITextField)
     {
+        // Trim the input first
+        let trimmedInput = (textField.text)?.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
+        
         // If the input is a number
-        if let inputAmount = Double(textField.text!)
+        if let inputAmount = Double(trimmedInput!)
         {
             // If the input is also between 0 and 1 million
             if inputAmount >= 0 && inputAmount <= 1000000
             {
                 // Save button gets enabled
-                self.saveButton?.isEnabled = true
+                self.confirmButton?.isEnabled = true
             }
             else
             {
-                self.saveButton?.isEnabled = false
+                self.confirmButton?.isEnabled = false
             }
         }
         else
         {
-            self.saveButton?.isEnabled = false
+            self.confirmButton?.isEnabled = false
         }
     }
     

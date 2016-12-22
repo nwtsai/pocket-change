@@ -85,6 +85,10 @@ class WithdrawalViewController: UIViewController, UITextFieldDelegate
             // If the input name isn't empty and it isn't the old name
             if inputName != "" && inputName != BudgetVariables.budgetArray[BudgetVariables.currentIndex].name
             {
+                // Trim all extra white space and new lines
+                inputName = inputName?.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
+                
+                // Create the name with the newly trimmed String
                 inputName = BudgetVariables.createName(myName: inputName!, myNum: 0)
                 BudgetVariables.budgetArray[BudgetVariables.currentIndex].name = inputName!
                 self.navigationItem.title = BudgetVariables.budgetArray[BudgetVariables.currentIndex].name
@@ -108,8 +112,11 @@ class WithdrawalViewController: UIViewController, UITextFieldDelegate
     // This function disables the save button if the input amount is not valid
     func textFieldDidChange(_ textField: UITextField)
     {
+        // Trim the input first
+        let input = (textField.text)?.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
+        
         // If the input is not empty and it doesn't currently exist, enable the Save button
-        if textField.text != "" && BudgetVariables.nameExistsAlready(str: textField.text!) == false
+        if input != "" && BudgetVariables.nameExistsAlready(str: input!) == false
         {
             self.saveButton?.isEnabled = true
         }
@@ -119,15 +126,19 @@ class WithdrawalViewController: UIViewController, UITextFieldDelegate
         }
     }
     
-    // Deposit button was pressed
+    // This function gets called when the Deposit button is pressed
     @IBAction func depositButtonWasPressed(_ sender: AnyObject)
     {
+        // If the input amount is a number
         if let input = Double(inputAmount.text!)
         {
             BudgetVariables.budgetArray[BudgetVariables.currentIndex].balance += input
             totalBalance.text = "Balance: $" + BudgetVariables.numFormat(myNum: BudgetVariables.budgetArray[BudgetVariables.currentIndex].balance)
             BudgetVariables.budgetArray[BudgetVariables.currentIndex].historyArray.append("+ $" + String(format: "%.2f", input))
-            BudgetVariables.budgetArray[BudgetVariables.currentIndex].descriptionArray.append(descriptionText.text!)
+            
+            // Trim description text before appending
+            let description = (descriptionText.text)?.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
+            BudgetVariables.budgetArray[BudgetVariables.currentIndex].descriptionArray.append(description!)
             
             if BudgetVariables.budgetArray[BudgetVariables.currentIndex].balance - input >= 0
             {
@@ -147,12 +158,16 @@ class WithdrawalViewController: UIViewController, UITextFieldDelegate
     // This function gets called when the Withdraw button is pressed
     @IBAction func withdrawButtonWasPressed(_ sender: AnyObject)
     {
+        // If the input amount is a number
         if let input = Double(inputAmount.text!)
         {
             BudgetVariables.budgetArray[BudgetVariables.currentIndex].balance -= input
             totalBalance.text = "Balance: $" + BudgetVariables.numFormat(myNum: BudgetVariables.budgetArray[BudgetVariables.currentIndex].balance)
             BudgetVariables.budgetArray[BudgetVariables.currentIndex].historyArray.append("– $" + String(format: "%.2f", input))
-            BudgetVariables.budgetArray[BudgetVariables.currentIndex].descriptionArray.append(descriptionText.text!)
+            
+            // Trim description text before appending
+            let description = (descriptionText.text)?.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
+            BudgetVariables.budgetArray[BudgetVariables.currentIndex].descriptionArray.append(description!)
             
             if BudgetVariables.budgetArray[BudgetVariables.currentIndex].balance - input < 0
             {

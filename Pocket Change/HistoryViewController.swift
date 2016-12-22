@@ -11,7 +11,7 @@ import CoreData
 
 class HistoryViewController: UIViewController, UITableViewDataSource, UITableViewDelegate
 {
-    // sharedDelegate
+    // Clean code
     var sharedDelegate: AppDelegate!
     
     // IBOutlet for components
@@ -31,6 +31,7 @@ class HistoryViewController: UIViewController, UITableViewDataSource, UITableVie
         historyTable.dataSource = self
         historyTable.delegate = self
         
+        // If there is no history, disable the clear history button
         if BudgetVariables.budgetArray[BudgetVariables.currentIndex].historyArray.isEmpty == true
         {
             clearHistoryButton.isEnabled = false
@@ -45,6 +46,7 @@ class HistoryViewController: UIViewController, UITableViewDataSource, UITableVie
         sharedDelegate = shDelegate
     }
     
+    // Function runs everytime the screen appears
     override func viewWillAppear(_ animated: Bool)
     {
         // Make sure the table is up to date
@@ -79,9 +81,10 @@ class HistoryViewController: UIViewController, UITableViewDataSource, UITableVie
         return BudgetVariables.budgetArray[BudgetVariables.currentIndex].historyArray.count
     }
     
+    // Determines what data goes in what cell
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
     {
-        let myCell:UITableViewCell = historyTable.dequeueReusableCell(withIdentifier: "prototype1", for: indexPath)
+        let myCell:UITableViewCell = historyTable.dequeueReusableCell(withIdentifier: "historyCell", for: indexPath)
         
         let str = BudgetVariables.budgetArray[BudgetVariables.currentIndex].historyArray[indexPath.row]
         let index = str.index(str.startIndex, offsetBy: 0)
@@ -111,6 +114,16 @@ class HistoryViewController: UIViewController, UITableViewDataSource, UITableVie
             tableView.deleteRows(at: [indexPath], with: .fade)
             self.sharedDelegate.saveContext()
             BudgetVariables.getData()
+            
+            // Disable the clear history button if the cell deleted was the last item
+            if BudgetVariables.budgetArray[BudgetVariables.currentIndex].historyArray.isEmpty == true
+            {
+                clearHistoryButton.isEnabled = false
+            }
+            else
+            {
+                clearHistoryButton.isEnabled = true
+            }
         }
     }
 }
