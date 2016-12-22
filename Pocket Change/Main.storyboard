@@ -4,6 +4,7 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -30,11 +31,6 @@
                                     <action selector="amountEnteredChanged:" destination="sds-LB-aBh" eventType="editingChanged" id="sJn-SC-fQx"/>
                                 </connections>
                             </textField>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$00.00" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TRe-by-rFq">
-                                <fontDescription key="fontDescription" type="system" pointSize="26"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="W6f-6S-ocL">
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Iyv-Ff-OpV">
@@ -55,12 +51,6 @@
                                     <constraint firstItem="Iyv-Ff-OpV" firstAttribute="top" secondItem="W6f-6S-ocL" secondAttribute="top" id="xHP-KB-dQi"/>
                                 </constraints>
                             </stackView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5tw-ZV-IXc">
-                                <state key="normal" image="Square-14-H"/>
-                                <connections>
-                                    <action selector="historyButtonPressed:" destination="sds-LB-aBh" eventType="touchUpInside" id="n1S-Bg-lYG"/>
-                                </connections>
-                            </button>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" semanticContentAttribute="forceLeftToRight" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="What's it for?" clearsOnBeginEditing="YES" adjustsFontSizeToFit="NO" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="ZPn-X5-MWC">
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="HHs-KS-CMW"/>
@@ -69,13 +59,6 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" enablesReturnKeyAutomatically="YES"/>
                             </textField>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="d04-w1-rW6" userLabel="Piggy Bank Icon">
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="125" id="T4D-jM-sSt"/>
-                                    <constraint firstAttribute="height" constant="125" id="doT-ao-IWp"/>
-                                </constraints>
-                                <state key="normal" title="Button" image="PiggyBank"/>
-                            </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5ah-Fv-utU" userLabel="DividerBelowInput">
                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
@@ -88,30 +71,55 @@
                                     <constraint firstAttribute="height" constant="1" id="Zfz-2Q-HFe"/>
                                 </constraints>
                             </view>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="ySw-VI-aqI" userLabel="History Stack">
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5tw-ZV-IXc">
+                                        <state key="normal" image="Square-14-H"/>
+                                        <connections>
+                                            <action selector="historyButtonPressed:" destination="sds-LB-aBh" eventType="touchUpInside" id="n1S-Bg-lYG"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="G3V-ry-Lfp" userLabel="Total Balance and Pig Stack View">
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$00.00" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TRe-by-rFq">
+                                        <fontDescription key="fontDescription" type="system" pointSize="26"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="d04-w1-rW6" userLabel="Piggy Bank Icon">
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="125" id="9zf-hq-7ye"/>
+                                            <constraint firstAttribute="height" constant="125" id="doT-ao-IWp"/>
+                                        </constraints>
+                                        <state key="normal" title="Button" image="PiggyBank"/>
+                                    </button>
+                                </subviews>
+                            </stackView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="Iyv-Ff-OpV" firstAttribute="top" secondItem="SCB-3r-rSq" secondAttribute="bottom" constant="60" id="3aj-b2-WHs"/>
+                            <constraint firstItem="W6f-6S-ocL" firstAttribute="centerY" secondItem="nub-g2-jhT" secondAttribute="centerY" multiplier="0.8" id="10E-1C-wvT"/>
                             <constraint firstAttribute="trailingMargin" secondItem="5ah-Fv-utU" secondAttribute="trailing" constant="-16" id="40u-Ac-raX"/>
                             <constraint firstAttribute="trailingMargin" secondItem="SCB-3r-rSq" secondAttribute="trailing" constant="-16" id="5kH-CP-Sjw"/>
+                            <constraint firstItem="Iyv-Ff-OpV" firstAttribute="top" secondItem="SCB-3r-rSq" secondAttribute="bottom" constant="60" id="6Y6-X4-a7E"/>
                             <constraint firstItem="aJg-CV-vGt" firstAttribute="top" secondItem="M3A-vS-Q4U" secondAttribute="bottom" constant="4" id="7Da-fz-AGo"/>
                             <constraint firstItem="aJg-CV-vGt" firstAttribute="leading" secondItem="nub-g2-jhT" secondAttribute="leadingMargin" id="7SB-bA-ugZ"/>
                             <constraint firstItem="W6f-6S-ocL" firstAttribute="leading" secondItem="nub-g2-jhT" secondAttribute="leadingMargin" constant="-16" id="8om-5y-FFR"/>
-                            <constraint firstItem="TRe-by-rFq" firstAttribute="top" secondItem="Iyv-Ff-OpV" secondAttribute="bottom" constant="60" id="GbS-Eq-gAG"/>
-                            <constraint firstItem="5tw-ZV-IXc" firstAttribute="top" secondItem="d04-w1-rW6" secondAttribute="bottom" constant="15" id="GjP-sb-5zT"/>
-                            <constraint firstItem="W6f-6S-ocL" firstAttribute="top" secondItem="ZPn-X5-MWC" secondAttribute="bottom" constant="100" id="IJv-EB-sDM"/>
-                            <constraint firstItem="d04-w1-rW6" firstAttribute="top" secondItem="TRe-by-rFq" secondAttribute="bottom" constant="10" id="NBR-yP-7sY"/>
+                            <constraint firstItem="ySw-VI-aqI" firstAttribute="centerY" secondItem="nub-g2-jhT" secondAttribute="centerY" multiplier="1.7" id="Hm6-Sx-x5R"/>
+                            <constraint firstItem="G3V-ry-Lfp" firstAttribute="centerX" secondItem="nub-g2-jhT" secondAttribute="centerX" id="JBF-yP-1o7"/>
                             <constraint firstAttribute="trailingMargin" secondItem="ZPn-X5-MWC" secondAttribute="trailing" id="NaG-3k-BZ0"/>
-                            <constraint firstItem="TRe-by-rFq" firstAttribute="centerX" secondItem="nub-g2-jhT" secondAttribute="centerX" id="WWj-lU-yc3"/>
+                            <constraint firstItem="G3V-ry-Lfp" firstAttribute="centerY" secondItem="nub-g2-jhT" secondAttribute="centerY" multiplier="1.25" id="RUR-QT-Dz7"/>
+                            <constraint firstItem="ySw-VI-aqI" firstAttribute="leading" secondItem="nub-g2-jhT" secondAttribute="leadingMargin" id="Re7-NJ-8Bu"/>
                             <constraint firstItem="5ah-Fv-utU" firstAttribute="top" secondItem="aJg-CV-vGt" secondAttribute="bottom" constant="4" id="Y4g-ks-JTv"/>
                             <constraint firstItem="SCB-3r-rSq" firstAttribute="leading" secondItem="nub-g2-jhT" secondAttribute="leadingMargin" constant="-16" id="YNx-Nw-3rL"/>
                             <constraint firstAttribute="trailingMargin" secondItem="aJg-CV-vGt" secondAttribute="trailing" id="ab2-Zj-c9z"/>
                             <constraint firstItem="ZPn-X5-MWC" firstAttribute="leading" secondItem="nub-g2-jhT" secondAttribute="leadingMargin" id="bzy-df-BSN"/>
-                            <constraint firstItem="d04-w1-rW6" firstAttribute="centerX" secondItem="W6f-6S-ocL" secondAttribute="centerX" id="p82-tZ-p23"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="ySw-VI-aqI" secondAttribute="trailing" id="gwe-AA-LiU"/>
                             <constraint firstItem="5ah-Fv-utU" firstAttribute="leading" secondItem="nub-g2-jhT" secondAttribute="leadingMargin" constant="-16" id="pss-c4-C2k"/>
                             <constraint firstItem="ZPn-X5-MWC" firstAttribute="top" secondItem="5ah-Fv-utU" secondAttribute="bottom" constant="4" id="r7h-Fw-C9z"/>
                             <constraint firstAttribute="trailingMargin" secondItem="W6f-6S-ocL" secondAttribute="trailing" constant="-16" id="smj-Mq-Wpl"/>
-                            <constraint firstItem="5tw-ZV-IXc" firstAttribute="centerX" secondItem="nub-g2-jhT" secondAttribute="centerX" id="srX-NA-aMv"/>
                         </constraints>
                     </view>
                     <toolbarItems/>
