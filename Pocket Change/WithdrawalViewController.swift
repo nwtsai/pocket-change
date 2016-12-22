@@ -45,7 +45,7 @@ class WithdrawalViewController: UIViewController, UITextFieldDelegate
         
         // Set Navbar title and other labels
         self.navigationItem.title = BudgetVariables.budgetArray[BudgetVariables.currentIndex].name
-        totalBalance.text = "Balance: $" + BudgetVariables.numFormat(myNum: BudgetVariables.budgetArray[BudgetVariables.currentIndex].balance)
+        totalBalance.text = "$" + BudgetVariables.numFormat(myNum: BudgetVariables.budgetArray[BudgetVariables.currentIndex].balance)
         if BudgetVariables.budgetArray[BudgetVariables.currentIndex].balance == 0
         {
             withdrawButton.isEnabled = false
@@ -129,11 +129,14 @@ class WithdrawalViewController: UIViewController, UITextFieldDelegate
     // This function gets called when the Deposit button is pressed
     @IBAction func depositButtonWasPressed(_ sender: AnyObject)
     {
+        // Trim input first
+        let trimmedInput = (inputAmount.text)?.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
+        
         // If the input amount is a number
-        if let input = Double(inputAmount.text!)
+        if let input = Double(trimmedInput!)
         {
             BudgetVariables.budgetArray[BudgetVariables.currentIndex].balance += input
-            totalBalance.text = "Balance: $" + BudgetVariables.numFormat(myNum: BudgetVariables.budgetArray[BudgetVariables.currentIndex].balance)
+            totalBalance.text = "$" + BudgetVariables.numFormat(myNum: BudgetVariables.budgetArray[BudgetVariables.currentIndex].balance)
             BudgetVariables.budgetArray[BudgetVariables.currentIndex].historyArray.append("+ $" + String(format: "%.2f", input))
             
             // Trim description text before appending
@@ -144,10 +147,17 @@ class WithdrawalViewController: UIViewController, UITextFieldDelegate
             {
                 withdrawButton.isEnabled = true
             }
+            
+            if BudgetVariables.budgetArray[BudgetVariables.currentIndex].balance + input > 1000000
+            {
+                depositButton.isEnabled = false
+            }
         }
         else
         {
-            totalBalance.text = "Only numbers are valid."
+            // Our amountEnteredChanged should take into account all non-Number cases and 
+            // disable this button before it can be pressed
+            totalBalance.text = "If this message is seen check func amountEnteredChanged"
         }
         
         self.sharedDelegate.saveContext()
@@ -158,11 +168,14 @@ class WithdrawalViewController: UIViewController, UITextFieldDelegate
     // This function gets called when the Withdraw button is pressed
     @IBAction func withdrawButtonWasPressed(_ sender: AnyObject)
     {
+        // Trim input first
+        let trimmedInput = (inputAmount.text)?.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
+        
         // If the input amount is a number
-        if let input = Double(inputAmount.text!)
+        if let input = Double(trimmedInput!)
         {
             BudgetVariables.budgetArray[BudgetVariables.currentIndex].balance -= input
-            totalBalance.text = "Balance: $" + BudgetVariables.numFormat(myNum: BudgetVariables.budgetArray[BudgetVariables.currentIndex].balance)
+            totalBalance.text = "$" + BudgetVariables.numFormat(myNum: BudgetVariables.budgetArray[BudgetVariables.currentIndex].balance)
             BudgetVariables.budgetArray[BudgetVariables.currentIndex].historyArray.append("– $" + String(format: "%.2f", input))
             
             // Trim description text before appending
@@ -173,10 +186,17 @@ class WithdrawalViewController: UIViewController, UITextFieldDelegate
             {
                 withdrawButton.isEnabled = false
             }
+            
+            if BudgetVariables.budgetArray[BudgetVariables.currentIndex].balance + input <= 1000000
+            {
+                depositButton.isEnabled = true
+            }
         }
         else
         {
-            totalBalance.text = "Only numbers are valid."
+            // Our amountEnteredChanged should take into account all non-Number cases and
+            // disable this button before it can be pressed
+            totalBalance.text = "If this message is seen check func amountEnteredChanged"
         }
         
         self.sharedDelegate.saveContext()
@@ -187,25 +207,36 @@ class WithdrawalViewController: UIViewController, UITextFieldDelegate
     // This function dynamically configures button availability depending on input
     @IBAction func amountEnteredChanged(_ sender: AnyObject)
     {
+        // Trim input first
+        let trimmedInput = (inputAmount.text)?.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
+        
         // If the input is empty, show current balance and disable buttons
         // Else if the input is a number and isn't empty, calculate whether or not to disable or enable the buttons
         // Else if the input is not a number and isn't empty, disable buttons and print error statement
-        if inputAmount.text == ""
+        if trimmedInput == ""
         {
-            totalBalance.text = "Balance: $" + BudgetVariables.numFormat(myNum: BudgetVariables.budgetArray[BudgetVariables.currentIndex].balance)
+            totalBalance.text = "$" + BudgetVariables.numFormat(myNum: BudgetVariables.budgetArray[BudgetVariables.currentIndex].balance)
             depositButton.isEnabled = false
             withdrawButton.isEnabled = false
         }
-        else if inputAmount.text == "-"
+        else if trimmedInput == "-" || trimmedInput == "-."
         {
-            totalBalance.text = "Amount must be positive."
+            totalBalance.text = "Must be positive"
+            withdrawButton.isEnabled = false
+            depositButton.isEnabled = false
         }
-        else if let input = Double(inputAmount.text!)
+        else if trimmedInput == "."
+        {
+            totalBalance.text = "$" + BudgetVariables.numFormat(myNum: BudgetVariables.budgetArray[BudgetVariables.currentIndex].balance)
+            withdrawButton.isEnabled = false
+            depositButton.isEnabled = false
+        }
+        else if let input = Double(trimmedInput!)
         {
             // Print error statement if input exceeeds 1 million
             if input > 1000000
             {
-                totalBalance.text = "Cannot exceed $1,000,000"
+                totalBalance.text = "Must be under $1M"
                 withdrawButton.isEnabled = false
                 depositButton.isEnabled = false
             }
@@ -213,11 +244,11 @@ class WithdrawalViewController: UIViewController, UITextFieldDelegate
             {
                 depositButton.isEnabled = false
                 withdrawButton.isEnabled = false
-                totalBalance.text = "Amount must be positive."
+                totalBalance.text = "Must be positive"
             }
             else
             {
-                totalBalance.text = "Balance: $" + BudgetVariables.numFormat(myNum: BudgetVariables.budgetArray[BudgetVariables.currentIndex].balance)
+                totalBalance.text = "$" + BudgetVariables.numFormat(myNum: BudgetVariables.budgetArray[BudgetVariables.currentIndex].balance)
                 if input == 0
                 {
                     depositButton.isEnabled = false
@@ -249,7 +280,7 @@ class WithdrawalViewController: UIViewController, UITextFieldDelegate
         {
             depositButton.isEnabled = false
             withdrawButton.isEnabled = false
-            totalBalance.text = "Only numbers are valid."
+            totalBalance.text = "Numbers only"
         }
     }
     
