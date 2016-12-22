@@ -179,7 +179,7 @@ class BudgetListViewController: UIViewController, UITableViewDataSource, UITable
     {
         // Set current index to row # of cell pressed, then segue
         BudgetVariables.currentIndex = indexPath.row
-        performSegue(withIdentifier: "viewBudget", sender: composeButton)
+        performSegue(withIdentifier: "viewBudget", sender: nil)
     }
     
     // This handles the delete functionality

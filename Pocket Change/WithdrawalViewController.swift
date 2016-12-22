@@ -287,7 +287,7 @@ class WithdrawalViewController: UIViewController, UITextFieldDelegate
     // When the history button gets pressed segue to the HistoryViewController file
     @IBAction func historyButtonPressed(_ sender: AnyObject)
     {
-        performSegue(withIdentifier: "showHistory", sender: inputAmount.text)
+        performSegue(withIdentifier: "showHistory", sender: nil)
     }
 }
 
