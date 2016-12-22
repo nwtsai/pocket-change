@@ -28,3 +28,6 @@ IOS App made from scratch that helps users manage their personal expenses and lo
 ‣ List of budgets and each budget's history is displayed using a UITableview <br />
 ‣ Used IBOutlets to programmatically interact with user interface elements <br />
 ‣ Defined an IBAction function that corrects button-enabling every time the user types or deletes a character <br /> 
+
+# Screenshots
+![alt tag](http://imgur.com/a/2DHZr)
