@@ -31,7 +31,7 @@
                                 </connections>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$00.00" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TRe-by-rFq">
-                                <fontDescription key="fontDescription" type="system" pointSize="40"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="26"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -71,10 +71,10 @@
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="d04-w1-rW6" userLabel="Piggy Bank Icon">
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="30" id="T4D-jM-sSt"/>
-                                    <constraint firstAttribute="height" constant="30" id="doT-ao-IWp"/>
+                                    <constraint firstAttribute="width" constant="125" id="T4D-jM-sSt"/>
+                                    <constraint firstAttribute="height" constant="125" id="doT-ao-IWp"/>
                                 </constraints>
-                                <state key="normal" title="Button" image="Piggy Bank 2"/>
+                                <state key="normal" title="Button" image="PiggyBank"/>
                             </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5ah-Fv-utU" userLabel="DividerBelowInput">
                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
@@ -96,16 +96,16 @@
                             <constraint firstAttribute="trailingMargin" secondItem="SCB-3r-rSq" secondAttribute="trailing" constant="-16" id="5kH-CP-Sjw"/>
                             <constraint firstItem="aJg-CV-vGt" firstAttribute="top" secondItem="M3A-vS-Q4U" secondAttribute="bottom" constant="4" id="7Da-fz-AGo"/>
                             <constraint firstItem="aJg-CV-vGt" firstAttribute="leading" secondItem="nub-g2-jhT" secondAttribute="leadingMargin" id="7SB-bA-ugZ"/>
-                            <constraint firstItem="W6f-6S-ocL" firstAttribute="centerY" secondItem="nub-g2-jhT" secondAttribute="centerY" id="7f7-SI-aqL"/>
                             <constraint firstItem="W6f-6S-ocL" firstAttribute="leading" secondItem="nub-g2-jhT" secondAttribute="leadingMargin" constant="-16" id="8om-5y-FFR"/>
-                            <constraint firstItem="TRe-by-rFq" firstAttribute="top" secondItem="Iyv-Ff-OpV" secondAttribute="bottom" constant="60" id="KMd-SR-qzA"/>
+                            <constraint firstItem="TRe-by-rFq" firstAttribute="top" secondItem="Iyv-Ff-OpV" secondAttribute="bottom" constant="60" id="GbS-Eq-gAG"/>
+                            <constraint firstItem="5tw-ZV-IXc" firstAttribute="top" secondItem="d04-w1-rW6" secondAttribute="bottom" constant="15" id="GjP-sb-5zT"/>
+                            <constraint firstItem="W6f-6S-ocL" firstAttribute="top" secondItem="ZPn-X5-MWC" secondAttribute="bottom" constant="100" id="IJv-EB-sDM"/>
+                            <constraint firstItem="d04-w1-rW6" firstAttribute="top" secondItem="TRe-by-rFq" secondAttribute="bottom" constant="10" id="NBR-yP-7sY"/>
                             <constraint firstAttribute="trailingMargin" secondItem="ZPn-X5-MWC" secondAttribute="trailing" id="NaG-3k-BZ0"/>
-                            <constraint firstItem="d04-w1-rW6" firstAttribute="centerY" secondItem="W6f-6S-ocL" secondAttribute="centerY" id="RkE-el-gjJ"/>
                             <constraint firstItem="TRe-by-rFq" firstAttribute="centerX" secondItem="nub-g2-jhT" secondAttribute="centerX" id="WWj-lU-yc3"/>
                             <constraint firstItem="5ah-Fv-utU" firstAttribute="top" secondItem="aJg-CV-vGt" secondAttribute="bottom" constant="4" id="Y4g-ks-JTv"/>
                             <constraint firstItem="SCB-3r-rSq" firstAttribute="leading" secondItem="nub-g2-jhT" secondAttribute="leadingMargin" constant="-16" id="YNx-Nw-3rL"/>
                             <constraint firstAttribute="trailingMargin" secondItem="aJg-CV-vGt" secondAttribute="trailing" id="ab2-Zj-c9z"/>
-                            <constraint firstItem="5tw-ZV-IXc" firstAttribute="top" secondItem="TRe-by-rFq" secondAttribute="bottom" constant="60" id="btf-Ay-WqO"/>
                             <constraint firstItem="ZPn-X5-MWC" firstAttribute="leading" secondItem="nub-g2-jhT" secondAttribute="leadingMargin" id="bzy-df-BSN"/>
                             <constraint firstItem="d04-w1-rW6" firstAttribute="centerX" secondItem="W6f-6S-ocL" secondAttribute="centerX" id="p82-tZ-p23"/>
                             <constraint firstItem="5ah-Fv-utU" firstAttribute="leading" secondItem="nub-g2-jhT" secondAttribute="leadingMargin" constant="-16" id="pss-c4-C2k"/>
@@ -151,18 +151,18 @@
                                 <rect key="frame" x="0.0" y="92" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="mDG-qP-hdH" id="8DO-UW-qdY">
-                                    <frame key="frameInset" width="375" height="43"/>
+                                    <frame key="frameInset" width="375" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="UVe-4t-pnt">
-                                            <frame key="frameInset" minX="15" minY="11" width="34" height="21"/>
+                                            <frame key="frameInset" minX="15" minY="12" width="33.5" height="20.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Detail" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="foI-it-SFX">
-                                            <frame key="frameInset" minX="316" minY="11" width="44" height="21"/>
+                                            <frame key="frameInset" minX="316" minY="12" width="44" height="20.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
@@ -269,7 +269,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="Piggy Bank 2" width="512" height="512"/>
+        <image name="PiggyBank" width="512" height="512"/>
         <image name="Square-14-D" width="110" height="32"/>
         <image name="Square-14-H" width="110" height="32"/>
         <image name="Square-14-W" width="110" height="32"/>

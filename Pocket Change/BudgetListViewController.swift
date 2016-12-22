@@ -34,6 +34,14 @@ class BudgetListViewController: UIViewController, UITableViewDataSource, UITable
         // So we don't need to type this out again
         let shDelegate = UIApplication.shared.delegate as! AppDelegate
         sharedDelegate = shDelegate
+        
+        //Looks for single or multiple taps.
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(WithdrawalViewController.dismissKeyboard))
+        
+        //Uncomment the line below if you want the tap not not interfere and cancel other interactions.
+        tap.cancelsTouchesInView = false
+        
+        view.addGestureRecognizer(tap)
     }
     
     // Reload table data everytime the view is about to appear
@@ -49,6 +57,13 @@ class BudgetListViewController: UIViewController, UITableViewDataSource, UITable
         
         // Always set current index to reference the most recent budget
         BudgetVariables.currentIndex = BudgetVariables.budgetArray.count - 1
+    }
+    
+    //Calls this function when the tap is recognized.
+    func dismissKeyboard()
+    {
+        //Causes the view (or one of its embedded text fields) to resign the first responder status.
+        view.endEditing(true)
     }
     
     // Use this variable to enable and disable the Save button

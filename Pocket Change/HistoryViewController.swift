@@ -44,6 +44,14 @@ class HistoryViewController: UIViewController, UITableViewDataSource, UITableVie
         // So we don't need to type this out again
         let shDelegate = UIApplication.shared.delegate as! AppDelegate
         sharedDelegate = shDelegate
+        
+        //Looks for single or multiple taps.
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(WithdrawalViewController.dismissKeyboard))
+        
+        //Uncomment the line below if you want the tap not not interfere and cancel other interactions.
+        tap.cancelsTouchesInView = false
+        
+        view.addGestureRecognizer(tap)
     }
     
     // Function runs everytime the screen appears
@@ -57,6 +65,13 @@ class HistoryViewController: UIViewController, UITableViewDataSource, UITableVie
         
         // Reload the budget table
         self.historyTable.reloadData()        
+    }
+    
+    //Calls this function when the tap is recognized.
+    func dismissKeyboard()
+    {
+        //Causes the view (or one of its embedded text fields) to resign the first responder status.
+        view.endEditing(true)
     }
     
     // When the clear history button gets pressed, clear the history and disable button

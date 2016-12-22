@@ -33,6 +33,14 @@ class WithdrawalViewController: UIViewController, UITextFieldDelegate
         // Set Navbar Color
         let color = UIColor.white
         self.navigationController?.navigationBar.tintColor = color
+        
+        //Looks for single or multiple taps.
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(WithdrawalViewController.dismissKeyboard))
+        
+        //Uncomment the line below if you want the tap not not interfere and cancel other interactions.
+        tap.cancelsTouchesInView = false
+        
+        view.addGestureRecognizer(tap)
     }
     
     // Syncs labels with global variables
@@ -56,6 +64,13 @@ class WithdrawalViewController: UIViewController, UITextFieldDelegate
         descriptionText.text = ""
         depositButton.isEnabled = false
         withdrawButton.isEnabled = false
+    }
+    
+    //Calls this function when the tap is recognized.
+    func dismissKeyboard()
+    {
+        //Causes the view (or one of its embedded text fields) to resign the first responder status.
+        view.endEditing(true)
     }
     
     // When the action button in the navbar gets pressed
