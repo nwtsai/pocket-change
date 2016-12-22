@@ -15,7 +15,7 @@ IOS App made from scratch that helps users manage their personal expenses and lo
 &nbsp;&nbsp;&nbsp;&nbsp;– Balance must be between $0 and $1,000,000 <br />
 &nbsp;&nbsp;&nbsp;&nbsp;– Withdraw button only enables when your balance is enough based on current input <br />
 &nbsp;&nbsp;&nbsp;&nbsp;– Renaming actions require the new name to be unique <br />
-‣ History of transactions have a corresponding color: <br />
+‣ History of transactions records the date of transaction along with a corresponding color: <br />
 &nbsp;&nbsp;&nbsp;&nbsp;– Red for money spent <br />
 &nbsp;&nbsp;&nbsp;&nbsp;– Green for money deposited <br />
 ‣ Creating names will add (a number) if the name already exists: <br />
