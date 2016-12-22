@@ -19,7 +19,7 @@ IOS App made from scratch that helps users manage their personal expenses and lo
 &nbsp;&nbsp;&nbsp;&nbsp;– Red for money spent <br />
 &nbsp;&nbsp;&nbsp;&nbsp;– Green for money deposited <br />
 ‣ Creating names will add (a number) if the name already exists: <br />
-&nbsp;&nbsp;&nbsp;&nbsp;– I.E. if "Mall" is already a budget name, naming a new one "Mall" automatically results in "Mall (1)", etc. <br />
+&nbsp;&nbsp;&nbsp;&nbsp;– I.E. if "Mall" is already a budget name, naming new "Mall" budgets results in "Mall (1)", "Mall (2)", etc. <br />
 ‣ Number Formatter: <br />
 &nbsp;&nbsp;&nbsp;&nbsp;– If we don't need commas, balance is shown with two decimal places <br />
 &nbsp;&nbsp;&nbsp;&nbsp;– If we do need commas, balance has two decimal places only if needed <br />
