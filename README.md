@@ -5,7 +5,7 @@ IOS App made from scratch that helps users manage their personal expenses and lo
 ‣ Create a budget with a name and starting balance <br />
 ‣ Withdraw or deposit money from the corresponding budget <br />
 ‣ Manage multiple budgets at once <br />
-‣ View your entire, color-coded history log of how much money was spent and why it was spent <br />
+‣ View your entire, color-coded history log of <i>how much</i>, <i>why</i>, and <i>when</i> money was spent <br />
 ‣ Delete one or all items of your transaction history <br />
 ‣ Rename and delete budgets <br />
 
