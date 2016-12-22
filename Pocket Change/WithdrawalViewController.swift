@@ -129,6 +129,9 @@ class WithdrawalViewController: UIViewController, UITextFieldDelegate
     // This function gets called when the Deposit button is pressed
     @IBAction func depositButtonWasPressed(_ sender: AnyObject)
     {
+        // Get current date, append to historyArray
+        let date = BudgetVariables.todaysDate(format: "MM/dd")
+        
         // Trim input first
         let trimmedInput = (inputAmount.text)?.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
         
@@ -141,7 +144,7 @@ class WithdrawalViewController: UIViewController, UITextFieldDelegate
             
             // Trim description text before appending
             let description = (descriptionText.text)?.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
-            BudgetVariables.budgetArray[BudgetVariables.currentIndex].descriptionArray.append(description!)
+            BudgetVariables.budgetArray[BudgetVariables.currentIndex].descriptionArray.append(description! + "    " + date)
             
             if BudgetVariables.budgetArray[BudgetVariables.currentIndex].balance - input >= 0
             {
@@ -168,6 +171,9 @@ class WithdrawalViewController: UIViewController, UITextFieldDelegate
     // This function gets called when the Withdraw button is pressed
     @IBAction func withdrawButtonWasPressed(_ sender: AnyObject)
     {
+        // Get current date, append to history Array
+        let date = BudgetVariables.todaysDate(format: "MM/dd")
+        
         // Trim input first
         let trimmedInput = (inputAmount.text)?.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
         
@@ -180,7 +186,7 @@ class WithdrawalViewController: UIViewController, UITextFieldDelegate
             
             // Trim description text before appending
             let description = (descriptionText.text)?.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
-            BudgetVariables.budgetArray[BudgetVariables.currentIndex].descriptionArray.append(description!)
+            BudgetVariables.budgetArray[BudgetVariables.currentIndex].descriptionArray.append(description! + "    " + date)
             
             if BudgetVariables.budgetArray[BudgetVariables.currentIndex].balance - input < 0
             {

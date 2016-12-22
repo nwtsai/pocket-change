@@ -90,4 +90,14 @@ class BudgetVariables: UIViewController
         // If it isn't empty but the name was not found after the search, return false
         return false
     }
+    
+    // Get current date in any format based on argument
+    class func todaysDate(format: String) -> String
+    {
+        let date = Date()
+        let formatter = DateFormatter()
+        
+        formatter.dateFormat = format
+        return formatter.string(from: date)
+    }
 }
