@@ -88,13 +88,13 @@
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5tw-ZV-IXc" userLabel="Daily Button">
                                         <state key="normal" image="Thin Daily"/>
                                         <connections>
-                                            <action selector="historyButtonPressed:" destination="sds-LB-aBh" eventType="touchUpInside" id="n1S-Bg-lYG"/>
+                                            <action selector="dailyButtonWasPressed:" destination="sds-LB-aBh" eventType="touchUpInside" id="a5C-3u-LtF"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3hM-UR-lAg" userLabel="Weekly Button">
                                         <state key="normal" image="Thin Weekly"/>
                                         <connections>
-                                            <action selector="graphsButtonWasPressed:" destination="sds-LB-aBh" eventType="touchUpInside" id="nnJ-dE-DsQ"/>
+                                            <action selector="weeklyButtonWasPressed:" destination="sds-LB-aBh" eventType="touchUpInside" id="q4u-gQ-Y7E"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -150,8 +150,8 @@
                         <outlet property="inputAmount" destination="aJg-CV-vGt" id="QfG-b6-s9W"/>
                         <outlet property="totalBalance" destination="TRe-by-rFq" id="jO9-5R-4xj"/>
                         <outlet property="withdrawButton" destination="Iyv-Ff-OpV" id="rDW-Ng-oCn"/>
-                        <segue destination="zFl-z3-0s0" kind="show" identifier="showHistory" id="GkY-hb-RdK"/>
-                        <segue destination="ptT-M2-wyM" kind="show" identifier="showGraph" id="9rw-Ha-VH8"/>
+                        <segue destination="zFl-z3-0s0" kind="show" identifier="showDaily" id="GkY-hb-RdK"/>
+                        <segue destination="ptT-M2-wyM" kind="show" identifier="showWeekly" id="9rw-Ha-VH8"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="weC-fA-FtV" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -235,7 +235,6 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="lineChartView" destination="vqK-WN-mOh" id="hQl-bs-4yz"/>
                         <outlet property="lineGraphView" destination="vqK-WN-mOh" id="mZw-fZ-qAs"/>
                         <outlet property="saveButton" destination="jun-1o-ruY" id="UB8-Fk-w2v"/>
                     </connections>

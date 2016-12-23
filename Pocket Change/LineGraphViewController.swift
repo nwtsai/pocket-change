@@ -24,7 +24,6 @@ public class LineChartFormatter: NSObject, IAxisValueFormatter
     }
 }
 
-
 class LineGraphViewController: UIViewController
 {
     // Clean code
@@ -67,17 +66,6 @@ class LineGraphViewController: UIViewController
         let amountSpent = BudgetVariables.amountSpent()
         
         setLineGraph(dataPoints: days, values: amountSpent)
-        
-        // DELETE LATER
-        print(BudgetVariables.budgetArray[BudgetVariables.currentIndex].name!)
-    }
-    
-    override func viewWillDisappear(_ animated: Bool)
-    {
-        // DELETE LATER
-        print("Line Graph Will Disappear")
-        print(BudgetVariables.budgetArray[BudgetVariables.currentIndex].name!)
-        print(BudgetVariables.currentIndex)
     }
 
     // Set Line Graph

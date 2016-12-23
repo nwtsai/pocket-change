@@ -46,7 +46,8 @@ class WithdrawalViewController: UIViewController, UITextFieldDelegate
     {
         super.viewWillAppear(animated)
         
-        // Get data from CoreData
+        // Save context and get data
+        self.sharedDelegate.saveContext()
         BudgetVariables.getData()
         
         // Set Navbar title and other labels
@@ -62,10 +63,6 @@ class WithdrawalViewController: UIViewController, UITextFieldDelegate
         descriptionText.text = ""
         depositButton.isEnabled = false
         withdrawButton.isEnabled = false
-        
-        // DELETE LATER
-        print(BudgetVariables.budgetArray[BudgetVariables.currentIndex].name!)
-        print(BudgetVariables.currentIndex)
     }
     
     //Calls this function when the tap is recognized.
@@ -311,19 +308,21 @@ class WithdrawalViewController: UIViewController, UITextFieldDelegate
     }
     
     // When the history button gets pressed segue to the HistoryViewController file
-    @IBAction func historyButtonPressed(_ sender: AnyObject)
+    @IBAction func dailyButtonWasPressed(_ sender: AnyObject)
     {
+        // Save context and get data
         self.sharedDelegate.saveContext()
         BudgetVariables.getData()
-        performSegue(withIdentifier: "showHistory", sender: nil)
+        performSegue(withIdentifier: "showDaily", sender: nil)
     }
     
     // When the graphs button gets pressed segue to the BarChartViewController file
-    @IBAction func graphsButtonWasPressed(_ sender: AnyObject)
+    @IBAction func weeklyButtonWasPressed(_ sender: AnyObject)
     {
+        // Save context and get data
         self.sharedDelegate.saveContext()
         BudgetVariables.getData()
-        performSegue(withIdentifier: "showGraph", sender: nil)
+        performSegue(withIdentifier: "showWeekly", sender: nil)
     }
 }
 
