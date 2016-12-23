@@ -4,13 +4,16 @@ IOS App made from scratch that helps users manage their personal expenses and lo
 # Features
 ‣ Create a budget with a name and starting balance <br />
 ‣ Withdraw or deposit money from the corresponding budget <br />
-‣ Manage multiple budgets at once <br />
 ‣ View your entire, color-coded history log of <i>how much</i>, <i>why</i>, and <i>when</i> money was spent <br />
+‣ View your transaction history within the past week on a line graph, detailing how much you spent on a particular day <br />
+‣ Manage multiple budgets at once <br />
 ‣ Delete one or all items of your transaction history <br />
 ‣ Rename and delete budgets <br />
 
 # Design
 ‣ CoreData allows for pertinent information to be stored regardless of whether or not the app is running <br />
+‣ Designed a class that efficiently populates the x and y axes of the line graph <br />
+‣ Constructed a dictionary that maps the current date to the total amount spent on that particular day <br />
 ‣ Buttons enable and disable dynamically based on the validity of input: <br />
 &nbsp;&nbsp;&nbsp;&nbsp;– Balance must be between $0 and $1,000,000 <br />
 &nbsp;&nbsp;&nbsp;&nbsp;– Withdraw button only enables when your balance is enough based on current input <br />
