@@ -36,10 +36,7 @@ class WithdrawalViewController: UIViewController, UITextFieldDelegate
         
         //Looks for single or multiple taps.
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(WithdrawalViewController.dismissKeyboard))
-        
-        //Uncomment the line below if you want the tap not not interfere and cancel other interactions.
         tap.cancelsTouchesInView = false
-        
         view.addGestureRecognizer(tap)
     }
     
