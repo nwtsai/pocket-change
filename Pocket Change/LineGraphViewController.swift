@@ -55,15 +55,14 @@ class LineGraphViewController: UIViewController
         BudgetVariables.getData()
         
         // Grab past 7 days into an array
-        // let days = BudgetVariables.pastSevenDays()
-        //self.navigationItem.title = "Weekly Spendings (" + days[0] + " – " + days[6] + ")"
-        self.navigationItem.title = "Weekly Spendings"
-        
-        // Grab past 7 days into an array
         days = BudgetVariables.pastSevenDays()
         
+        // Set the title to be the range of dates displayed
+        self.navigationItem.title = days[0] + " – " + days[6]
+        
         // Grab amount spent for each day in the past week into a double array
-        let amountSpent = BudgetVariables.amountSpent()
+        // let amountSpent = BudgetVariables.amountSpent()
+        let amountSpent = [20.0, 4.20, 6.89, 9.99, 60.81, 58.12, 35.0]
         
         setLineGraph(dataPoints: days, values: amountSpent)
     }
@@ -100,7 +99,7 @@ class LineGraphViewController: UIViewController
         lineGraphView.chartDescription?.text = ""
         
         // Animate the chart
-        lineGraphView.animate(xAxisDuration: 1.0, yAxisDuration: 1.0)
+        lineGraphView.animate(xAxisDuration: 1.0, yAxisDuration: 1.0, easingOption: .easeInBack)
     }
     
     // Save button was pressed (not completed)

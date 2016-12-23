@@ -106,7 +106,7 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="W6f-6S-ocL" firstAttribute="centerY" secondItem="nub-g2-jhT" secondAttribute="centerY" multiplier="0.75" id="10E-1C-wvT"/>
+                            <constraint firstItem="W6f-6S-ocL" firstAttribute="centerY" secondItem="nub-g2-jhT" secondAttribute="centerY" multiplier="0.8" id="10E-1C-wvT"/>
                             <constraint firstItem="d04-w1-rW6" firstAttribute="top" secondItem="TRe-by-rFq" secondAttribute="bottom" id="1Ep-nE-wl6"/>
                             <constraint firstItem="TRe-by-rFq" firstAttribute="centerX" secondItem="nub-g2-jhT" secondAttribute="centerX" id="2xY-wN-Ae0"/>
                             <constraint firstAttribute="trailingMargin" secondItem="5ah-Fv-utU" secondAttribute="trailing" constant="-16" id="40u-Ac-raX"/>

@@ -27,7 +27,7 @@ class HistoryViewController: UIViewController, UITableViewDataSource, UITableVie
         let color = UIColor.white
         self.navigationController?.navigationBar.tintColor = color
         
-        self.navigationItem.title = "My History"
+        self.navigationItem.title = "History"
         historyTable.dataSource = self
         historyTable.delegate = self
         
