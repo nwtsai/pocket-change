@@ -64,7 +64,10 @@ class HistoryViewController: UIViewController, UITableViewDataSource, UITableVie
         BudgetVariables.getData()
         
         // Reload the budget table
-        self.historyTable.reloadData()        
+        self.historyTable.reloadData()
+        
+        // DELETE LATER
+        print(BudgetVariables.budgetArray[BudgetVariables.currentIndex].name!)
     }
     
     //Calls this function when the tap is recognized.

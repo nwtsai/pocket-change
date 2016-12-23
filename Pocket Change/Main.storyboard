@@ -78,57 +78,65 @@
                                 </constraints>
                                 <state key="normal" title="Button" image="PiggyBank"/>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5tw-ZV-IXc">
-                                <state key="normal" image="Square-14-H"/>
-                                <connections>
-                                    <action selector="historyButtonPressed:" destination="sds-LB-aBh" eventType="touchUpInside" id="n1S-Bg-lYG"/>
-                                </connections>
-                            </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$00.00" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TRe-by-rFq">
                                 <fontDescription key="fontDescription" type="system" pointSize="35"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ykY-JB-tUb" userLabel="Spacer 1"/>
-                            <view hidden="YES" opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sUO-E5-naU" userLabel="Spacer 2"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="THk-Ji-wDx" userLabel="History Buttons Stack View">
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5tw-ZV-IXc" userLabel="Daily Button">
+                                        <state key="normal" image="Thin Daily"/>
+                                        <connections>
+                                            <action selector="historyButtonPressed:" destination="sds-LB-aBh" eventType="touchUpInside" id="n1S-Bg-lYG"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3hM-UR-lAg" userLabel="Weekly Button">
+                                        <state key="normal" image="Thin Weekly"/>
+                                        <connections>
+                                            <action selector="graphsButtonWasPressed:" destination="sds-LB-aBh" eventType="touchUpInside" id="nnJ-dE-DsQ"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="90" id="NHa-nb-WRh"/>
+                                </constraints>
+                            </stackView>
+                            <view hidden="YES" opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ykY-JB-tUb" userLabel="Spacer"/>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="W6f-6S-ocL" firstAttribute="centerY" secondItem="nub-g2-jhT" secondAttribute="centerY" multiplier="0.8" id="10E-1C-wvT"/>
+                            <constraint firstItem="W6f-6S-ocL" firstAttribute="centerY" secondItem="nub-g2-jhT" secondAttribute="centerY" multiplier="0.75" id="10E-1C-wvT"/>
                             <constraint firstItem="d04-w1-rW6" firstAttribute="top" secondItem="TRe-by-rFq" secondAttribute="bottom" id="1Ep-nE-wl6"/>
                             <constraint firstItem="TRe-by-rFq" firstAttribute="centerX" secondItem="nub-g2-jhT" secondAttribute="centerX" id="2xY-wN-Ae0"/>
                             <constraint firstAttribute="trailingMargin" secondItem="5ah-Fv-utU" secondAttribute="trailing" constant="-16" id="40u-Ac-raX"/>
-                            <constraint firstItem="5tw-ZV-IXc" firstAttribute="top" secondItem="ykY-JB-tUb" secondAttribute="bottom" id="4eG-Xb-u9A"/>
                             <constraint firstAttribute="trailingMargin" secondItem="SCB-3r-rSq" secondAttribute="trailing" constant="-16" id="5kH-CP-Sjw"/>
-                            <constraint firstItem="Jcm-fI-l1A" firstAttribute="top" secondItem="sUO-E5-naU" secondAttribute="bottom" id="5sk-MP-Ley"/>
-                            <constraint firstItem="Iyv-Ff-OpV" firstAttribute="top" secondItem="SCB-3r-rSq" secondAttribute="bottom" constant="60" id="6Y6-X4-a7E"/>
+                            <constraint firstItem="Iyv-Ff-OpV" firstAttribute="top" secondItem="SCB-3r-rSq" secondAttribute="bottom" constant="50" id="6Y6-X4-a7E"/>
                             <constraint firstItem="aJg-CV-vGt" firstAttribute="top" secondItem="M3A-vS-Q4U" secondAttribute="bottom" constant="4" id="7Da-fz-AGo"/>
                             <constraint firstItem="aJg-CV-vGt" firstAttribute="leading" secondItem="nub-g2-jhT" secondAttribute="leadingMargin" id="7SB-bA-ugZ"/>
-                            <constraint firstItem="sUO-E5-naU" firstAttribute="top" secondItem="5tw-ZV-IXc" secondAttribute="bottom" id="7q4-ZZ-8a9"/>
-                            <constraint firstItem="sUO-E5-naU" firstAttribute="leading" secondItem="nub-g2-jhT" secondAttribute="leadingMargin" id="8mp-dv-HWs"/>
                             <constraint firstItem="W6f-6S-ocL" firstAttribute="leading" secondItem="nub-g2-jhT" secondAttribute="leadingMargin" constant="-16" id="8om-5y-FFR"/>
                             <constraint firstItem="ykY-JB-tUb" firstAttribute="top" secondItem="d04-w1-rW6" secondAttribute="bottom" constant="-25" id="GEF-Bu-8Bi"/>
                             <constraint firstAttribute="trailingMargin" secondItem="ykY-JB-tUb" secondAttribute="trailing" id="GLN-Or-2DF"/>
                             <constraint firstItem="ykY-JB-tUb" firstAttribute="leading" secondItem="nub-g2-jhT" secondAttribute="leadingMargin" id="HjF-BS-s0d"/>
                             <constraint firstAttribute="trailingMargin" secondItem="ZPn-X5-MWC" secondAttribute="trailing" id="NaG-3k-BZ0"/>
-                            <constraint firstItem="sUO-E5-naU" firstAttribute="height" secondItem="ykY-JB-tUb" secondAttribute="height" id="Tv3-Tf-ONB"/>
+                            <constraint firstItem="TRe-by-rFq" firstAttribute="top" secondItem="Iyv-Ff-OpV" secondAttribute="bottom" constant="50" id="XiS-K1-Auh"/>
                             <constraint firstItem="5ah-Fv-utU" firstAttribute="top" secondItem="aJg-CV-vGt" secondAttribute="bottom" constant="4" id="Y4g-ks-JTv"/>
                             <constraint firstItem="SCB-3r-rSq" firstAttribute="leading" secondItem="nub-g2-jhT" secondAttribute="leadingMargin" constant="-16" id="YNx-Nw-3rL"/>
                             <constraint firstAttribute="trailingMargin" secondItem="aJg-CV-vGt" secondAttribute="trailing" id="ab2-Zj-c9z"/>
                             <constraint firstItem="ZPn-X5-MWC" firstAttribute="leading" secondItem="nub-g2-jhT" secondAttribute="leadingMargin" id="bzy-df-BSN"/>
-                            <constraint firstItem="TRe-by-rFq" firstAttribute="centerY" secondItem="nub-g2-jhT" secondAttribute="centerY" multiplier="1.1" id="eQL-Wb-g7o"/>
+                            <constraint firstItem="ykY-JB-tUb" firstAttribute="centerY" secondItem="THk-Ji-wDx" secondAttribute="centerY" id="j2V-mc-ST6"/>
                             <constraint firstItem="d04-w1-rW6" firstAttribute="centerX" secondItem="nub-g2-jhT" secondAttribute="centerX" id="kcr-dg-eKP"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="sUO-E5-naU" secondAttribute="trailing" id="oD7-rW-zCM"/>
+                            <constraint firstItem="THk-Ji-wDx" firstAttribute="centerX" secondItem="nub-g2-jhT" secondAttribute="centerX" id="nfx-fF-2ZE"/>
                             <constraint firstItem="5ah-Fv-utU" firstAttribute="leading" secondItem="nub-g2-jhT" secondAttribute="leadingMargin" constant="-16" id="pss-c4-C2k"/>
                             <constraint firstItem="ZPn-X5-MWC" firstAttribute="top" secondItem="5ah-Fv-utU" secondAttribute="bottom" constant="4" id="r7h-Fw-C9z"/>
                             <constraint firstAttribute="trailingMargin" secondItem="W6f-6S-ocL" secondAttribute="trailing" constant="-16" id="smj-Mq-Wpl"/>
-                            <constraint firstItem="5tw-ZV-IXc" firstAttribute="centerX" secondItem="nub-g2-jhT" secondAttribute="centerX" id="w9x-XD-BxR"/>
+                            <constraint firstItem="Jcm-fI-l1A" firstAttribute="top" secondItem="ykY-JB-tUb" secondAttribute="bottom" id="wQk-ja-JFg"/>
                         </constraints>
                     </view>
                     <toolbarItems/>
                     <navigationItem key="navigationItem" id="14i-Hh-xCb">
                         <barButtonItem key="rightBarButtonItem" systemItem="action" id="MFQ-Go-hpu">
-                            <color key="tintColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
+                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <connections>
                                 <action selector="actionButtonPressed:" destination="sds-LB-aBh" id="xAt-fn-jSg"/>
                             </connections>
@@ -143,6 +151,7 @@
                         <outlet property="totalBalance" destination="TRe-by-rFq" id="jO9-5R-4xj"/>
                         <outlet property="withdrawButton" destination="Iyv-Ff-OpV" id="rDW-Ng-oCn"/>
                         <segue destination="zFl-z3-0s0" kind="show" identifier="showHistory" id="GkY-hb-RdK"/>
+                        <segue destination="ptT-M2-wyM" kind="show" identifier="showGraph" id="9rw-Ha-VH8"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="weC-fA-FtV" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -187,7 +196,7 @@
                     <toolbarItems/>
                     <navigationItem key="navigationItem" id="EEE-pi-ymV">
                         <barButtonItem key="rightBarButtonItem" systemItem="trash" id="fT0-yn-Kat">
-                            <color key="tintColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
+                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <connections>
                                 <action selector="clearHistoryButtonWasPressed:" destination="zFl-z3-0s0" id="LaY-Gq-PcA"/>
                             </connections>
@@ -201,7 +210,39 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zQN-UU-JWU" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-154.40000000000001" y="-99.400299850074973"/>
+            <point key="canvasLocation" x="-10" y="-613"/>
+        </scene>
+        <!--Line Graph View Controller-->
+        <scene sceneID="CCG-Gz-MsH">
+            <objects>
+                <viewController id="ptT-M2-wyM" customClass="LineGraphViewController" customModule="Pocket_Change" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="VY6-tl-at9"/>
+                        <viewControllerLayoutGuide type="bottom" id="jVR-0J-6oK"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="vqK-WN-mOh" userLabel="Line Graph View" customClass="LineChartView" customModule="Charts">
+                        <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
+                    <navigationItem key="navigationItem" id="dg1-7A-Xal">
+                        <barButtonItem key="rightBarButtonItem" title="Save" id="jun-1o-ruY">
+                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <connections>
+                                <action selector="saveButtonWasPressed:" destination="ptT-M2-wyM" id="vmZ-4E-aDA"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="lineChartView" destination="vqK-WN-mOh" id="hQl-bs-4yz"/>
+                        <outlet property="lineGraphView" destination="vqK-WN-mOh" id="mZw-fZ-qAs"/>
+                        <outlet property="saveButton" destination="jun-1o-ruY" id="UB8-Fk-w2v"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="9ax-4o-MS9" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-10" y="161"/>
         </scene>
         <!--Budget List View Controller-->
         <scene sceneID="Ibv-9A-dme">
@@ -242,7 +283,7 @@
                     <toolbarItems/>
                     <navigationItem key="navigationItem" id="iGb-BM-5xC">
                         <barButtonItem key="rightBarButtonItem" systemItem="compose" id="l7g-mc-H40">
-                            <color key="tintColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
+                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <connections>
                                 <action selector="composeButtonWasPressed:" destination="9o8-Ar-hfP" id="mow-gp-06O"/>
                             </connections>
@@ -282,7 +323,8 @@
     <resources>
         <image name="PiggyBank" width="512" height="512"/>
         <image name="Square-14-D" width="110" height="32"/>
-        <image name="Square-14-H" width="110" height="32"/>
         <image name="Square-14-W" width="110" height="32"/>
+        <image name="Thin Daily" width="90" height="25"/>
+        <image name="Thin Weekly" width="90" height="25"/>
     </resources>
 </document>

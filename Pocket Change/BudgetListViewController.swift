@@ -55,8 +55,9 @@ class BudgetListViewController: UIViewController, UITableViewDataSource, UITable
         // Reload the budget table
         self.budgetTable.reloadData()
         
-        // Always set current index to reference the most recent budget
-        BudgetVariables.currentIndex = BudgetVariables.budgetArray.count - 1
+        // DELETE LATER
+        print(BudgetVariables.budgetArray[BudgetVariables.currentIndex].name!)
+        
     }
     
     //Calls this function when the tap is recognized.

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreData
 
 class WithdrawalViewController: UIViewController, UITextFieldDelegate
 {
@@ -61,6 +62,10 @@ class WithdrawalViewController: UIViewController, UITextFieldDelegate
         descriptionText.text = ""
         depositButton.isEnabled = false
         withdrawButton.isEnabled = false
+        
+        // DELETE LATER
+        print(BudgetVariables.budgetArray[BudgetVariables.currentIndex].name!)
+        print(BudgetVariables.currentIndex)
     }
     
     //Calls this function when the tap is recognized.
@@ -200,6 +205,9 @@ class WithdrawalViewController: UIViewController, UITextFieldDelegate
             let description = (descriptionText.text)?.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
             BudgetVariables.budgetArray[BudgetVariables.currentIndex].descriptionArray.append(description! + "    " + date)
             
+            // Log the amount withdrawn for today's spendings for this specific budget
+            BudgetVariables.logTodaysSpendings(num: input)
+            
             if BudgetVariables.budgetArray[BudgetVariables.currentIndex].balance - input < 0
             {
                 withdrawButton.isEnabled = false
@@ -305,7 +313,17 @@ class WithdrawalViewController: UIViewController, UITextFieldDelegate
     // When the history button gets pressed segue to the HistoryViewController file
     @IBAction func historyButtonPressed(_ sender: AnyObject)
     {
+        self.sharedDelegate.saveContext()
+        BudgetVariables.getData()
         performSegue(withIdentifier: "showHistory", sender: nil)
+    }
+    
+    // When the graphs button gets pressed segue to the BarChartViewController file
+    @IBAction func graphsButtonWasPressed(_ sender: AnyObject)
+    {
+        self.sharedDelegate.saveContext()
+        BudgetVariables.getData()
+        performSegue(withIdentifier: "showGraph", sender: nil)
     }
 }
 

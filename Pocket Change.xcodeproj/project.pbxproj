@@ -12,6 +12,9 @@
 		9A0010D01E0A097D008E7092 /* BudgetVariables.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A0010CF1E0A097D008E7092 /* BudgetVariables.swift */; };
 		9A0010DE1E0A27DF008E7092 /* MyBudget+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A0010DC1E0A27DF008E7092 /* MyBudget+CoreDataClass.swift */; };
 		9A0010DF1E0A27DF008E7092 /* MyBudget+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A0010DD1E0A27DF008E7092 /* MyBudget+CoreDataProperties.swift */; };
+		9A09B72A1E0CB96A00D0F4A4 /* Charts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A09B7291E0CB96A00D0F4A4 /* Charts.framework */; };
+		9A09B72B1E0CB96A00D0F4A4 /* Charts.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 9A09B7291E0CB96A00D0F4A4 /* Charts.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		9A09B72E1E0CBA5900D0F4A4 /* LineGraphViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A09B72D1E0CBA5900D0F4A4 /* LineGraphViewController.swift */; };
 		9A27BF2B1E0A01B100146EEA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A27BF2A1E0A01B100146EEA /* AppDelegate.swift */; };
 		9A27BF2D1E0A01B100146EEA /* WithdrawalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A27BF2C1E0A01B100146EEA /* WithdrawalViewController.swift */; };
 		9A27BF331E0A01B100146EEA /* Pocket_Change.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 9A27BF311E0A01B100146EEA /* Pocket_Change.xcdatamodeld */; };
@@ -23,6 +26,27 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		9A005AB71E0D01680081142A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 9A09B71D1E0CB92600D0F4A4 /* Charts.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 06165F241D8110E600722320;
+			remoteInfo = Charts;
+		};
+		9A005AB91E0D01680081142A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 9A09B71D1E0CB92600D0F4A4 /* Charts.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 06B120D51D811E6200D14B02;
+			remoteInfo = ChartsRealm;
+		};
+		9A005ABB1E0D01680081142A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 9A09B71D1E0CB92600D0F4A4 /* Charts.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 06165F2E1D8110E600722320;
+			remoteInfo = ChartsTests;
+		};
 		9A27BF3F1E0A01B100146EEA /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 9A27BF1F1E0A01B100146EEA /* Project object */;
@@ -39,12 +63,29 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		9A09B72C1E0CB96B00D0F4A4 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				9A09B72B1E0CB96A00D0F4A4 /* Charts.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		9A0010CB1E0A07B2008E7092 /* HistoryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HistoryViewController.swift; sourceTree = "<group>"; };
 		9A0010CD1E0A0887008E7092 /* BudgetListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BudgetListViewController.swift; sourceTree = "<group>"; };
 		9A0010CF1E0A097D008E7092 /* BudgetVariables.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BudgetVariables.swift; sourceTree = "<group>"; };
 		9A0010DC1E0A27DF008E7092 /* MyBudget+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "MyBudget+CoreDataClass.swift"; path = "../MyBudget+CoreDataClass.swift"; sourceTree = "<group>"; };
 		9A0010DD1E0A27DF008E7092 /* MyBudget+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "MyBudget+CoreDataProperties.swift"; path = "../MyBudget+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		9A09B71D1E0CB92600D0F4A4 /* Charts.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Charts.xcodeproj; path = "Pocket Change/Charts/Charts.xcodeproj"; sourceTree = "<group>"; };
+		9A09B7291E0CB96A00D0F4A4 /* Charts.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Charts.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		9A09B72D1E0CBA5900D0F4A4 /* LineGraphViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LineGraphViewController.swift; sourceTree = "<group>"; };
 		9A27BF271E0A01B100146EEA /* Pocket Change.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Pocket Change.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9A27BF2A1E0A01B100146EEA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9A27BF2C1E0A01B100146EEA /* WithdrawalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WithdrawalViewController.swift; sourceTree = "<group>"; };
@@ -66,6 +107,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9A09B72A1E0CB96A00D0F4A4 /* Charts.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -86,10 +128,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		9A005AB21E0D01640081142A /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				9A005AB81E0D01680081142A /* Charts.framework */,
+				9A005ABA1E0D01680081142A /* ChartsRealm.framework */,
+				9A005ABC1E0D01680081142A /* ChartsTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		9A27BF1E1E0A01B100146EEA = {
 			isa = PBXGroup;
 			children = (
+				9A09B7291E0CB96A00D0F4A4 /* Charts.framework */,
 				9A27BF291E0A01B100146EEA /* Pocket Change */,
+				9A09B71D1E0CB92600D0F4A4 /* Charts.xcodeproj */,
 				9A27BF411E0A01B100146EEA /* Pocket ChangeTests */,
 				9A27BF4C1E0A01B100146EEA /* Pocket ChangeUITests */,
 				9A27BF281E0A01B100146EEA /* Products */,
@@ -114,6 +168,7 @@
 				9A0010CD1E0A0887008E7092 /* BudgetListViewController.swift */,
 				9A27BF2C1E0A01B100146EEA /* WithdrawalViewController.swift */,
 				9A0010CB1E0A07B2008E7092 /* HistoryViewController.swift */,
+				9A09B72D1E0CBA5900D0F4A4 /* LineGraphViewController.swift */,
 				9A27BF5B1E0A022A00146EEA /* Main.storyboard */,
 				9A27BF311E0A01B100146EEA /* Pocket_Change.xcdatamodeld */,
 				9A0010DC1E0A27DF008E7092 /* MyBudget+CoreDataClass.swift */,
@@ -153,6 +208,7 @@
 				9A27BF231E0A01B100146EEA /* Sources */,
 				9A27BF241E0A01B100146EEA /* Frameworks */,
 				9A27BF251E0A01B100146EEA /* Resources */,
+				9A09B72C1E0CB96B00D0F4A4 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -239,6 +295,12 @@
 			mainGroup = 9A27BF1E1E0A01B100146EEA;
 			productRefGroup = 9A27BF281E0A01B100146EEA /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 9A005AB21E0D01640081142A /* Products */;
+					ProjectRef = 9A09B71D1E0CB92600D0F4A4 /* Charts.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				9A27BF261E0A01B100146EEA /* Pocket Change */,
@@ -247,6 +309,30 @@
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		9A005AB81E0D01680081142A /* Charts.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = Charts.framework;
+			remoteRef = 9A005AB71E0D01680081142A /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		9A005ABA1E0D01680081142A /* ChartsRealm.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = ChartsRealm.framework;
+			remoteRef = 9A005AB91E0D01680081142A /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		9A005ABC1E0D01680081142A /* ChartsTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = ChartsTests.xctest;
+			remoteRef = 9A005ABB1E0D01680081142A /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		9A27BF251E0A01B100146EEA /* Resources */ = {
@@ -282,6 +368,7 @@
 			files = (
 				9A0010DF1E0A27DF008E7092 /* MyBudget+CoreDataProperties.swift in Sources */,
 				9A27BF331E0A01B100146EEA /* Pocket_Change.xcdatamodeld in Sources */,
+				9A09B72E1E0CBA5900D0F4A4 /* LineGraphViewController.swift in Sources */,
 				9A0010DE1E0A27DF008E7092 /* MyBudget+CoreDataClass.swift in Sources */,
 				9A27BF2D1E0A01B100146EEA /* WithdrawalViewController.swift in Sources */,
 				9A0010D01E0A097D008E7092 /* BudgetVariables.swift in Sources */,
