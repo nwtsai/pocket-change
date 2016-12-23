@@ -1,8 +1,8 @@
 //
-//  LineGraphViewController.swift
+//  BarGraphViewController.swift
 //  Pocket Change
 //
-//  Created by Nathan Tsai on 12/22/16.
+//  Created by Nathan Tsai on 12/23/16.
 //  Copyright © 2016 Nathan Tsai. All rights reserved.
 //
 
@@ -12,8 +12,8 @@ import Foundation
 import CoreData
 
 // The point of this is to add X axis labels of the past 7 days to the graph
-@objc(LineChartFormatter)
-public class LineChartFormatter: NSObject, IAxisValueFormatter
+@objc(BarChartFormatter)
+public class BarChartFormatter: NSObject, IAxisValueFormatter
 {
     // Grab past 7 days into an array
     var days = BudgetVariables.pastSevenDays()
@@ -24,23 +24,23 @@ public class LineChartFormatter: NSObject, IAxisValueFormatter
     }
 }
 
-class LineGraphViewController: UIViewController
+class BarGraphViewController: UIViewController
 {
     // Clean code
     var sharedDelegate: AppDelegate!
-    
+
     // IB Outlets
-    @IBOutlet var lineGraphView: LineChartView!
-    @IBOutlet weak var saveButton: UIBarButtonItem!
+    @IBOutlet weak var cameraButton: UIBarButtonItem!
+    @IBOutlet var barGraphView: BarChartView!
     
     // Days Array
     var days: [String]!
     
-    // Initially load delegate 
+    // Initially doad delegate
     override func viewDidLoad()
     {
         super.viewDidLoad()
-        saveButton.isEnabled = false
+        cameraButton.isEnabled = false
         
         // So we don't need to type this out again
         let shDelegate = UIApplication.shared.delegate as! AppDelegate
@@ -66,52 +66,52 @@ class LineGraphViewController: UIViewController
         // let amountSpent = [20.0, 4.2, 6.89, 9.99, 60.8, 58.1, 35.0]
         let amountSpent = BudgetVariables.amountSpent()
         
-        setLineGraph(dataPoints: days, values: amountSpent)
+        setBarGraph(dataPoints: days, values: amountSpent)
     }
-
-    // Set Line Graph
-    func setLineGraph(dataPoints: [String], values: [Double])
+    
+    // Set Bar Graph
+    func setBarGraph(dataPoints: [String], values: [Double])
     {
-        // LINE CHART SPECS //
-        
-        let lineChartFormatter:LineChartFormatter = LineChartFormatter()
+        let barChartFormatter:BarChartFormatter = BarChartFormatter()
         let xAxis:XAxis = XAxis()
         
-        var dataEntries: [ChartDataEntry] = []
+        var dataEntries: [BarChartDataEntry] = []
         
         for i in 0..<dataPoints.count
         {
-            let dataEntry = ChartDataEntry(x: Double(i), y: values[i])
+            let dataEntry = BarChartDataEntry(x: Double(i), y: values[i])
             dataEntries.append(dataEntry)
             
-            let _ = lineChartFormatter.stringForValue(Double(i), axis: xAxis)
+            let _ = barChartFormatter.stringForValue(Double(i), axis: xAxis)
         }
         
-        xAxis.valueFormatter = lineChartFormatter
-        lineGraphView.xAxis.valueFormatter = xAxis.valueFormatter
+        xAxis.valueFormatter = barChartFormatter
+        barGraphView.xAxis.valueFormatter = xAxis.valueFormatter
         
         // Set the position of the x axis label
-        lineGraphView.xAxis.labelPosition = .bottom
+        barGraphView.xAxis.labelPosition = .bottom
         
-        let lineChartDataSet = LineChartDataSet(values: dataEntries, label: "Amount Spent ($)")
-        let lineChartData = LineChartData(dataSet: lineChartDataSet)
-        lineGraphView.data = lineChartData
+        let chartDataSet = BarChartDataSet(values: dataEntries, label: "Amount Spent ($)")
+        let chartData = BarChartData(dataSet: chartDataSet)
+        barGraphView.data = chartData
         
         // Set description texts
-        lineGraphView.chartDescription?.text = ""
+        barGraphView.chartDescription?.text = ""
         
         // Set the color scheme
-        lineChartDataSet.colors = ChartColorTemplates.liberty()
+        chartDataSet.colors = ChartColorTemplates.liberty()
         
         // Set the background color
-        // lineGraphView.backgroundColor = UIColor(red: 189/255, green: 195/255, blue: 199/255, alpha: 0.5)
+        // barGraphView.backgroundColor = UIColor(red: 230/255, green: 230/255, blue: 230/255, alpha: 1)
         
         // Animate the chart
-        lineGraphView.animate(xAxisDuration: 1.5, yAxisDuration: 1.5)
+        barGraphView.animate(xAxisDuration: 2.0, yAxisDuration: 2.0)
+
     }
+
     
-    // Save button was pressed (not completed)
-    @IBAction func saveButtonWasPressed(_ sender: UIBarButtonItem)
+    // Save the graph to the camera roll
+    @IBAction func cameraButtonWasPressed(_ sender: AnyObject)
     {
         //Create the UIImage
         UIGraphicsBeginImageContext(view.frame.size)

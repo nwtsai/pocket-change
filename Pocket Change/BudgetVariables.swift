@@ -101,7 +101,7 @@ class BudgetVariables: UIViewController
         return formatter.string(from: date)
     }
     
-    // Grab past 7 days into a String array
+    // Grab the past 7 days into a String array
     class func pastSevenDays() -> [String]
     {
         let cal = Calendar.current
@@ -161,7 +161,7 @@ class BudgetVariables: UIViewController
             BudgetVariables.budgetArray[BudgetVariables.currentIndex].amountSpentPastWeek[key] = 0.0
         }
         
-        // Store the new amount into the dictionary with the key being today's date
+        // Store the new amount into the dictionary with the key being today's date (MM/dd/YYYY)
         let newAmount = BudgetVariables.budgetArray[BudgetVariables.currentIndex].amountSpentPastWeek[key]! + num
         BudgetVariables.budgetArray[BudgetVariables.currentIndex].amountSpentPastWeek[key] = newAmount
     }

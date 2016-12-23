@@ -12,6 +12,7 @@
 		9A0010D01E0A097D008E7092 /* BudgetVariables.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A0010CF1E0A097D008E7092 /* BudgetVariables.swift */; };
 		9A0010DE1E0A27DF008E7092 /* MyBudget+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A0010DC1E0A27DF008E7092 /* MyBudget+CoreDataClass.swift */; };
 		9A0010DF1E0A27DF008E7092 /* MyBudget+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A0010DD1E0A27DF008E7092 /* MyBudget+CoreDataProperties.swift */; };
+		9A005ABE1E0D24F10081142A /* BarGraphViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A005ABD1E0D24F10081142A /* BarGraphViewController.swift */; };
 		9A09B72A1E0CB96A00D0F4A4 /* Charts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A09B7291E0CB96A00D0F4A4 /* Charts.framework */; };
 		9A09B72B1E0CB96A00D0F4A4 /* Charts.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 9A09B7291E0CB96A00D0F4A4 /* Charts.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		9A09B72E1E0CBA5900D0F4A4 /* LineGraphViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A09B72D1E0CBA5900D0F4A4 /* LineGraphViewController.swift */; };
@@ -83,6 +84,7 @@
 		9A0010CF1E0A097D008E7092 /* BudgetVariables.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BudgetVariables.swift; sourceTree = "<group>"; };
 		9A0010DC1E0A27DF008E7092 /* MyBudget+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "MyBudget+CoreDataClass.swift"; path = "../MyBudget+CoreDataClass.swift"; sourceTree = "<group>"; };
 		9A0010DD1E0A27DF008E7092 /* MyBudget+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "MyBudget+CoreDataProperties.swift"; path = "../MyBudget+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		9A005ABD1E0D24F10081142A /* BarGraphViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BarGraphViewController.swift; sourceTree = "<group>"; };
 		9A09B71D1E0CB92600D0F4A4 /* Charts.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Charts.xcodeproj; path = "Pocket Change/Charts/Charts.xcodeproj"; sourceTree = "<group>"; };
 		9A09B7291E0CB96A00D0F4A4 /* Charts.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Charts.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9A09B72D1E0CBA5900D0F4A4 /* LineGraphViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LineGraphViewController.swift; sourceTree = "<group>"; };
@@ -169,6 +171,7 @@
 				9A27BF2C1E0A01B100146EEA /* WithdrawalViewController.swift */,
 				9A0010CB1E0A07B2008E7092 /* HistoryViewController.swift */,
 				9A09B72D1E0CBA5900D0F4A4 /* LineGraphViewController.swift */,
+				9A005ABD1E0D24F10081142A /* BarGraphViewController.swift */,
 				9A27BF5B1E0A022A00146EEA /* Main.storyboard */,
 				9A27BF311E0A01B100146EEA /* Pocket_Change.xcdatamodeld */,
 				9A0010DC1E0A27DF008E7092 /* MyBudget+CoreDataClass.swift */,
@@ -375,6 +378,7 @@
 				9A27BF2B1E0A01B100146EEA /* AppDelegate.swift in Sources */,
 				9A0010CC1E0A07B2008E7092 /* HistoryViewController.swift in Sources */,
 				9A0010CE1E0A0887008E7092 /* BudgetListViewController.swift in Sources */,
+				9A005ABE1E0D24F10081142A /* BarGraphViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

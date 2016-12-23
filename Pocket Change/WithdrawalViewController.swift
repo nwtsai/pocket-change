@@ -308,7 +308,7 @@ class WithdrawalViewController: UIViewController, UITextFieldDelegate
     }
     
     // When the history button gets pressed segue to the HistoryViewController file
-    @IBAction func dailyButtonWasPressed(_ sender: AnyObject)
+    @IBAction func historyButtonWasPressed(_ sender: AnyObject)
     {
         // Save context and get data
         self.sharedDelegate.saveContext()
@@ -316,8 +316,17 @@ class WithdrawalViewController: UIViewController, UITextFieldDelegate
         performSegue(withIdentifier: "showDaily", sender: nil)
     }
     
-    // When the graphs button gets pressed segue to the BarChartViewController file
-    @IBAction func weeklyButtonWasPressed(_ sender: AnyObject)
+    // When the graphs button gets pressed segue to the BarGraphViewController file
+    @IBAction func barGraphButtonWasPressed(_ sender: AnyObject)
+    {
+        // Save context and get data
+        self.sharedDelegate.saveContext()
+        BudgetVariables.getData()
+        performSegue(withIdentifier: "showBarGraph", sender: nil)
+    }
+    
+    // When the graphs button gets pressed segue to the LineGraphViewController file
+    @IBAction func lineGraphButtonWasPressed(_ sender: AnyObject)
     {
         // Save context and get data
         self.sharedDelegate.saveContext()

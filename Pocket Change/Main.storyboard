@@ -73,8 +73,8 @@
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="d04-w1-rW6" userLabel="Piggy Bank Icon">
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="115" id="9zf-hq-7ye"/>
-                                    <constraint firstAttribute="height" constant="115" id="doT-ao-IWp"/>
+                                    <constraint firstAttribute="width" constant="110" id="9zf-hq-7ye"/>
+                                    <constraint firstAttribute="height" constant="110" id="doT-ao-IWp"/>
                                 </constraints>
                                 <state key="normal" title="Button" image="PiggyBank"/>
                             </button>
@@ -85,21 +85,27 @@
                             </label>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="THk-Ji-wDx" userLabel="History Buttons Stack View">
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5tw-ZV-IXc" userLabel="Daily Button">
-                                        <state key="normal" image="Thin Daily"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5tw-ZV-IXc" userLabel="History Button">
+                                        <state key="normal" image="Thin History"/>
                                         <connections>
-                                            <action selector="dailyButtonWasPressed:" destination="sds-LB-aBh" eventType="touchUpInside" id="a5C-3u-LtF"/>
+                                            <action selector="historyButtonWasPressed:" destination="sds-LB-aBh" eventType="touchUpInside" id="yt4-Wt-Zxf"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3hM-UR-lAg" userLabel="Weekly Button">
-                                        <state key="normal" image="Thin Weekly"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KOJ-SF-gm5" userLabel="Bar Graph Button">
+                                        <state key="normal" image="Thin Bar"/>
                                         <connections>
-                                            <action selector="weeklyButtonWasPressed:" destination="sds-LB-aBh" eventType="touchUpInside" id="q4u-gQ-Y7E"/>
+                                            <action selector="barGraphButtonWasPressed:" destination="sds-LB-aBh" eventType="touchUpInside" id="C5m-6r-Q7W"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3hM-UR-lAg" userLabel="Line Graph Button">
+                                        <state key="normal" image="Thin Line"/>
+                                        <connections>
+                                            <action selector="lineGraphButtonWasPressed:" destination="sds-LB-aBh" eventType="touchUpInside" id="Cuz-sW-DHu"/>
                                         </connections>
                                     </button>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="90" id="NHa-nb-WRh"/>
+                                    <constraint firstAttribute="height" constant="105" id="NHa-nb-WRh"/>
                                 </constraints>
                             </stackView>
                             <view hidden="YES" opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ykY-JB-tUb" userLabel="Spacer"/>
@@ -152,6 +158,7 @@
                         <outlet property="withdrawButton" destination="Iyv-Ff-OpV" id="rDW-Ng-oCn"/>
                         <segue destination="zFl-z3-0s0" kind="show" identifier="showDaily" id="GkY-hb-RdK"/>
                         <segue destination="ptT-M2-wyM" kind="show" identifier="showWeekly" id="9rw-Ha-VH8"/>
+                        <segue destination="GDo-YR-dDG" kind="show" identifier="showBarGraph" id="5yA-34-IDW"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="weC-fA-FtV" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -171,18 +178,18 @@
                                 <rect key="frame" x="0.0" y="92" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="mDG-qP-hdH" id="8DO-UW-qdY">
-                                    <frame key="frameInset" width="375" height="43"/>
+                                    <frame key="frameInset" width="375" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="UVe-4t-pnt">
-                                            <frame key="frameInset" minX="15" minY="11" width="34" height="21"/>
+                                            <frame key="frameInset" minX="15" minY="12" width="33.5" height="20.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Detail" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="foI-it-SFX">
-                                            <frame key="frameInset" minX="316" minY="11" width="44" height="21"/>
+                                            <frame key="frameInset" minX="316" minY="12" width="44" height="20.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
@@ -210,7 +217,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zQN-UU-JWU" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-10" y="-613"/>
+            <point key="canvasLocation" x="-34" y="-1003"/>
         </scene>
         <!--Line Graph View Controller-->
         <scene sceneID="CCG-Gz-MsH">
@@ -227,7 +234,7 @@
                     </view>
                     <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
                     <navigationItem key="navigationItem" id="dg1-7A-Xal">
-                        <barButtonItem key="rightBarButtonItem" title="Save" id="jun-1o-ruY">
+                        <barButtonItem key="rightBarButtonItem" systemItem="camera" id="jun-1o-ruY">
                             <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <connections>
                                 <action selector="saveButtonWasPressed:" destination="ptT-M2-wyM" id="vmZ-4E-aDA"/>
@@ -241,7 +248,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9ax-4o-MS9" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-10" y="161"/>
+            <point key="canvasLocation" x="-34" y="-250"/>
         </scene>
         <!--Budget List View Controller-->
         <scene sceneID="Ibv-9A-dme">
@@ -256,18 +263,18 @@
                                 <rect key="frame" x="0.0" y="92" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="xV3-fU-JcU" id="vVc-Te-qfI">
-                                    <frame key="frameInset" width="375" height="43"/>
+                                    <frame key="frameInset" width="375" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="uyg-Q0-VGI">
-                                            <frame key="frameInset" minX="15" minY="11" width="34" height="21"/>
+                                            <frame key="frameInset" minX="15" minY="12" width="33.5" height="20.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Detail" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Cub-ds-4N5">
-                                            <frame key="frameInset" minX="316" minY="11" width="44" height="21"/>
+                                            <frame key="frameInset" minX="316" minY="12" width="44" height="20.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
@@ -318,12 +325,44 @@
             </objects>
             <point key="canvasLocation" x="-2895.1999999999998" y="-99.400299850074973"/>
         </scene>
+        <!--Bar Graph View Controller-->
+        <scene sceneID="iAB-AN-GUb">
+            <objects>
+                <viewController id="GDo-YR-dDG" userLabel="Bar Graph View Controller" customClass="BarGraphViewController" customModule="Pocket_Change" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="9oa-Q2-pg3"/>
+                        <viewControllerLayoutGuide type="bottom" id="QQU-ol-lMv"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="B48-NJ-BQR" userLabel="Bar Graph View" customClass="BarChartView" customModule="Charts">
+                        <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
+                    <navigationItem key="navigationItem" id="Q3D-0g-plU">
+                        <barButtonItem key="rightBarButtonItem" systemItem="camera" id="iDK-Jx-Ghv">
+                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <connections>
+                                <action selector="cameraButtonWasPressed:" destination="GDo-YR-dDG" id="nQb-hv-Wm0"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="barGraphView" destination="B48-NJ-BQR" id="L4t-Ix-FkX"/>
+                        <outlet property="cameraButton" destination="iDK-Jx-Ghv" id="cIo-9K-2gT"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="6K8-ea-Mj3" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-34" y="539"/>
+        </scene>
     </scenes>
     <resources>
         <image name="PiggyBank" width="512" height="512"/>
         <image name="Square-14-D" width="110" height="32"/>
         <image name="Square-14-W" width="110" height="32"/>
-        <image name="Thin Daily" width="90" height="25"/>
-        <image name="Thin Weekly" width="90" height="25"/>
+        <image name="Thin Bar" width="72" height="25"/>
+        <image name="Thin History" width="72" height="25"/>
+        <image name="Thin Line" width="72" height="25"/>
     </resources>
 </document>
