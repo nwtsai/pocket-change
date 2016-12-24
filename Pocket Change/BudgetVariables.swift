@@ -136,7 +136,6 @@ class BudgetVariables: UIViewController
             aWeekAgo = cal.date(byAdding: .day, value: 1, to: aWeekAgo!)!
         }
         
-        print(amountSpentArray)
         return amountSpentArray
     }
     
@@ -250,5 +249,16 @@ class BudgetVariables: UIViewController
             blue: CGFloat(rgbValue & 0x0000FF) / 255.0,
             alpha: CGFloat(1.0)
         )
+    }
+    
+    // Calculates the average of a Double array
+    class func calculateAverage(nums: [Double]) -> Double
+    {
+        var total = 0.0
+        for num in nums
+        {
+            total += num
+        }
+        return total/Double(nums.count)
     }
 }

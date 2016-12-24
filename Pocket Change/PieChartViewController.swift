@@ -11,6 +11,23 @@ import Charts
 import CoreData
 import Foundation
 
+// For taking screenshots
+extension UIApplication
+{
+    var screenShot: UIImage?
+    {
+        let layer = keyWindow!.layer
+        let scale = UIScreen.main.scale
+        
+        UIGraphicsBeginImageContextWithOptions(layer.frame.size, false, scale);
+        layer.render(in: UIGraphicsGetCurrentContext()!)
+        let screenshot = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        
+        return screenshot
+    }
+}
+
 class PieChartViewController: UIViewController
 {
     // Clean code
@@ -23,14 +40,13 @@ class PieChartViewController: UIViewController
     override func viewDidLoad()
     {
         super.viewDidLoad()
-        cameraButton.isEnabled = false
         
         // So we don't need to type this out again
         let shDelegate = UIApplication.shared.delegate as! AppDelegate
         sharedDelegate = shDelegate
         
         // Set the page title
-        self.navigationItem.title = "Distribution"
+        self.navigationItem.title = "π"
     }
     
     // Load the graph before view appears. We do this here because data may change
@@ -48,13 +64,16 @@ class PieChartViewController: UIViewController
         // Grab Names and amount spent to populate the Pie Chart
         let map = BudgetVariables.nameToNetAmtSpentMap()
         let budgetNames = BudgetVariables.getBudgetNames(map: map)
-        let amtSpent = BudgetVariables.getAmtSpent(map: map)
-        print(budgetNames)
-        print(amtSpent)
+        let amountSpent = BudgetVariables.getAmtSpent(map: map)
         
-        if budgetNames.isEmpty == false && amtSpent.isEmpty == false
+        if budgetNames.isEmpty == false && amountSpent.isEmpty == false
         {
-            setPieGraph(names: budgetNames, values: amtSpent)
+            cameraButton.isEnabled = true
+            setPieGraph(names: budgetNames, values: amountSpent)
+        }
+        else
+        {
+            cameraButton.isEnabled = false
         }
     }
 
@@ -178,13 +197,6 @@ class PieChartViewController: UIViewController
         
         for i in 0..<names.count
         {
-            // Find random colors and append them to the colors array
-//            let red = Double(arc4random_uniform(201))
-//            let green = Double(arc4random_uniform(201))
-//            let blue = Double(arc4random_uniform(201))
-//            let color = UIColor(red: CGFloat(red/255), green: CGFloat(green/255), blue: CGFloat(blue/255), alpha: 1)
-//            colors.append(color)
-            
             // Create a custom label for each entry (Max 5 Entries)
             let entry:LegendEntry=LegendEntry.init()
             entry.label = names[i]
@@ -206,7 +218,7 @@ class PieChartViewController: UIViewController
         
         // Legend font size
         pieChartView.legend.font = UIFont.systemFont(ofSize: 18)
-        pieChartView.legend.formSize = 12
+        pieChartView.legend.formSize = 11
         
         // Set description texts
         pieChartView.chartDescription?.text = ""
@@ -214,17 +226,13 @@ class PieChartViewController: UIViewController
         // Set Font Size and Color
         pieChartData.setValueFont(UIFont.systemFont(ofSize: 18))
         pieChartData.setValueTextColor(UIColor.black)
+        
+        pieChartView.animate(xAxisDuration: 1.5, yAxisDuration: 1.5)
     }
     
-    // In construction
+    // Takes a screenshot of the pie chart
     @IBAction func cameraButtonWasPressed(_ sender: AnyObject)
     {
-        //Create the UIImage
-        UIGraphicsBeginImageContext(view.frame.size)
-        view.layer.render(in: UIGraphicsGetCurrentContext()!)
-        let image = UIGraphicsGetImageFromCurrentImageContext()
-        UIGraphicsEndImageContext()
-        //Save it to the camera roll
-        UIImageWriteToSavedPhotosAlbum(image!, nil, nil, nil)
+        UIApplication.shared.screenShot
     }
 }

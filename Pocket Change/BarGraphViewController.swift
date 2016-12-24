@@ -40,7 +40,6 @@ class BarGraphViewController: UIViewController
     override func viewDidLoad()
     {
         super.viewDidLoad()
-        cameraButton.isEnabled = false
         
         // So we don't need to type this out again
         let shDelegate = UIApplication.shared.delegate as! AppDelegate
@@ -66,10 +65,18 @@ class BarGraphViewController: UIViewController
         self.navigationItem.title = days[0] + " – " + days[6]
         
         // Grab amount spent for each day in the past week into a double array
-        let amountSpent = [20.0, 4.2, 6.89, 9.99, 60.8, 58.1, 35.0]
-        // let amountSpent = BudgetVariables.amountSpent()
+        // let amountSpent = [20.0, 4.2, 6.89, 9.99, 60.8, 58.1, 35.0]
+        let amountSpent = BudgetVariables.amountSpent()
         
-        setBarGraph(dataPoints: days, values: amountSpent)
+        if days.isEmpty == false && amountSpent.isEmpty == false
+        {
+            cameraButton.isEnabled = true
+            setBarGraph(dataPoints: days, values: amountSpent)
+        }
+        else
+        {
+            cameraButton.isEnabled = false
+        }
     }
     
     // Set Bar Graph
@@ -91,17 +98,24 @@ class BarGraphViewController: UIViewController
         xAxis.valueFormatter = barChartFormatter
         barGraphView.xAxis.valueFormatter = xAxis.valueFormatter
         
+        // Set a limit line to be the average amount spent in that week
+        let average = BudgetVariables.calculateAverage(nums: values)
+        let ll = ChartLimitLine(limit: average, label: "Average: " + BudgetVariables.numFormat(myNum: average))
+        ll.lineColor = BudgetVariables.hexStringToUIColor(hex: "092140")
+        ll.valueFont = UIFont.systemFont(ofSize: 15)
+        ll.lineWidth = 2
+        ll.labelPosition = .leftTop
+        barGraphView.leftAxis.addLimitLine(ll)
+        
         // Set the position of the x axis label
         barGraphView.xAxis.labelPosition = .bottom
         
-        let chartDataSet = BarChartDataSet(values: dataEntries, label: "Net Amount Spent ($)")
+        let chartDataSet = BarChartDataSet(values: dataEntries, label: "Net Amount Spent")
         let chartData = BarChartData(dataSet: chartDataSet)
         barGraphView.data = chartData
         
-        // Customize Bar Graph
-        
         // Set font size
-        chartData.setValueFont(UIFont.systemFont(ofSize: 16))
+        chartData.setValueFont(UIFont.systemFont(ofSize: 12))
         
         let format = NumberFormatter()
         format.numberStyle = .currency
@@ -109,8 +123,11 @@ class BarGraphViewController: UIViewController
         chartData.setValueFormatter(formatter)
         
         // Legend font size
-        barGraphView.legend.font = UIFont.systemFont(ofSize: 18)
-        barGraphView.legend.formSize = 12
+        barGraphView.legend.font = UIFont.systemFont(ofSize: 14)
+        barGraphView.legend.formSize = 8
+        
+        // Set X Axis Font
+        barGraphView.xAxis.labelFont = UIFont.systemFont(ofSize: 14)
         
         // Set description texts
         barGraphView.chartDescription?.text = ""
@@ -125,15 +142,9 @@ class BarGraphViewController: UIViewController
         barGraphView.animate(xAxisDuration: 0.0, yAxisDuration: 2.0)
     }
     
-    // Save the graph to the camera roll
+    // Takes a screenshot of the bar graph
     @IBAction func cameraButtonWasPressed(_ sender: AnyObject)
     {
-        //Create the UIImage
-        UIGraphicsBeginImageContext(view.frame.size)
-        view.layer.render(in: UIGraphicsGetCurrentContext()!)
-        let image = UIGraphicsGetImageFromCurrentImageContext()
-        UIGraphicsEndImageContext()
-        //Save it to the camera roll
-        UIImageWriteToSavedPhotosAlbum(image!, nil, nil, nil)
+        UIApplication.shared.screenShot
     }
 }
