@@ -171,18 +171,18 @@
                                 <rect key="frame" x="0.0" y="92" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="mDG-qP-hdH" id="8DO-UW-qdY">
-                                    <frame key="frameInset" width="375" height="43.5"/>
+                                    <frame key="frameInset" width="375" height="43"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="UVe-4t-pnt">
-                                            <frame key="frameInset" minX="15" minY="12" width="33.5" height="20.5"/>
+                                            <frame key="frameInset" minX="15" minY="11" width="34" height="21"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Detail" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="foI-it-SFX">
-                                            <frame key="frameInset" minX="316" minY="12" width="44" height="20.5"/>
+                                            <frame key="frameInset" minX="316" minY="11" width="44" height="21"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
@@ -225,18 +225,18 @@
                                 <rect key="frame" x="0.0" y="92" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="xV3-fU-JcU" id="vVc-Te-qfI">
-                                    <frame key="frameInset" width="375" height="43.5"/>
+                                    <frame key="frameInset" width="375" height="43"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="uyg-Q0-VGI">
-                                            <frame key="frameInset" minX="15" minY="12" width="33.5" height="20.5"/>
+                                            <frame key="frameInset" minX="15" minY="11" width="34" height="21"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Detail" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Cub-ds-4N5">
-                                            <frame key="frameInset" minX="316" minY="12" width="44" height="20.5"/>
+                                            <frame key="frameInset" minX="316" minY="11" width="44" height="21"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
@@ -342,13 +342,6 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rd4-TT-iwL" userLabel="Pie Center Image">
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="50" id="MTq-Rr-w1P"/>
-                                    <constraint firstAttribute="height" constant="50" id="dQG-8p-0zD"/>
-                                </constraints>
-                                <state key="normal" image="Coins"/>
-                            </button>
                             <view hidden="YES" opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Uzn-r4-01j">
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </view>
@@ -356,8 +349,6 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="MRV-H3-yAL" firstAttribute="centerX" secondItem="3oj-VF-CUA" secondAttribute="centerX" id="29a-vj-bTw"/>
-                            <constraint firstItem="rd4-TT-iwL" firstAttribute="centerY" secondItem="Uzn-r4-01j" secondAttribute="centerY" id="7Bz-ZJ-kS6"/>
-                            <constraint firstItem="rd4-TT-iwL" firstAttribute="centerX" secondItem="Uzn-r4-01j" secondAttribute="centerX" id="FaO-rE-u8i"/>
                             <constraint firstItem="MRV-H3-yAL" firstAttribute="centerY" secondItem="3oj-VF-CUA" secondAttribute="centerY" multiplier="0.15" id="MfB-Gg-xt8"/>
                             <constraint firstAttribute="trailingMargin" secondItem="Uzn-r4-01j" secondAttribute="trailing" id="ZLf-XO-lpx"/>
                             <constraint firstItem="Uzn-r4-01j" firstAttribute="leading" secondItem="3oj-VF-CUA" secondAttribute="leadingMargin" id="jMi-mW-qF4"/>
@@ -385,7 +376,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="Coins" width="512" height="512"/>
         <image name="PiggyBank" width="512" height="512"/>
         <image name="Square-14-D" width="110" height="32"/>
         <image name="Square-14-W" width="110" height="32"/>

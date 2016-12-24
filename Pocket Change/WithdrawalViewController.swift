@@ -52,7 +52,7 @@ class WithdrawalViewController: UIViewController, UITextFieldDelegate
         
         // Set Navbar title and other labels
         self.navigationItem.title = BudgetVariables.budgetArray[BudgetVariables.currentIndex].name
-        totalBalance.text = "$" + BudgetVariables.numFormat(myNum: BudgetVariables.budgetArray[BudgetVariables.currentIndex].balance)
+        totalBalance.text = BudgetVariables.numFormat(myNum: BudgetVariables.budgetArray[BudgetVariables.currentIndex].balance)
         if BudgetVariables.budgetArray[BudgetVariables.currentIndex].balance == 0
         {
             withdrawButton.isEnabled = false
@@ -153,7 +153,7 @@ class WithdrawalViewController: UIViewController, UITextFieldDelegate
         if let input = Double(trimmedInput!)
         {
             BudgetVariables.budgetArray[BudgetVariables.currentIndex].balance += input
-            totalBalance.text = "$" + BudgetVariables.numFormat(myNum: BudgetVariables.budgetArray[BudgetVariables.currentIndex].balance)
+            totalBalance.text = BudgetVariables.numFormat(myNum: BudgetVariables.budgetArray[BudgetVariables.currentIndex].balance)
             BudgetVariables.budgetArray[BudgetVariables.currentIndex].historyArray.append("+ $" + String(format: "%.2f", input))
             
             // Trim description text before appending
@@ -201,7 +201,7 @@ class WithdrawalViewController: UIViewController, UITextFieldDelegate
         if let input = Double(trimmedInput!)
         {
             BudgetVariables.budgetArray[BudgetVariables.currentIndex].balance -= input
-            totalBalance.text = "$" + BudgetVariables.numFormat(myNum: BudgetVariables.budgetArray[BudgetVariables.currentIndex].balance)
+            totalBalance.text = BudgetVariables.numFormat(myNum: BudgetVariables.budgetArray[BudgetVariables.currentIndex].balance)
             BudgetVariables.budgetArray[BudgetVariables.currentIndex].historyArray.append("– $" + String(format: "%.2f", input))
             
             // Trim description text before appending
@@ -247,7 +247,7 @@ class WithdrawalViewController: UIViewController, UITextFieldDelegate
         // Else if the input is not a number and isn't empty, disable buttons and print error statement
         if trimmedInput == ""
         {
-            totalBalance.text = "$" + BudgetVariables.numFormat(myNum: BudgetVariables.budgetArray[BudgetVariables.currentIndex].balance)
+            totalBalance.text = BudgetVariables.numFormat(myNum: BudgetVariables.budgetArray[BudgetVariables.currentIndex].balance)
             depositButton.isEnabled = false
             withdrawButton.isEnabled = false
         }
@@ -259,7 +259,7 @@ class WithdrawalViewController: UIViewController, UITextFieldDelegate
         }
         else if trimmedInput == "."
         {
-            totalBalance.text = "$" + BudgetVariables.numFormat(myNum: BudgetVariables.budgetArray[BudgetVariables.currentIndex].balance)
+            totalBalance.text = BudgetVariables.numFormat(myNum: BudgetVariables.budgetArray[BudgetVariables.currentIndex].balance)
             withdrawButton.isEnabled = false
             depositButton.isEnabled = false
         }
@@ -280,7 +280,7 @@ class WithdrawalViewController: UIViewController, UITextFieldDelegate
             }
             else
             {
-                totalBalance.text = "$" + BudgetVariables.numFormat(myNum: BudgetVariables.budgetArray[BudgetVariables.currentIndex].balance)
+                totalBalance.text = BudgetVariables.numFormat(myNum: BudgetVariables.budgetArray[BudgetVariables.currentIndex].balance)
                 if input == 0
                 {
                     depositButton.isEnabled = false

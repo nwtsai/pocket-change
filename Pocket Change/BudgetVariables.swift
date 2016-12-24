@@ -32,24 +32,14 @@ class BudgetVariables: UIViewController
         }
     }
     
-    // If we don't need commas, return number as double precision
-    // If we do need commas, return number as regular precision unless adding precision is more accurate
-    // For instance myNum = 999 returns 999.00 and myNum = 1000 becomes 1,000
-    // This saves screen space unless we need more space to be more precise
+    // Converts a Double like 80.0 and adds a $ sign to the front and rounds number to 2 decimal places
+    // Returns "$80.00" in this example
     class func numFormat(myNum: Double) -> String
     {
-        let temp = String(format: "%.2f", myNum)
-        if myNum < 1000
-        {
-            return temp
-        }
-        else
-        {
-            let largeNumber = Double(temp)
-            let numberFormatter = NumberFormatter()
-            numberFormatter.numberStyle = NumberFormatter.Style.decimal
-            return numberFormatter.string(from: NSNumber(value: largeNumber!))!
-        }
+        let largeNumber = Double(myNum)
+        let numberFormatter = NumberFormatter()
+        numberFormatter.numberStyle = .currency
+        return numberFormatter.string(from: NSNumber(value: largeNumber))!
     }
     
     // If name does not exist already, return argument
@@ -146,6 +136,7 @@ class BudgetVariables: UIViewController
             aWeekAgo = cal.date(byAdding: .day, value: 1, to: aWeekAgo!)!
         }
         
+        print(amountSpentArray)
         return amountSpentArray
     }
     

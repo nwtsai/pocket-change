@@ -101,7 +101,12 @@ class BarGraphViewController: UIViewController
         // Customize Bar Graph
         
         // Set font size
-        chartData.setValueFont(UIFont.systemFont(ofSize: 12))
+        chartData.setValueFont(UIFont.systemFont(ofSize: 16))
+        
+        let format = NumberFormatter()
+        format.numberStyle = .currency
+        let formatter = DefaultValueFormatter(formatter: format)
+        chartData.setValueFormatter(formatter)
         
         // Legend font size
         barGraphView.legend.font = UIFont.systemFont(ofSize: 18)
@@ -117,7 +122,7 @@ class BarGraphViewController: UIViewController
         // barGraphView.backgroundColor = UIColor(red: 230/255, green: 230/255, blue: 230/255, alpha: 1)
         
         // Animate the chart
-        barGraphView.animate(xAxisDuration: 1.5, yAxisDuration: 1.5)
+        barGraphView.animate(xAxisDuration: 0.0, yAxisDuration: 2.0)
     }
     
     // Save the graph to the camera roll
