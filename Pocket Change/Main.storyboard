@@ -250,7 +250,7 @@
                     </tableView>
                     <toolbarItems/>
                     <navigationItem key="navigationItem" id="iGb-BM-5xC">
-                        <barButtonItem key="leftBarButtonItem" title="Distribution" id="Wt1-JG-AMk">
+                        <barButtonItem key="leftBarButtonItem" title="π" style="done" id="Wt1-JG-AMk">
                             <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <connections>
                                 <action selector="pieChartButtonPressed:" destination="9o8-Ar-hfP" id="yEc-m3-m1p"/>
