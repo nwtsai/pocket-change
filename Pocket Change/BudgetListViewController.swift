@@ -9,6 +9,15 @@
 import UIKit
 import CoreData
 
+// Rounds doubles to a certain number of decimal places
+extension Double
+{
+    func roundTo(places:Int) -> Double {
+        let divisor = pow(10.0, Double(places))
+        return (self * divisor).rounded() / divisor
+    }
+}
+
 class BudgetListViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate
 {
     // sharedDelegate
@@ -71,6 +80,7 @@ class BudgetListViewController: UIViewController, UITableViewDataSource, UITable
         let alert = UIAlertController(title: "Create a Budget", message: "", preferredStyle: UIAlertControllerStyle.alert)
         alert.addTextField(configurationHandler: {(textField: UITextField) in
             textField.placeholder = "Enter Budget Name (Optional)"
+            textField.delegate = self
         })
         
         alert.addTextField(configurationHandler: {(textField: UITextField) in
@@ -126,6 +136,24 @@ class BudgetListViewController: UIViewController, UITableViewDataSource, UITable
         self.confirmButton = confirm
         confirm.isEnabled = false
         self.present(alert, animated: true, completion: nil)
+    }
+    
+    // This function limits the maximum character count for each textField
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool
+    {
+        var maxLength = 0
+        if textField.placeholder == "Enter Budget Name (Optional)"
+        {
+            maxLength = 18
+        }
+        else if textField.placeholder == "Amount from $0 to $1,000,000"
+        {
+            maxLength = 10
+        }
+        
+        let currentString = textField.text as NSString?
+        let newString = currentString?.replacingCharacters(in: range, with: string)
+        return newString!.characters.count <= maxLength
     }
     
     // This function disables the save button if the input amount is not valid

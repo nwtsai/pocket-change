@@ -35,6 +35,14 @@ class WithdrawalViewController: UIViewController, UITextFieldDelegate
         let color = UIColor.white
         self.navigationController?.navigationBar.tintColor = color
         
+        // Set textField delegates to themselves
+        inputAmount.delegate = self
+        descriptionText.delegate = self
+        
+        // Set placeholder text for each textfield
+        inputAmount.placeholder = "$0.00"
+        descriptionText.placeholder = "What's it for?"
+        
         //Looks for single or multiple taps.
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(WithdrawalViewController.dismissKeyboard))
         tap.cancelsTouchesInView = false
@@ -140,6 +148,29 @@ class WithdrawalViewController: UIViewController, UITextFieldDelegate
         }
     }
     
+    // This function limits the maximum character count for each textField
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool
+    {
+        var maxLength = 0
+        if textField.placeholder == "Enter New Budget Name"
+        {
+            maxLength = 18
+        }
+        else if textField.placeholder == "$0.00"
+        {
+            // Insert function that prevents a number from going past 2 decimal places
+            maxLength = 10
+        }
+        else if textField.placeholder == "What's it for?"
+        {
+            maxLength = 25
+        }
+        
+        let currentString = textField.text as NSString?
+        let newString = currentString?.replacingCharacters(in: range, with: string)
+        return newString!.characters.count <= maxLength
+    }
+    
     // This function gets called when the Deposit button is pressed
     @IBAction func depositButtonWasPressed(_ sender: AnyObject)
     {
@@ -149,8 +180,8 @@ class WithdrawalViewController: UIViewController, UITextFieldDelegate
         // Trim input first
         let trimmedInput = (inputAmount.text)?.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
         
-        // If the input amount is a number
-        if let input = Double(trimmedInput!)
+        // If the input amount is a number, round the input to two decimal places before doing further calculations
+        if let input = (Double(trimmedInput!))?.roundTo(places: 2)
         {
             BudgetVariables.budgetArray[BudgetVariables.currentIndex].balance += input
             totalBalance.text = BudgetVariables.numFormat(myNum: BudgetVariables.budgetArray[BudgetVariables.currentIndex].balance)
@@ -197,8 +228,8 @@ class WithdrawalViewController: UIViewController, UITextFieldDelegate
         // Trim input first
         let trimmedInput = (inputAmount.text)?.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
         
-        // If the input amount is a number
-        if let input = Double(trimmedInput!)
+        // If the input amount is a number, round the input to two decimal places before doing further calculations
+        if let input = (Double(trimmedInput!))?.roundTo(places: 2)
         {
             BudgetVariables.budgetArray[BudgetVariables.currentIndex].balance -= input
             totalBalance.text = BudgetVariables.numFormat(myNum: BudgetVariables.budgetArray[BudgetVariables.currentIndex].balance)
@@ -263,7 +294,7 @@ class WithdrawalViewController: UIViewController, UITextFieldDelegate
             withdrawButton.isEnabled = false
             depositButton.isEnabled = false
         }
-        else if let input = Double(trimmedInput!)
+        else if let input = (Double(trimmedInput!))?.roundTo(places: 2)
         {
             // Print error statement if input exceeeds 1 million
             if input > 1000000

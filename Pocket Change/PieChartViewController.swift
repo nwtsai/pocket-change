@@ -11,23 +11,6 @@ import Charts
 import CoreData
 import Foundation
 
-// For taking screenshots
-extension UIApplication
-{
-    var screenShot: UIImage?
-    {
-        let layer = keyWindow!.layer
-        let scale = UIScreen.main.scale
-        
-        UIGraphicsBeginImageContextWithOptions(layer.frame.size, false, scale);
-        layer.render(in: UIGraphicsGetCurrentContext()!)
-        let screenshot = UIGraphicsGetImageFromCurrentImageContext()
-        UIGraphicsEndImageContext()
-        
-        return screenshot
-    }
-}
-
 class PieChartViewController: UIViewController
 {
     // Clean code
@@ -47,6 +30,8 @@ class PieChartViewController: UIViewController
         
         // Set the page title
         self.navigationItem.title = "π"
+        
+        cameraButton.isEnabled = false
     }
     
     // Load the graph before view appears. We do this here because data may change
@@ -61,14 +46,14 @@ class PieChartViewController: UIViewController
         // If no data, set the noDataText
         pieChartView.noDataText = "You must have at least one budget."
         
-        // Grab Names and amount spent to populate the Pie Chart
+        // Grab names and amount spent to populate the Pie Chart
         let map = BudgetVariables.nameToNetAmtSpentMap()
         let budgetNames = BudgetVariables.getBudgetNames(map: map)
         let amountSpent = BudgetVariables.getAmtSpent(map: map)
         
         if budgetNames.isEmpty == false && amountSpent.isEmpty == false
         {
-            cameraButton.isEnabled = true
+            // cameraButton.isEnabled = true
             setPieGraph(names: budgetNames, values: amountSpent)
         }
         else
@@ -233,6 +218,12 @@ class PieChartViewController: UIViewController
     // Takes a screenshot of the pie chart
     @IBAction func cameraButtonWasPressed(_ sender: AnyObject)
     {
-        UIApplication.shared.screenShot
+        captureScreen()
+    }
+    
+    // Waiting for the Charts Library to be updated
+    func captureScreen()
+    {
+        // pieChartView.save()
     }
 }

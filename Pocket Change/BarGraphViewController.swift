@@ -44,6 +44,8 @@ class BarGraphViewController: UIViewController
         // So we don't need to type this out again
         let shDelegate = UIApplication.shared.delegate as! AppDelegate
         sharedDelegate = shDelegate
+        
+        cameraButton.isEnabled = false
     }
     
     // Load the graph before view appears. We do this here because data may change
@@ -70,7 +72,7 @@ class BarGraphViewController: UIViewController
         
         if days.isEmpty == false && amountSpent.isEmpty == false
         {
-            cameraButton.isEnabled = true
+            // cameraButton.isEnabled = true
             setBarGraph(dataPoints: days, values: amountSpent)
         }
         else
@@ -98,21 +100,38 @@ class BarGraphViewController: UIViewController
         xAxis.valueFormatter = barChartFormatter
         barGraphView.xAxis.valueFormatter = xAxis.valueFormatter
         
+        
         // Set a limit line to be the average amount spent in that week
         let average = BudgetVariables.calculateAverage(nums: values)
         let ll = ChartLimitLine(limit: average, label: "Average: " + BudgetVariables.numFormat(myNum: average))
         ll.lineColor = BudgetVariables.hexStringToUIColor(hex: "092140")
-        ll.valueFont = UIFont.systemFont(ofSize: 15)
+        ll.valueFont = UIFont.systemFont(ofSize: 12)
         ll.lineWidth = 2
         ll.labelPosition = .leftTop
-        barGraphView.leftAxis.addLimitLine(ll)
+        barGraphView.rightAxis.addLimitLine(ll)
         
         // Set the position of the x axis label
+        barGraphView.rightAxis.axisMinimum = 0
         barGraphView.xAxis.labelPosition = .bottom
         
         let chartDataSet = BarChartDataSet(values: dataEntries, label: "Net Amount Spent")
+        chartDataSet.axisDependency = .right
         let chartData = BarChartData(dataSet: chartDataSet)
         barGraphView.data = chartData
+        
+        // Set where axis starts
+        barGraphView.setScaleMinima(0, scaleY: 0.0)
+        
+        // Customization
+        barGraphView.pinchZoomEnabled = false
+        barGraphView.scaleXEnabled = false
+        barGraphView.scaleYEnabled = false
+        barGraphView.xAxis.drawGridLinesEnabled = false
+        barGraphView.leftAxis.drawGridLinesEnabled = false
+        barGraphView.rightAxis.drawGridLinesEnabled = false
+        barGraphView.leftAxis.drawLabelsEnabled = false
+        barGraphView.rightAxis.spaceBottom = 0
+        barGraphView.leftAxis.spaceBottom = 0
         
         // Set font size
         chartData.setValueFont(UIFont.systemFont(ofSize: 12))
@@ -123,11 +142,11 @@ class BarGraphViewController: UIViewController
         chartData.setValueFormatter(formatter)
         
         // Legend font size
-        barGraphView.legend.font = UIFont.systemFont(ofSize: 14)
+        barGraphView.legend.font = UIFont.systemFont(ofSize: 13)
         barGraphView.legend.formSize = 8
         
         // Set X Axis Font
-        barGraphView.xAxis.labelFont = UIFont.systemFont(ofSize: 14)
+        barGraphView.xAxis.labelFont = UIFont.systemFont(ofSize: 13)
         
         // Set description texts
         barGraphView.chartDescription?.text = ""
@@ -145,6 +164,12 @@ class BarGraphViewController: UIViewController
     // Takes a screenshot of the bar graph
     @IBAction func cameraButtonWasPressed(_ sender: AnyObject)
     {
-        UIApplication.shared.screenShot
+        captureScreen()
+    }
+    
+    // Waiting for the Charts Library to be updated
+    func captureScreen()
+    {
+        // barGraphView.save()
     }
 }
