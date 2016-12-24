@@ -261,4 +261,17 @@ class BudgetVariables: UIViewController
         }
         return total/Double(nums.count)
     }
+    
+    // Returns true if the array is filled with all 0.0's
+    class func isAllZeros(array: [Double]) -> Bool
+    {
+        for num in array
+        {
+            if num != 0.0
+            {
+                return false
+            }
+        }
+        return true
+    }
 }

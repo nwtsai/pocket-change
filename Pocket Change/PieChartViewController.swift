@@ -44,7 +44,10 @@ class PieChartViewController: UIViewController
         BudgetVariables.getData()
         
         // If no data, set the noDataText
-        pieChartView.noDataText = "You must have at least one budget."
+        if BudgetVariables.budgetArray.isEmpty == true
+        {
+            pieChartView.noDataText = "You must have at least one budget."
+        }
         
         // Grab names and amount spent to populate the Pie Chart
         let map = BudgetVariables.nameToNetAmtSpentMap()
@@ -53,8 +56,15 @@ class PieChartViewController: UIViewController
         
         if budgetNames.isEmpty == false && amountSpent.isEmpty == false
         {
-            // cameraButton.isEnabled = true
-            setPieGraph(names: budgetNames, values: amountSpent)
+            if BudgetVariables.isAllZeros(array: amountSpent) == false
+            {
+                // cameraButton.isEnabled = true
+                setPieGraph(names: budgetNames, values: amountSpent)
+            }
+            else
+            {
+                pieChartView.noDataText = "You must have at least one transaction."
+            }
         }
         else
         {
