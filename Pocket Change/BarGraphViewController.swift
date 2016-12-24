@@ -36,7 +36,7 @@ class BarGraphViewController: UIViewController
     // Days Array
     var days: [String]!
     
-    // Initially doad delegate
+    // Initially load delegate
     override func viewDidLoad()
     {
         super.viewDidLoad()
@@ -52,6 +52,9 @@ class BarGraphViewController: UIViewController
     {
         super.viewWillAppear(animated)
         
+        // If no data, set the noDataText
+        barGraphView.noDataText = "You have no transaction history"
+        
         // Sync data
         self.sharedDelegate.saveContext()
         BudgetVariables.getData()
@@ -63,8 +66,8 @@ class BarGraphViewController: UIViewController
         self.navigationItem.title = days[0] + " – " + days[6]
         
         // Grab amount spent for each day in the past week into a double array
-        // let amountSpent = [20.0, 4.2, 6.89, 9.99, 60.8, 58.1, 35.0]
-        let amountSpent = BudgetVariables.amountSpent()
+        let amountSpent = [20.0, 4.2, 6.89, 9.99, 60.8, 58.1, 35.0]
+        // let amountSpent = BudgetVariables.amountSpent()
         
         setBarGraph(dataPoints: days, values: amountSpent)
     }
@@ -91,9 +94,18 @@ class BarGraphViewController: UIViewController
         // Set the position of the x axis label
         barGraphView.xAxis.labelPosition = .bottom
         
-        let chartDataSet = BarChartDataSet(values: dataEntries, label: "Amount Spent ($)")
+        let chartDataSet = BarChartDataSet(values: dataEntries, label: "Net Amount Spent ($)")
         let chartData = BarChartData(dataSet: chartDataSet)
         barGraphView.data = chartData
+        
+        // Customize Bar Graph
+        
+        // Set font size
+        chartData.setValueFont(UIFont.systemFont(ofSize: 12))
+        
+        // Legend font size
+        barGraphView.legend.font = UIFont.systemFont(ofSize: 18)
+        barGraphView.legend.formSize = 12
         
         // Set description texts
         barGraphView.chartDescription?.text = ""
@@ -105,10 +117,8 @@ class BarGraphViewController: UIViewController
         // barGraphView.backgroundColor = UIColor(red: 230/255, green: 230/255, blue: 230/255, alpha: 1)
         
         // Animate the chart
-        barGraphView.animate(xAxisDuration: 2.0, yAxisDuration: 2.0)
-
+        barGraphView.animate(xAxisDuration: 1.5, yAxisDuration: 1.5)
     }
-
     
     // Save the graph to the camera roll
     @IBAction func cameraButtonWasPressed(_ sender: AnyObject)

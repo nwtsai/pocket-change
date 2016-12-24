@@ -15,7 +15,6 @@
 		9A005ABE1E0D24F10081142A /* BarGraphViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A005ABD1E0D24F10081142A /* BarGraphViewController.swift */; };
 		9A09B72A1E0CB96A00D0F4A4 /* Charts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A09B7291E0CB96A00D0F4A4 /* Charts.framework */; };
 		9A09B72B1E0CB96A00D0F4A4 /* Charts.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 9A09B7291E0CB96A00D0F4A4 /* Charts.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		9A09B72E1E0CBA5900D0F4A4 /* LineGraphViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A09B72D1E0CBA5900D0F4A4 /* LineGraphViewController.swift */; };
 		9A27BF2B1E0A01B100146EEA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A27BF2A1E0A01B100146EEA /* AppDelegate.swift */; };
 		9A27BF2D1E0A01B100146EEA /* WithdrawalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A27BF2C1E0A01B100146EEA /* WithdrawalViewController.swift */; };
 		9A27BF331E0A01B100146EEA /* Pocket_Change.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 9A27BF311E0A01B100146EEA /* Pocket_Change.xcdatamodeld */; };
@@ -24,6 +23,7 @@
 		9A27BF431E0A01B100146EEA /* Pocket_ChangeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A27BF421E0A01B100146EEA /* Pocket_ChangeTests.swift */; };
 		9A27BF4E1E0A01B100146EEA /* Pocket_ChangeUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A27BF4D1E0A01B100146EEA /* Pocket_ChangeUITests.swift */; };
 		9A27BF5C1E0A022A00146EEA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9A27BF5B1E0A022A00146EEA /* Main.storyboard */; };
+		9AAE17801E0DD41100F98BEB /* PieChartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AAE177F1E0DD41100F98BEB /* PieChartViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -87,7 +87,6 @@
 		9A005ABD1E0D24F10081142A /* BarGraphViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BarGraphViewController.swift; sourceTree = "<group>"; };
 		9A09B71D1E0CB92600D0F4A4 /* Charts.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Charts.xcodeproj; path = "Pocket Change/Charts/Charts.xcodeproj"; sourceTree = "<group>"; };
 		9A09B7291E0CB96A00D0F4A4 /* Charts.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Charts.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		9A09B72D1E0CBA5900D0F4A4 /* LineGraphViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LineGraphViewController.swift; sourceTree = "<group>"; };
 		9A27BF271E0A01B100146EEA /* Pocket Change.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Pocket Change.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9A27BF2A1E0A01B100146EEA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9A27BF2C1E0A01B100146EEA /* WithdrawalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WithdrawalViewController.swift; sourceTree = "<group>"; };
@@ -102,6 +101,7 @@
 		9A27BF4D1E0A01B100146EEA /* Pocket_ChangeUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pocket_ChangeUITests.swift; sourceTree = "<group>"; };
 		9A27BF4F1E0A01B100146EEA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9A27BF5B1E0A022A00146EEA /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		9AAE177F1E0DD41100F98BEB /* PieChartViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PieChartViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -167,10 +167,10 @@
 			children = (
 				9A27BF2A1E0A01B100146EEA /* AppDelegate.swift */,
 				9A0010CF1E0A097D008E7092 /* BudgetVariables.swift */,
+				9AAE177F1E0DD41100F98BEB /* PieChartViewController.swift */,
 				9A0010CD1E0A0887008E7092 /* BudgetListViewController.swift */,
 				9A27BF2C1E0A01B100146EEA /* WithdrawalViewController.swift */,
 				9A0010CB1E0A07B2008E7092 /* HistoryViewController.swift */,
-				9A09B72D1E0CBA5900D0F4A4 /* LineGraphViewController.swift */,
 				9A005ABD1E0D24F10081142A /* BarGraphViewController.swift */,
 				9A27BF5B1E0A022A00146EEA /* Main.storyboard */,
 				9A27BF311E0A01B100146EEA /* Pocket_Change.xcdatamodeld */,
@@ -371,9 +371,9 @@
 			files = (
 				9A0010DF1E0A27DF008E7092 /* MyBudget+CoreDataProperties.swift in Sources */,
 				9A27BF331E0A01B100146EEA /* Pocket_Change.xcdatamodeld in Sources */,
-				9A09B72E1E0CBA5900D0F4A4 /* LineGraphViewController.swift in Sources */,
 				9A0010DE1E0A27DF008E7092 /* MyBudget+CoreDataClass.swift in Sources */,
 				9A27BF2D1E0A01B100146EEA /* WithdrawalViewController.swift in Sources */,
+				9AAE17801E0DD41100F98BEB /* PieChartViewController.swift in Sources */,
 				9A0010D01E0A097D008E7092 /* BudgetVariables.swift in Sources */,
 				9A27BF2B1E0A01B100146EEA /* AppDelegate.swift in Sources */,
 				9A0010CC1E0A07B2008E7092 /* HistoryViewController.swift in Sources */,

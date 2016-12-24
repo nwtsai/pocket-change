@@ -40,7 +40,6 @@ class BudgetListViewController: UIViewController, UITableViewDataSource, UITable
         
         //Uncomment the line below if you want the tap not not interfere and cancel other interactions.
         tap.cancelsTouchesInView = false
-        
         view.addGestureRecognizer(tap)
     }
     
@@ -108,6 +107,7 @@ class BudgetListViewController: UIViewController, UITableViewDataSource, UITable
                     budget.balance = inputAmount
                     budget.descriptionArray = [String]()
                     budget.historyArray = [String]()
+                    budget.netTotalAmountSpent = 0.0
                     
                     // Save and get data to coredata
                     self.sharedDelegate.saveContext()
@@ -161,12 +161,22 @@ class BudgetListViewController: UIViewController, UITableViewDataSource, UITable
         showAlert()
     }
     
+    // When the pie chart button is pressed, segue to the pie chart view
+    @IBAction func pieChartButtonPressed(_ sender: AnyObject)
+    {
+        performSegue(withIdentifier: "showPieChart", sender: nil)
+    }
+    
     // If a cell is pressed, go to the corresponding budget
     override func prepare(for segue: UIStoryboardSegue, sender: Any?)
     {
         if segue.identifier == "viewBudget"
         {
             // code for viewing a budget after a cell is pressed
+        }
+        else if segue.identifier == "showPieChart"
+        {
+            // code for viewing the pie chart
         }
     }
     

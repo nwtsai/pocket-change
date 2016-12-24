@@ -160,6 +160,12 @@ class WithdrawalViewController: UIViewController, UITextFieldDelegate
             let description = (descriptionText.text)?.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
             BudgetVariables.budgetArray[BudgetVariables.currentIndex].descriptionArray.append(description! + "    " + date)
             
+            // Log the amount deposited for this specific budget on this day
+            BudgetVariables.logTodaysSpendings(num: input * -1)
+            
+            // Log the total amount spent for this specific budget
+            BudgetVariables.budgetArray[BudgetVariables.currentIndex].netTotalAmountSpent -= input
+            
             if BudgetVariables.budgetArray[BudgetVariables.currentIndex].balance - input >= 0
             {
                 withdrawButton.isEnabled = true
@@ -204,6 +210,9 @@ class WithdrawalViewController: UIViewController, UITextFieldDelegate
             
             // Log the amount withdrawn for today's spendings for this specific budget
             BudgetVariables.logTodaysSpendings(num: input)
+            
+            // Log the total amount spent for this budget
+            BudgetVariables.budgetArray[BudgetVariables.currentIndex].netTotalAmountSpent += input
             
             if BudgetVariables.budgetArray[BudgetVariables.currentIndex].balance - input < 0
             {
@@ -307,8 +316,8 @@ class WithdrawalViewController: UIViewController, UITextFieldDelegate
         }
     }
     
-    // When the history button gets pressed segue to the HistoryViewController file
-    @IBAction func historyButtonWasPressed(_ sender: AnyObject)
+    // When the Daily button gets pressed segue to the BarGraphViewController file
+    @IBAction func dailyButtonWasPressed(_ sender: AnyObject)
     {
         // Save context and get data
         self.sharedDelegate.saveContext()
@@ -316,22 +325,13 @@ class WithdrawalViewController: UIViewController, UITextFieldDelegate
         performSegue(withIdentifier: "showDaily", sender: nil)
     }
     
-    // When the graphs button gets pressed segue to the BarGraphViewController file
-    @IBAction func barGraphButtonWasPressed(_ sender: AnyObject)
+    // When the Weekly button gets pressed segue to the HistoryViewController file
+    @IBAction func weeklyButtonWasPressed(_ sender: AnyObject)
     {
         // Save context and get data
         self.sharedDelegate.saveContext()
         BudgetVariables.getData()
         performSegue(withIdentifier: "showBarGraph", sender: nil)
-    }
-    
-    // When the graphs button gets pressed segue to the LineGraphViewController file
-    @IBAction func lineGraphButtonWasPressed(_ sender: AnyObject)
-    {
-        // Save context and get data
-        self.sharedDelegate.saveContext()
-        BudgetVariables.getData()
-        performSegue(withIdentifier: "showWeekly", sender: nil)
     }
 }
 

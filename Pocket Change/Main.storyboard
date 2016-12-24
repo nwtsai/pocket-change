@@ -85,27 +85,21 @@
                             </label>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="THk-Ji-wDx" userLabel="History Buttons Stack View">
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5tw-ZV-IXc" userLabel="History Button">
-                                        <state key="normal" image="Thin History"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5tw-ZV-IXc" userLabel="Daily Button">
+                                        <state key="normal" image="Thin Daily"/>
                                         <connections>
-                                            <action selector="historyButtonWasPressed:" destination="sds-LB-aBh" eventType="touchUpInside" id="yt4-Wt-Zxf"/>
+                                            <action selector="dailyButtonWasPressed:" destination="sds-LB-aBh" eventType="touchUpInside" id="O79-Id-qEl"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KOJ-SF-gm5" userLabel="Bar Graph Button">
-                                        <state key="normal" image="Thin Bar"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KOJ-SF-gm5" userLabel="Weekly Button">
+                                        <state key="normal" image="Thin Weekly"/>
                                         <connections>
-                                            <action selector="barGraphButtonWasPressed:" destination="sds-LB-aBh" eventType="touchUpInside" id="C5m-6r-Q7W"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3hM-UR-lAg" userLabel="Line Graph Button">
-                                        <state key="normal" image="Thin Line"/>
-                                        <connections>
-                                            <action selector="lineGraphButtonWasPressed:" destination="sds-LB-aBh" eventType="touchUpInside" id="Cuz-sW-DHu"/>
+                                            <action selector="weeklyButtonWasPressed:" destination="sds-LB-aBh" eventType="touchUpInside" id="Pfx-lU-9CC"/>
                                         </connections>
                                     </button>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="105" id="NHa-nb-WRh"/>
+                                    <constraint firstAttribute="height" constant="100" id="NHa-nb-WRh"/>
                                 </constraints>
                             </stackView>
                             <view hidden="YES" opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ykY-JB-tUb" userLabel="Spacer"/>
@@ -157,7 +151,6 @@
                         <outlet property="totalBalance" destination="TRe-by-rFq" id="jO9-5R-4xj"/>
                         <outlet property="withdrawButton" destination="Iyv-Ff-OpV" id="rDW-Ng-oCn"/>
                         <segue destination="zFl-z3-0s0" kind="show" identifier="showDaily" id="GkY-hb-RdK"/>
-                        <segue destination="ptT-M2-wyM" kind="show" identifier="showWeekly" id="9rw-Ha-VH8"/>
                         <segue destination="GDo-YR-dDG" kind="show" identifier="showBarGraph" id="5yA-34-IDW"/>
                     </connections>
                 </viewController>
@@ -217,38 +210,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zQN-UU-JWU" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-34" y="-1003"/>
-        </scene>
-        <!--Line Graph View Controller-->
-        <scene sceneID="CCG-Gz-MsH">
-            <objects>
-                <viewController id="ptT-M2-wyM" customClass="LineGraphViewController" customModule="Pocket_Change" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="VY6-tl-at9"/>
-                        <viewControllerLayoutGuide type="bottom" id="jVR-0J-6oK"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="vqK-WN-mOh" userLabel="Line Graph View" customClass="LineChartView" customModule="Charts">
-                        <rect key="frame" x="0.0" y="64" width="375" height="603"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                    <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
-                    <navigationItem key="navigationItem" id="dg1-7A-Xal">
-                        <barButtonItem key="rightBarButtonItem" systemItem="camera" id="jun-1o-ruY">
-                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            <connections>
-                                <action selector="saveButtonWasPressed:" destination="ptT-M2-wyM" id="vmZ-4E-aDA"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
-                    <connections>
-                        <outlet property="lineGraphView" destination="vqK-WN-mOh" id="mZw-fZ-qAs"/>
-                        <outlet property="saveButton" destination="jun-1o-ruY" id="UB8-Fk-w2v"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="9ax-4o-MS9" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-34" y="-250"/>
+            <point key="canvasLocation" x="130" y="-421"/>
         </scene>
         <!--Budget List View Controller-->
         <scene sceneID="Ibv-9A-dme">
@@ -288,6 +250,12 @@
                     </tableView>
                     <toolbarItems/>
                     <navigationItem key="navigationItem" id="iGb-BM-5xC">
+                        <barButtonItem key="leftBarButtonItem" title="Distribution" id="Wt1-JG-AMk">
+                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <connections>
+                                <action selector="pieChartButtonPressed:" destination="9o8-Ar-hfP" id="yEc-m3-m1p"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="compose" id="l7g-mc-H40">
                             <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <connections>
@@ -301,6 +269,7 @@
                         <outlet property="budgetTable" destination="bav-lg-KxE" id="JtU-0Q-1GQ"/>
                         <outlet property="composeButton" destination="l7g-mc-H40" id="XyW-xD-Tgp"/>
                         <segue destination="sds-LB-aBh" kind="show" identifier="viewBudget" id="3gt-G2-nhW"/>
+                        <segue destination="MoQ-Ps-lSU" kind="show" identifier="showPieChart" id="B4P-S8-jSZ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gaP-kE-o7l" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -354,15 +323,73 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6K8-ea-Mj3" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-34" y="539"/>
+            <point key="canvasLocation" x="129" y="329"/>
+        </scene>
+        <!--Pie Chart View Controller-->
+        <scene sceneID="aeD-Nb-p0U">
+            <objects>
+                <viewController id="MoQ-Ps-lSU" userLabel="Pie Chart View Controller" customClass="PieChartViewController" customModule="Pocket_Change" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="QeF-jT-se3"/>
+                        <viewControllerLayoutGuide type="bottom" id="oSv-kI-Y5L"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="3oj-VF-CUA" customClass="PieChartView" customModule="Charts">
+                        <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Net Amount Spent per Budget" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MRV-H3-yAL" userLabel="Net Amount Spent per Budget">
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rd4-TT-iwL" userLabel="Pie Center Image">
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="50" id="MTq-Rr-w1P"/>
+                                    <constraint firstAttribute="height" constant="50" id="dQG-8p-0zD"/>
+                                </constraints>
+                                <state key="normal" image="Coins"/>
+                            </button>
+                            <view hidden="YES" opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Uzn-r4-01j">
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="MRV-H3-yAL" firstAttribute="centerX" secondItem="3oj-VF-CUA" secondAttribute="centerX" id="29a-vj-bTw"/>
+                            <constraint firstItem="rd4-TT-iwL" firstAttribute="centerY" secondItem="Uzn-r4-01j" secondAttribute="centerY" id="7Bz-ZJ-kS6"/>
+                            <constraint firstItem="rd4-TT-iwL" firstAttribute="centerX" secondItem="Uzn-r4-01j" secondAttribute="centerX" id="FaO-rE-u8i"/>
+                            <constraint firstItem="MRV-H3-yAL" firstAttribute="centerY" secondItem="3oj-VF-CUA" secondAttribute="centerY" multiplier="0.15" id="MfB-Gg-xt8"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="Uzn-r4-01j" secondAttribute="trailing" id="ZLf-XO-lpx"/>
+                            <constraint firstItem="Uzn-r4-01j" firstAttribute="leading" secondItem="3oj-VF-CUA" secondAttribute="leadingMargin" id="jMi-mW-qF4"/>
+                            <constraint firstItem="oSv-kI-Y5L" firstAttribute="top" secondItem="Uzn-r4-01j" secondAttribute="bottom" id="kVC-bI-CDn"/>
+                            <constraint firstItem="Uzn-r4-01j" firstAttribute="top" secondItem="QeF-jT-se3" secondAttribute="bottom" constant="-65" id="opA-hx-AVI"/>
+                        </constraints>
+                    </view>
+                    <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
+                    <navigationItem key="navigationItem" id="I3Y-yD-oGX">
+                        <barButtonItem key="rightBarButtonItem" systemItem="camera" id="wxz-mb-FPA">
+                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <connections>
+                                <action selector="cameraButtonWasPressed:" destination="MoQ-Ps-lSU" id="Daj-Iy-a3X"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="cameraButton" destination="wxz-mb-FPA" id="Ly0-Zu-aKE"/>
+                        <outlet property="pieChartView" destination="3oj-VF-CUA" id="0oa-eX-iJ2"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="6Za-Gq-abm" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1956" y="714"/>
         </scene>
     </scenes>
     <resources>
+        <image name="Coins" width="512" height="512"/>
         <image name="PiggyBank" width="512" height="512"/>
         <image name="Square-14-D" width="110" height="32"/>
         <image name="Square-14-W" width="110" height="32"/>
-        <image name="Thin Bar" width="72" height="25"/>
-        <image name="Thin History" width="72" height="25"/>
-        <image name="Thin Line" width="72" height="25"/>
+        <image name="Thin Daily" width="90" height="25"/>
+        <image name="Thin Weekly" width="90" height="25"/>
     </resources>
 </document>
