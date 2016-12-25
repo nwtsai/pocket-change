@@ -92,7 +92,7 @@ class PieChartViewController: UIViewController
         var colors = [UIColor]()
         
         // Pick a random UIColor Scheme
-        let randNum = Int(arc4random_uniform(9) + 1)
+        let randNum = Int(arc4random_uniform(10) + 1)
         switch randNum
         {
         case 1:
@@ -146,7 +146,7 @@ class PieChartViewController: UIViewController
                     BudgetVariables.hexStringToUIColor(hex: "00ADA7")
                 ]
         case 6:
-            // Chinese
+            // Cultural Element
             colors =
                 [
                     BudgetVariables.hexStringToUIColor(hex: "0067A6"),
@@ -184,6 +184,16 @@ class PieChartViewController: UIViewController
                     BudgetVariables.hexStringToUIColor(hex: "BEEB9F"),
                     BudgetVariables.hexStringToUIColor(hex: "79BD8F"),
                     BudgetVariables.hexStringToUIColor(hex: "00A388")
+                ]
+        case 10:
+            // Ocean Sunset
+            colors =
+                [
+                    BudgetVariables.hexStringToUIColor(hex: "F54F29"),
+                    BudgetVariables.hexStringToUIColor(hex: "FF974F"),
+                    BudgetVariables.hexStringToUIColor(hex: "FFD393"),
+                    BudgetVariables.hexStringToUIColor(hex: "9C9B7A"),
+                    BudgetVariables.hexStringToUIColor(hex: "405952")
                 ]
         default:
             colors = ChartColorTemplates.colorful()
