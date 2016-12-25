@@ -82,6 +82,7 @@ class BudgetListViewController: UIViewController, UITableViewDataSource, UITable
         alert.addTextField(configurationHandler: {(textField: UITextField) in
             textField.placeholder = "Enter Budget Name (Optional)"
             textField.delegate = self
+            textField.autocapitalizationType = .words
         })
         
         alert.addTextField(configurationHandler: {(textField: UITextField) in

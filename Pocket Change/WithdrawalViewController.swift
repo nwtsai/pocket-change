@@ -95,6 +95,7 @@ class WithdrawalViewController: UIViewController, UITextFieldDelegate
         editAlert.addTextField(configurationHandler: {(textField: UITextField) in
             textField.placeholder = "Enter New Budget Name"
             textField.delegate = self
+            textField.autocapitalizationType = .words
             textField.addTarget(self, action: #selector(self.textFieldDidChange(_:)), for: .editingChanged)
         })
         
