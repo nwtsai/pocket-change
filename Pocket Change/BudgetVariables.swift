@@ -81,6 +81,19 @@ class BudgetVariables: UIViewController
         return false
     }
     
+    // Returns true if every budget's history log is empty
+    class func isAllHistoryEmpty() -> Bool
+    {
+        for i in 0...BudgetVariables.budgetArray.count - 1
+        {
+            if BudgetVariables.budgetArray[i].historyArray.isEmpty == false
+            {
+                return false
+            }
+        }
+        return true
+    }
+    
     // Get current date in any format based on argument
     class func todaysDate(format: String) -> String
     {
@@ -112,7 +125,7 @@ class BudgetVariables: UIViewController
     }
     
     // Grab amount spent for the past 7 days into a Double array
-    class func amountSpent() -> [Double]
+    class func amountSpentInThePastWeek() -> [Double]
     {
         let cal = Calendar.current
         let today = cal.startOfDay(for: Date())
@@ -166,13 +179,11 @@ class BudgetVariables: UIViewController
         // String array of all the keys (non-sorted)
         for (key, value) in map
         {
-            if value != 0.0
+            if value > 0.0
             {
                 keys.append(key)
             }
         }
-        
-        // var keys = Array(map.keys)
         
         // Sort the dictionary by its value, so keys holds the greatest to least Budget in terms of net amount spent
         if keys.count > 5
@@ -199,7 +210,7 @@ class BudgetVariables: UIViewController
         // Grab just the ordered values into a Double array
         for (_, value) in map
         {
-            if value != 0.0
+            if value > 0.0
             {
                 valuesArray.append(value)
             }
@@ -278,6 +289,11 @@ class BudgetVariables: UIViewController
     // Returns true if the array is filled with all 0.0's
     class func isAllZeros(array: [Double]) -> Bool
     {
+        if array.isEmpty == true
+        {
+            return false
+        }
+        
         for num in array
         {
             if num != 0.0

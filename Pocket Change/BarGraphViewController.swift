@@ -45,6 +45,9 @@ class BarGraphViewController: UIViewController
         let shDelegate = UIApplication.shared.delegate as! AppDelegate
         sharedDelegate = shDelegate
         
+        // If there is no data
+        barGraphView.noDataText = "You must have at least one transaction."
+        
         cameraButton.isEnabled = false
     }
     
@@ -52,9 +55,6 @@ class BarGraphViewController: UIViewController
     override func viewWillAppear(_ animated: Bool)
     {
         super.viewWillAppear(animated)
-        
-        // If no data, set the noDataText
-        barGraphView.noDataText = "You have no transaction history"
         
         // Sync data
         self.sharedDelegate.saveContext()
@@ -68,12 +68,15 @@ class BarGraphViewController: UIViewController
         
         // Grab amount spent for each day in the past week into a double array
         // let amountSpent = [20.0, 4.2, 6.89, 9.99, 60.8, 58.1, 35.0]
-        let amountSpent = BudgetVariables.amountSpent()
+        let amountSpent = BudgetVariables.amountSpentInThePastWeek()
         
         if days.isEmpty == false && amountSpent.isEmpty == false
         {
-            // cameraButton.isEnabled = true
-            setBarGraph(dataPoints: days, values: amountSpent)
+            if BudgetVariables.budgetArray[BudgetVariables.currentIndex].historyArray.isEmpty == false
+            {
+                // cameraButton.isEnabled = true
+                setBarGraph(dataPoints: days, values: amountSpent)
+            }            
         }
         else
         {
@@ -103,12 +106,17 @@ class BarGraphViewController: UIViewController
         
         // Set a limit line to be the average amount spent in that week
         let average = BudgetVariables.calculateAverage(nums: values)
-        let ll = ChartLimitLine(limit: average, label: "Average: " + BudgetVariables.numFormat(myNum: average))
-        ll.lineColor = BudgetVariables.hexStringToUIColor(hex: "092140")
-        ll.valueFont = UIFont.systemFont(ofSize: 12)
-        ll.lineWidth = 2
-        ll.labelPosition = .leftTop
-        barGraphView.rightAxis.addLimitLine(ll)
+        
+        // Only add the average line if there is actually data in the bar graph
+        if average != 0.0
+        {
+            let ll = ChartLimitLine(limit: average, label: "Average: " + BudgetVariables.numFormat(myNum: average))
+            ll.lineColor = BudgetVariables.hexStringToUIColor(hex: "092140")
+            ll.valueFont = UIFont.systemFont(ofSize: 12)
+            ll.lineWidth = 2
+            ll.labelPosition = .leftTop
+            barGraphView.rightAxis.addLimitLine(ll)
+        }
         
         // Set the position of the x axis label
         barGraphView.rightAxis.axisMinimum = 0

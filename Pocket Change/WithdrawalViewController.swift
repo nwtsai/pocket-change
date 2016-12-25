@@ -175,7 +175,7 @@ class WithdrawalViewController: UIViewController, UITextFieldDelegate
     @IBAction func depositButtonWasPressed(_ sender: AnyObject)
     {
         // Get current date, append to historyArray
-        let date = BudgetVariables.todaysDate(format: "MM/dd")
+        let date = BudgetVariables.todaysDate(format: "MM/dd/YYYY")
         
         // Trim input first
         let trimmedInput = (inputAmount.text)?.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
@@ -223,7 +223,7 @@ class WithdrawalViewController: UIViewController, UITextFieldDelegate
     @IBAction func withdrawButtonWasPressed(_ sender: AnyObject)
     {
         // Get current date, append to history Array
-        let date = BudgetVariables.todaysDate(format: "MM/dd")
+        let date = BudgetVariables.todaysDate(format: "MM/dd/YYYY")
         
         // Trim input first
         let trimmedInput = (inputAmount.text)?.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)

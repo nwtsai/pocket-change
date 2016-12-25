@@ -43,16 +43,24 @@ class PieChartViewController: UIViewController
         self.sharedDelegate.saveContext()
         BudgetVariables.getData()
         
-        // If no data, set the noDataText
-        if BudgetVariables.budgetArray.isEmpty == true
-        {
-            pieChartView.noDataText = "You must have at least one budget."
-        }
-        
         // Grab names and amount spent to populate the Pie Chart
         let map = BudgetVariables.nameToNetAmtSpentMap()
         let budgetNames = BudgetVariables.getBudgetNames(map: map)
         let amountSpent = BudgetVariables.getAmtSpent(map: map)
+        
+        // Set the no data text message
+        if BudgetVariables.budgetArray.isEmpty == true
+        {
+            pieChartView.noDataText = "You must have at least one budget."
+        }
+        else if BudgetVariables.isAllHistoryEmpty() == true
+        {
+            pieChartView.noDataText = "You must have at least one transaction."
+        }
+        else
+        {
+            pieChartView.noDataText = "Amount withdrawn must be greater than the amount deposited."
+        }
         
         if budgetNames.isEmpty == false && amountSpent.isEmpty == false
         {
@@ -60,10 +68,6 @@ class PieChartViewController: UIViewController
             {
                 // cameraButton.isEnabled = true
                 setPieGraph(names: budgetNames, values: amountSpent)
-            }
-            else
-            {
-                pieChartView.noDataText = "You must have at least one transaction."
             }
         }
         else
