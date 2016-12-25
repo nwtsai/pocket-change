@@ -161,8 +161,18 @@ class BudgetVariables: UIViewController
     // If there are 5 or less budgets, just return the String array of budget names
     class func getBudgetNames(map: [String:Double]) -> [String]
     {
+        var keys = [String]()
+        
         // String array of all the keys (non-sorted)
-        var keys = Array(map.keys)
+        for (key, value) in map
+        {
+            if value != 0.0
+            {
+                keys.append(key)
+            }
+        }
+        
+        // var keys = Array(map.keys)
         
         // Sort the dictionary by its value, so keys holds the greatest to least Budget in terms of net amount spent
         if keys.count > 5
@@ -189,7 +199,10 @@ class BudgetVariables: UIViewController
         // Grab just the ordered values into a Double array
         for (_, value) in map
         {
-            valuesArray.append(value)
+            if value != 0.0
+            {
+                valuesArray.append(value)
+            }
         }
         
         if valuesArray.count > 5

@@ -84,7 +84,7 @@ class BudgetListViewController: UIViewController, UITableViewDataSource, UITable
         })
         
         alert.addTextField(configurationHandler: {(textField: UITextField) in
-            textField.placeholder = "Amount from $0 to $1,000,000"
+            textField.placeholder = "From $0 to $1,000,000"
             textField.keyboardType = .decimalPad
             textField.delegate = self
             textField.addTarget(self, action: #selector(self.inputAmountDidChange(_:)), for: .editingChanged)
@@ -146,7 +146,7 @@ class BudgetListViewController: UIViewController, UITableViewDataSource, UITable
         {
             maxLength = 18
         }
-        else if textField.placeholder == "Amount from $0 to $1,000,000"
+        else if textField.placeholder == "From $0 to $1,000,000"
         {
             maxLength = 10
         }
