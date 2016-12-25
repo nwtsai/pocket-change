@@ -22,6 +22,7 @@ IOS App made from scratch that helps users manage their personal expenses and lo
 ‣ History of transactions records the date of transaction along with a corresponding color: <br />
 &nbsp;&nbsp;&nbsp;&nbsp;– Red for money spent <br />
 &nbsp;&nbsp;&nbsp;&nbsp;– Green for money deposited <br />
+&nbsp;&nbsp;&nbsp;&nbsp;– Deleting history essentially reverts the transaction and restores your balance <br />
 ‣ Creating names will add (a number) if the name already exists: <br />
 &nbsp;&nbsp;&nbsp;&nbsp;– I.E. if "Mall" is already a budget name, naming new "Mall" budgets results in "Mall (1)", "Mall (2)", etc. <br />
 ‣ Number Formatter: <br />
