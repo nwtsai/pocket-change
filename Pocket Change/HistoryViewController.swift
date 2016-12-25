@@ -81,6 +81,11 @@ class HistoryViewController: UIViewController, UITableViewDataSource, UITableVie
         BudgetVariables.budgetArray[BudgetVariables.currentIndex].historyArray = [String]()
         BudgetVariables.budgetArray[BudgetVariables.currentIndex].descriptionArray = [String]()
         
+        // Revert the balance to its original value
+        let oldBalance = BudgetVariables.budgetArray[BudgetVariables.currentIndex].balance
+        let netTotalAmtSpent = BudgetVariables.budgetArray[BudgetVariables.currentIndex].netTotalAmountSpent
+        BudgetVariables.budgetArray[BudgetVariables.currentIndex].balance = oldBalance + netTotalAmtSpent
+        
         // Zero out the spending's for this array per date and total
         for (key, _) in BudgetVariables.budgetArray[BudgetVariables.currentIndex].netAmountSpentOnDate
         {
@@ -100,44 +105,58 @@ class HistoryViewController: UIViewController, UITableViewDataSource, UITableVie
     // Functions that conform to UITableViewDataSource
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
     {
-        return BudgetVariables.budgetArray[BudgetVariables.currentIndex].historyArray.count
+        // represents the number of rows the UITableView should have
+        return BudgetVariables.budgetArray[BudgetVariables.currentIndex].historyArray.count + 1
     }
     
     // Determines what data goes in what cell
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
     {
         let myCell:UITableViewCell = historyTable.dequeueReusableCell(withIdentifier: "historyCell", for: indexPath)
+        let count = BudgetVariables.budgetArray[BudgetVariables.currentIndex].historyArray.count
         
-        let str = BudgetVariables.budgetArray[BudgetVariables.currentIndex].historyArray[indexPath.row]
-        let index = str.index(str.startIndex, offsetBy: 0)
-        
-        if str[index] == "+"
+        // If it's the last cell, customize the message
+        if indexPath.row == count
         {
-            myCell.textLabel?.textColor = UIColor.green
+            myCell.textLabel?.textColor = UIColor.lightGray
+            myCell.textLabel?.text = "Tip: Deleting history restores your balance"
+            myCell.detailTextLabel?.text = ""
         }
-        
-        if str[index] == "–"
+        else
         {
-            myCell.textLabel?.textColor = UIColor.red
+            let str = BudgetVariables.budgetArray[BudgetVariables.currentIndex].historyArray[indexPath.row]
+            let index = str.index(str.startIndex, offsetBy: 0)
+            
+            if str[index] == "+"
+            {
+                myCell.textLabel?.textColor = UIColor.green
+            }
+            
+            if str[index] == "–"
+            {
+                myCell.textLabel?.textColor = UIColor.red
+            }
+            
+            myCell.textLabel?.text = BudgetVariables.budgetArray[BudgetVariables.currentIndex].historyArray[indexPath.row]
+            
+            // The description string holds MM/dd/YYYY at the end of each description. Display everything but the year in the table
+            let descripStr = BudgetVariables.budgetArray[BudgetVariables.currentIndex].descriptionArray[indexPath.row]
+            let descripIndex = descripStr.index(descripStr.endIndex, offsetBy: -5)
+            let detailText = descripStr.substring(to: descripIndex)
+            myCell.detailTextLabel?.text = detailText
         }
-        
-        myCell.textLabel?.text = BudgetVariables.budgetArray[BudgetVariables.currentIndex].historyArray[indexPath.row]
-        
-        // The description string holds MM/dd/YYYY at the end of each description. Display everything but the year in the table
-        let descripStr = BudgetVariables.budgetArray[BudgetVariables.currentIndex].descriptionArray[indexPath.row]
-        let descripIndex = descripStr.index(descripStr.endIndex, offsetBy: -5)
-        let detailText = descripStr.substring(to: descripIndex)
-        myCell.detailTextLabel?.text = detailText
         
         return myCell
     }
     
-    @objc(tableView:commitEditingStyle:forRowAtIndexPath:) func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath)
+    // User cannot delete the last cell which contains information
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool
     {
-        // Extract the key to the map in the format "MM/dd/YYYY" into the variable date
-        let descripStr = BudgetVariables.budgetArray[BudgetVariables.currentIndex].descriptionArray[indexPath.row]
-        let dateIndex = descripStr.index(descripStr.endIndex, offsetBy: -10)
-        let date = descripStr.substring(from: dateIndex)
+        // If it is the last cell which contains information, user cannot delete this cell
+        if indexPath.row == BudgetVariables.budgetArray[BudgetVariables.currentIndex].historyArray.count
+        {
+            return false
+        }
         
         // Extract the amount spent for this specific transaction into the variable amountSpent
         let historyStr = BudgetVariables.budgetArray[BudgetVariables.currentIndex].historyArray[indexPath.row]
@@ -145,10 +164,45 @@ class HistoryViewController: UIViewController, UITableViewDataSource, UITableVie
         let index2 = historyStr.index(historyStr.startIndex, offsetBy: 3) // Index spans the amount spent in that transaction
         let amountSpent = Double(historyStr.substring(from: index2))
 
+        // If after the deletion of a deposit action the new balance is negative, user cannot delete this cell
+        if historyStr[index1] == "+"
+        {
+            let newBalance = BudgetVariables.budgetArray[BudgetVariables.currentIndex].balance - amountSpent!
+            if newBalance < 0
+            {
+                return false
+            }
+        }
+        // If after the deletion of a withdraw action the new balance is over 1M, user cannot delete this cell
+        else if historyStr[index1] == "–"
+        {
+            let newBalance = BudgetVariables.budgetArray[BudgetVariables.currentIndex].balance + amountSpent!
+            if newBalance > 1000000
+            {
+                return false
+            }
+        }
+        
+        return true
+    }
+    
+    @objc(tableView:commitEditingStyle:forRowAtIndexPath:) func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath)
+    {
         // If the deleting swipe motion happens, remove the budget from the budgetArray, decrement the currentIndex, and delete the row
         // Also update the values that directly correlate to the data in both the pie chart and the bar graph
-        if editingStyle == .delete
+        if editingStyle == .delete && indexPath.row != BudgetVariables.budgetArray[BudgetVariables.currentIndex].historyArray.count
         {
+            // Extract the key to the map in the format "MM/dd/YYYY" into the variable date
+            let descripStr = BudgetVariables.budgetArray[BudgetVariables.currentIndex].descriptionArray[indexPath.row]
+            let dateIndex = descripStr.index(descripStr.endIndex, offsetBy: -10)
+            let date = descripStr.substring(from: dateIndex)
+            
+            // Extract the amount spent for this specific transaction into the variable amountSpent
+            let historyStr = BudgetVariables.budgetArray[BudgetVariables.currentIndex].historyArray[indexPath.row]
+            let index1 = historyStr.index(historyStr.startIndex, offsetBy: 0) // Index spans the first character in the string
+            let index2 = historyStr.index(historyStr.startIndex, offsetBy: 3) // Index spans the amount spent in that transaction
+            let amountSpent = Double(historyStr.substring(from: index2))
+            
             // If this specific piece of history logged a deposit action, the total amount spent should increase after deletion
             if historyStr[index1] == "+"
             {
@@ -156,6 +210,8 @@ class HistoryViewController: UIViewController, UITableViewDataSource, UITableVie
                 BudgetVariables.budgetArray[BudgetVariables.currentIndex].netAmountSpentOnDate[date] = newSpentOnDateAmount
                 let newTotalAmount = BudgetVariables.budgetArray[BudgetVariables.currentIndex].netTotalAmountSpent + amountSpent!
                 BudgetVariables.budgetArray[BudgetVariables.currentIndex].netTotalAmountSpent = newTotalAmount
+                let newBalance = BudgetVariables.budgetArray[BudgetVariables.currentIndex].balance - amountSpent!
+                BudgetVariables.budgetArray[BudgetVariables.currentIndex].balance = newBalance
             }
             // If this specific piece of history logged a withdraw action, the total amount spent should decrease after deletion
             else if historyStr[index1] == "–"
@@ -164,6 +220,8 @@ class HistoryViewController: UIViewController, UITableViewDataSource, UITableVie
                 BudgetVariables.budgetArray[BudgetVariables.currentIndex].netAmountSpentOnDate[date] = newDateAmount
                 let newTotalAmount = BudgetVariables.budgetArray[BudgetVariables.currentIndex].netTotalAmountSpent - amountSpent!
                 BudgetVariables.budgetArray[BudgetVariables.currentIndex].netTotalAmountSpent = newTotalAmount
+                let newBalance = BudgetVariables.budgetArray[BudgetVariables.currentIndex].balance + amountSpent!
+                BudgetVariables.budgetArray[BudgetVariables.currentIndex].balance = newBalance
             }
             
             // Delete the row
