@@ -142,7 +142,7 @@
                                     <action selector="addToBudgetButtonPressed:" destination="sds-LB-aBh" id="VcF-74-buq"/>
                                 </connections>
                             </barButtonItem>
-                            <barButtonItem systemItem="action" id="MFQ-Go-hpu">
+                            <barButtonItem systemItem="organize" id="MFQ-Go-hpu">
                                 <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <connections>
                                     <action selector="actionButtonPressed:" destination="sds-LB-aBh" id="xAt-fn-jSg"/>
