@@ -3,12 +3,13 @@ IOS App made from scratch that helps users manage their personal expenses and lo
 
 # Features
 ‣ Create a budget with a name and starting balance <br />
-‣ Withdraw or deposit money from the corresponding budget <br />
+‣ Spend or add money to any budget, adding to your history <br />
 ‣ Check your pie chart to see the net amount spent per budget; everytime you view the pie chart it is drawn with 1 out of the 10 color schemes included in my design, offering visibility and clarity on up-to-date data <br />
 ‣ View your entire, color-coded history log of <i>how much</i>, <i>why</i>, and <i>when</i> money was spent <br />
-‣ View your transaction history within the past week on a line graph, detailing how much you spent on a particular day <br />
+‣ View your transaction history within the past week on a bar graph, detailing how much you spent on a particular day <br />
+&nbsp;&nbsp;&nbsp;&nbsp;– The graph also details the average amount spent per day for the past week <br />
 ‣ Manage multiple budgets at once <br />
-‣ Delete one or all items of your transaction history <br />
+‣ Undo an item in your history or delete your entire history, reverting your balance to its original value <br />
 ‣ Rename and delete budgets <br />
 
 # Design
