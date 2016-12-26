@@ -225,9 +225,9 @@ class BudgetListViewController: UIViewController, UITableViewDataSource, UITable
         myCell.textLabel?.text = BudgetVariables.budgetArray[indexPath.row].name
         let currentBalance = (BudgetVariables.budgetArray[indexPath.row].balance).roundTo(places: 2)
         let currentBalanceString = BudgetVariables.numFormat(myNum: currentBalance)
-        let totalBudgetAmt = BudgetVariables.budgetArray[indexPath.row].totalBudgetAmount
-        let totalBudgetAmtString = BudgetVariables.numFormat(myNum: totalBudgetAmt)
-        myCell.detailTextLabel?.text = currentBalanceString + " / " + totalBudgetAmtString
+        let totalBudgetAmt = lround((BudgetVariables.budgetArray[indexPath.row].totalBudgetAmount))
+        let totalBudgetAmtString = String(totalBudgetAmt)
+        myCell.detailTextLabel?.text = currentBalanceString + " / $" + totalBudgetAmtString
         
         return myCell
     }
