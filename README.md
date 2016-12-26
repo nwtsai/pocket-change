@@ -38,6 +38,6 @@ IOS App made from scratch that helps users manage their personal expenses and lo
 # Screenshots
 ![alt tag](http://i.imgur.com/vaM9QwE.png)
 ![alt tag](http://i.imgur.com/TwkiiEh.png)
-![alt tag](http://i.imgur.com/72ewBm7.png)
+![alt tag](http://i.imgur.com/13IMw3u.png)
 ![alt tag](http://i.imgur.com/ef8zUOb.png)
 ![alt tag](http://i.imgur.com/p8negKf.png)
