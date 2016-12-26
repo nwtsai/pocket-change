@@ -81,15 +81,20 @@ class HistoryViewController: UIViewController, UITableViewDataSource, UITableVie
         BudgetVariables.budgetArray[BudgetVariables.currentIndex].historyArray = [String]()
         BudgetVariables.budgetArray[BudgetVariables.currentIndex].descriptionArray = [String]()
         
-        // Revert the balance to its original value
-        let totalBudgetAmt = BudgetVariables.budgetArray[BudgetVariables.currentIndex].totalBudgetAmount
+        // Revert the balance to its original value, and reset the variables
         let totalAmtAdded = BudgetVariables.budgetArray[BudgetVariables.currentIndex].totalAmountAdded
-        BudgetVariables.budgetArray[BudgetVariables.currentIndex].balance = totalBudgetAmt - totalAmtAdded
-        
+        let totalAmtSpent = BudgetVariables.budgetArray[BudgetVariables.currentIndex].totalAmountSpent
+        let myBalance = BudgetVariables.budgetArray[BudgetVariables.currentIndex].balance
+        let newBalanceAndBudgetAmount = myBalance - totalAmtAdded + totalAmtSpent
+        BudgetVariables.budgetArray[BudgetVariables.currentIndex].balance = newBalanceAndBudgetAmount
+        BudgetVariables.budgetArray[BudgetVariables.currentIndex].totalBudgetAmount = newBalanceAndBudgetAmount
+        BudgetVariables.budgetArray[BudgetVariables.currentIndex].totalAmountAdded = 0.0
+        BudgetVariables.budgetArray[BudgetVariables.currentIndex].totalAmountSpent = 0.0
+
         // Zero out the spending's for this array per date and total
-        for (key, _) in BudgetVariables.budgetArray[BudgetVariables.currentIndex].netAmountSpentOnDate
+        for (key, _) in BudgetVariables.budgetArray[BudgetVariables.currentIndex].amountSpentOnDate
         {
-            BudgetVariables.budgetArray[BudgetVariables.currentIndex].netAmountSpentOnDate[key] = 0.0
+            BudgetVariables.budgetArray[BudgetVariables.currentIndex].amountSpentOnDate[key] = 0.0
         }
         BudgetVariables.budgetArray[BudgetVariables.currentIndex].totalAmountSpent = 0.0
         
@@ -192,7 +197,7 @@ class HistoryViewController: UIViewController, UITableViewDataSource, UITableVie
         let undo = UITableViewRowAction(style: .normal, title: "Undo")
         { (action, indexPath) in
             
-            // Remove item at indexPath
+            // Undo item at indexPath
             
             // Extract the key to the map in the format "MM/dd/YYYY" into the variable date
             let descripStr = BudgetVariables.budgetArray[BudgetVariables.currentIndex].descriptionArray[indexPath.row]
@@ -203,23 +208,27 @@ class HistoryViewController: UIViewController, UITableViewDataSource, UITableVie
             let historyStr = BudgetVariables.budgetArray[BudgetVariables.currentIndex].historyArray[indexPath.row]
             let index1 = historyStr.index(historyStr.startIndex, offsetBy: 0) // Index spans the first character in the string
             let index2 = historyStr.index(historyStr.startIndex, offsetBy: 3) // Index spans the amount spent in that transaction
-            let amountSpent = Double(historyStr.substring(from: index2))
+            let historyValue = Double(historyStr.substring(from: index2))
             
             // If this specific piece of history logged a spend action, the total amount spent should decrease after deletion
             if historyStr[index1] == "–"
             {
-                let newDateAmount = BudgetVariables.budgetArray[BudgetVariables.currentIndex].netAmountSpentOnDate[date]! - amountSpent!
-                BudgetVariables.budgetArray[BudgetVariables.currentIndex].netAmountSpentOnDate[date] = newDateAmount
-                let newTotalAmount = BudgetVariables.budgetArray[BudgetVariables.currentIndex].totalAmountSpent - amountSpent!
-                BudgetVariables.budgetArray[BudgetVariables.currentIndex].totalAmountSpent = newTotalAmount
-                let newBalance = BudgetVariables.budgetArray[BudgetVariables.currentIndex].balance + amountSpent!
+                let newDateAmount = BudgetVariables.budgetArray[BudgetVariables.currentIndex].amountSpentOnDate[date]! - historyValue!
+                BudgetVariables.budgetArray[BudgetVariables.currentIndex].amountSpentOnDate[date] = newDateAmount
+                let newTotalAmountSpent = BudgetVariables.budgetArray[BudgetVariables.currentIndex].totalAmountSpent - historyValue!
+                BudgetVariables.budgetArray[BudgetVariables.currentIndex].totalAmountSpent = newTotalAmountSpent
+                let newBalance = BudgetVariables.budgetArray[BudgetVariables.currentIndex].balance + historyValue!
                 BudgetVariables.budgetArray[BudgetVariables.currentIndex].balance = newBalance
             }
-                // If this action was an "Added to Budget" action
+            // If this action was an "Added to Budget" action
             else if historyStr[index1] == "+"
             {
-                let newBalance = BudgetVariables.budgetArray[BudgetVariables.currentIndex].balance - amountSpent!
+                let newTotalAmountAdded = BudgetVariables.budgetArray[BudgetVariables.currentIndex].totalAmountAdded - historyValue!
+                BudgetVariables.budgetArray[BudgetVariables.currentIndex].totalAmountAdded = newTotalAmountAdded
+                let newBalance = BudgetVariables.budgetArray[BudgetVariables.currentIndex].balance - historyValue!
                 BudgetVariables.budgetArray[BudgetVariables.currentIndex].balance = newBalance
+                let newBudgetAmount = BudgetVariables.budgetArray[BudgetVariables.currentIndex].totalBudgetAmount - historyValue!
+                BudgetVariables.budgetArray[BudgetVariables.currentIndex].totalBudgetAmount = newBudgetAmount
             }
             
             // Delete the row

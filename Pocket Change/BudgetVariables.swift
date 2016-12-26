@@ -152,12 +152,12 @@ class BudgetVariables: UIViewController
             let key = String(month) + "/" + String(day) + "/" + String(year)
             
             // If the amount spent is empty, set it to 0.0 for that day
-            if BudgetVariables.budgetArray[BudgetVariables.currentIndex].netAmountSpentOnDate[key] == nil
+            if BudgetVariables.budgetArray[BudgetVariables.currentIndex].amountSpentOnDate[key] == nil
             {
-                BudgetVariables.budgetArray[BudgetVariables.currentIndex].netAmountSpentOnDate[key] = 0.0
+                BudgetVariables.budgetArray[BudgetVariables.currentIndex].amountSpentOnDate[key] = 0.0
             }
             
-            amountSpentArray.append(BudgetVariables.budgetArray[BudgetVariables.currentIndex].netAmountSpentOnDate[key]!)
+            amountSpentArray.append(BudgetVariables.budgetArray[BudgetVariables.currentIndex].amountSpentOnDate[key]!)
             aWeekAgo = cal.date(byAdding: .day, value: 1, to: aWeekAgo!)!
         }
         
@@ -171,14 +171,14 @@ class BudgetVariables: UIViewController
         let key = BudgetVariables.todaysDate(format: "MM/dd/YYYY")
         
         // If the item is nil, that means nothing has been spent today. If so, initialize it to 0.0
-        if BudgetVariables.budgetArray[BudgetVariables.currentIndex].netAmountSpentOnDate[key] == nil
+        if BudgetVariables.budgetArray[BudgetVariables.currentIndex].amountSpentOnDate[key] == nil
         {
-            BudgetVariables.budgetArray[BudgetVariables.currentIndex].netAmountSpentOnDate[key] = 0.0
+            BudgetVariables.budgetArray[BudgetVariables.currentIndex].amountSpentOnDate[key] = 0.0
         }
         
         // Store the new amount into the dictionary with the key being today's date (MM/dd/YYYY)
-        let newAmount = BudgetVariables.budgetArray[BudgetVariables.currentIndex].netAmountSpentOnDate[key]! + num
-        BudgetVariables.budgetArray[BudgetVariables.currentIndex].netAmountSpentOnDate[key] = newAmount
+        let newAmount = BudgetVariables.budgetArray[BudgetVariables.currentIndex].amountSpentOnDate[key]! + num
+        BudgetVariables.budgetArray[BudgetVariables.currentIndex].amountSpentOnDate[key] = newAmount
     }
     
     // If there are more than 5 budgets, return the top 4 budget names in sorted order based on its 

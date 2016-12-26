@@ -131,6 +131,8 @@ class BarGraphViewController: UIViewController
         if BudgetVariables.isAllZeros(array: values) == true
         {
             chartDataSet.label = "You must spend to see data"
+            chartData.setDrawValues(false)
+            barGraphView.rightAxis.drawLabelsEnabled = false
         }
         
         // Set where axis starts
@@ -154,6 +156,9 @@ class BarGraphViewController: UIViewController
         format.numberStyle = .currency
         let formatter = DefaultValueFormatter(formatter: format)
         chartData.setValueFormatter(formatter)
+        
+        // Set Y Axis Font
+        barGraphView.rightAxis.labelFont = UIFont.systemFont(ofSize: 11)
         
         // Set X Axis Font
         barGraphView.xAxis.labelFont = UIFont.systemFont(ofSize: 13)

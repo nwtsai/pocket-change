@@ -188,11 +188,11 @@ class SpendViewController: UIViewController, UITextFieldDelegate
                 BudgetVariables.budgetArray[BudgetVariables.currentIndex].balance = newBalance
                 self.totalBalance.text = BudgetVariables.numFormat(myNum: newBalance)
                 
-                // Log this into the history and description arrays, and then update the totalAmountAdded
+                // Log this into the history and description arrays, and then update the totalAmountAdded and totalBudgetAmount
                 BudgetVariables.budgetArray[BudgetVariables.currentIndex].historyArray.append("+ $" + String(format: "%.2f", inputAmountNum!))
                 BudgetVariables.budgetArray[BudgetVariables.currentIndex].descriptionArray.append("Added to \"" + budgetName! + "\"    " + date)
                 BudgetVariables.budgetArray[BudgetVariables.currentIndex].totalAmountAdded += inputAmountNum!
-                BudgetVariables.budgetArray[BudgetVariables.currentIndex].totalBudgetAmount = myBalance + inputAmountNum!
+                BudgetVariables.budgetArray[BudgetVariables.currentIndex].totalBudgetAmount += inputAmountNum!
             }
             
             // Save data to coredata
