@@ -72,11 +72,8 @@ class BarGraphViewController: UIViewController
         
         if days.isEmpty == false && amountSpent.isEmpty == false
         {
-            if BudgetVariables.budgetArray[BudgetVariables.currentIndex].historyArray.isEmpty == false
-            {
-                // cameraButton.isEnabled = true
-                setBarGraph(dataPoints: days, values: amountSpent)
-            }            
+            // cameraButton.isEnabled = true
+            setBarGraph(dataPoints: days, values: amountSpent)
         }
         else
         {
@@ -122,10 +119,19 @@ class BarGraphViewController: UIViewController
         barGraphView.rightAxis.axisMinimum = 0
         barGraphView.xAxis.labelPosition = .bottom
         
-        let chartDataSet = BarChartDataSet(values: dataEntries, label: "Net Amount Spent")
+        let chartDataSet = BarChartDataSet(values: dataEntries, label: "Amount Spent Per Day")
         chartDataSet.axisDependency = .right
         let chartData = BarChartData(dataSet: chartDataSet)
         barGraphView.data = chartData
+        
+        // Legend font size
+        barGraphView.legend.font = UIFont.systemFont(ofSize: 13)
+        barGraphView.legend.formSize = 8
+        
+        if BudgetVariables.isAllZeros(array: values) == true
+        {
+            chartDataSet.label = "You must spend to see data"
+        }
         
         // Set where axis starts
         barGraphView.setScaleMinima(0, scaleY: 0.0)
@@ -148,10 +154,6 @@ class BarGraphViewController: UIViewController
         format.numberStyle = .currency
         let formatter = DefaultValueFormatter(formatter: format)
         chartData.setValueFormatter(formatter)
-        
-        // Legend font size
-        barGraphView.legend.font = UIFont.systemFont(ofSize: 13)
-        barGraphView.legend.formSize = 8
         
         // Set X Axis Font
         barGraphView.xAxis.labelFont = UIFont.systemFont(ofSize: 13)

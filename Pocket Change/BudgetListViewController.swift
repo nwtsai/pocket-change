@@ -46,7 +46,7 @@ class BudgetListViewController: UIViewController, UITableViewDataSource, UITable
         sharedDelegate = shDelegate
         
         //Looks for single or multiple taps.
-        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(WithdrawalViewController.dismissKeyboard))
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(SpendViewController.dismissKeyboard))
         
         //Uncomment the line below if you want the tap not not interfere and cancel other interactions.
         tap.cancelsTouchesInView = false
@@ -101,7 +101,7 @@ class BudgetListViewController: UIViewController, UITableViewDataSource, UITable
             // Trim the inputName first
             inputName = inputName?.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
             
-            if let inputAmount = Double(alert.textFields![1].text!)
+            if let inputAmount = (Double(alert.textFields![1].text!))?.roundTo(places: 2)
             {
                 if inputAmount >= 0 && inputAmount <= 1000000
                 {
@@ -119,7 +119,9 @@ class BudgetListViewController: UIViewController, UITableViewDataSource, UITable
                     budget.balance = inputAmount
                     budget.descriptionArray = [String]()
                     budget.historyArray = [String]()
-                    budget.netTotalAmountSpent = 0.0
+                    budget.totalAmountSpent = 0.0
+                    budget.totalBudgetAmount = inputAmount
+                    budget.totalAmountAdded = 0.0
                     
                     // Save and get data to coredata
                     self.sharedDelegate.saveContext()
@@ -221,7 +223,11 @@ class BudgetListViewController: UIViewController, UITableViewDataSource, UITable
     {
         let myCell:UITableViewCell = self.budgetTable.dequeueReusableCell(withIdentifier: "clickableCell", for: indexPath)
         myCell.textLabel?.text = BudgetVariables.budgetArray[indexPath.row].name
-        myCell.detailTextLabel?.text = BudgetVariables.numFormat(myNum: BudgetVariables.budgetArray[indexPath.row].balance)
+        let currentBalance = (BudgetVariables.budgetArray[indexPath.row].balance).roundTo(places: 2)
+        let currentBalanceString = BudgetVariables.numFormat(myNum: currentBalance)
+        let totalBudgetAmt = BudgetVariables.budgetArray[indexPath.row].totalBudgetAmount
+        let totalBudgetAmtString = BudgetVariables.numFormat(myNum: totalBudgetAmt)
+        myCell.detailTextLabel?.text = currentBalanceString + " / " + totalBudgetAmtString
         
         return myCell
     }

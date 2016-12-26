@@ -46,7 +46,7 @@ class HistoryViewController: UIViewController, UITableViewDataSource, UITableVie
         sharedDelegate = shDelegate
         
         //Looks for single or multiple taps.
-        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(WithdrawalViewController.dismissKeyboard))
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(SpendViewController.dismissKeyboard))
         
         //Uncomment the line below if you want the tap not not interfere and cancel other interactions.
         tap.cancelsTouchesInView = false
@@ -82,16 +82,16 @@ class HistoryViewController: UIViewController, UITableViewDataSource, UITableVie
         BudgetVariables.budgetArray[BudgetVariables.currentIndex].descriptionArray = [String]()
         
         // Revert the balance to its original value
-        let oldBalance = BudgetVariables.budgetArray[BudgetVariables.currentIndex].balance
-        let netTotalAmtSpent = BudgetVariables.budgetArray[BudgetVariables.currentIndex].netTotalAmountSpent
-        BudgetVariables.budgetArray[BudgetVariables.currentIndex].balance = oldBalance + netTotalAmtSpent
+        let totalBudgetAmt = BudgetVariables.budgetArray[BudgetVariables.currentIndex].totalBudgetAmount
+        let totalAmtAdded = BudgetVariables.budgetArray[BudgetVariables.currentIndex].totalAmountAdded
+        BudgetVariables.budgetArray[BudgetVariables.currentIndex].balance = totalBudgetAmt - totalAmtAdded
         
         // Zero out the spending's for this array per date and total
         for (key, _) in BudgetVariables.budgetArray[BudgetVariables.currentIndex].netAmountSpentOnDate
         {
             BudgetVariables.budgetArray[BudgetVariables.currentIndex].netAmountSpentOnDate[key] = 0.0
         }
-        BudgetVariables.budgetArray[BudgetVariables.currentIndex].netTotalAmountSpent = 0.0
+        BudgetVariables.budgetArray[BudgetVariables.currentIndex].totalAmountSpent = 0.0
         
         // Save context and get data
         self.sharedDelegate.saveContext()
@@ -119,7 +119,7 @@ class HistoryViewController: UIViewController, UITableViewDataSource, UITableVie
         if indexPath.row == count
         {
             myCell.textLabel?.textColor = UIColor.lightGray
-            myCell.textLabel?.text = "Tip: Deleting history restores your balance"
+            myCell.textLabel?.text = "Tip: Swipe to the left to undo"
             myCell.detailTextLabel?.text = ""
         }
         else
@@ -129,12 +129,12 @@ class HistoryViewController: UIViewController, UITableViewDataSource, UITableVie
             
             if str[index] == "+"
             {
-                myCell.textLabel?.textColor = UIColor.green
+                myCell.textLabel?.textColor = BudgetVariables.hexStringToUIColor(hex: "00B22C")
             }
             
             if str[index] == "–"
             {
-                myCell.textLabel?.textColor = UIColor.red
+                myCell.textLabel?.textColor = BudgetVariables.hexStringToUIColor(hex: "FF0212")
             }
             
             myCell.textLabel?.text = BudgetVariables.budgetArray[BudgetVariables.currentIndex].historyArray[indexPath.row]
@@ -163,21 +163,20 @@ class HistoryViewController: UIViewController, UITableViewDataSource, UITableVie
         let index1 = historyStr.index(historyStr.startIndex, offsetBy: 0) // Index spans the first character in the string
         let index2 = historyStr.index(historyStr.startIndex, offsetBy: 3) // Index spans the amount spent in that transaction
         let amountSpent = Double(historyStr.substring(from: index2))
-
-        // If after the deletion of a deposit action the new balance is negative, user cannot delete this cell
-        if historyStr[index1] == "+"
+            
+        // If after the deletion of a spend action the new balance is over 1M, user cannot delete this cell
+        if historyStr[index1] == "–"
         {
-            let newBalance = BudgetVariables.budgetArray[BudgetVariables.currentIndex].balance - amountSpent!
-            if newBalance < 0
+            let newBalance = BudgetVariables.budgetArray[BudgetVariables.currentIndex].balance + amountSpent!
+            if newBalance > 1000000
             {
                 return false
             }
         }
-        // If after the deletion of a withdraw action the new balance is over 1M, user cannot delete this cell
-        else if historyStr[index1] == "–"
+        else if historyStr[index1] == "+"
         {
-            let newBalance = BudgetVariables.budgetArray[BudgetVariables.currentIndex].balance + amountSpent!
-            if newBalance > 1000000
+            let newBalance = BudgetVariables.budgetArray[BudgetVariables.currentIndex].balance - amountSpent!
+            if newBalance < 0
             {
                 return false
             }
@@ -186,12 +185,15 @@ class HistoryViewController: UIViewController, UITableViewDataSource, UITableVie
         return true
     }
     
-    @objc(tableView:commitEditingStyle:forRowAtIndexPath:) func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath)
+    // Generates an array of custom buttons that appear after the swipe to the left
+    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]?
     {
-        // If the deleting swipe motion happens, remove the budget from the budgetArray, decrement the currentIndex, and delete the row
-        // Also update the values that directly correlate to the data in both the pie chart and the bar graph
-        if editingStyle == .delete && indexPath.row != BudgetVariables.budgetArray[BudgetVariables.currentIndex].historyArray.count
-        {
+        // Title is the text of the button
+        let undo = UITableViewRowAction(style: .normal, title: "Undo")
+        { (action, indexPath) in
+            
+            // Remove item at indexPath
+            
             // Extract the key to the map in the format "MM/dd/YYYY" into the variable date
             let descripStr = BudgetVariables.budgetArray[BudgetVariables.currentIndex].descriptionArray[indexPath.row]
             let dateIndex = descripStr.index(descripStr.endIndex, offsetBy: -10)
@@ -203,24 +205,20 @@ class HistoryViewController: UIViewController, UITableViewDataSource, UITableVie
             let index2 = historyStr.index(historyStr.startIndex, offsetBy: 3) // Index spans the amount spent in that transaction
             let amountSpent = Double(historyStr.substring(from: index2))
             
-            // If this specific piece of history logged a deposit action, the total amount spent should increase after deletion
-            if historyStr[index1] == "+"
-            {
-                let newSpentOnDateAmount = BudgetVariables.budgetArray[BudgetVariables.currentIndex].netAmountSpentOnDate[date]! + amountSpent!
-                BudgetVariables.budgetArray[BudgetVariables.currentIndex].netAmountSpentOnDate[date] = newSpentOnDateAmount
-                let newTotalAmount = BudgetVariables.budgetArray[BudgetVariables.currentIndex].netTotalAmountSpent + amountSpent!
-                BudgetVariables.budgetArray[BudgetVariables.currentIndex].netTotalAmountSpent = newTotalAmount
-                let newBalance = BudgetVariables.budgetArray[BudgetVariables.currentIndex].balance - amountSpent!
-                BudgetVariables.budgetArray[BudgetVariables.currentIndex].balance = newBalance
-            }
-            // If this specific piece of history logged a withdraw action, the total amount spent should decrease after deletion
-            else if historyStr[index1] == "–"
+            // If this specific piece of history logged a spend action, the total amount spent should decrease after deletion
+            if historyStr[index1] == "–"
             {
                 let newDateAmount = BudgetVariables.budgetArray[BudgetVariables.currentIndex].netAmountSpentOnDate[date]! - amountSpent!
                 BudgetVariables.budgetArray[BudgetVariables.currentIndex].netAmountSpentOnDate[date] = newDateAmount
-                let newTotalAmount = BudgetVariables.budgetArray[BudgetVariables.currentIndex].netTotalAmountSpent - amountSpent!
-                BudgetVariables.budgetArray[BudgetVariables.currentIndex].netTotalAmountSpent = newTotalAmount
+                let newTotalAmount = BudgetVariables.budgetArray[BudgetVariables.currentIndex].totalAmountSpent - amountSpent!
+                BudgetVariables.budgetArray[BudgetVariables.currentIndex].totalAmountSpent = newTotalAmount
                 let newBalance = BudgetVariables.budgetArray[BudgetVariables.currentIndex].balance + amountSpent!
+                BudgetVariables.budgetArray[BudgetVariables.currentIndex].balance = newBalance
+            }
+                // If this action was an "Added to Budget" action
+            else if historyStr[index1] == "+"
+            {
+                let newBalance = BudgetVariables.budgetArray[BudgetVariables.currentIndex].balance - amountSpent!
                 BudgetVariables.budgetArray[BudgetVariables.currentIndex].balance = newBalance
             }
             
@@ -234,12 +232,17 @@ class HistoryViewController: UIViewController, UITableViewDataSource, UITableVie
             // Disable the clear history button if the cell deleted was the last item
             if BudgetVariables.budgetArray[BudgetVariables.currentIndex].historyArray.isEmpty == true
             {
-                clearHistoryButton.isEnabled = false
+                self.clearHistoryButton.isEnabled = false
             }
             else
             {
-                clearHistoryButton.isEnabled = true
+                self.clearHistoryButton.isEnabled = true
             }
         }
+        
+        // Change the color of the button
+        undo.backgroundColor = BudgetVariables.hexStringToUIColor(hex: "B2010C")
+        
+        return [undo]
     }
 }

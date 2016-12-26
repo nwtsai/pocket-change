@@ -23,5 +23,7 @@ extension MyBudget
     @NSManaged public var descriptionArray: [String]
     @NSManaged public var historyArray: [String]
     @NSManaged public var netAmountSpentOnDate: [String: Double]
-    @NSManaged public var netTotalAmountSpent: Double
+    @NSManaged public var totalAmountSpent: Double
+    @NSManaged public var totalBudgetAmount: Double
+    @NSManaged public var totalAmountAdded: Double
 }

@@ -57,10 +57,6 @@ class PieChartViewController: UIViewController
         {
             pieChartView.noDataText = "You must have at least one transaction."
         }
-        else
-        {
-            pieChartView.noDataText = "Amount withdrawn must be greater than the amount deposited."
-        }
         
         if budgetNames.isEmpty == false && amountSpent.isEmpty == false
         {
@@ -88,7 +84,7 @@ class PieChartViewController: UIViewController
             dataEntries.append(dataEntry)
         }
         
-        let pieChartDataSet = PieChartDataSet(values: dataEntries, label: "Net Amount Spent")
+        let pieChartDataSet = PieChartDataSet(values: dataEntries, label: "Amount Spent Per Budget")
         let pieChartData = PieChartData(dataSet: pieChartDataSet)
         pieChartView.data = pieChartData
         

@@ -16,7 +16,7 @@
 		9A09B72A1E0CB96A00D0F4A4 /* Charts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A09B7291E0CB96A00D0F4A4 /* Charts.framework */; };
 		9A09B72B1E0CB96A00D0F4A4 /* Charts.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 9A09B7291E0CB96A00D0F4A4 /* Charts.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		9A27BF2B1E0A01B100146EEA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A27BF2A1E0A01B100146EEA /* AppDelegate.swift */; };
-		9A27BF2D1E0A01B100146EEA /* WithdrawalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A27BF2C1E0A01B100146EEA /* WithdrawalViewController.swift */; };
+		9A27BF2D1E0A01B100146EEA /* SpendViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A27BF2C1E0A01B100146EEA /* SpendViewController.swift */; };
 		9A27BF331E0A01B100146EEA /* Pocket_Change.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 9A27BF311E0A01B100146EEA /* Pocket_Change.xcdatamodeld */; };
 		9A27BF351E0A01B100146EEA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9A27BF341E0A01B100146EEA /* Assets.xcassets */; };
 		9A27BF381E0A01B100146EEA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9A27BF361E0A01B100146EEA /* LaunchScreen.storyboard */; };
@@ -89,7 +89,7 @@
 		9A09B7291E0CB96A00D0F4A4 /* Charts.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Charts.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9A27BF271E0A01B100146EEA /* Pocket Change.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Pocket Change.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9A27BF2A1E0A01B100146EEA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		9A27BF2C1E0A01B100146EEA /* WithdrawalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WithdrawalViewController.swift; sourceTree = "<group>"; };
+		9A27BF2C1E0A01B100146EEA /* SpendViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpendViewController.swift; sourceTree = "<group>"; };
 		9A27BF321E0A01B100146EEA /* Pocket_Change.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Pocket_Change.xcdatamodel; sourceTree = "<group>"; };
 		9A27BF341E0A01B100146EEA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		9A27BF371E0A01B100146EEA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -169,7 +169,7 @@
 				9A0010CF1E0A097D008E7092 /* BudgetVariables.swift */,
 				9AAE177F1E0DD41100F98BEB /* PieChartViewController.swift */,
 				9A0010CD1E0A0887008E7092 /* BudgetListViewController.swift */,
-				9A27BF2C1E0A01B100146EEA /* WithdrawalViewController.swift */,
+				9A27BF2C1E0A01B100146EEA /* SpendViewController.swift */,
 				9A0010CB1E0A07B2008E7092 /* HistoryViewController.swift */,
 				9A005ABD1E0D24F10081142A /* BarGraphViewController.swift */,
 				9A27BF5B1E0A022A00146EEA /* Main.storyboard */,
@@ -372,7 +372,7 @@
 				9A0010DF1E0A27DF008E7092 /* MyBudget+CoreDataProperties.swift in Sources */,
 				9A27BF331E0A01B100146EEA /* Pocket_Change.xcdatamodeld in Sources */,
 				9A0010DE1E0A27DF008E7092 /* MyBudget+CoreDataClass.swift in Sources */,
-				9A27BF2D1E0A01B100146EEA /* WithdrawalViewController.swift in Sources */,
+				9A27BF2D1E0A01B100146EEA /* SpendViewController.swift in Sources */,
 				9AAE17801E0DD41100F98BEB /* PieChartViewController.swift in Sources */,
 				9A0010D01E0A097D008E7092 /* BudgetVariables.swift in Sources */,
 				9A27BF2B1E0A01B100146EEA /* AppDelegate.swift in Sources */,

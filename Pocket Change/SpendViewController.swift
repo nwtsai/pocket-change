@@ -1,5 +1,5 @@
 //
-//  WithdrawalViewController.swift
+//  SpendViewController.swift
 //  Pocket Change
 //
 //  Created by Nathan Tsai on 12/20/16.
@@ -9,15 +9,13 @@
 import UIKit
 import CoreData
 
-class WithdrawalViewController: UIViewController, UITextFieldDelegate
+class SpendViewController: UIViewController, UITextFieldDelegate
 {
     // sharedDelegate
     var sharedDelegate: AppDelegate!
     
     // IB Outlets
-    @IBOutlet weak var withdrawButton: UIButton!
-    @IBOutlet weak var depositButton: UIButton!
-    @IBOutlet weak var historyButton: UIButton!
+    @IBOutlet weak var spendButton: UIButton!
     @IBOutlet weak var totalBalance: UILabel!
     @IBOutlet weak var inputAmount: UITextField!
     @IBOutlet weak var descriptionText: UITextField!
@@ -44,7 +42,7 @@ class WithdrawalViewController: UIViewController, UITextFieldDelegate
         descriptionText.placeholder = "What's it for?"
         
         //Looks for single or multiple taps.
-        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(WithdrawalViewController.dismissKeyboard))
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(SpendViewController.dismissKeyboard))
         tap.cancelsTouchesInView = false
         view.addGestureRecognizer(tap)
     }
@@ -63,14 +61,13 @@ class WithdrawalViewController: UIViewController, UITextFieldDelegate
         totalBalance.text = BudgetVariables.numFormat(myNum: BudgetVariables.budgetArray[BudgetVariables.currentIndex].balance)
         if BudgetVariables.budgetArray[BudgetVariables.currentIndex].balance == 0
         {
-            withdrawButton.isEnabled = false
+            spendButton.isEnabled = false
         }
         
         // Reset the text fields and disable both buttons
         inputAmount.text = ""
         descriptionText.text = ""
-        depositButton.isEnabled = false
-        withdrawButton.isEnabled = false
+        spendButton.isEnabled = false
     }
     
     //Calls this function when the tap is recognized.
@@ -83,20 +80,21 @@ class WithdrawalViewController: UIViewController, UITextFieldDelegate
     // When the action button in the navbar gets pressed
     @IBAction func actionButtonPressed(_ sender: AnyObject)
     {
-        showEditAlert()
+        showEditNameAlert()
     }
     // Use this variable to enable or disable the Save button
-    weak var saveButton : UIAlertAction?
+    weak var nameSaveButton : UIAlertAction?
     
-    // Show Edit Pop-up
-    func showEditAlert()
+    // Show Edit Name Pop-up
+    func showEditNameAlert()
     {
-        let editAlert = UIAlertController(title: "Edit Name", message: "", preferredStyle: UIAlertControllerStyle.alert)
+        let editAlert = UIAlertController(title: "Edit Budget Name", message: "", preferredStyle: UIAlertControllerStyle.alert)
+        
         editAlert.addTextField(configurationHandler: {(textField: UITextField) in
             textField.placeholder = "Enter New Budget Name"
             textField.delegate = self
             textField.autocapitalizationType = .words
-            textField.addTarget(self, action: #selector(self.textFieldDidChange(_:)), for: .editingChanged)
+            textField.addTarget(self, action: #selector(self.newNameTextFieldDidChange(_:)), for: .editingChanged)
         })
         
         let cancel = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.default, handler: { (_) -> Void in
@@ -115,25 +113,25 @@ class WithdrawalViewController: UIViewController, UITextFieldDelegate
                 inputName = BudgetVariables.createName(myName: inputName!, myNum: 0)
                 BudgetVariables.budgetArray[BudgetVariables.currentIndex].name = inputName!
                 self.navigationItem.title = BudgetVariables.budgetArray[BudgetVariables.currentIndex].name
-                
-                // Save data to coredata
-                self.sharedDelegate.saveContext()
-                
-                // Get data
-                BudgetVariables.getData()
             }
+            
+            // Save data to coredata
+            self.sharedDelegate.saveContext()
+            
+            // Get data
+            BudgetVariables.getData()
         })
         
         editAlert.addAction(save)
         editAlert.addAction(cancel)
         
-        self.saveButton = save
+        self.nameSaveButton = save
         save.isEnabled = false
         self.present(editAlert, animated: true, completion: nil)
     }
     
-    // This function disables the save button if the input amount is not valid
-    func textFieldDidChange(_ textField: UITextField)
+    // This function disables the save button if the input name is not valid
+    func newNameTextFieldDidChange(_ textField: UITextField)
     {
         // Trim the input first
         let input = (textField.text)?.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
@@ -141,11 +139,105 @@ class WithdrawalViewController: UIViewController, UITextFieldDelegate
         // If the input is not empty and it doesn't currently exist, enable the Save button
         if input != "" && BudgetVariables.nameExistsAlready(str: input!) == false
         {
-            self.saveButton?.isEnabled = true
+            self.nameSaveButton?.isEnabled = true
         }
         else
         {
-            self.saveButton?.isEnabled = false
+            self.nameSaveButton?.isEnabled = false
+        }
+    }
+    
+    // When the add to budget balance button is pressed
+    @IBAction func addToBudgetButtonPressed(_ sender: Any)
+    {
+        showEditBalanceAlert()
+    }
+    // Use this variable to enable or disable the Save button
+    weak var amountSaveButton : UIAlertAction?
+    
+    // Show Edit Balance Pop-up
+    func showEditBalanceAlert()
+    {
+        let budgetName = BudgetVariables.budgetArray[BudgetVariables.currentIndex].name
+        let editAlert = UIAlertController(title: "Add to \"" + budgetName! + "\"", message: "", preferredStyle: UIAlertControllerStyle.alert)
+        
+        editAlert.addTextField(configurationHandler: {(textField: UITextField) in
+            textField.placeholder = "$0.00"
+            textField.delegate = self
+            textField.keyboardType = .decimalPad
+            textField.addTarget(self, action: #selector(self.newAmountTextFieldDidChange(_:)), for: .editingChanged)
+        })
+        
+        let cancel = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.default, handler: { (_) -> Void in
+        })
+        
+        let save = UIAlertAction(title: "Save", style: UIAlertActionStyle.default, handler: { (_) -> Void in
+            
+            let date = BudgetVariables.todaysDate(format: "MM/dd/YYYY")
+            
+            // Trim the input Amount
+            let inputAmountText = (editAlert.textFields![0].text!).trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
+            let inputAmountNum = (Double(inputAmountText))?.roundTo(places: 2)
+            
+            // If the input amount isn't empty and the new balance doesn't exceed 1M
+            let myBalance = BudgetVariables.budgetArray[BudgetVariables.currentIndex].balance
+            if inputAmountText != "" && (inputAmountNum! + myBalance) <= 1000000
+            {
+                // Update balance and balance label
+                let newBalance = myBalance + inputAmountNum!
+                BudgetVariables.budgetArray[BudgetVariables.currentIndex].balance = newBalance
+                self.totalBalance.text = BudgetVariables.numFormat(myNum: newBalance)
+                
+                // Log this into the history and description arrays, and then update the totalAmountAdded
+                BudgetVariables.budgetArray[BudgetVariables.currentIndex].historyArray.append("+ $" + String(format: "%.2f", inputAmountNum!))
+                BudgetVariables.budgetArray[BudgetVariables.currentIndex].descriptionArray.append("Added to \"" + budgetName! + "\"    " + date)
+                BudgetVariables.budgetArray[BudgetVariables.currentIndex].totalAmountAdded += inputAmountNum!
+                BudgetVariables.budgetArray[BudgetVariables.currentIndex].totalBudgetAmount = myBalance + inputAmountNum!
+            }
+            
+            // Save data to coredata
+            self.sharedDelegate.saveContext()
+            
+            // Get data
+            BudgetVariables.getData()
+        })
+        
+        editAlert.addAction(save)
+        editAlert.addAction(cancel)
+        
+        self.amountSaveButton = save
+        save.isEnabled = false
+        self.present(editAlert, animated: true, completion: nil)
+    }
+    
+    // This function disables the save button if the input amount is not valid
+    func newAmountTextFieldDidChange(_ textField: UITextField)
+    {
+        // Trim input first
+        let trimmedInput = (textField.text)?.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
+        let balance = BudgetVariables.budgetArray[BudgetVariables.currentIndex].balance
+        
+        // Disable button if input is empty or just a "."
+        if trimmedInput == "" || trimmedInput == "."
+        {
+            self.amountSaveButton?.isEnabled = false
+        }
+        // If the input is a number
+        else if let input = (Double(trimmedInput!))?.roundTo(places: 2)
+        {
+            if input + balance <= 1000000
+            {
+                self.amountSaveButton?.isEnabled = true
+            }
+            else
+            {
+                self.amountSaveButton?.isEnabled = false
+            }
+        }
+        // If the input is not a number
+        else
+        {
+            self.amountSaveButton?.isEnabled = false
         }
     }
     
@@ -153,6 +245,7 @@ class WithdrawalViewController: UIViewController, UITextFieldDelegate
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool
     {
         var maxLength = 0
+        
         if textField.placeholder == "Enter New Budget Name"
         {
             maxLength = 18
@@ -172,56 +265,55 @@ class WithdrawalViewController: UIViewController, UITextFieldDelegate
         return newString!.characters.count <= maxLength
     }
     
-    // This function gets called when the Deposit button is pressed
-    @IBAction func depositButtonWasPressed(_ sender: AnyObject)
-    {
-        // Get current date, append to historyArray
-        let date = BudgetVariables.todaysDate(format: "MM/dd/YYYY")
-        
-        // Trim input first
-        let trimmedInput = (inputAmount.text)?.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
-        
-        // If the input amount is a number, round the input to two decimal places before doing further calculations
-        if let input = (Double(trimmedInput!))?.roundTo(places: 2)
-        {
-            BudgetVariables.budgetArray[BudgetVariables.currentIndex].balance += input
-            totalBalance.text = BudgetVariables.numFormat(myNum: BudgetVariables.budgetArray[BudgetVariables.currentIndex].balance)
-            BudgetVariables.budgetArray[BudgetVariables.currentIndex].historyArray.append("+ $" + String(format: "%.2f", input))
-            
-            // Trim description text before appending
-            let description = (descriptionText.text)?.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
-            BudgetVariables.budgetArray[BudgetVariables.currentIndex].descriptionArray.append(description! + "    " + date)
-            
-            // Log the amount deposited for this specific budget on this day
-            BudgetVariables.logTodaysSpendings(num: input * -1)
-            
-            // Log the total amount spent for this specific budget
-            BudgetVariables.budgetArray[BudgetVariables.currentIndex].netTotalAmountSpent -= input
-            
-            if BudgetVariables.budgetArray[BudgetVariables.currentIndex].balance - input >= 0
-            {
-                withdrawButton.isEnabled = true
-            }
-            
-            if BudgetVariables.budgetArray[BudgetVariables.currentIndex].balance + input > 1000000
-            {
-                depositButton.isEnabled = false
-            }
-        }
-        else
-        {
-            // Our amountEnteredChanged should take into account all non-Number cases and 
-            // disable this button before it can be pressed
-            totalBalance.text = "If this message is seen check func amountEnteredChanged"
-        }
-        
-        self.sharedDelegate.saveContext()
-        BudgetVariables.getData()
-        historyButton.isEnabled = true
-    }
+    // This function gets called when the Deposit button is pressed (button does not exist anymore)
+//    @IBAction func depositButtonWasPressed(_ sender: AnyObject)
+//    {
+//        // Get current date, append to historyArray
+//        let date = BudgetVariables.todaysDate(format: "MM/dd/YYYY")
+//        
+//        // Trim input first
+//        let trimmedInput = (inputAmount.text)?.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
+//        
+//        // If the input amount is a number, round the input to two decimal places before doing further calculations
+//        if let input = (Double(trimmedInput!))?.roundTo(places: 2)
+//        {
+//            BudgetVariables.budgetArray[BudgetVariables.currentIndex].balance += input
+//            totalBalance.text = BudgetVariables.numFormat(myNum: BudgetVariables.budgetArray[BudgetVariables.currentIndex].balance)
+//            BudgetVariables.budgetArray[BudgetVariables.currentIndex].historyArray.append("+ $" + String(format: "%.2f", input))
+//            
+//            // Trim description text before appending
+//            let description = (descriptionText.text)?.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
+//            BudgetVariables.budgetArray[BudgetVariables.currentIndex].descriptionArray.append(description! + "    " + date)
+//            
+//            // Log the amount deposited for this specific budget on this day
+//            BudgetVariables.logTodaysSpendings(num: input * -1)
+//            
+//            // Log the total amount spent for this specific budget
+//            BudgetVariables.budgetArray[BudgetVariables.currentIndex].netTotalAmountSpent -= input
+//            
+//            if BudgetVariables.budgetArray[BudgetVariables.currentIndex].balance - input >= 0
+//            {
+//                withdrawButton.isEnabled = true
+//            }
+//            
+//            if BudgetVariables.budgetArray[BudgetVariables.currentIndex].balance + input > 1000000
+//            {
+//                depositButton.isEnabled = false
+//            }
+//        }
+//        else
+//        {
+//            // Our amountEnteredChanged should take into account all non-Number cases and 
+//            // disable this button before it can be pressed
+//            totalBalance.text = "If this message is seen check func amountEnteredChanged"
+//        }
+//        
+//        self.sharedDelegate.saveContext()
+//        BudgetVariables.getData()
+//    }
     
-    // This function gets called when the Withdraw button is pressed
-    @IBAction func withdrawButtonWasPressed(_ sender: AnyObject)
+    // This function gets called when the Spend button is pressed
+    @IBAction func spendButtonPressed(_ sender: Any)
     {
         // Get current date, append to history Array
         let date = BudgetVariables.todaysDate(format: "MM/dd/YYYY")
@@ -244,16 +336,11 @@ class WithdrawalViewController: UIViewController, UITextFieldDelegate
             BudgetVariables.logTodaysSpendings(num: input)
             
             // Log the total amount spent for this budget
-            BudgetVariables.budgetArray[BudgetVariables.currentIndex].netTotalAmountSpent += input
+            BudgetVariables.budgetArray[BudgetVariables.currentIndex].totalAmountSpent += input
             
             if BudgetVariables.budgetArray[BudgetVariables.currentIndex].balance - input < 0
             {
-                withdrawButton.isEnabled = false
-            }
-            
-            if BudgetVariables.budgetArray[BudgetVariables.currentIndex].balance + input <= 1000000
-            {
-                depositButton.isEnabled = true
+                spendButton.isEnabled = false
             }
         }
         else
@@ -265,7 +352,6 @@ class WithdrawalViewController: UIViewController, UITextFieldDelegate
         
         self.sharedDelegate.saveContext()
         BudgetVariables.getData()
-        historyButton.isEnabled = true
     }
     
     // This function dynamically configures button availability depending on input
@@ -280,20 +366,17 @@ class WithdrawalViewController: UIViewController, UITextFieldDelegate
         if trimmedInput == ""
         {
             totalBalance.text = BudgetVariables.numFormat(myNum: BudgetVariables.budgetArray[BudgetVariables.currentIndex].balance)
-            depositButton.isEnabled = false
-            withdrawButton.isEnabled = false
+            spendButton.isEnabled = false
         }
         else if trimmedInput == "-" || trimmedInput == "-."
         {
             totalBalance.text = "Must be positive"
-            withdrawButton.isEnabled = false
-            depositButton.isEnabled = false
+            spendButton.isEnabled = false
         }
         else if trimmedInput == "."
         {
             totalBalance.text = BudgetVariables.numFormat(myNum: BudgetVariables.budgetArray[BudgetVariables.currentIndex].balance)
-            withdrawButton.isEnabled = false
-            depositButton.isEnabled = false
+            spendButton.isEnabled = false
         }
         else if let input = (Double(trimmedInput!))?.roundTo(places: 2)
         {
@@ -301,13 +384,11 @@ class WithdrawalViewController: UIViewController, UITextFieldDelegate
             if input > 1000000
             {
                 totalBalance.text = "Must be under $1M"
-                withdrawButton.isEnabled = false
-                depositButton.isEnabled = false
+                spendButton.isEnabled = false
             }
             else if input < 0
             {
-                depositButton.isEnabled = false
-                withdrawButton.isEnabled = false
+                spendButton.isEnabled = false
                 totalBalance.text = "Must be positive"
             }
             else
@@ -315,35 +396,24 @@ class WithdrawalViewController: UIViewController, UITextFieldDelegate
                 totalBalance.text = BudgetVariables.numFormat(myNum: BudgetVariables.budgetArray[BudgetVariables.currentIndex].balance)
                 if input == 0
                 {
-                    depositButton.isEnabled = false
-                    withdrawButton.isEnabled = false
+                    spendButton.isEnabled = false
                 }
                 else
                 {
-                    if BudgetVariables.budgetArray[BudgetVariables.currentIndex].balance + input > 1000000
-                    {
-                        depositButton.isEnabled = false
-                    }
-                    else
-                    {
-                        depositButton.isEnabled = true
-                    }
-                    
                     if BudgetVariables.budgetArray[BudgetVariables.currentIndex].balance - input < 0
                     {
-                        withdrawButton.isEnabled = false
+                        spendButton.isEnabled = false
                     }
                     else
                     {
-                        withdrawButton.isEnabled = true
+                        spendButton.isEnabled = true
                     }
                 }
             }
         }
         else
         {
-            depositButton.isEnabled = false
-            withdrawButton.isEnabled = false
+            spendButton.isEnabled = false
             totalBalance.text = "Numbers only"
         }
     }
