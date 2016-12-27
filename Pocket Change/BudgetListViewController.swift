@@ -9,16 +9,6 @@
 import UIKit
 import CoreData
 
-// Rounds doubles to a certain number of decimal places
-extension Double
-{
-    func roundTo(places:Int) -> Double
-    {
-        let divisor = pow(10.0, Double(places))
-        return (self * divisor).rounded() / divisor
-    }
-}
-
 class BudgetListViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate
 {
     // sharedDelegate
@@ -80,7 +70,7 @@ class BudgetListViewController: UIViewController, UITableViewDataSource, UITable
     {
         let alert = UIAlertController(title: "Create a Budget", message: "", preferredStyle: UIAlertControllerStyle.alert)
         alert.addTextField(configurationHandler: {(textField: UITextField) in
-            textField.placeholder = "Enter Budget Name (Optional)"
+            textField.placeholder = "Budget Name (Optional)"
             textField.delegate = self
             textField.autocapitalizationType = .words
         })
@@ -142,22 +132,76 @@ class BudgetListViewController: UIViewController, UITableViewDataSource, UITable
         self.present(alert, animated: true, completion: nil)
     }
     
-    // This function limits the maximum character count for each textField
+    // This function limits the maximum character count for each textField and limits the decimal places input to 2
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool
     {
         var maxLength = 0
-        if textField.placeholder == "Enter Budget Name (Optional)"
-        {
-            maxLength = 18
-        }
-        else if textField.placeholder == "From $0 to $1,000,000"
+        
+        if textField.placeholder == "From $0 to $1,000,000"
         {
             maxLength = 10
+        }
+        else if textField.placeholder == "Budget Name (Optional)" || textField.placeholder == "Enter New Budget Name"
+        {
+            maxLength = 18
         }
         
         let currentString = textField.text as NSString?
         let newString = currentString?.replacingCharacters(in: range, with: string)
-        return newString!.characters.count <= maxLength
+        let isValidLength = newString!.characters.count <= maxLength
+        
+        if textField.placeholder == "From $0 to $1,000,000"
+        {
+            // Max 2 decimal places for input using regex :D
+            let newText = (textField.text! as NSString).replacingCharacters(in: range, with: string)
+            let regex = try! NSRegularExpression(pattern: "\\..{3,}", options: [])
+            let matches = regex.matches(in: newText, options:[], range:NSMakeRange(0, newText.characters.count))
+            guard matches.count == 0 else { return false }
+            
+            switch string
+            {
+            case "0","1","2","3","4","5","6","7","8","9":
+                if isValidLength == true
+                {
+                    return true
+                }
+            case ".":
+                let array = textField.text?.characters.map { String($0) }
+                var decimalCount = 0
+                for character in array!
+                {
+                    if character == "."
+                    {
+                        decimalCount += 1
+                    }
+                }
+                if decimalCount == 1
+                {
+                    return false
+                }
+                else if isValidLength == true
+                {
+                    return true
+                }
+            default:
+                let array = string.characters.map { String($0) }
+                if array.count == 0
+                {
+                    return true
+                }
+                return false
+            }
+        }
+        
+        // For any other text field, return true if the length is valid
+        if isValidLength == true
+        {
+            return true
+        }
+        else
+        {
+            return false
+        }
     }
     
     // This function disables the save button if the input amount is not valid
@@ -240,17 +284,17 @@ class BudgetListViewController: UIViewController, UITableViewDataSource, UITable
         performSegue(withIdentifier: "viewBudget", sender: nil)
     }
     
-    // This handles the delete functionality
-    @objc(tableView:commitEditingStyle:forRowAtIndexPath:) func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath)
+    // Generates an array of custom buttons that appear after the swipe to the left
+    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]?
     {
         let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
         
-        // If the deleting swipe motion happens, remove the budget from the budgetArray, decrement the currentIndex, and delete the row
-        if editingStyle == .delete
-        {
+        // Title is the text of the button
+        let delete = UITableViewRowAction(style: .normal, title: "Delete")
+        { (action, indexPath) in
             let budget = BudgetVariables.budgetArray[indexPath.row]
             context.delete(budget)
-            sharedDelegate.saveContext()
+            self.sharedDelegate.saveContext()
             
             do
             {
@@ -263,6 +307,84 @@ class BudgetListViewController: UIViewController, UITableViewDataSource, UITable
             
             tableView.deleteRows(at: [indexPath], with: .fade)
             BudgetVariables.currentIndex = BudgetVariables.budgetArray.count - 1
+            
+        }
+        
+        // Title is the text of the button
+        let rename = UITableViewRowAction(style: .normal, title: "Rename")
+        { (action, indexPath) in
+            self.showEditNameAlert(indexPath: indexPath)
+        }
+        
+        // Change the color of the buttons
+        rename.backgroundColor = BudgetVariables.hexStringToUIColor(hex: "3498DB")
+        delete.backgroundColor = BudgetVariables.hexStringToUIColor(hex: "E74C3C")
+        
+        return [delete, rename]
+    }
+    
+    // Use this variable to enable or disable the Save button
+    weak var nameSaveButton : UIAlertAction?
+    
+    // Show Edit Name Pop-up
+    func showEditNameAlert(indexPath: IndexPath)
+    {
+        let editAlert = UIAlertController(title: "Edit Budget Name", message: "", preferredStyle: UIAlertControllerStyle.alert)
+        
+        editAlert.addTextField(configurationHandler: {(textField: UITextField) in
+            textField.placeholder = "Enter New Budget Name"
+            textField.delegate = self
+            textField.autocapitalizationType = .words
+            textField.addTarget(self, action: #selector(self.newNameTextFieldDidChange(_:)), for: .editingChanged)
+        })
+        
+        let cancel = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.default, handler: { (_) -> Void in
+        })
+        
+        let save = UIAlertAction(title: "Save", style: UIAlertActionStyle.default, handler: { (_) -> Void in
+            var inputName = editAlert.textFields![0].text
+            
+            // If the input name isn't empty and it isn't the old name
+            if inputName != "" && inputName != BudgetVariables.budgetArray[BudgetVariables.currentIndex].name
+            {
+                // Trim all extra white space and new lines
+                inputName = inputName?.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
+                
+                // Create the name with the newly trimmed String
+                inputName = BudgetVariables.createName(myName: inputName!, myNum: 0)
+                BudgetVariables.budgetArray[indexPath.row].name = inputName!
+                self.budgetTable.reloadRows(at: [indexPath], with: .right)
+            }
+            
+            // Save data to coredata
+            self.sharedDelegate.saveContext()
+            
+            // Get data
+            BudgetVariables.getData()
+        })
+        
+        editAlert.addAction(save)
+        editAlert.addAction(cancel)
+        
+        self.nameSaveButton = save
+        save.isEnabled = false
+        self.present(editAlert, animated: true, completion: nil)
+    }
+    
+    // This function disables the save button if the input name is not valid
+    func newNameTextFieldDidChange(_ textField: UITextField)
+    {
+        // Trim the input first
+        let input = (textField.text)?.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
+        
+        // If the input is not empty and it doesn't currently exist, enable the Save button
+        if input != "" && BudgetVariables.nameExistsAlready(str: input!) == false
+        {
+            self.nameSaveButton?.isEnabled = true
+        }
+        else
+        {
+            self.nameSaveButton?.isEnabled = false
         }
     }
 }

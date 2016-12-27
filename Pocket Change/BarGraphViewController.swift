@@ -67,7 +67,6 @@ class BarGraphViewController: UIViewController
         self.navigationItem.title = days[0] + " – " + days[6]
         
         // Grab amount spent for each day in the past week into a double array
-        // let amountSpent = [20.0, 4.2, 6.89, 9.99, 60.8, 58.1, 35.0]
         let amountSpent = BudgetVariables.amountSpentInThePastWeek()
         
         if days.isEmpty == false && amountSpent.isEmpty == false

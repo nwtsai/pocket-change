@@ -77,76 +77,6 @@ class SpendViewController: UIViewController, UITextFieldDelegate
         view.endEditing(true)
     }
     
-    // When the action button in the navbar gets pressed
-    @IBAction func actionButtonPressed(_ sender: AnyObject)
-    {
-        showEditNameAlert()
-    }
-    // Use this variable to enable or disable the Save button
-    weak var nameSaveButton : UIAlertAction?
-    
-    // Show Edit Name Pop-up
-    func showEditNameAlert()
-    {
-        let editAlert = UIAlertController(title: "Edit Budget Name", message: "", preferredStyle: UIAlertControllerStyle.alert)
-        
-        editAlert.addTextField(configurationHandler: {(textField: UITextField) in
-            textField.placeholder = "Enter New Budget Name"
-            textField.delegate = self
-            textField.autocapitalizationType = .words
-            textField.addTarget(self, action: #selector(self.newNameTextFieldDidChange(_:)), for: .editingChanged)
-        })
-        
-        let cancel = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.default, handler: { (_) -> Void in
-        })
-        
-        let save = UIAlertAction(title: "Save", style: UIAlertActionStyle.default, handler: { (_) -> Void in
-            var inputName = editAlert.textFields![0].text
-            
-            // If the input name isn't empty and it isn't the old name
-            if inputName != "" && inputName != BudgetVariables.budgetArray[BudgetVariables.currentIndex].name
-            {
-                // Trim all extra white space and new lines
-                inputName = inputName?.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
-                
-                // Create the name with the newly trimmed String
-                inputName = BudgetVariables.createName(myName: inputName!, myNum: 0)
-                BudgetVariables.budgetArray[BudgetVariables.currentIndex].name = inputName!
-                self.navigationItem.title = BudgetVariables.budgetArray[BudgetVariables.currentIndex].name
-            }
-            
-            // Save data to coredata
-            self.sharedDelegate.saveContext()
-            
-            // Get data
-            BudgetVariables.getData()
-        })
-        
-        editAlert.addAction(save)
-        editAlert.addAction(cancel)
-        
-        self.nameSaveButton = save
-        save.isEnabled = false
-        self.present(editAlert, animated: true, completion: nil)
-    }
-    
-    // This function disables the save button if the input name is not valid
-    func newNameTextFieldDidChange(_ textField: UITextField)
-    {
-        // Trim the input first
-        let input = (textField.text)?.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
-        
-        // If the input is not empty and it doesn't currently exist, enable the Save button
-        if input != "" && BudgetVariables.nameExistsAlready(str: input!) == false
-        {
-            self.nameSaveButton?.isEnabled = true
-        }
-        else
-        {
-            self.nameSaveButton?.isEnabled = false
-        }
-    }
-    
     // When the add to budget balance button is pressed
     @IBAction func addToBudgetButtonPressed(_ sender: Any)
     {
@@ -190,7 +120,7 @@ class SpendViewController: UIViewController, UITextFieldDelegate
                 
                 // Log this into the history and description arrays, and then update the totalAmountAdded and totalBudgetAmount
                 BudgetVariables.budgetArray[BudgetVariables.currentIndex].historyArray.append("+ $" + String(format: "%.2f", inputAmountNum!))
-                BudgetVariables.budgetArray[BudgetVariables.currentIndex].descriptionArray.append("Added to \"" + budgetName! + "\"    " + date)
+                BudgetVariables.budgetArray[BudgetVariables.currentIndex].descriptionArray.append("Added to budget" + "    " + date)
                 BudgetVariables.budgetArray[BudgetVariables.currentIndex].totalAmountAdded += inputAmountNum!
                 BudgetVariables.budgetArray[BudgetVariables.currentIndex].totalBudgetAmount += inputAmountNum!
             }
@@ -241,28 +171,76 @@ class SpendViewController: UIViewController, UITextFieldDelegate
         }
     }
     
-    // This function limits the maximum character count for each textField
+    // This function limits the maximum character count for each textField and limits the decimal places input to 2
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool
     {
         var maxLength = 0
         
-        if textField.placeholder == "Enter New Budget Name"
+        if textField.placeholder == "$0.00"
         {
-            maxLength = 18
-        }
-        else if textField.placeholder == "$0.00"
-        {
-            // Insert function that prevents a number from going past 2 decimal places
             maxLength = 10
         }
         else if textField.placeholder == "What's it for?"
         {
-            maxLength = 25
+            maxLength = 22
         }
         
         let currentString = textField.text as NSString?
         let newString = currentString?.replacingCharacters(in: range, with: string)
-        return newString!.characters.count <= maxLength
+        let isValidLength = newString!.characters.count <= maxLength
+        
+        if textField.placeholder == "$0.00"
+        {
+            // Max 2 decimal places for input using regex :D
+            let newText = (textField.text! as NSString).replacingCharacters(in: range, with: string)
+            let regex = try! NSRegularExpression(pattern: "\\..{3,}", options: [])
+            let matches = regex.matches(in: newText, options:[], range:NSMakeRange(0, newText.characters.count))
+            guard matches.count == 0 else { return false }
+            
+            switch string
+            {
+            case "0","1","2","3","4","5","6","7","8","9":
+                if isValidLength == true
+                {
+                    return true
+                }
+            case ".":
+                let array = textField.text?.characters.map { String($0) }
+                var decimalCount = 0
+                for character in array!
+                {
+                    if character == "."
+                    {
+                        decimalCount += 1
+                    }
+                }
+                if decimalCount == 1
+                {
+                    return false
+                }
+                else if isValidLength == true
+                {
+                    return true
+                }
+            default:
+                let array = string.characters.map { String($0) }
+                if array.count == 0
+                {
+                    return true
+                }
+                return false
+            }
+        }
+        
+        // For any other text field, return true if the length is valid
+        if isValidLength == true
+        {
+            return true
+        }
+        else
+        {
+            return false
+        }
     }
     
     // This function gets called when the Deposit button is pressed (button does not exist anymore)

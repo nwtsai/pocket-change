@@ -250,7 +250,7 @@ class HistoryViewController: UIViewController, UITableViewDataSource, UITableVie
         }
         
         // Change the color of the button
-        undo.backgroundColor = BudgetVariables.hexStringToUIColor(hex: "B2010C")
+        undo.backgroundColor = BudgetVariables.hexStringToUIColor(hex: "BBB7B0")
         
         return [undo]
     }

@@ -9,15 +9,13 @@
 import UIKit
 import CoreData
 
-extension String {
-    var html2AttStr: NSAttributedString? {
-        guard let data = data(using: .utf8) else { return nil }
-        do {
-            return try NSAttributedString(data: data, options: [NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType, NSCharacterEncodingDocumentAttribute: String.Encoding.utf8.rawValue], documentAttributes: nil)
-        } catch let error as NSError {
-            print(error.code)
-            return nil
-        }
+// Rounds doubles to a certain number of decimal places
+extension Double
+{
+    func roundTo(places:Int) -> Double
+    {
+        let divisor = pow(10.0, Double(places))
+        return (self * divisor).rounded() / divisor
     }
 }
 
