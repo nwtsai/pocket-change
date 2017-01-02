@@ -140,14 +140,33 @@ class BudgetVariables: UIViewController
         let cal = Calendar.current
         let today = cal.startOfDay(for: Date())
         var aWeekAgo = cal.date(byAdding: .day, value: -6, to: today)
+        
         var amountSpentArray = [Double]()
         
         for _ in 1 ... 7
         {
+            // Creating the day component
             let day = cal.component(.day, from: aWeekAgo!)
+            var dayString = String(day)
+            if dayString.characters.count == 1
+            {
+                dayString = "0" + dayString
+            }
+            
+            // Creating the month component
             let month = cal.component(.month, from: aWeekAgo!)
+            var monthString = String(month)
+            if monthString.characters.count == 1
+            {
+                monthString = "0" + monthString
+            }
+            
+            // Creating the year component
             let year = cal.component(.year, from: aWeekAgo!)
-            let key = String(month) + "/" + String(day) + "/" + String(year)
+            let yearString = String(year)
+            
+            // The final key used to look up the amount spent on a certain day
+            let key = monthString + "/" + dayString + "/" + yearString
             
             // If the amount spent is empty, set it to 0.0 for that day
             if BudgetVariables.budgetArray[BudgetVariables.currentIndex].amountSpentOnDate[key] == nil
