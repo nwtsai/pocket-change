@@ -145,10 +145,47 @@ class HistoryViewController: UIViewController, UITableViewDataSource, UITableVie
             myCell.textLabel?.text = BudgetVariables.budgetArray[BudgetVariables.currentIndex].historyArray[indexPath.row]
             
             // The description string holds MM/dd/YYYY at the end of each description. Display everything but the year in the table
-            let descripStr = BudgetVariables.budgetArray[BudgetVariables.currentIndex].descriptionArray[indexPath.row]
-            let descripIndex = descripStr.index(descripStr.endIndex, offsetBy: -5)
-            let detailText = descripStr.substring(to: descripIndex)
-            myCell.detailTextLabel?.text = detailText
+            let historyStr = BudgetVariables.budgetArray[BudgetVariables.currentIndex].descriptionArray[indexPath.row]
+            let descripIndex = historyStr.index(historyStr.endIndex, offsetBy: -14) // -5
+            let dateIndex = historyStr.index(historyStr.endIndex, offsetBy: -10)
+            
+            // Format dateText from descriptionText to become "dd/MM"
+            let detailText = historyStr.substring(to: descripIndex)
+            var dateText = historyStr.substring(from: dateIndex)
+            let ddMMIndex = dateText.index(dateText.endIndex, offsetBy: -5)
+            dateText = dateText.substring(to: ddMMIndex)
+            
+            // If the first character is a zero, replace it with empty space
+            let firstLeadingZeroIndex = dateText.index(dateText.startIndex, offsetBy: 0)
+            if dateText[firstLeadingZeroIndex] == "0"
+            {
+                dateText.remove(at: firstLeadingZeroIndex)
+                dateText = "   " + dateText
+            }
+            
+            // Find the index of the character immediately after "/"
+            var count = 0
+            for char in dateText.characters
+            {
+                if char == "/"
+                {
+                    break
+                }
+                count += 1
+            }
+            let firstSlashIndex = dateText.index(dateText.startIndex, offsetBy: count)
+            let secondLeadingZeroIndex = dateText.index(after: firstSlashIndex)
+            
+            // If the character immediately after "/" is a 0, replace it with empty space
+            if dateText[secondLeadingZeroIndex] == "0"
+            {
+                dateText.remove(at: secondLeadingZeroIndex)
+                dateText = "   " + dateText
+            }
+            
+            // Display the description
+            let displayText = detailText + "     " + dateText
+            myCell.detailTextLabel?.text = displayText
         }
         
         return myCell
