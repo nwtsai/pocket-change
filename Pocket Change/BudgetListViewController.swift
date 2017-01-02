@@ -259,29 +259,58 @@ class BudgetListViewController: UIViewController, UITableViewDataSource, UITable
     // Functions that conform to UITableViewDataSource
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
     {
-        return BudgetVariables.budgetArray.count
+        // represents the number of rows the UITableView should have
+        return BudgetVariables.budgetArray.count + 1
     }
     
     // Set the title and description of each corresponding cell
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
     {
         let myCell:UITableViewCell = self.budgetTable.dequeueReusableCell(withIdentifier: "clickableCell", for: indexPath)
-        myCell.textLabel?.text = BudgetVariables.budgetArray[indexPath.row].name
-        let currentBalance = (BudgetVariables.budgetArray[indexPath.row].balance).roundTo(places: 2)
-        let currentBalanceString = BudgetVariables.numFormat(myNum: currentBalance)
-        let totalBudgetAmt = lround((BudgetVariables.budgetArray[indexPath.row].totalBudgetAmount))
-        let totalBudgetAmtString = String(totalBudgetAmt)
-        myCell.detailTextLabel?.text = currentBalanceString + " / $" + totalBudgetAmtString
+        let count = BudgetVariables.budgetArray.count
+        
+        // If it's the last cell, customize the message
+        if indexPath.row == count
+        {
+            myCell.textLabel?.textColor = UIColor.lightGray
+            myCell.detailTextLabel?.textColor = UIColor.lightGray
+            myCell.textLabel?.text = "Budget Name"
+            myCell.detailTextLabel?.text = "Balance / Budget"
+        }
+        else
+        {
+            myCell.textLabel?.text = BudgetVariables.budgetArray[indexPath.row].name
+            let currentBalance = (BudgetVariables.budgetArray[indexPath.row].balance).roundTo(places: 2)
+            let currentBalanceString = BudgetVariables.numFormat(myNum: currentBalance)
+            let totalBudgetAmt = lround((BudgetVariables.budgetArray[indexPath.row].totalBudgetAmount))
+            let totalBudgetAmtString = String(totalBudgetAmt)
+            myCell.detailTextLabel?.text = currentBalanceString + " / $" + totalBudgetAmtString
+        }
         
         return myCell
+    }
+    
+    // User cannot delete the last cell which contains information
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool
+    {
+        // If it is the last cell which contains information, user cannot delete this cell
+        if indexPath.row == BudgetVariables.budgetArray.count
+        {
+            return false
+        }
+        
+        return true
     }
     
     // When a cell is selected segue to corresponding view controller
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath)
     {
-        // Set current index to row # of cell pressed, then segue
-        BudgetVariables.currentIndex = indexPath.row
-        performSegue(withIdentifier: "viewBudget", sender: nil)
+        // If it is not the last row, set current index to row # of cell pressed, then segue
+        if indexPath.row != BudgetVariables.budgetArray.count
+        {
+            BudgetVariables.currentIndex = indexPath.row
+            performSegue(withIdentifier: "viewBudget", sender: nil)
+        }
     }
     
     // Generates an array of custom buttons that appear after the swipe to the left
