@@ -146,19 +146,23 @@ class HistoryViewController: UIViewController, UITableViewDataSource, UITableVie
             
             // The description string holds MM/dd/YYYY at the end of each description. Display everything but the year in the table
             let historyStr = BudgetVariables.budgetArray[BudgetVariables.currentIndex].descriptionArray[indexPath.row]
-            let descripIndex = historyStr.index(historyStr.endIndex, offsetBy: -14) // -5
+            let detailIndex = historyStr.index(historyStr.endIndex, offsetBy: -14) // -5
             let dateIndex = historyStr.index(historyStr.endIndex, offsetBy: -10)
             
-            // Format dateText from descriptionText to become "dd/MM"
-            let detailText = historyStr.substring(to: descripIndex)
+            // Detail text is whatever user inputs
+            let detailText = historyStr.substring(to: detailIndex)
+            
+            // Date text becomes MM/dd/YYYY
             var dateText = historyStr.substring(from: dateIndex)
+            
+            // Date text becomes MM/dd (get rid of the year)
             let ddMMIndex = dateText.index(dateText.endIndex, offsetBy: -5)
             dateText = dateText.substring(to: ddMMIndex)
             
             // Keep track of the number of leading zeros removed
             var numOfZerosRemoved = 0
             
-            // If the first character is a zero, replace it with empty space
+            // If the first character is a zero, remove it
             let firstLeadingZeroIndex = dateText.index(dateText.startIndex, offsetBy: 0)
             if dateText[firstLeadingZeroIndex] == "0"
             {
@@ -179,7 +183,7 @@ class HistoryViewController: UIViewController, UITableViewDataSource, UITableVie
             let firstSlashIndex = dateText.index(dateText.startIndex, offsetBy: count)
             let secondLeadingZeroIndex = dateText.index(after: firstSlashIndex)
             
-            // If the character immediately after "/" is a 0, replace it with empty space
+            // If the character immediately after "/" is a 0, remove it
             if dateText[secondLeadingZeroIndex] == "0"
             {
                 dateText.remove(at: secondLeadingZeroIndex)

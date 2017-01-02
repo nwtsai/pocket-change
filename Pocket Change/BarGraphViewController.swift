@@ -72,7 +72,7 @@ class BarGraphViewController: UIViewController
         if days.isEmpty == false && amountSpent.isEmpty == false
         {
             // cameraButton.isEnabled = true
-            setBarGraph(dataPoints: days, values: amountSpent)
+            setBarGraph(values: amountSpent)
         }
         else
         {
@@ -81,14 +81,14 @@ class BarGraphViewController: UIViewController
     }
     
     // Set Bar Graph
-    func setBarGraph(dataPoints: [String], values: [Double])
+    func setBarGraph(values: [Double])
     {
         let barChartFormatter:BarChartFormatter = BarChartFormatter()
         let xAxis:XAxis = XAxis()
         
         var dataEntries: [BarChartDataEntry] = []
         
-        for i in 0..<dataPoints.count
+        for i in 0..<values.count
         {
             let dataEntry = BarChartDataEntry(x: Double(i), y: values[i])
             dataEntries.append(dataEntry)
