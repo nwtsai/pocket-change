@@ -332,4 +332,82 @@ class BudgetVariables: UIViewController
         }
         return true
     }
+    
+    // Get full date from description text
+    class func getDateFromDescription(descripStr: String) -> String
+    {
+        let dateIndex = descripStr.index(descripStr.endIndex, offsetBy: -10)
+        
+        // Date text becomes MM/dd/YYYY
+        return descripStr.substring(from: dateIndex)
+    }
+    
+    // Creates the description part of the description array
+    class func createDetailText(descripStr: String, indexPath: IndexPath) -> String
+    {
+        // The description string holds MM/dd/YYYY at the end of each description. Display everything but the year in the table
+        let detailIndex = descripStr.index(descripStr.endIndex, offsetBy: -14) // -5
+        
+        // Detail text is whatever user inputs
+        return descripStr.substring(to: detailIndex)
+    }
+    
+    // Creates the date part of the description array
+    class func createDateText(descripStr: String, indexPath: IndexPath) -> String
+    {
+        // Get date with format: MM/dd/YYYY
+        var dateText = getDateFromDescription(descripStr: descripStr)
+        
+        // Date text becomes MM/dd (get rid of the year)
+        let ddMMIndex = dateText.index(dateText.endIndex, offsetBy: -5)
+        dateText = dateText.substring(to: ddMMIndex)
+        
+        // Keep track of the number of leading zeros removed
+        var numOfZerosRemoved = 0
+        
+        // If the first character is a zero, remove it
+        let firstLeadingZeroIndex = dateText.index(dateText.startIndex, offsetBy: 0)
+        if dateText[firstLeadingZeroIndex] == "0"
+        {
+            dateText.remove(at: firstLeadingZeroIndex)
+            numOfZerosRemoved += 1
+        }
+        
+        // Find the index of the character immediately after "/"
+        var count = 0
+        for char in dateText.characters
+        {
+            if char == "/"
+            {
+                break
+            }
+            count += 1
+        }
+        let firstSlashIndex = dateText.index(dateText.startIndex, offsetBy: count)
+        let secondLeadingZeroIndex = dateText.index(after: firstSlashIndex)
+        
+        // If the character immediately after "/" is a 0, remove it
+        if dateText[secondLeadingZeroIndex] == "0"
+        {
+            dateText.remove(at: secondLeadingZeroIndex)
+            numOfZerosRemoved += 1
+        }
+        
+        var blankSpace = ""
+        
+        // Fix spacing based on number of zeros removed
+        switch numOfZerosRemoved
+        {
+        case 0:
+            blankSpace = "     "
+        case 1:
+            blankSpace = "        "
+        case 2:
+            blankSpace = "          "
+        default:
+            blankSpace = "     "
+        }
+        
+        return blankSpace + dateText
+    }
 }

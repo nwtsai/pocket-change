@@ -62,7 +62,7 @@ class BudgetListViewController: UIViewController, UITableViewDataSource, UITable
         view.endEditing(true)
     }
     
-    // Use this variable to enable and disable the Save button
+    // Use this variable to enable and disable the Confirm button
     weak var confirmButton : UIAlertAction?
     
     // Function that shows the alert pop-up
@@ -204,7 +204,7 @@ class BudgetListViewController: UIViewController, UITableViewDataSource, UITable
         }
     }
     
-    // This function disables the save button if the input amount is not valid
+    // This function disables the Confirm button if the input amount is not valid
     func inputAmountDidChange(_ textField: UITextField)
     {
         // Trim the input first
@@ -216,7 +216,7 @@ class BudgetListViewController: UIViewController, UITableViewDataSource, UITable
             // If the input is also between 0 and 1 million
             if inputAmount >= 0 && inputAmount <= 1000000
             {
-                // Save button gets enabled
+                // Confirm button gets enabled
                 self.confirmButton?.isEnabled = true
             }
             else

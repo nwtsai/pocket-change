@@ -9,7 +9,7 @@
 import UIKit
 import CoreData
 
-class HistoryViewController: UIViewController, UITableViewDataSource, UITableViewDelegate
+class HistoryViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate
 {
     // Clean code
     var sharedDelegate: AppDelegate!
@@ -124,7 +124,7 @@ class HistoryViewController: UIViewController, UITableViewDataSource, UITableVie
         if indexPath.row == count
         {
             myCell.textLabel?.textColor = UIColor.lightGray
-            myCell.textLabel?.text = "Tip: Swipe to the left to undo"
+            myCell.textLabel?.text = "Tip: Swipe left to undo"
             myCell.detailTextLabel?.text = ""
         }
         else
@@ -144,69 +144,17 @@ class HistoryViewController: UIViewController, UITableViewDataSource, UITableVie
             
             myCell.textLabel?.text = BudgetVariables.budgetArray[BudgetVariables.currentIndex].historyArray[indexPath.row]
             
-            // The description string holds MM/dd/YYYY at the end of each description. Display everything but the year in the table
-            let historyStr = BudgetVariables.budgetArray[BudgetVariables.currentIndex].descriptionArray[indexPath.row]
-            let detailIndex = historyStr.index(historyStr.endIndex, offsetBy: -14) // -5
-            let dateIndex = historyStr.index(historyStr.endIndex, offsetBy: -10)
+            // String of the description
+            let descripStr = BudgetVariables.budgetArray[BudgetVariables.currentIndex].descriptionArray[indexPath.row]
             
-            // Detail text is whatever user inputs
-            let detailText = historyStr.substring(to: detailIndex)
+            // Create Detail Text
+            let detailText = BudgetVariables.createDetailText(descripStr: descripStr, indexPath: indexPath)
             
-            // Date text becomes MM/dd/YYYY
-            var dateText = historyStr.substring(from: dateIndex)
-            
-            // Date text becomes MM/dd (get rid of the year)
-            let ddMMIndex = dateText.index(dateText.endIndex, offsetBy: -5)
-            dateText = dateText.substring(to: ddMMIndex)
-            
-            // Keep track of the number of leading zeros removed
-            var numOfZerosRemoved = 0
-            
-            // If the first character is a zero, remove it
-            let firstLeadingZeroIndex = dateText.index(dateText.startIndex, offsetBy: 0)
-            if dateText[firstLeadingZeroIndex] == "0"
-            {
-                dateText.remove(at: firstLeadingZeroIndex)
-                numOfZerosRemoved += 1
-            }
-            
-            // Find the index of the character immediately after "/"
-            var count = 0
-            for char in dateText.characters
-            {
-                if char == "/"
-                {
-                    break
-                }
-                count += 1
-            }
-            let firstSlashIndex = dateText.index(dateText.startIndex, offsetBy: count)
-            let secondLeadingZeroIndex = dateText.index(after: firstSlashIndex)
-            
-            // If the character immediately after "/" is a 0, remove it
-            if dateText[secondLeadingZeroIndex] == "0"
-            {
-                dateText.remove(at: secondLeadingZeroIndex)
-                numOfZerosRemoved += 1
-            }
-            
-            var blankSpace = ""
-            
-            // Fix spacing based on number of zeros removed
-            switch numOfZerosRemoved
-            {
-            case 0:
-                blankSpace = "     "
-            case 1:
-                blankSpace = "        "
-            case 2:
-                blankSpace = "          "
-            default:
-                blankSpace = "     "
-            }
-            
+            // Create Date Text
+            let dateText = BudgetVariables.createDateText(descripStr: descripStr, indexPath: indexPath)
+                        
             // Display text
-            let displayText = detailText + blankSpace + dateText
+            let displayText = detailText + dateText
             myCell.detailTextLabel?.text = displayText
         }
         
@@ -312,5 +260,68 @@ class HistoryViewController: UIViewController, UITableViewDataSource, UITableVie
         undo.backgroundColor = BudgetVariables.hexStringToUIColor(hex: "BBB7B0")
         
         return [undo]
+    }
+    
+    // When a cell is selected, show an alert
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath)
+    {
+        // If it is not the last row
+        if indexPath.row != BudgetVariables.budgetArray[BudgetVariables.currentIndex].historyArray.count
+        {
+            showEditDescriptionAlert(indexPath: indexPath)
+        }
+    }
+    
+    // Use this variable to enable and disable the Save button
+    weak var saveButton : UIAlertAction?
+    
+    // Shows the alert pop-up
+    func showEditDescriptionAlert(indexPath: IndexPath)
+    {
+        let alert = UIAlertController(title: "Edit Description", message: "", preferredStyle: UIAlertControllerStyle.alert)
+        alert.addTextField(configurationHandler: {(textField: UITextField) in
+            textField.placeholder = "New Description"
+            textField.delegate = self
+            textField.autocapitalizationType = .sentences
+            textField.addTarget(self, action: #selector(self.inputDescriptionDidChange(_:)), for: .editingChanged)
+        })
+        
+        let cancel = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.default, handler: { (_) -> Void in
+        })
+        
+        let save = UIAlertAction(title: "Save", style: UIAlertActionStyle.default, handler: { (_) -> Void in
+            var inputDescription = alert.textFields![0].text
+            
+            // Trim the inputName first
+            inputDescription = inputDescription?.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
+            
+            // Get and trim the old description
+            let oldDescription = BudgetVariables.budgetArray[BudgetVariables.currentIndex].descriptionArray[indexPath.row]
+            
+            // Change the current description
+            let date = BudgetVariables.getDateFromDescription(descripStr: oldDescription)
+            BudgetVariables.budgetArray[BudgetVariables.currentIndex].descriptionArray[indexPath.row] = inputDescription! + "    " + date
+            self.historyTable.reloadRows(at: [indexPath], with: .top)
+            
+            // Save and get data to coredata
+            self.sharedDelegate.saveContext()
+            BudgetVariables.getData()
+                
+            // Reload the table
+            self.historyTable.reloadData()
+        })
+        
+        alert.addAction(save)
+        alert.addAction(cancel)
+        
+        self.saveButton = save
+        save.isEnabled = true // usually false
+        self.present(alert, animated: true, completion: nil)
+    }
+    
+    // Enable save button when text changes
+    func inputDescriptionDidChange(_ textField: UITextField)
+    {
+        
     }
 }
