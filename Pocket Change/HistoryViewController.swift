@@ -155,12 +155,15 @@ class HistoryViewController: UIViewController, UITableViewDataSource, UITableVie
             let ddMMIndex = dateText.index(dateText.endIndex, offsetBy: -5)
             dateText = dateText.substring(to: ddMMIndex)
             
+            // Keep track of the number of leading zeros removed
+            var numOfZerosRemoved = 0
+            
             // If the first character is a zero, replace it with empty space
             let firstLeadingZeroIndex = dateText.index(dateText.startIndex, offsetBy: 0)
             if dateText[firstLeadingZeroIndex] == "0"
             {
                 dateText.remove(at: firstLeadingZeroIndex)
-                dateText = "   " + dateText
+                numOfZerosRemoved += 1
             }
             
             // Find the index of the character immediately after "/"
@@ -180,11 +183,26 @@ class HistoryViewController: UIViewController, UITableViewDataSource, UITableVie
             if dateText[secondLeadingZeroIndex] == "0"
             {
                 dateText.remove(at: secondLeadingZeroIndex)
-                dateText = "   " + dateText
+                numOfZerosRemoved += 1
             }
             
-            // Display the description
-            let displayText = detailText + "     " + dateText
+            var blankSpace = ""
+            
+            // Fix spacing based on number of zeros removed
+            switch numOfZerosRemoved
+            {
+            case 0:
+                blankSpace = "     "
+            case 1:
+                blankSpace = "        "
+            case 2:
+                blankSpace = "          "
+            default:
+                blankSpace = "     "
+            }
+            
+            // Display text
+            let displayText = detailText + blankSpace + dateText
             myCell.detailTextLabel?.text = displayText
         }
         
