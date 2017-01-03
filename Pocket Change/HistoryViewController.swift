@@ -124,11 +124,15 @@ class HistoryViewController: UIViewController, UITableViewDataSource, UITableVie
         if indexPath.row == count
         {
             myCell.textLabel?.textColor = UIColor.lightGray
-            myCell.textLabel?.text = "Tip: Swipe left to undo"
-            myCell.detailTextLabel?.text = ""
+            myCell.detailTextLabel?.textColor = UIColor.lightGray
+            myCell.textLabel?.text = "Swipe left to undo"
+            myCell.detailTextLabel?.text = "Tap to edit"
         }
         else
         {
+            myCell.textLabel?.textColor = UIColor.black
+            myCell.detailTextLabel?.textColor = UIColor.black
+            
             let str = BudgetVariables.budgetArray[BudgetVariables.currentIndex].historyArray[indexPath.row]
             let index = str.index(str.startIndex, offsetBy: 0)
             
@@ -268,6 +272,10 @@ class HistoryViewController: UIViewController, UITableViewDataSource, UITableVie
         // If it is not the last row
         if indexPath.row != BudgetVariables.budgetArray[BudgetVariables.currentIndex].historyArray.count
         {
+            let descripStr = BudgetVariables.budgetArray[BudgetVariables.currentIndex].descriptionArray[indexPath.row]
+            let index = descripStr.index(descripStr.endIndex, offsetBy: -14)
+            self.oldDescription = descripStr.substring(to: index)
+            
             showEditDescriptionAlert(indexPath: indexPath)
         }
     }
@@ -315,13 +323,39 @@ class HistoryViewController: UIViewController, UITableViewDataSource, UITableVie
         alert.addAction(cancel)
         
         self.saveButton = save
-        save.isEnabled = true // usually false
+        save.isEnabled = false
         self.present(alert, animated: true, completion: nil)
     }
     
-    // Enable save button when text changes
+    // Holds the old description of cell pressed
+    var oldDescription: String = ""
+    
+    // Enable save button if the description doesn't equal current description
     func inputDescriptionDidChange(_ textField: UITextField)
     {
+        let inputDescription = textField.text?.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
+        if inputDescription != self.oldDescription
+        {
+            self.saveButton?.isEnabled = true
+        }
+        else
+        {
+            self.saveButton?.isEnabled = false
+        }
+    }
+    
+    // This function limits the maximum character count for a textField
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool
+    {
+        var maxLength = 0
         
+        if textField.placeholder == "New Description"
+        {
+            maxLength = 22
+        }
+        
+        let currentString = textField.text as NSString?
+        let newString = currentString?.replacingCharacters(in: range, with: string)
+        return newString!.characters.count <= maxLength
     }
 }
