@@ -279,6 +279,8 @@ class BudgetListViewController: UIViewController, UITableViewDataSource, UITable
         }
         else
         {
+            myCell.textLabel?.textColor = UIColor.black
+            myCell.detailTextLabel?.textColor = UIColor.black
             myCell.textLabel?.text = BudgetVariables.budgetArray[indexPath.row].name
             let currentBalance = (BudgetVariables.budgetArray[indexPath.row].balance).roundTo(places: 2)
             let currentBalanceString = BudgetVariables.numFormat(myNum: currentBalance)

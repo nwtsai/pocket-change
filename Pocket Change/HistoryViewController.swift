@@ -301,7 +301,7 @@ class HistoryViewController: UIViewController, UITableViewDataSource, UITableVie
             // Change the current description
             let date = BudgetVariables.getDateFromDescription(descripStr: oldDescription)
             BudgetVariables.budgetArray[BudgetVariables.currentIndex].descriptionArray[indexPath.row] = inputDescription! + "    " + date
-            self.historyTable.reloadRows(at: [indexPath], with: .top)
+            self.historyTable.reloadRows(at: [indexPath], with: .fade)
             
             // Save and get data to coredata
             self.sharedDelegate.saveContext()
