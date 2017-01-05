@@ -127,9 +127,15 @@ class BarGraphViewController: UIViewController
         barGraphView.legend.font = UIFont.systemFont(ofSize: 13)
         barGraphView.legend.formSize = 8
         
-        if BudgetVariables.isAllZeros(array: values) == true
+        if BudgetVariables.budgetArray[BudgetVariables.currentIndex].historyArray.isEmpty == true
         {
             chartDataSet.label = "You must spend to see data"
+            chartData.setDrawValues(false)
+            barGraphView.rightAxis.drawLabelsEnabled = false
+        }
+        else if BudgetVariables.isAllZeros(array: values) == true
+        {
+            chartDataSet.label = "No spendings this week"
             chartData.setDrawValues(false)
             barGraphView.rightAxis.drawLabelsEnabled = false
         }
