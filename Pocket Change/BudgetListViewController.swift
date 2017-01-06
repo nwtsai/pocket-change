@@ -82,10 +82,10 @@ class BudgetListViewController: UIViewController, UITableViewDataSource, UITable
             textField.addTarget(self, action: #selector(self.inputAmountDidChange(_:)), for: .editingChanged)
         })
         
-        let cancel = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.default, handler: { (_) -> Void in
+        let cancel = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.cancel, handler: { (_) -> Void in
         })
         
-        let confirm = UIAlertAction(title: "Confirm", style: UIAlertActionStyle.default, handler: { (_) -> Void in
+        let create = UIAlertAction(title: "Create", style: UIAlertActionStyle.default, handler: { (_) -> Void in
             var inputName = alert.textFields![0].text
             
             // Trim the inputName first
@@ -124,11 +124,11 @@ class BudgetListViewController: UIViewController, UITableViewDataSource, UITable
             }
         })
         
-        alert.addAction(confirm)
+        alert.addAction(create)
         alert.addAction(cancel)
         
-        self.confirmButton = confirm
-        confirm.isEnabled = false
+        self.confirmButton = create
+        create.isEnabled = false
         self.present(alert, animated: true, completion: nil)
     }
     
@@ -348,7 +348,8 @@ class BudgetListViewController: UIViewController, UITableViewDataSource, UITable
         }
         
         // Change the color of the buttons
-        rename.backgroundColor = BudgetVariables.hexStringToUIColor(hex: "3498DB")
+        // rename.backgroundColor = BudgetVariables.hexStringToUIColor(hex: "3498DB")
+        rename.backgroundColor = #colorLiteral(red: 0.2392156869, green: 0.6745098233, blue: 0.9686274529, alpha: 1)
         delete.backgroundColor = BudgetVariables.hexStringToUIColor(hex: "E74C3C")
         
         return [delete, rename]

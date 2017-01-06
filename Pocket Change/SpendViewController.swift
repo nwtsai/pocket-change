@@ -89,7 +89,7 @@ class SpendViewController: UIViewController, UITextFieldDelegate
     func showEditBalanceAlert()
     {
         let budgetName = BudgetVariables.budgetArray[BudgetVariables.currentIndex].name
-        let editAlert = UIAlertController(title: "Add to \"" + budgetName! + "\"", message: "", preferredStyle: UIAlertControllerStyle.alert)
+        let editAlert = UIAlertController(title: "Add to " + budgetName!, message: "", preferredStyle: UIAlertControllerStyle.alert)
         
         editAlert.addTextField(configurationHandler: {(textField: UITextField) in
             textField.placeholder = "$0.00"
@@ -98,10 +98,10 @@ class SpendViewController: UIViewController, UITextFieldDelegate
             textField.addTarget(self, action: #selector(self.newAmountTextFieldDidChange(_:)), for: .editingChanged)
         })
         
-        let cancel = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.default, handler: { (_) -> Void in
+        let cancel = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.cancel, handler: { (_) -> Void in
         })
         
-        let save = UIAlertAction(title: "Save", style: UIAlertActionStyle.default, handler: { (_) -> Void in
+        let add = UIAlertAction(title: "Add", style: UIAlertActionStyle.default, handler: { (_) -> Void in
             
             let date = BudgetVariables.todaysDate(format: "MM/dd/YYYY")
             
@@ -132,11 +132,11 @@ class SpendViewController: UIViewController, UITextFieldDelegate
             BudgetVariables.getData()
         })
         
-        editAlert.addAction(save)
+        editAlert.addAction(add)
         editAlert.addAction(cancel)
         
-        self.amountSaveButton = save
-        save.isEnabled = false
+        self.amountSaveButton = add
+        add.isEnabled = false
         self.present(editAlert, animated: true, completion: nil)
     }
     

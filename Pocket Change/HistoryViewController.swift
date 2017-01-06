@@ -294,7 +294,7 @@ class HistoryViewController: UIViewController, UITableViewDataSource, UITableVie
             textField.addTarget(self, action: #selector(self.inputDescriptionDidChange(_:)), for: .editingChanged)
         })
         
-        let cancel = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.default, handler: { (_) -> Void in
+        let cancel = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.cancel, handler: { (_) -> Void in
         })
         
         let save = UIAlertAction(title: "Save", style: UIAlertActionStyle.default, handler: { (_) -> Void in
