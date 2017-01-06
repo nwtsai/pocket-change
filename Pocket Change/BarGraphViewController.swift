@@ -191,5 +191,6 @@ class BarGraphViewController: UIViewController
     func captureScreen()
     {
         // barGraphView.save()
+        // UIImageWriteToSavedPhotosAlbum(<#T##image: UIImage##UIImage#>, nil, nil, nil)
     }
 }

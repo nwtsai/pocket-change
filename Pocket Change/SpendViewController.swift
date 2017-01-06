@@ -155,7 +155,7 @@ class SpendViewController: UIViewController, UITextFieldDelegate
         // If the input is a number
         else if let input = (Double(trimmedInput!))?.roundTo(places: 2)
         {
-            if input + balance <= 1000000
+            if input + balance <= 1000000 && input != 0.00
             {
                 self.amountSaveButton?.isEnabled = true
             }
