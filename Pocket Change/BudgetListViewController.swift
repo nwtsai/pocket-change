@@ -321,7 +321,7 @@ class BudgetListViewController: UIViewController, UITableViewDataSource, UITable
         let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
         
         // Title is the text of the button
-        let delete = UITableViewRowAction(style: .normal, title: "Delete")
+        let delete = UITableViewRowAction(style: .normal, title: " Delete  ")
         { (action, indexPath) in
             let budget = BudgetVariables.budgetArray[indexPath.row]
             context.delete(budget)
