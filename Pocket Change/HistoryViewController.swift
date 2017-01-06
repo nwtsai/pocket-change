@@ -205,7 +205,7 @@ class HistoryViewController: UIViewController, UITableViewDataSource, UITableVie
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]?
     {
         // Title is the text of the button
-        let undo = UITableViewRowAction(style: .normal, title: "Undo")
+        let undo = UITableViewRowAction(style: .normal, title: " Undo")
         { (action, indexPath) in
             
             // Undo item at indexPath
@@ -221,11 +221,11 @@ class HistoryViewController: UIViewController, UITableViewDataSource, UITableVie
             let index2 = historyStr.index(historyStr.startIndex, offsetBy: 3) // Index spans the amount spent in that transaction
             let historyValue = Double(historyStr.substring(from: index2))
             
-            // If this specific piece of history logged a spend action, the total amount spent should decrease after deletion
+            // If this specific piece of history logged a "Spend" action, the total amount spent should decrease after deletion
             if historyStr[index1] == "–"
             {
-                let newDateAmount = BudgetVariables.budgetArray[BudgetVariables.currentIndex].amountSpentOnDate[date]! - historyValue!
-                BudgetVariables.budgetArray[BudgetVariables.currentIndex].amountSpentOnDate[date] = newDateAmount
+                let newAmtSpentOnDate = BudgetVariables.budgetArray[BudgetVariables.currentIndex].amountSpentOnDate[date]! - historyValue!
+                BudgetVariables.budgetArray[BudgetVariables.currentIndex].amountSpentOnDate[date] = newAmtSpentOnDate
                 let newTotalAmountSpent = BudgetVariables.budgetArray[BudgetVariables.currentIndex].totalAmountSpent - historyValue!
                 BudgetVariables.budgetArray[BudgetVariables.currentIndex].totalAmountSpent = newTotalAmountSpent
                 let newBalance = BudgetVariables.budgetArray[BudgetVariables.currentIndex].balance + historyValue!
