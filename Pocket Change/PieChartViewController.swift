@@ -45,8 +45,23 @@ class PieChartViewController: UIViewController
         
         // Grab names and amount spent to populate the Pie Chart
         let map = BudgetVariables.nameToNetAmtSpentMap()
-        let budgetNames = BudgetVariables.getBudgetNames(map: map)
+        var budgetNames = BudgetVariables.getBudgetNames(map: map)
         let amountSpent = BudgetVariables.getAmtSpent(map: map)
+        
+        // Format all names except the last name in the budgetNames array
+        if budgetNames.count >= 2
+        {
+            for i in 0..<budgetNames.count - 1
+            {
+                budgetNames[i] = " " + budgetNames[i] + "    "
+            }
+        }
+        
+        // Format the last name in the budgetNames array
+        if budgetNames.isEmpty == false
+        {
+            budgetNames[budgetNames.count - 1] = " " + budgetNames[budgetNames.count - 1]
+        }
         
         // Set the no data text message
         if BudgetVariables.budgetArray.isEmpty == true

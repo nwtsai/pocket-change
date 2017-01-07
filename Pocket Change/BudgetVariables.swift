@@ -226,15 +226,6 @@ class BudgetVariables: UIViewController
             keys = first4
         }
         
-        // Add spacing between budget names in pie chart legend
-        if keys.count >= 2
-        {
-            for i in 0..<keys.count - 1
-            {
-                keys[i] = " " + keys[i] + "    "
-            }
-        }
-        
         return keys
     }
     
