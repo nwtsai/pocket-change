@@ -342,7 +342,7 @@ class BudgetListViewController: UIViewController, UITableViewDataSource, UITable
         }
         
         // Title is the text of the button
-        let rename = UITableViewRowAction(style: .normal, title: "Rename")
+        let rename = UITableViewRowAction(style: .normal, title: " Rename")
         { (action, indexPath) in
             self.showEditNameAlert(indexPath: indexPath)
         }

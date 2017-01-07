@@ -205,7 +205,7 @@ class HistoryViewController: UIViewController, UITableViewDataSource, UITableVie
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]?
     {
         // Title is the text of the button
-        let undo = UITableViewRowAction(style: .normal, title: " Undo")
+        let undo = UITableViewRowAction(style: .normal, title: " Undo  ")
         { (action, indexPath) in
             
             // Undo item at indexPath
