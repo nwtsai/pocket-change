@@ -342,10 +342,10 @@ class BudgetVariables: UIViewController
         return descripStr.substring(from: dateIndex)
     }
     
-    // Creates the description part of the description array
-    class func createDetailText(descripStr: String, indexPath: IndexPath) -> String
+    // Creates the detail part of the description array
+    class func getDetailFromDescription(descripStr: String) -> String
     {
-        // The description string holds MM/dd/YYYY at the end of each description. Display everything but the year in the table
+        // Grab just the detail part of the description
         let detailIndex = descripStr.index(descripStr.endIndex, offsetBy: -14) // -5
         
         // Detail text is whatever user inputs
@@ -353,7 +353,7 @@ class BudgetVariables: UIViewController
     }
     
     // Creates the date part of the description array
-    class func createDateText(descripStr: String, indexPath: IndexPath) -> String
+    class func createDateText(descripStr: String) -> String
     {
         // Get date with format: MM/dd/YYYY
         var dateText = getDateFromDescription(descripStr: descripStr)

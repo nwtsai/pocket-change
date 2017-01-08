@@ -141,7 +141,7 @@ class BudgetListViewController: UIViewController, UITableViewDataSource, UITable
         {
             maxLength = 10
         }
-        else if textField.placeholder == "Budget Name (Optional)" || textField.placeholder == "Enter New Budget Name"
+        else if textField.placeholder == "Budget Name (Optional)" || textField.placeholder == "New Name"
         {
             maxLength = 18
         }
@@ -364,7 +364,11 @@ class BudgetListViewController: UIViewController, UITableViewDataSource, UITable
         let editAlert = UIAlertController(title: "Edit Budget Name", message: "", preferredStyle: UIAlertControllerStyle.alert)
         
         editAlert.addTextField(configurationHandler: {(textField: UITextField) in
-            textField.placeholder = "Enter New Budget Name"
+            textField.placeholder = "New Name"
+            
+            // Set the initial text to be the budget name of the row selected
+            textField.text = BudgetVariables.budgetArray[indexPath.row].name
+            
             textField.delegate = self
             textField.autocapitalizationType = .words
             textField.addTarget(self, action: #selector(self.newNameTextFieldDidChange(_:)), for: .editingChanged)

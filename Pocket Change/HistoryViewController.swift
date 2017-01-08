@@ -152,10 +152,10 @@ class HistoryViewController: UIViewController, UITableViewDataSource, UITableVie
             let descripStr = BudgetVariables.budgetArray[BudgetVariables.currentIndex].descriptionArray[indexPath.row]
             
             // Create Detail Text
-            let detailText = BudgetVariables.createDetailText(descripStr: descripStr, indexPath: indexPath)
+            let detailText = BudgetVariables.getDetailFromDescription(descripStr: descripStr)
             
             // Create Date Text
-            let dateText = BudgetVariables.createDateText(descripStr: descripStr, indexPath: indexPath)
+            let dateText = BudgetVariables.createDateText(descripStr: descripStr)
                         
             // Display text
             let displayText = detailText + dateText
@@ -289,6 +289,11 @@ class HistoryViewController: UIViewController, UITableViewDataSource, UITableVie
         let alert = UIAlertController(title: "Edit Description", message: "", preferredStyle: UIAlertControllerStyle.alert)
         alert.addTextField(configurationHandler: {(textField: UITextField) in
             textField.placeholder = "New Description"
+            
+            // Grab old description and put it into the initial textfield
+            let oldDescription = BudgetVariables.budgetArray[BudgetVariables.currentIndex].descriptionArray[indexPath.row]
+            textField.text = BudgetVariables.getDetailFromDescription(descripStr: oldDescription)
+            
             textField.delegate = self
             textField.autocapitalizationType = .sentences
             textField.addTarget(self, action: #selector(self.inputDescriptionDidChange(_:)), for: .editingChanged)
@@ -303,7 +308,7 @@ class HistoryViewController: UIViewController, UITableViewDataSource, UITableVie
             // Trim the inputName first
             inputDescription = inputDescription?.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
             
-            // Get and trim the old description
+            // Get old description
             let oldDescription = BudgetVariables.budgetArray[BudgetVariables.currentIndex].descriptionArray[indexPath.row]
             
             // Change the current description
