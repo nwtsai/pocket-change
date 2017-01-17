@@ -243,53 +243,6 @@ class SpendViewController: UIViewController, UITextFieldDelegate
         }
     }
     
-    // This function gets called when the Deposit button is pressed (button does not exist anymore)
-//    @IBAction func depositButtonWasPressed(_ sender: AnyObject)
-//    {
-//        // Get current date, append to historyArray
-//        let date = BudgetVariables.todaysDate(format: "MM/dd/YYYY")
-//        
-//        // Trim input first
-//        let trimmedInput = (inputAmount.text)?.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
-//        
-//        // If the input amount is a number, round the input to two decimal places before doing further calculations
-//        if let input = (Double(trimmedInput!))?.roundTo(places: 2)
-//        {
-//            BudgetVariables.budgetArray[BudgetVariables.currentIndex].balance += input
-//            totalBalance.text = BudgetVariables.numFormat(myNum: BudgetVariables.budgetArray[BudgetVariables.currentIndex].balance)
-//            BudgetVariables.budgetArray[BudgetVariables.currentIndex].historyArray.append("+ $" + String(format: "%.2f", input))
-//            
-//            // Trim description text before appending
-//            let description = (descriptionText.text)?.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
-//            BudgetVariables.budgetArray[BudgetVariables.currentIndex].descriptionArray.append(description! + "    " + date)
-//            
-//            // Log the amount deposited for this specific budget on this day
-//            BudgetVariables.logTodaysSpendings(num: input * -1)
-//            
-//            // Log the total amount spent for this specific budget
-//            BudgetVariables.budgetArray[BudgetVariables.currentIndex].netTotalAmountSpent -= input
-//            
-//            if BudgetVariables.budgetArray[BudgetVariables.currentIndex].balance - input >= 0
-//            {
-//                withdrawButton.isEnabled = true
-//            }
-//            
-//            if BudgetVariables.budgetArray[BudgetVariables.currentIndex].balance + input > 1000000
-//            {
-//                depositButton.isEnabled = false
-//            }
-//        }
-//        else
-//        {
-//            // Our amountEnteredChanged should take into account all non-Number cases and 
-//            // disable this button before it can be pressed
-//            totalBalance.text = "If this message is seen check func amountEnteredChanged"
-//        }
-//        
-//        self.sharedDelegate.saveContext()
-//        BudgetVariables.getData()
-//    }
-    
     // This function gets called when the Spend button is pressed
     @IBAction func spendButtonPressed(_ sender: Any)
     {
