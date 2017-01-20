@@ -17,7 +17,6 @@ class PieChartViewController: UIViewController
     var sharedDelegate: AppDelegate!
 
     // IB Outlets
-    @IBOutlet weak var cameraButton: UIBarButtonItem!
     @IBOutlet var pieChartView: PieChartView!
     
     override func viewDidLoad()
@@ -30,8 +29,6 @@ class PieChartViewController: UIViewController
         
         // Set the page title
         self.navigationItem.title = "π"
-        
-        cameraButton.isEnabled = false
     }
     
     // Load the graph before view appears. We do this here because data may change
@@ -77,13 +74,8 @@ class PieChartViewController: UIViewController
         {
             if BudgetVariables.isAllZeros(array: amountSpent) == false
             {
-                // cameraButton.isEnabled = true
                 setPieGraph(names: budgetNames, values: amountSpent)
             }
-        }
-        else
-        {
-            cameraButton.isEnabled = false
         }
     }
 
@@ -248,17 +240,5 @@ class PieChartViewController: UIViewController
         pieChartData.setValueTextColor(UIColor.black)
         
         pieChartView.animate(xAxisDuration: 1.5, yAxisDuration: 1.5)
-    }
-    
-    // Takes a screenshot of the pie chart
-    @IBAction func cameraButtonWasPressed(_ sender: AnyObject)
-    {
-        captureScreen()
-    }
-    
-    // Waiting for the Charts Library to be updated
-    func captureScreen()
-    {
-        // pieChartView.save()
     }
 }

@@ -30,7 +30,6 @@ class BarGraphViewController: UIViewController
     var sharedDelegate: AppDelegate!
 
     // IB Outlets
-    @IBOutlet weak var cameraButton: UIBarButtonItem!
     @IBOutlet var barGraphView: BarChartView!
     
     // Days Array
@@ -47,8 +46,6 @@ class BarGraphViewController: UIViewController
         
         // If there is no data
         barGraphView.noDataText = "You must have at least one transaction."
-        
-        cameraButton.isEnabled = false
     }
     
     // Load the graph before view appears. We do this here because data may change
@@ -71,12 +68,7 @@ class BarGraphViewController: UIViewController
         
         if days.isEmpty == false && amountSpent.isEmpty == false
         {
-            // cameraButton.isEnabled = true
             setBarGraph(values: amountSpent)
-        }
-        else
-        {
-            cameraButton.isEnabled = false
         }
     }
     
@@ -179,18 +171,5 @@ class BarGraphViewController: UIViewController
         
         // Animate the chart
         barGraphView.animate(xAxisDuration: 0.0, yAxisDuration: 2.0)
-    }
-    
-    // Takes a screenshot of the bar graph
-    @IBAction func cameraButtonWasPressed(_ sender: AnyObject)
-    {
-        captureScreen()
-    }
-    
-    // Waiting for the Charts Library to be updated
-    func captureScreen()
-    {
-        // barGraphView.save()
-        // UIImageWriteToSavedPhotosAlbum(<#T##image: UIImage##UIImage#>, nil, nil, nil)
     }
 }

@@ -305,17 +305,9 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
-                    <navigationItem key="navigationItem" id="Q3D-0g-plU">
-                        <barButtonItem key="rightBarButtonItem" systemItem="camera" id="iDK-Jx-Ghv">
-                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            <connections>
-                                <action selector="cameraButtonWasPressed:" destination="GDo-YR-dDG" id="nQb-hv-Wm0"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" id="Q3D-0g-plU"/>
                     <connections>
                         <outlet property="barGraphView" destination="B48-NJ-BQR" id="L4t-Ix-FkX"/>
-                        <outlet property="cameraButton" destination="iDK-Jx-Ghv" id="cIo-9K-2gT"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6K8-ea-Mj3" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -356,16 +348,8 @@
                         </constraints>
                     </view>
                     <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
-                    <navigationItem key="navigationItem" id="I3Y-yD-oGX">
-                        <barButtonItem key="rightBarButtonItem" systemItem="camera" id="wxz-mb-FPA">
-                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            <connections>
-                                <action selector="cameraButtonWasPressed:" destination="MoQ-Ps-lSU" id="Daj-Iy-a3X"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" id="I3Y-yD-oGX"/>
                     <connections>
-                        <outlet property="cameraButton" destination="wxz-mb-FPA" id="Ly0-Zu-aKE"/>
                         <outlet property="pieChartView" destination="3oj-VF-CUA" id="0oa-eX-iJ2"/>
                     </connections>
                 </viewController>

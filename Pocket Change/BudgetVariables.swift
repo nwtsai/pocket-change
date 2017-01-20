@@ -346,7 +346,7 @@ class BudgetVariables: UIViewController
     class func getDetailFromDescription(descripStr: String) -> String
     {
         // Grab just the detail part of the description
-        let detailIndex = descripStr.index(descripStr.endIndex, offsetBy: -14) // -5
+        let detailIndex = descripStr.index(descripStr.endIndex, offsetBy: -14)
         
         // Detail text is whatever user inputs
         return descripStr.substring(to: detailIndex)
