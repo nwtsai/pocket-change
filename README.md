@@ -35,9 +35,9 @@ IOS App made from scratch that helps users manage their personal expenses and lo
 ‣ Defined an IBAction function that corrects button-enabling every time the user types or deletes a character <br /> 
 
 # Screenshots
-![alt tag](http://i.imgur.com/vaM9QwE.png)
-![alt tag](http://i.imgur.com/tcp8vIj.png)
-![alt tag](http://i.imgur.com/reb1viQ.png)
+![alt tag](http://i.imgur.com/j36wkBa.png)
+![alt tag](http://i.imgur.com/lmsqSxB.png)
+![alt tag](http://i.imgur.com/dwc03HV.png)
 ![alt tag](http://i.imgur.com/VC6zsMb.png)
 ![alt tag](http://i.imgur.com/jmsbQ1P.png)
 ![alt tag](http://i.imgur.com/p8negKf.png)
