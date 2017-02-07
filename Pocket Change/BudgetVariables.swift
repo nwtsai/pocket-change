@@ -115,38 +115,49 @@ class BudgetVariables: UIViewController
     }
     
     // Grab the past 7 days into a String array
-    class func pastSevenDays() -> [String]
+    class func pastInterval(interval: String) -> [String]
     {
+        var size = 7;
+        if (interval == "Month")
+        {
+            size = 31;
+        }
         let cal = Calendar.current
         let today = cal.startOfDay(for: Date())
-        var sevenDaysAgo = cal.date(byAdding: .day, value: -6, to: today)
+        var dayIndex = cal.date(byAdding: .day, value: ((size - 1) * -1), to: today)
         var days = [String]()
         
-        for _ in 1 ... 7
+        for _ in 1 ... size
         {
-            let day = cal.component(.day, from: sevenDaysAgo!)
-            let month = cal.component(.month, from: sevenDaysAgo!)
+            let day = cal.component(.day, from: dayIndex!)
+            let month = cal.component(.month, from: dayIndex!)
             let stringDate = String(month) + "/" + String(day)
             days.append(stringDate)
-            sevenDaysAgo = cal.date(byAdding: .day, value: 1, to: sevenDaysAgo!)!
+            dayIndex = cal.date(byAdding: .day, value: 1, to: dayIndex!)!
         }
         
         return days
     }
     
     // Grab amount spent for the past 7 days into a Double array
-    class func amountSpentInThePastWeek() -> [Double]
+    class func amountSpentInThePast(interval: String) -> [Double]
     {
+        var size = 7;
+        if (interval == "Month")
+        {
+            size = 31
+        }
+        
         let cal = Calendar.current
         let today = cal.startOfDay(for: Date())
-        var aWeekAgo = cal.date(byAdding: .day, value: -6, to: today)
+        var startingPoint = cal.date(byAdding: .day, value: (size - 1) * -1, to: today)
         
         var amountSpentArray = [Double]()
         
-        for _ in 1 ... 7
+        for _ in 1 ... size
         {
             // Creating the day component
-            let day = cal.component(.day, from: aWeekAgo!)
+            let day = cal.component(.day, from: startingPoint!)
             var dayString = String(day)
             if dayString.characters.count == 1
             {
@@ -154,7 +165,7 @@ class BudgetVariables: UIViewController
             }
             
             // Creating the month component
-            let month = cal.component(.month, from: aWeekAgo!)
+            let month = cal.component(.month, from: startingPoint!)
             var monthString = String(month)
             if monthString.characters.count == 1
             {
@@ -162,7 +173,7 @@ class BudgetVariables: UIViewController
             }
             
             // Creating the year component
-            let year = cal.component(.year, from: aWeekAgo!)
+            let year = cal.component(.year, from: startingPoint!)
             let yearString = String(year)
             
             // The final key used to look up the amount spent on a certain day
@@ -175,7 +186,7 @@ class BudgetVariables: UIViewController
             }
             
             amountSpentArray.append(BudgetVariables.budgetArray[BudgetVariables.currentIndex].amountSpentOnDate[key]!)
-            aWeekAgo = cal.date(byAdding: .day, value: 1, to: aWeekAgo!)!
+            startingPoint = cal.date(byAdding: .day, value: 1, to: startingPoint!)!
         }
         
         return amountSpentArray
