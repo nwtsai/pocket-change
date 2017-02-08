@@ -76,16 +76,39 @@ class BarGraphViewController: UIViewController
         
         // Grab amount spent for each day in the past week into a double array
         var amountSpentPerWeek = BudgetVariables.amountSpentInThePast(interval: "Week")
+        var amountSpentPerMonth = BudgetVariables.amountSpentInThePast(interval: "Month")
         
+        // Index 0 is our test case with random sample data
         if (BudgetVariables.currentIndex == 0)
         {
             amountSpentPerWeek = [20, 4.2, 6.89, 9.99, 60.80, 58.10, 35]
+            var max = 25.0
+            var min = 5.0
+            for i in 0...30
+            {
+                let randomNum = (Double(arc4random()) / 0xFFFFFFFF) * (max - min) + min
+                amountSpentPerMonth[i] = Double(randomNum)
+                if (i < 16)
+                {
+                    max += 5.0
+                    min += 1.0
+                }
+                else
+                {
+                    max -= 2.0
+                    min -= 1.0
+                }
+            }
         }
         
         // If there are actually values to display, display the graph
-        if amountSpentPerWeek.isEmpty == false
+        if (segmentedController.selectedSegmentIndex == 0)
         {
             setBarGraphWeek(values: amountSpentPerWeek)
+        }
+        else
+        {
+            setBarGraphMonth(values: amountSpentPerMonth)
         }
     }
     
@@ -529,6 +552,7 @@ class BarGraphViewController: UIViewController
         {
             var amountSpentPerMonth = BudgetVariables.amountSpentInThePast(interval: "Month")
             
+            // Index 0 is our test case with random sample data
             if (BudgetVariables.currentIndex == 0)
             {
                 var max = 25.0
