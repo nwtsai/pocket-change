@@ -24,9 +24,9 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Iyv-Ff-OpV" userLabel="Spend Button">
-                                <rect key="frame" x="145" y="253" width="84" height="28"/>
+                                <rect key="frame" x="145" y="254" width="84" height="26"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                <state key="normal" image="Spend"/>
+                                <state key="normal" image="button_spend"/>
                                 <connections>
                                     <action selector="spendButtonPressed:" destination="sds-LB-aBh" eventType="touchUpInside" id="Jg9-t0-LST"/>
                                 </connections>
@@ -60,14 +60,14 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SCB-3r-rSq" userLabel="DividerAboveButtons">
-                                <rect key="frame" x="0.0" y="202" width="375" height="1"/>
+                                <rect key="frame" x="0.0" y="203" width="375" height="1"/>
                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="1" id="Zfz-2Q-HFe"/>
                                 </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="d04-w1-rW6" userLabel="Piggy Bank Icon">
-                                <rect key="frame" x="125.5" y="373" width="125" height="125"/>
+                                <rect key="frame" x="125" y="372" width="125" height="125"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="125" id="9zf-hq-7ye"/>
                                     <constraint firstAttribute="height" constant="125" id="doT-ao-IWp"/>
@@ -75,27 +75,27 @@
                                 <state key="normal" title="Button" image="PiggyBank"/>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$00.00" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TRe-by-rFq">
-                                <rect key="frame" x="129" y="331" width="117" height="42"/>
+                                <rect key="frame" x="129" y="330" width="117" height="42"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="35"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <view hidden="YES" opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ykY-JB-tUb" userLabel="Spacer">
-                                <rect key="frame" x="16" y="473" width="343" height="150"/>
+                                <rect key="frame" x="16" y="472" width="343" height="151"/>
                             </view>
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="IyT-re-OVV">
-                                <rect key="frame" x="16" y="534.5" width="343" height="28"/>
+                                <rect key="frame" x="16" y="535" width="343" height="26"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5tw-ZV-IXc" userLabel="Daily Button">
-                                        <rect key="frame" x="0.0" y="0.0" width="171.5" height="28"/>
-                                        <state key="normal" image="Daily"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="171.5" height="26"/>
+                                        <state key="normal" image="button_history"/>
                                         <connections>
                                             <action selector="dailyButtonWasPressed:" destination="sds-LB-aBh" eventType="touchUpInside" id="O79-Id-qEl"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KOJ-SF-gm5" userLabel="Weekly Button">
-                                        <rect key="frame" x="171.5" y="0.0" width="171.5" height="28"/>
-                                        <state key="normal" image="Weekly"/>
+                                        <rect key="frame" x="171.5" y="0.0" width="171.5" height="26"/>
+                                        <state key="normal" image="button_graphs"/>
                                         <connections>
                                             <action selector="weeklyButtonWasPressed:" destination="sds-LB-aBh" eventType="touchUpInside" id="Pfx-lU-9CC"/>
                                         </connections>
@@ -306,16 +306,23 @@
                     </view>
                     <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
                     <navigationItem key="navigationItem" id="Q3D-0g-plU">
-                        <barButtonItem key="rightBarButtonItem" title="Monthly" id="N26-Sp-3VD">
+                        <nil key="title"/>
+                        <segmentedControl key="titleView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="0" id="7Gn-oP-Zkt">
+                            <rect key="frame" x="113" y="7" width="150" height="30"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <segments>
+                                <segment title="Week"/>
+                                <segment title="Month"/>
+                            </segments>
                             <connections>
-                                <action selector="timeIntervalButtonPressed:" destination="GDo-YR-dDG" id="SJ7-IZ-7VN"/>
+                                <action selector="indexChanged:" destination="GDo-YR-dDG" eventType="valueChanged" id="r0H-hJ-xkM"/>
                             </connections>
-                        </barButtonItem>
+                        </segmentedControl>
                     </navigationItem>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="barGraphView" destination="B48-NJ-BQR" id="L4t-Ix-FkX"/>
-                        <outlet property="timeIntervalButton" destination="N26-Sp-3VD" id="gTp-h6-jeb"/>
+                        <outlet property="segmentedController" destination="7Gn-oP-Zkt" id="HQ0-uK-1QX"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6K8-ea-Mj3" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -367,9 +374,9 @@
         </scene>
     </scenes>
     <resources>
-        <image name="Daily" width="84" height="28"/>
         <image name="PiggyBank" width="512" height="512"/>
-        <image name="Spend" width="84" height="28"/>
-        <image name="Weekly" width="84" height="28"/>
+        <image name="button_graphs" width="84" height="26"/>
+        <image name="button_history" width="84" height="26"/>
+        <image name="button_spend" width="84" height="26"/>
     </resources>
 </document>

@@ -44,7 +44,7 @@ class BarGraphViewController: UIViewController
 
     // IB Outlets
     @IBOutlet var barGraphView: BarChartView!
-    @IBOutlet weak var timeIntervalButton: UIBarButtonItem!
+    @IBOutlet weak var segmentedController: UISegmentedControl!
     
     // Days Array
     var days: [String]!
@@ -60,6 +60,9 @@ class BarGraphViewController: UIViewController
         
         // If there is no data
         barGraphView.noDataText = "You must have at least one transaction."
+        
+        segmentedController.setTitle("Week", forSegmentAt: 0)
+        segmentedController.setTitle("Month", forSegmentAt: 1)
     }
     
     // Load the graph before view appears. We do this here because data may change
@@ -70,12 +73,6 @@ class BarGraphViewController: UIViewController
         // Sync data
         self.sharedDelegate.saveContext()
         BudgetVariables.getData()
-        
-        // Grab the days of this past week
-        var days = BudgetVariables.pastInterval(interval: "Week")
-        
-        // Set the title to be the range of dates displayed
-        self.navigationItem.title = "Week of " + days[0] + " – " + days[6]
         
         // Grab amount spent for each day in the past week into a double array
         var amountSpentPerWeek = BudgetVariables.amountSpentInThePast(interval: "Week")
@@ -135,114 +132,114 @@ class BarGraphViewController: UIViewController
         let chartDataSet = BarChartDataSet(values: dataEntries, label: "Amount Spent Per Day")
         
         // Set the color scheme
-        var colors = ChartColorTemplates.liberty()
-        let randNum = Int(arc4random_uniform(10) + 1)
-        switch randNum
-        {
-        case 1:
-            // Pear Lemon Fizz
-            colors =
-                [
-                    BudgetVariables.hexStringToUIColor(hex: "588F27"),
-                    BudgetVariables.hexStringToUIColor(hex: "04BFBF"),
-                    BudgetVariables.hexStringToUIColor(hex: "CAFCD8"),
-                    BudgetVariables.hexStringToUIColor(hex: "A9CF54"),
-                    BudgetVariables.hexStringToUIColor(hex: "F7E967")
-            ]
-        case 2:
-            // Vintage Card
-            colors =
-                [
-                    BudgetVariables.hexStringToUIColor(hex: "5C4B51"),
-                    BudgetVariables.hexStringToUIColor(hex: "8CBEB2"),
-                    BudgetVariables.hexStringToUIColor(hex: "F2EBBF"),
-                    BudgetVariables.hexStringToUIColor(hex: "F3B562"),
-                    BudgetVariables.hexStringToUIColor(hex: "F06060")
-            ]
-        case 3:
-            // Marie Antoinette
-            colors =
-                [
-                    BudgetVariables.hexStringToUIColor(hex: "C44C51"),
-                    BudgetVariables.hexStringToUIColor(hex: "FFB6B8"),
-                    BudgetVariables.hexStringToUIColor(hex: "FFEFB6"),
-                    BudgetVariables.hexStringToUIColor(hex: "A2B5BF"),
-                    BudgetVariables.hexStringToUIColor(hex: "5F8CA3")
-            ]
-        case 4:
-            // Autumn Berries
-            colors =
-                [
-                    BudgetVariables.hexStringToUIColor(hex: "588C7E"),
-                    BudgetVariables.hexStringToUIColor(hex: "F2E394"),
-                    BudgetVariables.hexStringToUIColor(hex: "F2AE72"),
-                    BudgetVariables.hexStringToUIColor(hex: "D96459"),
-                    BudgetVariables.hexStringToUIColor(hex: "8C4646")
-            ]
-        case 5:
-            // Appalachian Spring
-            colors =
-                [
-                    BudgetVariables.hexStringToUIColor(hex: "C24704"),
-                    BudgetVariables.hexStringToUIColor(hex: "D9CC3C"),
-                    BudgetVariables.hexStringToUIColor(hex: "FFEB79"),
-                    BudgetVariables.hexStringToUIColor(hex: "A0E0A9"),
-                    BudgetVariables.hexStringToUIColor(hex: "00ADA7")
-            ]
-        case 6:
-            // Cultural Element
-            colors =
-                [
-                    BudgetVariables.hexStringToUIColor(hex: "0067A6"),
-                    BudgetVariables.hexStringToUIColor(hex: "00ABD8"),
-                    BudgetVariables.hexStringToUIColor(hex: "008972"),
-                    BudgetVariables.hexStringToUIColor(hex: "EFC028"),
-                    BudgetVariables.hexStringToUIColor(hex: "F2572D")
-            ]
-        case 7:
-            // Aviator
-            colors =
-                [
-                    BudgetVariables.hexStringToUIColor(hex: "6A7059"),
-                    BudgetVariables.hexStringToUIColor(hex: "FDEEA7"),
-                    BudgetVariables.hexStringToUIColor(hex: "9BCC93"),
-                    BudgetVariables.hexStringToUIColor(hex: "1A9481"),
-                    BudgetVariables.hexStringToUIColor(hex: "003D5C")
-            ]
-        case 8:
-            // Firenze
-            colors =
-                [
-                    BudgetVariables.hexStringToUIColor(hex: "468966"),
-                    BudgetVariables.hexStringToUIColor(hex: "FFF0A5"),
-                    BudgetVariables.hexStringToUIColor(hex: "FFB03B"),
-                    BudgetVariables.hexStringToUIColor(hex: "B64926"),
-                    BudgetVariables.hexStringToUIColor(hex: "8E2800")
-            ]
-        case 9:
-            // Phaedra
-            colors =
-                [
-                    BudgetVariables.hexStringToUIColor(hex: "FF6138"),
-                    BudgetVariables.hexStringToUIColor(hex: "FFFF9D"),
-                    BudgetVariables.hexStringToUIColor(hex: "BEEB9F"),
-                    BudgetVariables.hexStringToUIColor(hex: "79BD8F"),
-                    BudgetVariables.hexStringToUIColor(hex: "00A388")
-            ]
-        case 10:
-            // Ocean Sunset
-            colors =
-                [
-                    BudgetVariables.hexStringToUIColor(hex: "F54F29"),
-                    BudgetVariables.hexStringToUIColor(hex: "FF974F"),
-                    BudgetVariables.hexStringToUIColor(hex: "FFD393"),
-                    BudgetVariables.hexStringToUIColor(hex: "9C9B7A"),
-                    BudgetVariables.hexStringToUIColor(hex: "405952")
-            ]
-        default:
-            colors = ChartColorTemplates.colorful()
-            break
-        }
+        let colors = ChartColorTemplates.liberty()
+//        let randNum = Int(arc4random_uniform(10) + 1)
+//        switch randNum
+//        {
+//        case 1:
+//            // Radiant Gradient
+//            colors =
+//                [
+//                    BudgetVariables.hexStringToUIColor(hex: "DB832E"),
+//                    BudgetVariables.hexStringToUIColor(hex: "C76326"),
+//                    BudgetVariables.hexStringToUIColor(hex: "AD481F"),
+//                    BudgetVariables.hexStringToUIColor(hex: "872E1A"),
+//                    BudgetVariables.hexStringToUIColor(hex: "631C15")
+//            ]
+//        case 2:
+//            // Blue Sky
+//            colors =
+//                [
+//                    BudgetVariables.hexStringToUIColor(hex: "ADD5F7"),
+//                    BudgetVariables.hexStringToUIColor(hex: "7FB2F0"),
+//                    BudgetVariables.hexStringToUIColor(hex: "4E7AC7"),
+//                    BudgetVariables.hexStringToUIColor(hex: "35478C"),
+//                    BudgetVariables.hexStringToUIColor(hex: "16193B")
+//            ]
+//        case 3:
+//            // Purple Gradient
+//            colors =
+//                [
+//                    BudgetVariables.hexStringToUIColor(hex: "D49AFF"),
+//                    BudgetVariables.hexStringToUIColor(hex: "AA7BCC"),
+//                    BudgetVariables.hexStringToUIColor(hex: "B44CFF"),
+//                    BudgetVariables.hexStringToUIColor(hex: "873ABF"),
+//                    BudgetVariables.hexStringToUIColor(hex: "6A4D7F")
+//            ]
+//        case 4:
+//            // Saras Greys
+//            colors =
+//                [
+//                    BudgetVariables.hexStringToUIColor(hex: "A3ADC2"),
+//                    BudgetVariables.hexStringToUIColor(hex: "8F99AB"),
+//                    BudgetVariables.hexStringToUIColor(hex: "474C55"),
+//                    BudgetVariables.hexStringToUIColor(hex: "3D4148"),
+//                    BudgetVariables.hexStringToUIColor(hex: "272A2F")
+//            ]
+//        case 5:
+//            // Teal Gradient
+//            colors =
+//                [
+//                    BudgetVariables.hexStringToUIColor(hex: "94EEDD"),
+//                    BudgetVariables.hexStringToUIColor(hex: "58F0DB"),
+//                    BudgetVariables.hexStringToUIColor(hex: "1DADA7"),
+//                    BudgetVariables.hexStringToUIColor(hex: "14898A"),
+//                    BudgetVariables.hexStringToUIColor(hex: "0C4A4E")
+//            ]
+//        case 6:
+//            // Green Gradient
+//            colors =
+//                [
+//                    BudgetVariables.hexStringToUIColor(hex: "B2FFBA"),
+//                    BudgetVariables.hexStringToUIColor(hex: "AFED98"),
+//                    BudgetVariables.hexStringToUIColor(hex: "A1E388"),
+//                    BudgetVariables.hexStringToUIColor(hex: "588C56"),
+//                    BudgetVariables.hexStringToUIColor(hex: "244021")
+//            ]
+//        case 7:
+//            // Purple Blue Gradient
+//            colors =
+//                [
+//                    BudgetVariables.hexStringToUIColor(hex: "CFC4E0"),
+//                    BudgetVariables.hexStringToUIColor(hex: "A69FCF"),
+//                    BudgetVariables.hexStringToUIColor(hex: "8683C2"),
+//                    BudgetVariables.hexStringToUIColor(hex: "7374B2"),
+//                    BudgetVariables.hexStringToUIColor(hex: "64619C")
+//            ]
+//        case 8:
+//            // Misty Sky
+//            colors =
+//                [
+//                    BudgetVariables.hexStringToUIColor(hex: "DCFAC0"),
+//                    BudgetVariables.hexStringToUIColor(hex: "B1E1AE"),
+//                    BudgetVariables.hexStringToUIColor(hex: "85C79C"),
+//                    BudgetVariables.hexStringToUIColor(hex: "56AE8B"),
+//                    BudgetVariables.hexStringToUIColor(hex: "00968B")
+//            ]
+//        case 9:
+//            // Ocean
+//            colors =
+//                [
+//                    BudgetVariables.hexStringToUIColor(hex: "02A676"),
+//                    BudgetVariables.hexStringToUIColor(hex: "008C72"),
+//                    BudgetVariables.hexStringToUIColor(hex: "007369"),
+//                    BudgetVariables.hexStringToUIColor(hex: "005A5B"),
+//                    BudgetVariables.hexStringToUIColor(hex: "003840")
+//            ]
+//        case 10:
+//            // Red -> Orange
+//            colors =
+//                [
+//                    BudgetVariables.hexStringToUIColor(hex: "F2852A"),
+//                    BudgetVariables.hexStringToUIColor(hex: "F8650C"),
+//                    BudgetVariables.hexStringToUIColor(hex: "F75105"),
+//                    BudgetVariables.hexStringToUIColor(hex: "CD1E01"),
+//                    BudgetVariables.hexStringToUIColor(hex: "730202")
+//            ]
+//        default:
+//            colors = ChartColorTemplates.liberty()
+//            break
+//        }
         
         chartDataSet.colors = colors
         
@@ -329,22 +326,8 @@ class BarGraphViewController: UIViewController
         xAxis.valueFormatter = barChartFormatter
         barGraphView.xAxis.valueFormatter = xAxis.valueFormatter
         
-        // Set a limit line to be the average amount spent in that week
-        let average = BudgetVariables.calculateAverage(nums: values)
-        
         // Remove the limit line from the previous graph
         barGraphView.rightAxis.removeAllLimitLines();
-        
-        // Only add the average line if there is actually data in the bar graph
-        if average != 0.0
-        {
-            let ll = ChartLimitLine(limit: average, label: "Average: " + BudgetVariables.numFormat(myNum: average))
-            ll.lineColor = BudgetVariables.hexStringToUIColor(hex: "092140")
-            ll.valueFont = UIFont.systemFont(ofSize: 12)
-            ll.lineWidth = 2
-            ll.labelPosition = .leftTop
-            barGraphView.rightAxis.addLimitLine(ll)
-        }
         
         // Set the position of the x axis label
         barGraphView.rightAxis.axisMinimum = 0
@@ -353,114 +336,114 @@ class BarGraphViewController: UIViewController
         let chartDataSet = BarChartDataSet(values: dataEntries, label: "Amount Spent Per Day")
         
         // Set the color scheme
-        var colors = ChartColorTemplates.liberty()
-        let randNum = Int(arc4random_uniform(10) + 1)
-        switch randNum
-        {
-        case 1:
-            // Pear Lemon Fizz
-            colors =
-                [
-                    BudgetVariables.hexStringToUIColor(hex: "588F27"),
-                    BudgetVariables.hexStringToUIColor(hex: "04BFBF"),
-                    BudgetVariables.hexStringToUIColor(hex: "CAFCD8"),
-                    BudgetVariables.hexStringToUIColor(hex: "A9CF54"),
-                    BudgetVariables.hexStringToUIColor(hex: "F7E967")
-            ]
-        case 2:
-            // Vintage Card
-            colors =
-                [
-                    BudgetVariables.hexStringToUIColor(hex: "5C4B51"),
-                    BudgetVariables.hexStringToUIColor(hex: "8CBEB2"),
-                    BudgetVariables.hexStringToUIColor(hex: "F2EBBF"),
-                    BudgetVariables.hexStringToUIColor(hex: "F3B562"),
-                    BudgetVariables.hexStringToUIColor(hex: "F06060")
-            ]
-        case 3:
-            // Marie Antoinette
-            colors =
-                [
-                    BudgetVariables.hexStringToUIColor(hex: "C44C51"),
-                    BudgetVariables.hexStringToUIColor(hex: "FFB6B8"),
-                    BudgetVariables.hexStringToUIColor(hex: "FFEFB6"),
-                    BudgetVariables.hexStringToUIColor(hex: "A2B5BF"),
-                    BudgetVariables.hexStringToUIColor(hex: "5F8CA3")
-            ]
-        case 4:
-            // Autumn Berries
-            colors =
-                [
-                    BudgetVariables.hexStringToUIColor(hex: "588C7E"),
-                    BudgetVariables.hexStringToUIColor(hex: "F2E394"),
-                    BudgetVariables.hexStringToUIColor(hex: "F2AE72"),
-                    BudgetVariables.hexStringToUIColor(hex: "D96459"),
-                    BudgetVariables.hexStringToUIColor(hex: "8C4646")
-            ]
-        case 5:
-            // Appalachian Spring
-            colors =
-                [
-                    BudgetVariables.hexStringToUIColor(hex: "C24704"),
-                    BudgetVariables.hexStringToUIColor(hex: "D9CC3C"),
-                    BudgetVariables.hexStringToUIColor(hex: "FFEB79"),
-                    BudgetVariables.hexStringToUIColor(hex: "A0E0A9"),
-                    BudgetVariables.hexStringToUIColor(hex: "00ADA7")
-            ]
-        case 6:
-            // Cultural Element
-            colors =
-                [
-                    BudgetVariables.hexStringToUIColor(hex: "0067A6"),
-                    BudgetVariables.hexStringToUIColor(hex: "00ABD8"),
-                    BudgetVariables.hexStringToUIColor(hex: "008972"),
-                    BudgetVariables.hexStringToUIColor(hex: "EFC028"),
-                    BudgetVariables.hexStringToUIColor(hex: "F2572D")
-            ]
-        case 7:
-            // Aviator
-            colors =
-                [
-                    BudgetVariables.hexStringToUIColor(hex: "6A7059"),
-                    BudgetVariables.hexStringToUIColor(hex: "FDEEA7"),
-                    BudgetVariables.hexStringToUIColor(hex: "9BCC93"),
-                    BudgetVariables.hexStringToUIColor(hex: "1A9481"),
-                    BudgetVariables.hexStringToUIColor(hex: "003D5C")
-            ]
-        case 8:
-            // Firenze
-            colors =
-                [
-                    BudgetVariables.hexStringToUIColor(hex: "468966"),
-                    BudgetVariables.hexStringToUIColor(hex: "FFF0A5"),
-                    BudgetVariables.hexStringToUIColor(hex: "FFB03B"),
-                    BudgetVariables.hexStringToUIColor(hex: "B64926"),
-                    BudgetVariables.hexStringToUIColor(hex: "8E2800")
-            ]
-        case 9:
-            // Phaedra
-            colors =
-                [
-                    BudgetVariables.hexStringToUIColor(hex: "FF6138"),
-                    BudgetVariables.hexStringToUIColor(hex: "FFFF9D"),
-                    BudgetVariables.hexStringToUIColor(hex: "BEEB9F"),
-                    BudgetVariables.hexStringToUIColor(hex: "79BD8F"),
-                    BudgetVariables.hexStringToUIColor(hex: "00A388")
-            ]
-        case 10:
-            // Ocean Sunset
-            colors =
-                [
-                    BudgetVariables.hexStringToUIColor(hex: "F54F29"),
-                    BudgetVariables.hexStringToUIColor(hex: "FF974F"),
-                    BudgetVariables.hexStringToUIColor(hex: "FFD393"),
-                    BudgetVariables.hexStringToUIColor(hex: "9C9B7A"),
-                    BudgetVariables.hexStringToUIColor(hex: "405952")
-            ]
-        default:
-            colors = ChartColorTemplates.colorful()
-            break
-        }
+        let colors = ChartColorTemplates.liberty()
+//        let randNum = Int(arc4random_uniform(10) + 1)
+//        switch randNum
+//        {
+//        case 1:
+//            // Radiant Gradient
+//            colors =
+//                [
+//                    BudgetVariables.hexStringToUIColor(hex: "DB832E"),
+//                    BudgetVariables.hexStringToUIColor(hex: "C76326"),
+//                    BudgetVariables.hexStringToUIColor(hex: "AD481F"),
+//                    BudgetVariables.hexStringToUIColor(hex: "872E1A"),
+//                    BudgetVariables.hexStringToUIColor(hex: "631C15")
+//            ]
+//        case 2:
+//            // Blue Sky
+//            colors =
+//                [
+//                    BudgetVariables.hexStringToUIColor(hex: "ADD5F7"),
+//                    BudgetVariables.hexStringToUIColor(hex: "7FB2F0"),
+//                    BudgetVariables.hexStringToUIColor(hex: "4E7AC7"),
+//                    BudgetVariables.hexStringToUIColor(hex: "35478C"),
+//                    BudgetVariables.hexStringToUIColor(hex: "16193B")
+//            ]
+//        case 3:
+//            // Purple Gradient
+//            colors =
+//                [
+//                    BudgetVariables.hexStringToUIColor(hex: "D49AFF"),
+//                    BudgetVariables.hexStringToUIColor(hex: "AA7BCC"),
+//                    BudgetVariables.hexStringToUIColor(hex: "B44CFF"),
+//                    BudgetVariables.hexStringToUIColor(hex: "873ABF"),
+//                    BudgetVariables.hexStringToUIColor(hex: "6A4D7F")
+//            ]
+//        case 4:
+//            // Saras Greys
+//            colors =
+//                [
+//                    BudgetVariables.hexStringToUIColor(hex: "A3ADC2"),
+//                    BudgetVariables.hexStringToUIColor(hex: "8F99AB"),
+//                    BudgetVariables.hexStringToUIColor(hex: "474C55"),
+//                    BudgetVariables.hexStringToUIColor(hex: "3D4148"),
+//                    BudgetVariables.hexStringToUIColor(hex: "272A2F")
+//            ]
+//        case 5:
+//            // Teal Gradient
+//            colors =
+//                [
+//                    BudgetVariables.hexStringToUIColor(hex: "94EEDD"),
+//                    BudgetVariables.hexStringToUIColor(hex: "58F0DB"),
+//                    BudgetVariables.hexStringToUIColor(hex: "1DADA7"),
+//                    BudgetVariables.hexStringToUIColor(hex: "14898A"),
+//                    BudgetVariables.hexStringToUIColor(hex: "0C4A4E")
+//            ]
+//        case 6:
+//            // Green Gradient
+//            colors =
+//                [
+//                    BudgetVariables.hexStringToUIColor(hex: "B2FFBA"),
+//                    BudgetVariables.hexStringToUIColor(hex: "AFED98"),
+//                    BudgetVariables.hexStringToUIColor(hex: "A1E388"),
+//                    BudgetVariables.hexStringToUIColor(hex: "588C56"),
+//                    BudgetVariables.hexStringToUIColor(hex: "244021")
+//            ]
+//        case 7:
+//            // Purple Blue Gradient
+//            colors =
+//                [
+//                    BudgetVariables.hexStringToUIColor(hex: "CFC4E0"),
+//                    BudgetVariables.hexStringToUIColor(hex: "A69FCF"),
+//                    BudgetVariables.hexStringToUIColor(hex: "8683C2"),
+//                    BudgetVariables.hexStringToUIColor(hex: "7374B2"),
+//                    BudgetVariables.hexStringToUIColor(hex: "64619C")
+//            ]
+//        case 8:
+//            // Misty Sky
+//            colors =
+//                [
+//                    BudgetVariables.hexStringToUIColor(hex: "DCFAC0"),
+//                    BudgetVariables.hexStringToUIColor(hex: "B1E1AE"),
+//                    BudgetVariables.hexStringToUIColor(hex: "85C79C"),
+//                    BudgetVariables.hexStringToUIColor(hex: "56AE8B"),
+//                    BudgetVariables.hexStringToUIColor(hex: "00968B")
+//            ]
+//        case 9:
+//            // Ocean
+//            colors =
+//                [
+//                    BudgetVariables.hexStringToUIColor(hex: "02A676"),
+//                    BudgetVariables.hexStringToUIColor(hex: "008C72"),
+//                    BudgetVariables.hexStringToUIColor(hex: "007369"),
+//                    BudgetVariables.hexStringToUIColor(hex: "005A5B"),
+//                    BudgetVariables.hexStringToUIColor(hex: "003840")
+//            ]
+//        case 10:
+//            // Red -> Orange
+//            colors =
+//                [
+//                    BudgetVariables.hexStringToUIColor(hex: "F2852A"),
+//                    BudgetVariables.hexStringToUIColor(hex: "F8650C"),
+//                    BudgetVariables.hexStringToUIColor(hex: "F75105"),
+//                    BudgetVariables.hexStringToUIColor(hex: "CD1E01"),
+//                    BudgetVariables.hexStringToUIColor(hex: "730202")
+//            ]
+//        default:
+//            colors = ChartColorTemplates.liberty()
+//            break
+//        }
         
         chartDataSet.colors = colors
         
@@ -527,48 +510,48 @@ class BarGraphViewController: UIViewController
         barGraphView.animate(xAxisDuration: 0.0, yAxisDuration: 1.5)
     }
     
-    // This function runs when time interval button is pressed
-    @IBAction func timeIntervalButtonPressed(_ sender: Any)
+    // This functions runs when the user selects a new tab
+    @IBAction func indexChanged(_ sender: UISegmentedControl)
     {
-        // Grab the past 31 days
-        var days = BudgetVariables.pastInterval(interval: "Month")
-        
-        // Toggle the navigation title between past week and month, and the timeIntervalButton
-        if self.navigationItem.title == "Week of " + days[24] + " – " + days[30]
-        {
-            var amountSpentPerMonth = BudgetVariables.amountSpentInThePast(interval: "Month")
-            
-            if (BudgetVariables.currentIndex == 0)
-            {
-                for i in 0...30
-                {
-                    let randomNum = (Double(arc4random()) / 0xFFFFFFFF) * (100 - 5) + 5
-                    amountSpentPerMonth[i] = Double(randomNum)
-                }
-            }
-            
-            self.navigationItem.title = "Month of " + days[0] + " – " + days[30]
-            
-            // Toggle button text
-            timeIntervalButton.title = "Weekly"
-            barGraphView.notifyDataSetChanged()
-            setBarGraphMonth(values: amountSpentPerMonth)
-        }
-        else
+        if (segmentedController.selectedSegmentIndex == 0)
         {
             var amountSpentPerWeek = BudgetVariables.amountSpentInThePast(interval: "Week")
-
+            
             if (BudgetVariables.currentIndex == 0)
             {
                 amountSpentPerWeek = [20, 4.2, 6.89, 9.99, 60.80, 58.10, 35]
             }
             
-            self.navigationItem.title = "Week of " + days[24] + " – " + days[30]
-            
-            // Toggle button text
-            timeIntervalButton.title = "Monthly"
             barGraphView.notifyDataSetChanged()
             setBarGraphWeek(values: amountSpentPerWeek)
+        }
+        else if (segmentedController.selectedSegmentIndex == 1)
+        {
+            var amountSpentPerMonth = BudgetVariables.amountSpentInThePast(interval: "Month")
+            
+            if (BudgetVariables.currentIndex == 0)
+            {
+                var max = 25.0
+                var min = 5.0
+                for i in 0...30
+                {
+                    let randomNum = (Double(arc4random()) / 0xFFFFFFFF) * (max - min) + min
+                    amountSpentPerMonth[i] = Double(randomNum)
+                    if (i < 16)
+                    {
+                        max += 5.0
+                        min += 1.0
+                    }
+                    else
+                    {
+                        max -= 2.0
+                        min -= 1.0
+                    }
+                }
+            }
+            
+            barGraphView.notifyDataSetChanged()
+            setBarGraphMonth(values: amountSpentPerMonth)
         }
     }
 }
