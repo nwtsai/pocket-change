@@ -9,7 +9,7 @@ iOS App made from scratch that helps users manage their personal expenses and lo
 ‣ View your transaction history within the past week on a bar graph, detailing how much you spent on a particular day <br />
 &nbsp;&nbsp;&nbsp;&nbsp;– The graph also details the average amount spent per day for the past week <br />
 ‣ Manage multiple budgets at once <br />
-‣ Undo an item in your history or delete your entire history, reverting your balance to its original value <br />
+‣ Undoing an item in your history or deleting your entire history reverts your balance to its original value <br />
 ‣ Rename and delete budgets <br />
 
 # Design
