@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="11759" systemVersion="16C67" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="11759" systemVersion="16D32" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="MyBudget" representedClassName="MyBudget" syncable="YES">
         <attribute name="amountSpentOnDate" optional="YES" attributeType="Transformable" syncable="YES"/>
         <attribute name="balance" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>

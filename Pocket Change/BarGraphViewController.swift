@@ -24,7 +24,7 @@ public class BarChartFormatterWeek: NSObject, IAxisValueFormatter
     }
 }
 
-// The point of this is to add X axis labels of the past 7 days to the graph
+// The point of this is to add X axis labels of the past 31 days to the graph
 @objc(BarChartFormatterMonth)
 public class BarChartFormatterMonth: NSObject, IAxisValueFormatter
 {
