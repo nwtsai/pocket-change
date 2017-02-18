@@ -361,10 +361,12 @@ class SpendViewController: UIViewController, UITextFieldDelegate
     // When the Weekly button gets pressed segue to the HistoryViewController file
     @IBAction func weeklyButtonWasPressed(_ sender: AnyObject)
     {
+        // When transitioning to the bar graph view, get rid of the title to clear back button text
+        self.navigationItem.title = " "
+        
         // Save context and get data
         self.sharedDelegate.saveContext()
         BudgetVariables.getData()
         performSegue(withIdentifier: "showBarGraph", sender: nil)
     }
 }
-

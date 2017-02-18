@@ -96,6 +96,8 @@ class HistoryViewController: UIViewController, UITableViewDataSource, UITableVie
         {
             BudgetVariables.budgetArray[BudgetVariables.currentIndex].amountSpentOnDate[key] = 0.0
         }
+        
+        // Zero out the total amount spent
         BudgetVariables.budgetArray[BudgetVariables.currentIndex].totalAmountSpent = 0.0
         
         // Save context and get data
@@ -215,6 +217,14 @@ class HistoryViewController: UIViewController, UITableViewDataSource, UITableVie
             let dateIndex = descripStr.index(descripStr.endIndex, offsetBy: -10)
             let date = descripStr.substring(from: dateIndex)
             
+            // Extract the month and year from description so we can undo how much we spend a month
+            let monthBegin = descripStr.index(descripStr.endIndex, offsetBy: -10)
+            let monthEnd = descripStr.index(descripStr.endIndex, offsetBy: -9)
+            let monthString = descripStr[monthBegin...monthEnd]
+            let yearBegin = descripStr.index(descripStr.endIndex, offsetBy: -4)
+            let yearString = descripStr.substring(from: yearBegin)
+            let monthKey = monthString + "/" + yearString
+            
             // Extract the amount spent for this specific transaction into the variable amountSpent
             let historyStr = BudgetVariables.budgetArray[BudgetVariables.currentIndex].historyArray[indexPath.row]
             let index1 = historyStr.index(historyStr.startIndex, offsetBy: 0) // Index spans the first character in the string
@@ -226,6 +236,8 @@ class HistoryViewController: UIViewController, UITableViewDataSource, UITableVie
             {
                 let newAmtSpentOnDate = BudgetVariables.budgetArray[BudgetVariables.currentIndex].amountSpentOnDate[date]! - historyValue!
                 BudgetVariables.budgetArray[BudgetVariables.currentIndex].amountSpentOnDate[date] = newAmtSpentOnDate
+                let newAmtSpentInMonth = BudgetVariables.budgetArray[BudgetVariables.currentIndex].amountSpentOnDate[monthKey]! - historyValue!
+                BudgetVariables.budgetArray[BudgetVariables.currentIndex].amountSpentOnDate[monthKey] = newAmtSpentInMonth
                 let newTotalAmountSpent = BudgetVariables.budgetArray[BudgetVariables.currentIndex].totalAmountSpent - historyValue!
                 BudgetVariables.budgetArray[BudgetVariables.currentIndex].totalAmountSpent = newTotalAmountSpent
                 let newBalance = BudgetVariables.budgetArray[BudgetVariables.currentIndex].balance + historyValue!

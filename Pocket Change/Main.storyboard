@@ -308,11 +308,12 @@
                     <navigationItem key="navigationItem" id="Q3D-0g-plU">
                         <nil key="title"/>
                         <segmentedControl key="titleView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="0" id="7Gn-oP-Zkt">
-                            <rect key="frame" x="113" y="7" width="150" height="30"/>
+                            <rect key="frame" x="107" y="7" width="161" height="30"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <segments>
                                 <segment title="Week"/>
                                 <segment title="Month"/>
+                                <segment title="Year"/>
                             </segments>
                             <connections>
                                 <action selector="indexChanged:" destination="GDo-YR-dDG" eventType="valueChanged" id="r0H-hJ-xkM"/>
@@ -327,7 +328,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6K8-ea-Mj3" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="129" y="329"/>
+            <point key="canvasLocation" x="128.80000000000001" y="328.78560719640183"/>
         </scene>
         <!--Pie Chart View Controller-->
         <scene sceneID="aeD-Nb-p0U">

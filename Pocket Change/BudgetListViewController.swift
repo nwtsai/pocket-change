@@ -27,7 +27,6 @@ class BudgetListViewController: UIViewController, UITableViewDataSource, UITable
         let color = UIColor.white
         self.navigationController?.navigationBar.tintColor = color
         
-        self.navigationItem.title = "My Budgets"
         budgetTable.dataSource = self
         budgetTable.delegate = self
         
@@ -47,6 +46,8 @@ class BudgetListViewController: UIViewController, UITableViewDataSource, UITable
     override func viewWillAppear(_ animated: Bool)
     {
         super.viewWillAppear(animated)
+        
+        self.navigationItem.title = "My Budgets"
         
         // Get data from CoreData
         BudgetVariables.getData()
