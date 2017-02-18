@@ -111,7 +111,7 @@ class BarGraphViewController: UIViewController
                     min -= 1.0
                 }
             }
-            amountSpentOverAYear = [25.20, 40.50, 50.65, 24.54, 55.58, 95.69, 135.04, 56.87, 75.67, 100.07, 40.23, 24.64]
+            amountSpentOverAYear = [65.20, 134.50, 120.65, 168.8, 186.58, 295.69, 275.67, 256.87, 186.42, 240.23, 200.67, 140.98]
         }
         
         // If there are actually values to display, display the graph
@@ -369,8 +369,22 @@ class BarGraphViewController: UIViewController
         xAxis.valueFormatter = barChartFormatter
         barGraphView.xAxis.valueFormatter = xAxis.valueFormatter
         
-        // Remove the limit line from the previous graph
+        // Set a limit line to be the average amount spent in that week
+        let average = BudgetVariables.calculateAverage(nums: values)
+        
+        // Remove the average line from the previous graph rendered
         barGraphView.rightAxis.removeAllLimitLines();
+        
+        // Only add the average line if there is actually data in the bar graph
+        if average != 0.0
+        {
+            let ll = ChartLimitLine(limit: average, label: "Average: " + BudgetVariables.numFormat(myNum: average))
+            ll.lineColor = BudgetVariables.hexStringToUIColor(hex: "092140")
+            ll.valueFont = UIFont.systemFont(ofSize: 12)
+            ll.lineWidth = 2
+            ll.labelPosition = .leftTop
+            barGraphView.rightAxis.addLimitLine(ll)
+        }
         
         // Set the position of the x axis label
         barGraphView.rightAxis.axisMinimum = 0
@@ -435,7 +449,7 @@ class BarGraphViewController: UIViewController
         // Set X Axis Font
         barGraphView.xAxis.labelFont = UIFont.systemFont(ofSize: 13)
         
-        // Force each week to show up
+        // Set labels to be 5 day increments
         barGraphView.xAxis.setLabelCount(6, force: false)
         
         // Set description texts
@@ -568,6 +582,7 @@ class BarGraphViewController: UIViewController
         {
             var amountSpentPerWeek = BudgetVariables.amountSpentInThePast(interval: "Week")
             
+            // Index 0 is our test case with random sample data
             if (BudgetVariables.currentIndex == 0)
             {
                 amountSpentPerWeek = [20, 4.2, 6.89, 9.99, 60.80, 58.10, 35]
@@ -585,13 +600,18 @@ class BarGraphViewController: UIViewController
             // Index 0 is our test case with random sample data
             if (BudgetVariables.currentIndex == 0)
             {
-                var max = 25.0
+                var max = 15.0
                 var min = 5.0
                 for i in 0...30
                 {
                     let randomNum = (Double(arc4random()) / 0xFFFFFFFF) * (max - min) + min
                     amountSpentPerMonth[i] = Double(randomNum)
-                    if (i < 16)
+                    if (i < 11)
+                    {
+                        max += 2.0
+                        min += 1.0
+                    }
+                    else if (i < 21)
                     {
                         max += 5.0
                         min += 1.0
@@ -613,9 +633,10 @@ class BarGraphViewController: UIViewController
         {
             var amountSpentOverAYear = BudgetVariables.amountSpentInThePast12Months()
             
+            // Index 0 is our test case with random sample data
             if (BudgetVariables.currentIndex == 0)
             {
-                amountSpentOverAYear = [25.20, 40.50, 50.65, 24.54, 55.58, 95.69, 135.04, 56.87, 75.67, 100.07, 40.23, 24.64]
+                amountSpentOverAYear = [65.20, 134.50, 120.65, 168.8, 186.58, 295.69, 275.67, 256.87, 186.42, 240.23, 200.67, 140.98]
             }
             
             barGraphView.notifyDataSetChanged()
