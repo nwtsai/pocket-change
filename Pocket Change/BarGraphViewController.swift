@@ -65,27 +65,10 @@ class BarGraphViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
     var ColorPicker = UIPickerView()
 
     // Blue
-    var color0 =
-    [
-        BudgetVariables.hexStringToUIColor(hex: "ADD5F7"),
-        BudgetVariables.hexStringToUIColor(hex: "7FB2F0"),
-        BudgetVariables.hexStringToUIColor(hex: "4E7AC7"),
-        BudgetVariables.hexStringToUIColor(hex: "35478C"),
-        BudgetVariables.hexStringToUIColor(hex: "16193B")
-    ]
-
-    // Grey
-    var color1 =
-    [
-        BudgetVariables.hexStringToUIColor(hex: "A3ADC2"),
-        BudgetVariables.hexStringToUIColor(hex: "8F99AB"),
-        BudgetVariables.hexStringToUIColor(hex: "474C55"),
-        BudgetVariables.hexStringToUIColor(hex: "3D4148"),
-        BudgetVariables.hexStringToUIColor(hex: "272A2F")
-    ]
+    var color0 = ChartColorTemplates.liberty()
 
     // Purple
-    var color2 =
+    var color1 =
     [
         BudgetVariables.hexStringToUIColor(hex: "CFC4E0"),
         BudgetVariables.hexStringToUIColor(hex: "A69FCF"),
@@ -93,22 +76,19 @@ class BarGraphViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
         BudgetVariables.hexStringToUIColor(hex: "7374B2"),
         BudgetVariables.hexStringToUIColor(hex: "64619C")
     ]
-
-    // Liberty
-    var color3 = ChartColorTemplates.liberty()
     
-    // Autumn
-    var color4 =
+    // Grey
+    var color2 =
     [
-        BudgetVariables.hexStringToUIColor(hex: "DB832E"),
-        BudgetVariables.hexStringToUIColor(hex: "C76326"),
-        BudgetVariables.hexStringToUIColor(hex: "AD481F"),
-        BudgetVariables.hexStringToUIColor(hex: "872E1A"),
-        BudgetVariables.hexStringToUIColor(hex: "631C15")
+        BudgetVariables.hexStringToUIColor(hex: "A3ADC2"),
+        BudgetVariables.hexStringToUIColor(hex: "8F99AB"),
+        BudgetVariables.hexStringToUIColor(hex: "474C55"),
+        BudgetVariables.hexStringToUIColor(hex: "3D4148"),
+        BudgetVariables.hexStringToUIColor(hex: "272A2F")
     ]
-
+    
     // Teal
-    var color5 =
+    var color3 =
     [
         BudgetVariables.hexStringToUIColor(hex: "94EEDD"),
         BudgetVariables.hexStringToUIColor(hex: "58F0DB"),
@@ -116,39 +96,9 @@ class BarGraphViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
         BudgetVariables.hexStringToUIColor(hex: "14898A"),
         BudgetVariables.hexStringToUIColor(hex: "0C4A4E")
     ]
-
-    // Grape
-    var color6 =
-    [
-        BudgetVariables.hexStringToUIColor(hex: "D49AFF"),
-        BudgetVariables.hexStringToUIColor(hex: "AA7BCC"),
-        BudgetVariables.hexStringToUIColor(hex: "B44CFF"),
-        BudgetVariables.hexStringToUIColor(hex: "873ABF"),
-        BudgetVariables.hexStringToUIColor(hex: "6A4D7F")
-    ]
-
-    // Mist
-    var color7 =
-    [
-        BudgetVariables.hexStringToUIColor(hex: "DCFAC0"),
-        BudgetVariables.hexStringToUIColor(hex: "B1E1AE"),
-        BudgetVariables.hexStringToUIColor(hex: "85C79C"),
-        BudgetVariables.hexStringToUIColor(hex: "56AE8B"),
-        BudgetVariables.hexStringToUIColor(hex: "00968B")
-    ]
-
-    // Ocean
-    var color8 =
-    [
-        BudgetVariables.hexStringToUIColor(hex: "02A676"),
-        BudgetVariables.hexStringToUIColor(hex: "008C72"),
-        BudgetVariables.hexStringToUIColor(hex: "007369"),
-        BudgetVariables.hexStringToUIColor(hex: "005A5B"),
-        BudgetVariables.hexStringToUIColor(hex: "003840")
-    ]
-
+    
     // Fire
-    var color9 =
+    var color4 =
     [
         BudgetVariables.hexStringToUIColor(hex: "F2852A"),
         BudgetVariables.hexStringToUIColor(hex: "F8650C"),
@@ -157,19 +107,69 @@ class BarGraphViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
         BudgetVariables.hexStringToUIColor(hex: "730202")
     ]
     
-    // Green
+    // Water
+    var color5 =
+    [
+        BudgetVariables.hexStringToUIColor(hex: "1A8BB2"),
+        BudgetVariables.hexStringToUIColor(hex: "127899"),
+        BudgetVariables.hexStringToUIColor(hex: "13647F"),
+        BudgetVariables.hexStringToUIColor(hex: "0E5066"),
+        BudgetVariables.hexStringToUIColor(hex: "0B3C4C")
+    ]
+    
+    // Earth
+    var color6 =
+    [
+        BudgetVariables.hexStringToUIColor(hex: "02A676"),
+        BudgetVariables.hexStringToUIColor(hex: "008C72"),
+        BudgetVariables.hexStringToUIColor(hex: "007369"),
+        BudgetVariables.hexStringToUIColor(hex: "005A5B"),
+        BudgetVariables.hexStringToUIColor(hex: "003840")
+    ]
+    
+    // Air
+    var color7 =
+    [
+        BudgetVariables.hexStringToUIColor(hex: "ACD3D8"),
+        BudgetVariables.hexStringToUIColor(hex: "9ABCE0"),
+        BudgetVariables.hexStringToUIColor(hex: "7798BD"),
+        BudgetVariables.hexStringToUIColor(hex: "4A678C"),
+        BudgetVariables.hexStringToUIColor(hex: "2D4473")
+    ]
+    
+    // Mist
+    var color8 =
+    [
+        BudgetVariables.hexStringToUIColor(hex: "DCFAC0"),
+        BudgetVariables.hexStringToUIColor(hex: "B1E1AE"),
+        BudgetVariables.hexStringToUIColor(hex: "85C79C"),
+        BudgetVariables.hexStringToUIColor(hex: "56AE8B"),
+        BudgetVariables.hexStringToUIColor(hex: "00968B")
+    ]
+    
+    // Orange
+    var color9 =
+    [
+        BudgetVariables.hexStringToUIColor(hex: "DB832E"),
+        BudgetVariables.hexStringToUIColor(hex: "C76326"),
+        BudgetVariables.hexStringToUIColor(hex: "AD481F"),
+        BudgetVariables.hexStringToUIColor(hex: "872E1A"),
+        BudgetVariables.hexStringToUIColor(hex: "631C15")
+    ]
+
+    // Grape
     var color10 =
     [
-        BudgetVariables.hexStringToUIColor(hex: "B2FFBA"),
-        BudgetVariables.hexStringToUIColor(hex: "AFED98"),
-        BudgetVariables.hexStringToUIColor(hex: "A1E388"),
-        BudgetVariables.hexStringToUIColor(hex: "588C56"),
-        BudgetVariables.hexStringToUIColor(hex: "244021")
+        BudgetVariables.hexStringToUIColor(hex: "D49AFF"),
+        BudgetVariables.hexStringToUIColor(hex: "AA7BCC"),
+        BudgetVariables.hexStringToUIColor(hex: "B44CFF"),
+        BudgetVariables.hexStringToUIColor(hex: "873ABF"),
+        BudgetVariables.hexStringToUIColor(hex: "6A4D7F")
     ]
 
     // Color Array
     var ColorArray = [[UIColor]]()
-    var ColorArrayLabels = ["Blue", "Grey", "Purple", "Liberty", "Fall", "Teal", "Grape", "Mist", "Ocean", "Fire", "Green"]
+    var ColorArrayLabels = ["Blue", "Purple", "Grey", "Teal", "Fire", "Water", "Earth", "Air", "Mist", "Orange", "Grape"]
 
     // Days Array
     var days: [String]!
@@ -258,8 +258,10 @@ class BarGraphViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
             setBarGraphYear(values: amountSpentOverAYear)
         }
         
-        // Set textfield label for color
-        pickerTextField.text = ColorArrayLabels[BudgetVariables.budgetArray[BudgetVariables.currentIndex].barGraphColor]
+        // Set textfield label for color, and initialize the picker to start at a certain value
+        let CurrentColorIndex = BudgetVariables.budgetArray[BudgetVariables.currentIndex].barGraphColor
+        pickerTextField.text = ColorArrayLabels[CurrentColorIndex]
+        ColorPicker.selectRow(CurrentColorIndex, inComponent: 0, animated: true)
     }
     
     //Calls this function when the tap is recognized.
