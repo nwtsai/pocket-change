@@ -113,6 +113,7 @@ class BudgetListViewController: UIViewController, UITableViewDataSource, UITable
                     budget.totalAmountSpent = 0.0
                     budget.totalBudgetAmount = inputAmount
                     budget.totalAmountAdded = 0.0
+                    budget.barGraphColor = 0
                     
                     // Save and get data to coredata
                     self.sharedDelegate.saveContext()

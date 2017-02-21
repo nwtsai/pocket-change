@@ -20,6 +20,7 @@ extension MyBudget
 
     @NSManaged public var name: String?
     @NSManaged public var balance: Double
+    @NSManaged public var barGraphColor: Int
     @NSManaged public var descriptionArray: [String]
     @NSManaged public var historyArray: [String]
     @NSManaged public var amountSpentOnDate: [String: Double]

@@ -319,10 +319,21 @@
                                 <action selector="indexChanged:" destination="GDo-YR-dDG" eventType="valueChanged" id="r0H-hJ-xkM"/>
                             </connections>
                         </segmentedControl>
+                        <barButtonItem key="rightBarButtonItem" width="10" style="plain" id="PRn-xk-tnA">
+                            <textField key="customView" opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Blue" textAlignment="center" minimumFontSize="17" id="kEC-AX-fNa" userLabel="PickerTextField">
+                                <rect key="frame" x="304" y="7" width="55" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                        </barButtonItem>
                     </navigationItem>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="barGraphView" destination="B48-NJ-BQR" id="L4t-Ix-FkX"/>
+                        <outlet property="pickerTextField" destination="kEC-AX-fNa" id="9wl-n8-exe"/>
                         <outlet property="segmentedController" destination="7Gn-oP-Zkt" id="HQ0-uK-1QX"/>
                     </connections>
                 </viewController>
