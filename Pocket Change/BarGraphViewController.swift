@@ -311,7 +311,7 @@ class BarGraphViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
         barGraphView.rightAxis.axisMinimum = 0
         barGraphView.xAxis.labelPosition = .bottom
         
-        let chartDataSet = BarChartDataSet(values: dataEntries, label: "Amount Spent Per Day")
+        let chartDataSet = BarChartDataSet(values: dataEntries, label: "$$ Spent Per Day")
         
         // Select the color scheme
         chartDataSet.colors = ColorArray[BudgetVariables.budgetArray[BudgetVariables.currentIndex].barGraphColor]
@@ -416,7 +416,7 @@ class BarGraphViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
         barGraphView.rightAxis.axisMinimum = 0
         barGraphView.xAxis.labelPosition = .bottom
         
-        let chartDataSet = BarChartDataSet(values: dataEntries, label: "Amount Spent Per Day")
+        let chartDataSet = BarChartDataSet(values: dataEntries, label: "$$ Spent Per Day")
         
         // Select the color scheme
         let colorSelector = BudgetVariables.budgetArray[BudgetVariables.currentIndex].barGraphColor
@@ -522,7 +522,7 @@ class BarGraphViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
         barGraphView.rightAxis.axisMinimum = 0
         barGraphView.xAxis.labelPosition = .bottom
         
-        let chartDataSet = BarChartDataSet(values: dataEntries, label: "Amount Spent Per Month")
+        let chartDataSet = BarChartDataSet(values: dataEntries, label: "$$ Spent Per Month")
         
         // Select the color scheme
         let colorSelector = BudgetVariables.budgetArray[BudgetVariables.currentIndex].barGraphColor
