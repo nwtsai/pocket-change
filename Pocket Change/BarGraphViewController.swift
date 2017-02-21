@@ -64,31 +64,8 @@ class BarGraphViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
     // ColorPicker
     var ColorPicker = UIPickerView()
 
-    // Blue Gradient
-    var color0 = ChartColorTemplates.liberty()
-
-    // Radiant Gradient
-    var color1 =
-    [
-        BudgetVariables.hexStringToUIColor(hex: "DB832E"),
-        BudgetVariables.hexStringToUIColor(hex: "C76326"),
-        BudgetVariables.hexStringToUIColor(hex: "AD481F"),
-        BudgetVariables.hexStringToUIColor(hex: "872E1A"),
-        BudgetVariables.hexStringToUIColor(hex: "631C15")
-    ]
-
-    // Purple Gradient
-    var color2 =
-    [
-        BudgetVariables.hexStringToUIColor(hex: "D49AFF"),
-        BudgetVariables.hexStringToUIColor(hex: "AA7BCC"),
-        BudgetVariables.hexStringToUIColor(hex: "B44CFF"),
-        BudgetVariables.hexStringToUIColor(hex: "873ABF"),
-        BudgetVariables.hexStringToUIColor(hex: "6A4D7F")
-    ]
-
-    // Blue Sky
-    var color3 =
+    // Blue
+    var color0 =
     [
         BudgetVariables.hexStringToUIColor(hex: "ADD5F7"),
         BudgetVariables.hexStringToUIColor(hex: "7FB2F0"),
@@ -97,8 +74,8 @@ class BarGraphViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
         BudgetVariables.hexStringToUIColor(hex: "16193B")
     ]
 
-    // Saras Greys
-    var color4 =
+    // Grey
+    var color1 =
     [
         BudgetVariables.hexStringToUIColor(hex: "A3ADC2"),
         BudgetVariables.hexStringToUIColor(hex: "8F99AB"),
@@ -107,7 +84,30 @@ class BarGraphViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
         BudgetVariables.hexStringToUIColor(hex: "272A2F")
     ]
 
-    // Teal Gradient
+    // Purple
+    var color2 =
+    [
+        BudgetVariables.hexStringToUIColor(hex: "CFC4E0"),
+        BudgetVariables.hexStringToUIColor(hex: "A69FCF"),
+        BudgetVariables.hexStringToUIColor(hex: "8683C2"),
+        BudgetVariables.hexStringToUIColor(hex: "7374B2"),
+        BudgetVariables.hexStringToUIColor(hex: "64619C")
+    ]
+
+    // Liberty
+    var color3 = ChartColorTemplates.liberty()
+    
+    // Autumn
+    var color4 =
+    [
+        BudgetVariables.hexStringToUIColor(hex: "DB832E"),
+        BudgetVariables.hexStringToUIColor(hex: "C76326"),
+        BudgetVariables.hexStringToUIColor(hex: "AD481F"),
+        BudgetVariables.hexStringToUIColor(hex: "872E1A"),
+        BudgetVariables.hexStringToUIColor(hex: "631C15")
+    ]
+
+    // Teal
     var color5 =
     [
         BudgetVariables.hexStringToUIColor(hex: "94EEDD"),
@@ -117,28 +117,18 @@ class BarGraphViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
         BudgetVariables.hexStringToUIColor(hex: "0C4A4E")
     ]
 
-    // Green Gradient
+    // Grape
     var color6 =
     [
-        BudgetVariables.hexStringToUIColor(hex: "B2FFBA"),
-        BudgetVariables.hexStringToUIColor(hex: "AFED98"),
-        BudgetVariables.hexStringToUIColor(hex: "A1E388"),
-        BudgetVariables.hexStringToUIColor(hex: "588C56"),
-        BudgetVariables.hexStringToUIColor(hex: "244021")
+        BudgetVariables.hexStringToUIColor(hex: "D49AFF"),
+        BudgetVariables.hexStringToUIColor(hex: "AA7BCC"),
+        BudgetVariables.hexStringToUIColor(hex: "B44CFF"),
+        BudgetVariables.hexStringToUIColor(hex: "873ABF"),
+        BudgetVariables.hexStringToUIColor(hex: "6A4D7F")
     ]
 
-    // Purple Blue Gradient
+    // Mist
     var color7 =
-    [
-        BudgetVariables.hexStringToUIColor(hex: "CFC4E0"),
-        BudgetVariables.hexStringToUIColor(hex: "A69FCF"),
-        BudgetVariables.hexStringToUIColor(hex: "8683C2"),
-        BudgetVariables.hexStringToUIColor(hex: "7374B2"),
-        BudgetVariables.hexStringToUIColor(hex: "64619C")
-    ]
-
-    // Misty Sky
-    var color8 =
     [
         BudgetVariables.hexStringToUIColor(hex: "DCFAC0"),
         BudgetVariables.hexStringToUIColor(hex: "B1E1AE"),
@@ -148,7 +138,7 @@ class BarGraphViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
     ]
 
     // Ocean
-    var color9 =
+    var color8 =
     [
         BudgetVariables.hexStringToUIColor(hex: "02A676"),
         BudgetVariables.hexStringToUIColor(hex: "008C72"),
@@ -157,8 +147,8 @@ class BarGraphViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
         BudgetVariables.hexStringToUIColor(hex: "003840")
     ]
 
-    // Red -> Orange
-    var color10 =
+    // Fire
+    var color9 =
     [
         BudgetVariables.hexStringToUIColor(hex: "F2852A"),
         BudgetVariables.hexStringToUIColor(hex: "F8650C"),
@@ -166,10 +156,20 @@ class BarGraphViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
         BudgetVariables.hexStringToUIColor(hex: "CD1E01"),
         BudgetVariables.hexStringToUIColor(hex: "730202")
     ]
+    
+    // Green
+    var color10 =
+    [
+        BudgetVariables.hexStringToUIColor(hex: "B2FFBA"),
+        BudgetVariables.hexStringToUIColor(hex: "AFED98"),
+        BudgetVariables.hexStringToUIColor(hex: "A1E388"),
+        BudgetVariables.hexStringToUIColor(hex: "588C56"),
+        BudgetVariables.hexStringToUIColor(hex: "244021")
+    ]
 
     // Color Array
     var ColorArray = [[UIColor]]()
-    var ColorArrayLabels = ["Liberty", "Radiant", "Purple", "Blue", "Grey", "Teal", "Green", "Purple-Blue", "Mist", "Ocean", "Red-Orange"]
+    var ColorArrayLabels = ["Blue", "Grey", "Purple", "Liberty", "Fall", "Teal", "Grape", "Mist", "Ocean", "Fire", "Green"]
 
     // Days Array
     var days: [String]!
@@ -195,13 +195,14 @@ class BarGraphViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
         pickerTextField.tintColor = UIColor.clear
         pickerTextField.layer.borderColor = UIColor.white.cgColor
         pickerTextField.layer.borderWidth = 1.0
-        pickerTextField.layer.cornerRadius = 5.0
+        pickerTextField.layer.cornerRadius = 4.0
         
         //Looks for single or multiple taps.
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(BarGraphViewController.dismissKeyboard))
         tap.cancelsTouchesInView = false
         view.addGestureRecognizer(tap)
         
+        // Initialize the color array
         ColorArray = [color0, color1, color2, color3, color4, color5, color6, color7, color8, color9, color10]
     }
     
@@ -311,8 +312,7 @@ class BarGraphViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
         let chartDataSet = BarChartDataSet(values: dataEntries, label: "Amount Spent Per Day")
         
         // Select the color scheme
-        let colorSelector = BudgetVariables.budgetArray[BudgetVariables.currentIndex].barGraphColor
-        chartDataSet.colors = ColorArray[colorSelector]
+        chartDataSet.colors = ColorArray[BudgetVariables.budgetArray[BudgetVariables.currentIndex].barGraphColor]
         
         chartDataSet.axisDependency = .right
         let chartData = BarChartData(dataSet: chartDataSet)
@@ -326,15 +326,8 @@ class BarGraphViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
         chartData.setDrawValues(true)
         barGraphView.rightAxis.drawLabelsEnabled = true
         
-        if BudgetVariables.budgetArray[BudgetVariables.currentIndex].historyArray.isEmpty == true
+        if BudgetVariables.budgetArray[BudgetVariables.currentIndex].historyArray.isEmpty == true || BudgetVariables.isAllZeros(array: values) == true
         {
-            chartDataSet.label = "You must spend to see data"
-            chartData.setDrawValues(false)
-            barGraphView.rightAxis.drawLabelsEnabled = false
-        }
-        else if BudgetVariables.isAllZeros(array: values) == true
-        {
-            chartDataSet.label = "No spendings this week"
             chartData.setDrawValues(false)
             barGraphView.rightAxis.drawLabelsEnabled = false
         }
@@ -439,15 +432,9 @@ class BarGraphViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
         chartData.setDrawValues(true)
         barGraphView.rightAxis.drawLabelsEnabled = true
         
-        if BudgetVariables.budgetArray[BudgetVariables.currentIndex].historyArray.isEmpty == true
+        if BudgetVariables.budgetArray[BudgetVariables.currentIndex].historyArray.isEmpty == true || BudgetVariables.isAllZeros(array: values) == true
         {
             chartDataSet.label = "You must spend to see data"
-            chartData.setDrawValues(false)
-            barGraphView.rightAxis.drawLabelsEnabled = false
-        }
-        else if BudgetVariables.isAllZeros(array: values) == true
-        {
-            chartDataSet.label = "No spendings this month"
             chartData.setDrawValues(false)
             barGraphView.rightAxis.drawLabelsEnabled = false
         }
@@ -551,15 +538,8 @@ class BarGraphViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
         chartData.setDrawValues(true)
         barGraphView.rightAxis.drawLabelsEnabled = true
         
-        if BudgetVariables.budgetArray[BudgetVariables.currentIndex].historyArray.isEmpty == true
+        if BudgetVariables.budgetArray[BudgetVariables.currentIndex].historyArray.isEmpty == true || BudgetVariables.isAllZeros(array: values) == true
         {
-            chartDataSet.label = "You must spend to see data"
-            chartData.setDrawValues(false)
-            barGraphView.rightAxis.drawLabelsEnabled = false
-        }
-        else if BudgetVariables.isAllZeros(array: values) == true
-        {
-            chartDataSet.label = "No spendings this year"
             chartData.setDrawValues(false)
             barGraphView.rightAxis.drawLabelsEnabled = false
         }
@@ -681,12 +661,6 @@ class BarGraphViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
         updateGraph()
     }
     
-    // Runs when the color picker button is pressed
-    @IBAction func chooseColorButton(_ sender: Any)
-    {
-        ColorPicker.isHidden = false;
-    }
-    
     // Conform to picker view protocol
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String?
     {
@@ -698,6 +672,7 @@ class BarGraphViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
         return ColorArrayLabels.count
     }
     
+    // When a row is selected, update color index and update the bar graph
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int)
     {
         pickerTextField.text = ColorArrayLabels[row]
