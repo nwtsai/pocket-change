@@ -700,4 +700,36 @@ class BarGraphViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
     {
         return false
     }
+    
+    // A view that dims the background while the user selects a color
+    let blackView = UIView()
+    
+    // When a user presses the text field picker, dim the background with an animation
+    func textFieldDidBeginEditing(_ textField: UITextField)
+    {
+        if let window = UIApplication.shared.keyWindow
+        {
+            blackView.backgroundColor = UIColor(white: 0, alpha: 0.45)
+            
+            blackView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleDismiss)))
+            
+            window.addSubview(blackView)
+            blackView.frame = window.frame
+            blackView.alpha = 0
+            UIView.animate(withDuration: 0.6, animations:
+            {
+                self.blackView.alpha = 1
+            })
+        }
+    }
+    
+    // When a user taps the black view, animate and fade the view back to normal
+    func handleDismiss()
+    {
+        UIView.animate(withDuration: 0.6)
+        {
+            self.blackView.alpha = 0
+        }
+        dismissKeyboard()
+    }
 }
