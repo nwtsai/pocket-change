@@ -32,6 +32,7 @@ class SpendViewController: UIViewController, UITextFieldDelegate
         // Set Navbar Color
         let color = UIColor.white
         self.navigationController?.navigationBar.tintColor = color
+        self.navigationItem.title = BudgetVariables.budgetArray[BudgetVariables.currentIndex].name
         
         // Set textField delegates to themselves
         inputAmount.delegate = self
@@ -56,15 +57,10 @@ class SpendViewController: UIViewController, UITextFieldDelegate
         self.sharedDelegate.saveContext()
         BudgetVariables.getData()
         
-        // Set Navbar title and other labels
-        self.navigationItem.title = BudgetVariables.budgetArray[BudgetVariables.currentIndex].name
+        // Refresh the total balance label, in the case that another view modified the balance vaariable
         totalBalance.text = BudgetVariables.numFormat(myNum: BudgetVariables.budgetArray[BudgetVariables.currentIndex].balance)
-        if BudgetVariables.budgetArray[BudgetVariables.currentIndex].balance == 0
-        {
-            spendButton.isEnabled = false
-        }
         
-        // Reset the text fields and disable both buttons
+        // Reset the text fields and disable the spend button
         inputAmount.text = ""
         descriptionText.text = ""
         spendButton.isEnabled = false
@@ -152,6 +148,7 @@ class SpendViewController: UIViewController, UITextFieldDelegate
         {
             self.amountSaveButton?.isEnabled = false
         }
+            
         // If the input is a number
         else if let input = (Double(trimmedInput!))?.roundTo(places: 2)
         {
@@ -349,24 +346,43 @@ class SpendViewController: UIViewController, UITextFieldDelegate
         }
     }
     
-    // When the Daily button gets pressed segue to the BarGraphViewController file
-    @IBAction func dailyButtonWasPressed(_ sender: AnyObject)
+    // When the History button gets pressed segue to the BarGraphViewController file
+    @IBAction func historyButtonPressed(_ sender: Any)
     {
         // Save context and get data
         self.sharedDelegate.saveContext()
         BudgetVariables.getData()
-        performSegue(withIdentifier: "showDaily", sender: nil)
+        performSegue(withIdentifier: "showHistory", sender: nil)
     }
     
-    // When the Weekly button gets pressed segue to the HistoryViewController file
-    @IBAction func weeklyButtonWasPressed(_ sender: AnyObject)
+    // When the Graphs button gets pressed segue to the HistoryViewController file
+    @IBAction func graphsButtonPressed(_ sender: Any)
     {
-        // When transitioning to the bar graph view, get rid of the title to clear back button text
-        self.navigationItem.title = " "
-        
         // Save context and get data
         self.sharedDelegate.saveContext()
         BudgetVariables.getData()
-        performSegue(withIdentifier: "showBarGraph", sender: nil)
+        performSegue(withIdentifier: "showGraphs", sender: nil)
+    }
+    
+    // Prepare for segue
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?)
+    {
+        // Define the back button's text for the next view
+        let backItem = UIBarButtonItem()
+        
+        // If we are going to the bar graph view, set button text to be empty
+        if segue.identifier == "showGraphs"
+        {
+            backItem.title = ""
+        }
+            
+        // If we are going to the history view, set button text to be the name of the budget
+        else if (segue.identifier == "showHistory")
+        {
+            backItem.title = BudgetVariables.budgetArray[BudgetVariables.currentIndex].name
+        }
+        
+        // Set the back bar button item
+        navigationItem.backBarButtonItem = backItem
     }
 }

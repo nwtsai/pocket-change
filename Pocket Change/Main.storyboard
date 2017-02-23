@@ -86,18 +86,18 @@
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="IyT-re-OVV">
                                 <rect key="frame" x="16" y="535" width="343" height="26"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5tw-ZV-IXc" userLabel="Daily Button">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5tw-ZV-IXc" userLabel="History Button">
                                         <rect key="frame" x="0.0" y="0.0" width="171.5" height="26"/>
                                         <state key="normal" image="button_history"/>
                                         <connections>
-                                            <action selector="dailyButtonWasPressed:" destination="sds-LB-aBh" eventType="touchUpInside" id="O79-Id-qEl"/>
+                                            <action selector="historyButtonPressed:" destination="sds-LB-aBh" eventType="touchUpInside" id="16H-KH-r9r"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KOJ-SF-gm5" userLabel="Weekly Button">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KOJ-SF-gm5" userLabel="Graphs Button">
                                         <rect key="frame" x="171.5" y="0.0" width="171.5" height="26"/>
                                         <state key="normal" image="button_graphs"/>
                                         <connections>
-                                            <action selector="weeklyButtonWasPressed:" destination="sds-LB-aBh" eventType="touchUpInside" id="Pfx-lU-9CC"/>
+                                            <action selector="graphsButtonPressed:" destination="sds-LB-aBh" eventType="touchUpInside" id="fyS-ia-JYj"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -147,8 +147,8 @@
                         <outlet property="inputAmount" destination="aJg-CV-vGt" id="QfG-b6-s9W"/>
                         <outlet property="spendButton" destination="Iyv-Ff-OpV" id="DA7-qO-4aU"/>
                         <outlet property="totalBalance" destination="TRe-by-rFq" id="jO9-5R-4xj"/>
-                        <segue destination="zFl-z3-0s0" kind="show" identifier="showDaily" id="GkY-hb-RdK"/>
-                        <segue destination="GDo-YR-dDG" kind="show" identifier="showBarGraph" id="5yA-34-IDW"/>
+                        <segue destination="zFl-z3-0s0" kind="show" identifier="showHistory" id="GkY-hb-RdK"/>
+                        <segue destination="GDo-YR-dDG" kind="show" identifier="showGraphs" id="5yA-34-IDW"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="weC-fA-FtV" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -320,8 +320,8 @@
                             </connections>
                         </segmentedControl>
                         <barButtonItem key="rightBarButtonItem" width="10" style="plain" id="PRn-xk-tnA">
-                            <textField key="customView" opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="center" minimumFontSize="17" id="kEC-AX-fNa" userLabel="PickerTextField">
-                                <rect key="frame" x="299" y="7" width="60" height="30"/>
+                            <textField key="customView" opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="center" adjustsFontSizeToFit="NO" minimumFontSize="17" id="kEC-AX-fNa" userLabel="PickerTextField">
+                                <rect key="frame" x="300" y="7" width="59" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>

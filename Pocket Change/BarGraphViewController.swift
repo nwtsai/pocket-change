@@ -51,7 +51,7 @@ public class BarChartFormatterYear: NSObject, IAxisValueFormatter
 }
 
 // View Controller Class
-class BarGraphViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource
+class BarGraphViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource, UITextFieldDelegate
 {
     // Clean code
     var sharedDelegate: AppDelegate!
@@ -191,11 +191,12 @@ class BarGraphViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
         ColorPicker.dataSource = self
         
         // Customize the textfield
+        pickerTextField.delegate = self
         pickerTextField.inputView = ColorPicker
         pickerTextField.tintColor = UIColor.clear
         pickerTextField.layer.borderColor = UIColor.white.cgColor
         pickerTextField.layer.borderWidth = 1.0
-        pickerTextField.layer.cornerRadius = 4.0
+        pickerTextField.layer.cornerRadius = 4.5
         
         //Looks for single or multiple taps.
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(BarGraphViewController.dismissKeyboard))
@@ -688,8 +689,15 @@ class BarGraphViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
         updateGraph()
     }
     
+    // There is only one component for the pickerView
     func numberOfComponents(in pickerView: UIPickerView) -> Int
     {
         return 1
+    }
+    
+    // A user cannot edit the text that is in the UITextField. Only the pickerView can modify the text in the UITextField
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool
+    {
+        return false
     }
 }
