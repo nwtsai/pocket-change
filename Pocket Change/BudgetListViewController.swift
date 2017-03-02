@@ -8,6 +8,7 @@
 
 import UIKit
 import CoreData
+import GoogleMaps
 
 class BudgetListViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate
 {
@@ -113,6 +114,8 @@ class BudgetListViewController: UIViewController, UITableViewDataSource, UITable
                     budget.totalBudgetAmount = inputAmount
                     budget.totalAmountAdded = 0.0
                     budget.barGraphColor = 0
+                    budget.markerLatitude = [Double]()
+                    budget.markerLongitude = [Double]()
                     
                     // Save and get data to coredata
                     self.sharedDelegate.saveContext()

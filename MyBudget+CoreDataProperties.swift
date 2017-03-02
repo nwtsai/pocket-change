@@ -9,7 +9,7 @@
 
 import Foundation
 import CoreData
-
+import GoogleMaps
 
 extension MyBudget
 {
@@ -23,6 +23,8 @@ extension MyBudget
     @NSManaged public var barGraphColor: Int
     @NSManaged public var descriptionArray: [String]
     @NSManaged public var historyArray: [String]
+    @NSManaged public var markerLatitude: [Double]
+    @NSManaged public var markerLongitude: [Double]
     @NSManaged public var amountSpentOnDate: [String: Double]
     @NSManaged public var totalAmountSpent: Double
     @NSManaged public var totalBudgetAmount: Double

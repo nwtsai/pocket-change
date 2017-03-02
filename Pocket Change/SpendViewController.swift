@@ -8,11 +8,16 @@
 
 import UIKit
 import CoreData
+import GoogleMaps
+import CoreLocation
 
-class SpendViewController: UIViewController, UITextFieldDelegate
+class SpendViewController: UIViewController, UITextFieldDelegate, CLLocationManagerDelegate
 {
     // sharedDelegate
     var sharedDelegate: AppDelegate!
+    
+    // Location manager for finding the current location
+    let locationManager = CLLocationManager()
     
     // IB Outlets
     @IBOutlet weak var spendButton: UIButton!
@@ -28,6 +33,12 @@ class SpendViewController: UIViewController, UITextFieldDelegate
         // So we don't need to type this out again
         let shDelegate = UIApplication.shared.delegate as! AppDelegate
         sharedDelegate = shDelegate
+        
+        // Find the current location
+        self.locationManager.delegate = self
+        self.locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
+        self.locationManager.requestWhenInUseAuthorization()
+        self.locationManager.startUpdatingLocation()
         
         // Set Navbar Color
         let color = UIColor.white
@@ -78,6 +89,7 @@ class SpendViewController: UIViewController, UITextFieldDelegate
     {
         showEditBalanceAlert()
     }
+    
     // Use this variable to enable or disable the Save button
     weak var amountSaveButton : UIAlertAction?
     
@@ -266,6 +278,21 @@ class SpendViewController: UIViewController, UITextFieldDelegate
             // Log the total amount spent for this budget
             BudgetVariables.budgetArray[BudgetVariables.currentIndex].totalAmountSpent += input
             
+            // Log the latitude and longitude of the current transaction if the current location is available
+            let currentPosition = self.locationManager.location?.coordinate
+            if currentPosition != nil
+            {
+                BudgetVariables.budgetArray[BudgetVariables.currentIndex].markerLatitude.append((currentPosition?.latitude)!)
+                BudgetVariables.budgetArray[BudgetVariables.currentIndex].markerLongitude.append((currentPosition?.longitude)!)
+            }
+                
+            // If the current position is nil, set the arrays with placeholders of (0,0)
+            else
+            {
+                BudgetVariables.budgetArray[BudgetVariables.currentIndex].markerLatitude.append(0)
+                BudgetVariables.budgetArray[BudgetVariables.currentIndex].markerLongitude.append(0)
+            }
+                        
             if BudgetVariables.budgetArray[BudgetVariables.currentIndex].balance - input < 0
             {
                 spendButton.isEnabled = false
@@ -352,7 +379,7 @@ class SpendViewController: UIViewController, UITextFieldDelegate
         // Save context and get data
         self.sharedDelegate.saveContext()
         BudgetVariables.getData()
-        performSegue(withIdentifier: "showHistory", sender: nil)
+        performSegue(withIdentifier: "showHistoryAndMap", sender: nil)
     }
     
     // When the Graphs button gets pressed segue to the HistoryViewController file
@@ -380,6 +407,11 @@ class SpendViewController: UIViewController, UITextFieldDelegate
         else if (segue.identifier == "showHistory")
         {
             backItem.title = BudgetVariables.budgetArray[BudgetVariables.currentIndex].name
+        }
+        
+        else if (segue.identifier == "showHistoryAndMap")
+        {
+            
         }
         
         // Set the back bar button item

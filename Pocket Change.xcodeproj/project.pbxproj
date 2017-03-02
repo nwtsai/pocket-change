@@ -17,13 +17,15 @@
 		9A09B72B1E0CB96A00D0F4A4 /* Charts.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 9A09B7291E0CB96A00D0F4A4 /* Charts.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		9A27BF2B1E0A01B100146EEA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A27BF2A1E0A01B100146EEA /* AppDelegate.swift */; };
 		9A27BF2D1E0A01B100146EEA /* SpendViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A27BF2C1E0A01B100146EEA /* SpendViewController.swift */; };
-		9A27BF331E0A01B100146EEA /* Pocket_Change.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 9A27BF311E0A01B100146EEA /* Pocket_Change.xcdatamodeld */; };
 		9A27BF351E0A01B100146EEA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9A27BF341E0A01B100146EEA /* Assets.xcassets */; };
 		9A27BF381E0A01B100146EEA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9A27BF361E0A01B100146EEA /* LaunchScreen.storyboard */; };
 		9A27BF431E0A01B100146EEA /* Pocket_ChangeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A27BF421E0A01B100146EEA /* Pocket_ChangeTests.swift */; };
 		9A27BF4E1E0A01B100146EEA /* Pocket_ChangeUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A27BF4D1E0A01B100146EEA /* Pocket_ChangeUITests.swift */; };
 		9A27BF5C1E0A022A00146EEA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9A27BF5B1E0A022A00146EEA /* Main.storyboard */; };
+		9AA401401E681F2B006D4D70 /* HistoryAndMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AA4013F1E681F2B006D4D70 /* HistoryAndMapViewController.swift */; };
+		9AA401431E683F95006D4D70 /* Pocket_Change.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 9AA401411E683F95006D4D70 /* Pocket_Change.xcdatamodeld */; };
 		9AAE17801E0DD41100F98BEB /* PieChartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AAE177F1E0DD41100F98BEB /* PieChartViewController.swift */; };
+		9BEEB8B3237E9316D22EC5F1 /* libPods-Pocket Change.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6B3C8443A31C8AFFA3062D10 /* libPods-Pocket Change.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -79,6 +81,9 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		6B3C8443A31C8AFFA3062D10 /* libPods-Pocket Change.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Pocket Change.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		703EF1DA9E0B13718BB778C5 /* Pods-Pocket Change.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Pocket Change.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Pocket Change/Pods-Pocket Change.debug.xcconfig"; sourceTree = "<group>"; };
+		8F0F7F4F5510AE26864AF489 /* Pods-Pocket Change.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Pocket Change.release.xcconfig"; path = "Pods/Target Support Files/Pods-Pocket Change/Pods-Pocket Change.release.xcconfig"; sourceTree = "<group>"; };
 		9A0010CB1E0A07B2008E7092 /* HistoryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HistoryViewController.swift; sourceTree = "<group>"; };
 		9A0010CD1E0A0887008E7092 /* BudgetListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BudgetListViewController.swift; sourceTree = "<group>"; };
 		9A0010CF1E0A097D008E7092 /* BudgetVariables.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BudgetVariables.swift; sourceTree = "<group>"; };
@@ -90,7 +95,6 @@
 		9A27BF271E0A01B100146EEA /* Pocket Change.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Pocket Change.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9A27BF2A1E0A01B100146EEA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9A27BF2C1E0A01B100146EEA /* SpendViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpendViewController.swift; sourceTree = "<group>"; };
-		9A27BF321E0A01B100146EEA /* Pocket_Change.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Pocket_Change.xcdatamodel; sourceTree = "<group>"; };
 		9A27BF341E0A01B100146EEA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		9A27BF371E0A01B100146EEA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		9A27BF391E0A01B100146EEA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -101,6 +105,8 @@
 		9A27BF4D1E0A01B100146EEA /* Pocket_ChangeUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pocket_ChangeUITests.swift; sourceTree = "<group>"; };
 		9A27BF4F1E0A01B100146EEA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9A27BF5B1E0A022A00146EEA /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		9AA4013F1E681F2B006D4D70 /* HistoryAndMapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HistoryAndMapViewController.swift; sourceTree = "<group>"; };
+		9AA401421E683F95006D4D70 /* Pocket_Change.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Pocket_Change.xcdatamodel; sourceTree = "<group>"; };
 		9AAE177F1E0DD41100F98BEB /* PieChartViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PieChartViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -110,6 +116,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9A09B72A1E0CB96A00D0F4A4 /* Charts.framework in Frameworks */,
+				9BEEB8B3237E9316D22EC5F1 /* libPods-Pocket Change.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -130,6 +137,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		5F66FB100FF091CBE3C4C024 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				703EF1DA9E0B13718BB778C5 /* Pods-Pocket Change.debug.xcconfig */,
+				8F0F7F4F5510AE26864AF489 /* Pods-Pocket Change.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		9A005AB21E0D01640081142A /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -149,6 +165,8 @@
 				9A27BF411E0A01B100146EEA /* Pocket ChangeTests */,
 				9A27BF4C1E0A01B100146EEA /* Pocket ChangeUITests */,
 				9A27BF281E0A01B100146EEA /* Products */,
+				5F66FB100FF091CBE3C4C024 /* Pods */,
+				F282B2119CEA6BD34C6FD349 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -170,12 +188,13 @@
 				9AAE177F1E0DD41100F98BEB /* PieChartViewController.swift */,
 				9A0010CD1E0A0887008E7092 /* BudgetListViewController.swift */,
 				9A27BF2C1E0A01B100146EEA /* SpendViewController.swift */,
-				9A0010CB1E0A07B2008E7092 /* HistoryViewController.swift */,
 				9A005ABD1E0D24F10081142A /* BarGraphViewController.swift */,
+				9AA4013F1E681F2B006D4D70 /* HistoryAndMapViewController.swift */,
+				9A0010CB1E0A07B2008E7092 /* HistoryViewController.swift */,
 				9A27BF5B1E0A022A00146EEA /* Main.storyboard */,
-				9A27BF311E0A01B100146EEA /* Pocket_Change.xcdatamodeld */,
 				9A0010DC1E0A27DF008E7092 /* MyBudget+CoreDataClass.swift */,
 				9A0010DD1E0A27DF008E7092 /* MyBudget+CoreDataProperties.swift */,
+				9AA401411E683F95006D4D70 /* Pocket_Change.xcdatamodeld */,
 				9A27BF341E0A01B100146EEA /* Assets.xcassets */,
 				9A27BF361E0A01B100146EEA /* LaunchScreen.storyboard */,
 				9A27BF391E0A01B100146EEA /* Info.plist */,
@@ -201,6 +220,14 @@
 			path = "Pocket ChangeUITests";
 			sourceTree = "<group>";
 		};
+		F282B2119CEA6BD34C6FD349 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				6B3C8443A31C8AFFA3062D10 /* libPods-Pocket Change.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -208,10 +235,13 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 9A27BF521E0A01B100146EEA /* Build configuration list for PBXNativeTarget "Pocket Change" */;
 			buildPhases = (
+				C48D1F0D2606CB4B057E4D1B /* [CP] Check Pods Manifest.lock */,
 				9A27BF231E0A01B100146EEA /* Sources */,
 				9A27BF241E0A01B100146EEA /* Frameworks */,
 				9A27BF251E0A01B100146EEA /* Resources */,
 				9A09B72C1E0CB96B00D0F4A4 /* Embed Frameworks */,
+				A2D313829B82474B25B0E3B8 /* [CP] Embed Pods Frameworks */,
+				39C9ECA117FD938A03EE9B83 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -364,13 +394,61 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		39C9ECA117FD938A03EE9B83 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Pocket Change/Pods-Pocket Change-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		A2D313829B82474B25B0E3B8 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Pocket Change/Pods-Pocket Change-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		C48D1F0D2606CB4B057E4D1B /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		9A27BF231E0A01B100146EEA /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				9A0010DF1E0A27DF008E7092 /* MyBudget+CoreDataProperties.swift in Sources */,
-				9A27BF331E0A01B100146EEA /* Pocket_Change.xcdatamodeld in Sources */,
+				9AA401401E681F2B006D4D70 /* HistoryAndMapViewController.swift in Sources */,
 				9A0010DE1E0A27DF008E7092 /* MyBudget+CoreDataClass.swift in Sources */,
 				9A27BF2D1E0A01B100146EEA /* SpendViewController.swift in Sources */,
 				9AAE17801E0DD41100F98BEB /* PieChartViewController.swift in Sources */,
@@ -378,6 +456,7 @@
 				9A27BF2B1E0A01B100146EEA /* AppDelegate.swift in Sources */,
 				9A0010CC1E0A07B2008E7092 /* HistoryViewController.swift in Sources */,
 				9A0010CE1E0A0887008E7092 /* BudgetListViewController.swift in Sources */,
+				9AA401431E683F95006D4D70 /* Pocket_Change.xcdatamodeld in Sources */,
 				9A005ABE1E0D24F10081142A /* BarGraphViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -522,6 +601,7 @@
 		};
 		9A27BF531E0A01B100146EEA /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 703EF1DA9E0B13718BB778C5 /* Pods-Pocket Change.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = QDXV9N79EB;
@@ -537,6 +617,7 @@
 		};
 		9A27BF541E0A01B100146EEA /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8F0F7F4F5510AE26864AF489 /* Pods-Pocket Change.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = QDXV9N79EB;
@@ -650,12 +731,12 @@
 /* End XCConfigurationList section */
 
 /* Begin XCVersionGroup section */
-		9A27BF311E0A01B100146EEA /* Pocket_Change.xcdatamodeld */ = {
+		9AA401411E683F95006D4D70 /* Pocket_Change.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
-				9A27BF321E0A01B100146EEA /* Pocket_Change.xcdatamodel */,
+				9AA401421E683F95006D4D70 /* Pocket_Change.xcdatamodel */,
 			);
-			currentVersion = 9A27BF321E0A01B100146EEA /* Pocket_Change.xcdatamodel */;
+			currentVersion = 9AA401421E683F95006D4D70 /* Pocket_Change.xcdatamodel */;
 			path = Pocket_Change.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
