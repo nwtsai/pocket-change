@@ -87,14 +87,14 @@
                                 <rect key="frame" x="16" y="535" width="343" height="26"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5tw-ZV-IXc" userLabel="History Button">
-                                        <rect key="frame" x="0.0" y="0.0" width="172" height="26"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="171.5" height="26"/>
                                         <state key="normal" image="button_history"/>
                                         <connections>
                                             <action selector="historyButtonPressed:" destination="sds-LB-aBh" eventType="touchUpInside" id="16H-KH-r9r"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KOJ-SF-gm5" userLabel="Graphs Button">
-                                        <rect key="frame" x="172" y="0.0" width="171" height="26"/>
+                                        <rect key="frame" x="171.5" y="0.0" width="171.5" height="26"/>
                                         <state key="normal" image="button_graphs"/>
                                         <connections>
                                             <action selector="graphsButtonPressed:" destination="sds-LB-aBh" eventType="touchUpInside" id="fyS-ia-JYj"/>
@@ -147,7 +147,6 @@
                         <outlet property="inputAmount" destination="aJg-CV-vGt" id="QfG-b6-s9W"/>
                         <outlet property="spendButton" destination="Iyv-Ff-OpV" id="DA7-qO-4aU"/>
                         <outlet property="totalBalance" destination="TRe-by-rFq" id="jO9-5R-4xj"/>
-                        <segue destination="zFl-z3-0s0" kind="show" identifier="showHistory" id="GkY-hb-RdK"/>
                         <segue destination="GDo-YR-dDG" kind="show" identifier="showGraphs" id="5yA-34-IDW"/>
                         <segue destination="4en-47-sPL" kind="show" identifier="showHistoryAndMap" id="nf0-hd-iik"/>
                     </connections>
@@ -155,60 +154,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="weC-fA-FtV" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-1036" y="-99.400299850074973"/>
-        </scene>
-        <!--History View Controller-->
-        <scene sceneID="SGq-qE-RBh">
-            <objects>
-                <viewController id="zFl-z3-0s0" customClass="HistoryViewController" customModule="Pocket_Change" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="Uzz-eG-a7m">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="historyCell" textLabel="UVe-4t-pnt" detailTextLabel="foI-it-SFX" style="IBUITableViewCellStyleValue1" id="mDG-qP-hdH">
-                                <rect key="frame" x="0.0" y="28" width="375" height="44"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="mDG-qP-hdH" id="8DO-UW-qdY">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                    <subviews>
-                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="UVe-4t-pnt">
-                                            <rect key="frame" x="15" y="11" width="34" height="21"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                            <nil key="textColor"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Detail" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="foI-it-SFX">
-                                            <rect key="frame" x="316" y="11" width="44" height="21"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                            <nil key="textColor"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                    </subviews>
-                                </tableViewCellContentView>
-                            </tableViewCell>
-                        </prototypes>
-                    </tableView>
-                    <toolbarItems/>
-                    <navigationItem key="navigationItem" id="EEE-pi-ymV">
-                        <barButtonItem key="rightBarButtonItem" systemItem="trash" id="fT0-yn-Kat">
-                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            <connections>
-                                <action selector="clearHistoryButtonWasPressed:" destination="zFl-z3-0s0" id="LaY-Gq-PcA"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
-                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
-                    <connections>
-                        <outlet property="clearHistoryButton" destination="fT0-yn-Kat" id="jyq-N3-Ub3"/>
-                        <outlet property="historyTable" destination="Uzz-eG-a7m" id="zjp-5v-MTI"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="zQN-UU-JWU" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="129" y="-1274"/>
         </scene>
         <!--History and Map View Controller-->
         <scene sceneID="STd-v6-pbN">
@@ -223,8 +168,11 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="zAr-rv-Y1t">
-                                <rect key="frame" x="0.0" y="64" width="375" height="305"/>
+                                <rect key="frame" x="0.0" y="64" width="375" height="308"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="308" id="wWq-hW-oJA"/>
+                                </constraints>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="historyCell" textLabel="mXO-xm-9ja" detailTextLabel="DS5-Cq-I6G" style="IBUITableViewCellStyleValue1" id="NBP-Vd-7z0">
                                         <rect key="frame" x="0.0" y="28" width="375" height="44"/>
@@ -253,14 +201,13 @@
                                 </prototypes>
                             </tableView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xUj-oh-P4U">
-                                <rect key="frame" x="0.0" y="369" width="375" height="254"/>
+                                <rect key="frame" x="0.0" y="372" width="375" height="251"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="zAr-rv-Y1t" firstAttribute="top" secondItem="fjv-8B-5bL" secondAttribute="bottom" id="5AN-8p-mNP"/>
-                            <constraint firstItem="xUj-oh-P4U" firstAttribute="height" secondItem="zAr-rv-Y1t" secondAttribute="height" constant="-50" id="GDu-PO-pr8"/>
                             <constraint firstAttribute="trailingMargin" secondItem="zAr-rv-Y1t" secondAttribute="trailing" constant="-16" id="L5F-Zm-K8T"/>
                             <constraint firstItem="xUj-oh-P4U" firstAttribute="leading" secondItem="Pqw-fg-cLP" secondAttribute="leadingMargin" constant="-16" id="MwR-cd-9RS"/>
                             <constraint firstItem="3T3-TZ-EwR" firstAttribute="top" secondItem="xUj-oh-P4U" secondAttribute="bottom" id="SpR-93-gxO"/>
@@ -358,7 +305,7 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="OXd-cA-3Lr" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="koO-cn-31M">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="koO-cn-31M">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>

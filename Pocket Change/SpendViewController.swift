@@ -131,6 +131,21 @@ class SpendViewController: UIViewController, UITextFieldDelegate, CLLocationMana
                 BudgetVariables.budgetArray[BudgetVariables.currentIndex].descriptionArray.append("Added to budget" + "    " + date)
                 BudgetVariables.budgetArray[BudgetVariables.currentIndex].totalAmountAdded += inputAmountNum!
                 BudgetVariables.budgetArray[BudgetVariables.currentIndex].totalBudgetAmount += inputAmountNum!
+                
+                // Log the latitude and longitude of the current transaction if the current location is available
+                let currentPosition = self.locationManager.location?.coordinate
+                if currentPosition != nil
+                {
+                    BudgetVariables.budgetArray[BudgetVariables.currentIndex].markerLatitude.append((currentPosition?.latitude)!)
+                    BudgetVariables.budgetArray[BudgetVariables.currentIndex].markerLongitude.append((currentPosition?.longitude)!)
+                }
+                    
+                // If the current position is nil, set the arrays with placeholders of (360,360)
+                else
+                {
+                    BudgetVariables.budgetArray[BudgetVariables.currentIndex].markerLatitude.append(360)
+                    BudgetVariables.budgetArray[BudgetVariables.currentIndex].markerLongitude.append(360)
+                }
             }
             
             // Save data to coredata
@@ -286,11 +301,11 @@ class SpendViewController: UIViewController, UITextFieldDelegate, CLLocationMana
                 BudgetVariables.budgetArray[BudgetVariables.currentIndex].markerLongitude.append((currentPosition?.longitude)!)
             }
                 
-            // If the current position is nil, set the arrays with placeholders of (0,0)
+            // If the current position is nil, set the arrays with placeholders of (360,360)
             else
             {
-                BudgetVariables.budgetArray[BudgetVariables.currentIndex].markerLatitude.append(0)
-                BudgetVariables.budgetArray[BudgetVariables.currentIndex].markerLongitude.append(0)
+                BudgetVariables.budgetArray[BudgetVariables.currentIndex].markerLatitude.append(360)
+                BudgetVariables.budgetArray[BudgetVariables.currentIndex].markerLongitude.append(360)
             }
                         
             if BudgetVariables.budgetArray[BudgetVariables.currentIndex].balance - input < 0
@@ -379,7 +394,10 @@ class SpendViewController: UIViewController, UITextFieldDelegate, CLLocationMana
         // Save context and get data
         self.sharedDelegate.saveContext()
         BudgetVariables.getData()
+        
+        // Show the view controller with history and the map
         performSegue(withIdentifier: "showHistoryAndMap", sender: nil)
+        
     }
     
     // When the Graphs button gets pressed segue to the HistoryViewController file
@@ -403,15 +421,10 @@ class SpendViewController: UIViewController, UITextFieldDelegate, CLLocationMana
             backItem.title = ""
         }
             
-        // If we are going to the history view, set button text to be the name of the budget
-        else if (segue.identifier == "showHistory")
-        {
-            backItem.title = BudgetVariables.budgetArray[BudgetVariables.currentIndex].name
-        }
-        
+        // If we are going to the history and map view, set button text to be the name of the budget
         else if (segue.identifier == "showHistoryAndMap")
         {
-            
+            backItem.title = BudgetVariables.budgetArray[BudgetVariables.currentIndex].name
         }
         
         // Set the back bar button item

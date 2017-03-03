@@ -353,7 +353,8 @@ class BudgetListViewController: UIViewController, UITableViewDataSource, UITable
         
         // Change the color of the buttons
         // rename.backgroundColor = BudgetVariables.hexStringToUIColor(hex: "3498DB")
-        rename.backgroundColor = #colorLiteral(red: 0.2392156869, green: 0.6745098233, blue: 0.9686274529, alpha: 1)
+        // rename.backgroundColor = #colorLiteral(red: 0.2392156869, green: 0.6745098233, blue: 0.9686274529, alpha: 1)
+        rename.backgroundColor = BudgetVariables.hexStringToUIColor(hex: "BBB7B0")
         delete.backgroundColor = BudgetVariables.hexStringToUIColor(hex: "E74C3C")
         
         return [delete, rename]

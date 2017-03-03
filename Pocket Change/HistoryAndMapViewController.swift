@@ -11,7 +11,7 @@ import CoreLocation
 import GoogleMaps
 import CoreData
 
-class HistoryAndMapViewController: UIViewController, CLLocationManagerDelegate, UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate
+class HistoryAndMapViewController: UIViewController, CLLocationManagerDelegate, UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate, GMSMapViewDelegate
 {
     // Clean code
     var sharedDelegate: AppDelegate!
@@ -36,6 +36,7 @@ class HistoryAndMapViewController: UIViewController, CLLocationManagerDelegate, 
         super.viewDidLoad()
         
         // Set up the map
+        mapView.delegate = self
         mapView.isMyLocationEnabled = true
         self.locationManager.delegate = self
         self.locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
@@ -122,12 +123,30 @@ class HistoryAndMapViewController: UIViewController, CLLocationManagerDelegate, 
         // Create markers for all the locations in the array
         for i in 0..<BudgetVariables.budgetArray[BudgetVariables.currentIndex].markerLatitude.count
         {
-            let marker = GMSMarker()
-            marker.position.latitude = BudgetVariables.budgetArray[BudgetVariables.currentIndex].markerLatitude[i]
-            marker.position.longitude = BudgetVariables.budgetArray[BudgetVariables.currentIndex].markerLongitude[i]
-            marker.snippet = BudgetVariables.getDetailFromDescription(descripStr: BudgetVariables.budgetArray[BudgetVariables.currentIndex].descriptionArray[i])
-            marker.icon = GMSMarker.markerImage(with: .black)
-            marker.map = mapView
+            let latitude = BudgetVariables.budgetArray[BudgetVariables.currentIndex].markerLatitude[i]
+            let longitude = BudgetVariables.budgetArray[BudgetVariables.currentIndex].markerLongitude[i]
+            
+            // If the latitude and longitude are valid, add a corresponding marker to the map
+            if latitude != 360 && longitude != 360
+            {
+                let marker = GMSMarker()
+                marker.position.latitude = latitude
+                marker.position.longitude = longitude
+                marker.snippet = BudgetVariables.getDetailFromDescription(descripStr: BudgetVariables.budgetArray[BudgetVariables.currentIndex].descriptionArray[i])
+                
+                // If the action is a "+", add a green marker instead
+                let str = BudgetVariables.budgetArray[BudgetVariables.currentIndex].historyArray[i]
+                let index = str.index(str.startIndex, offsetBy: 0)
+                
+                if str[index] == "+"
+                {
+                    marker.icon = GMSMarker.markerImage(with: BudgetVariables.hexStringToUIColor(hex: "00B22C"))
+                }
+                
+                marker.tracksInfoWindowChanges = true
+                mapView.selectedMarker = marker
+                marker.map = mapView
+            }
         }
         
         // Add the map to the map view
@@ -192,8 +211,8 @@ class HistoryAndMapViewController: UIViewController, CLLocationManagerDelegate, 
         {
             myCell.textLabel?.textColor = UIColor.lightGray
             myCell.detailTextLabel?.textColor = UIColor.lightGray
-            myCell.textLabel?.text = "Swipe left to undo"
-            myCell.detailTextLabel?.text = "Tap to edit"
+            myCell.textLabel?.text = "Swipe left to edit"
+            myCell.detailTextLabel?.text = "Tap to locate"
         }
         else
         {
@@ -272,7 +291,7 @@ class HistoryAndMapViewController: UIViewController, CLLocationManagerDelegate, 
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]?
     {
         // Title is the text of the button
-        let undo = UITableViewRowAction(style: .normal, title: " Undo  ")
+        let undo = UITableViewRowAction(style: .normal, title: " Undo")
         { (action, indexPath) in
             
             // Undo item at indexPath
@@ -307,10 +326,9 @@ class HistoryAndMapViewController: UIViewController, CLLocationManagerDelegate, 
                 BudgetVariables.budgetArray[BudgetVariables.currentIndex].totalAmountSpent = newTotalAmountSpent
                 let newBalance = BudgetVariables.budgetArray[BudgetVariables.currentIndex].balance + historyValue!
                 BudgetVariables.budgetArray[BudgetVariables.currentIndex].balance = newBalance
-                BudgetVariables.budgetArray[BudgetVariables.currentIndex].markerLatitude.remove(at: indexPath.row)
-                BudgetVariables.budgetArray[BudgetVariables.currentIndex].markerLongitude.remove(at: indexPath.row)
             }
-                // If this action was an "Added to Budget" action
+                
+            // If this action was an "Added to Budget" action
             else if historyStr[index1] == "+"
             {
                 let newTotalAmountAdded = BudgetVariables.budgetArray[BudgetVariables.currentIndex].totalAmountAdded - historyValue!
@@ -320,6 +338,10 @@ class HistoryAndMapViewController: UIViewController, CLLocationManagerDelegate, 
                 let newBudgetAmount = BudgetVariables.budgetArray[BudgetVariables.currentIndex].totalBudgetAmount - historyValue!
                 BudgetVariables.budgetArray[BudgetVariables.currentIndex].totalBudgetAmount = newBudgetAmount
             }
+            
+            // Remove the latitude and longitude for the current row
+            BudgetVariables.budgetArray[BudgetVariables.currentIndex].markerLatitude.remove(at: indexPath.row)
+            BudgetVariables.budgetArray[BudgetVariables.currentIndex].markerLongitude.remove(at: indexPath.row)
             
             // Delete the row
             BudgetVariables.budgetArray[BudgetVariables.currentIndex].historyArray.remove(at: indexPath.row)
@@ -342,23 +364,45 @@ class HistoryAndMapViewController: UIViewController, CLLocationManagerDelegate, 
             }
         }
         
-        // Change the color of the button
-        undo.backgroundColor = BudgetVariables.hexStringToUIColor(hex: "BBB7B0")
+        // Change the color of the undo button
+        undo.backgroundColor = BudgetVariables.hexStringToUIColor(hex: "E74C3C")
         
-        return [undo]
+        // Edit item at indexPath
+        let edit = UITableViewRowAction(style: .normal, title: "Edit   ")
+        { (action, indexPath) in
+            
+            // If it is not the last row
+            if indexPath.row != BudgetVariables.budgetArray[BudgetVariables.currentIndex].historyArray.count
+            {
+                let descripStr = BudgetVariables.budgetArray[BudgetVariables.currentIndex].descriptionArray[indexPath.row]
+                let index = descripStr.index(descripStr.endIndex, offsetBy: -14)
+                self.oldDescription = descripStr.substring(to: index)
+                self.showEditDescriptionAlert(indexPath: indexPath)
+            }
+        }
+        
+        // Change the color of the edit button
+        edit.backgroundColor = BudgetVariables.hexStringToUIColor(hex: "BBB7B0")
+        
+        return [undo, edit]
     }
     
-    // When a cell is selected, show an alert
+    // When a cell is selected, focus the camera on the associated marker
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath)
     {
         // If it is not the last row
         if indexPath.row != BudgetVariables.budgetArray[BudgetVariables.currentIndex].historyArray.count
         {
-            let descripStr = BudgetVariables.budgetArray[BudgetVariables.currentIndex].descriptionArray[indexPath.row]
-            let index = descripStr.index(descripStr.endIndex, offsetBy: -14)
-            self.oldDescription = descripStr.substring(to: index)
+            // Create a map view using the current width and height of the view
+            let latitude = BudgetVariables.budgetArray[BudgetVariables.currentIndex].markerLatitude[indexPath.row]
+            let longitude = BudgetVariables.budgetArray[BudgetVariables.currentIndex].markerLongitude[indexPath.row]
             
-            showEditDescriptionAlert(indexPath: indexPath)
+            // If the latitude and longitude are valid, animate the camera to that location, otherwise do nothing
+            if latitude != 360 && longitude != 360
+            {
+                mapView.animate(toLocation: CLLocationCoordinate2D(latitude: latitude, longitude: longitude))
+            }
+            
         }
     }
     
@@ -404,6 +448,9 @@ class HistoryAndMapViewController: UIViewController, CLLocationManagerDelegate, 
             
             // Reload the table
             self.historyTable.reloadData()
+            
+            // Refresh the map
+            self.refreshMarkers()
         })
         
         alert.addAction(save)
