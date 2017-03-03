@@ -84,7 +84,7 @@ class HistoryAndMapViewController: UIViewController, CLLocationManagerDelegate, 
         // Get data from CoreData
         BudgetVariables.getData()
         
-        // Reload the budget table
+        // Reload the history table
         self.historyTable.reloadData()
     }
     
@@ -94,13 +94,13 @@ class HistoryAndMapViewController: UIViewController, CLLocationManagerDelegate, 
         self.initializeMarkers()
     }
     
-    // When the location is updated, show the current location
+    // When the location finishes updating, stop updating the current location
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation])
     {
         self.locationManager.stopUpdatingLocation()
     }
     
-    // Show the current location on the Google Map
+    // Show the current markers on the Google Maps
     func initializeMarkers()
     {
         // If the current location cannot be found, set the default camera to be centered at UCLA
@@ -139,7 +139,6 @@ class HistoryAndMapViewController: UIViewController, CLLocationManagerDelegate, 
                 // If the action is a "+", add a green marker instead
                 let str = BudgetVariables.budgetArray[BudgetVariables.currentIndex].historyArray[i]
                 let index = str.index(str.startIndex, offsetBy: 0)
-                
                 if str[index] == "+"
                 {
                     marker.icon = GMSMarker.markerImage(with: BudgetVariables.hexStringToUIColor(hex: "00B22C"))
