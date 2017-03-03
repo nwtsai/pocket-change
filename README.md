@@ -16,7 +16,7 @@ iOS App made from scratch that helps users visualize their personal expenses and
 ‣ Rename and delete budgets <br />
 
 # Design
-‣ CoreData allows for pertinent information to be stored regardless of whether or not the app is running <br />
+‣ Implemented CoreData to store pertinent information unique to the individual budgets <br />
 ‣ Designed a class that efficiently populates the x and y axes of the bar graphs <br />
 ‣ Constructed a backend design that stores the location information of each transaction <br />
 ‣ Developed an efficient method for retrieving data by relying on the fast lookup of Swift dictionaries when dealing with transaction history <br />
