@@ -105,7 +105,17 @@ class HistoryAndMapViewController: UIViewController, CLLocationManagerDelegate, 
         // If there are no latitudes and longitudes, center the camera around the current location
         if BudgetVariables.budgetArray[BudgetVariables.currentIndex].markerLatitude.isEmpty == true
         {
-            camera = GMSCameraPosition.camera(withLatitude: (self.locationManager.location?.coordinate.latitude)!, longitude: (self.locationManager.location?.coordinate.longitude)!, zoom: 15)
+            // If the current location cannot be found, set the default camera to be centered at UCLA
+            if self.locationManager.location?.coordinate.latitude == nil || self.locationManager.location?.coordinate.longitude == nil
+            {
+                camera = GMSCameraPosition.camera(withLatitude: 34.068921, longitude: -118.44518110000001, zoom: 15)
+            }
+                
+            // Otherwise if the current location can be found, center the map at the current location
+            else
+            {
+                camera = GMSCameraPosition.camera(withLatitude: (self.locationManager.location?.coordinate.latitude)!, longitude: (self.locationManager.location?.coordinate.longitude)!, zoom: 15)
+            }
         }
         
         // If the marker array is not empty, center the camera around the first transaction's location
@@ -402,7 +412,6 @@ class HistoryAndMapViewController: UIViewController, CLLocationManagerDelegate, 
             {
                 mapView.animate(toLocation: CLLocationCoordinate2D(latitude: latitude, longitude: longitude))
             }
-            
         }
     }
     
