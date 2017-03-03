@@ -1,5 +1,5 @@
 # Pocket Change
-iOS App made from scratch that helps users manage their personal expenses and log their day-to-day transactions
+iOS App made from scratch that helps users visualize their personal expenses and log their day-to-day transactions
 
 # Features
 ‣ View your entire, color-coded history log of <i>how much</i>, <i>why</i>, <i>where</i>, and <i>when</i> money was spent <br />
