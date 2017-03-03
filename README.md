@@ -2,10 +2,12 @@
 iOS App made from scratch that helps users manage their personal expenses and log their day-to-day transactions
 
 # Features
+‣ View your entire, color-coded history log of <i>how much</i>, <i>why</i>, <i>where</i>, and <i>when</i> money was spent <br />
+‣ Integrated the application with the Google Maps API to visualize where money was spent when the user travels <br />
+‣ When a user taps on a transaction, the map animates and centers on the location of where the transaction happened <br /> 
 ‣ Create a budget with a name and starting balance <br />
 ‣ Spend or add money to any budget, adding to your history <br />
 ‣ Check your pie chart to see the net amount spent per budget; everytime you view the pie chart it is drawn with 1 out of the 10 color schemes included in my design, offering visibility and clarity on up-to-date data <br />
-‣ View your entire, color-coded history log of <i>how much</i>, <i>why</i>, and <i>when</i> money was spent <br />
 ‣ View your transaction history within a specified time interval (past week, month, or year) on a bar graph <br />
 &nbsp;&nbsp;&nbsp;&nbsp;– A horizontal line details the average amount spent per day for the specified time interval <br />
 &nbsp;&nbsp;&nbsp;&nbsp;– The user can customize each budget's bar graph with 11 different color schemes <br />
@@ -15,7 +17,9 @@ iOS App made from scratch that helps users manage their personal expenses and lo
 
 # Design
 ‣ CoreData allows for pertinent information to be stored regardless of whether or not the app is running <br />
-‣ Designed a class that efficiently populates the x and y axes of the line graph <br />
+‣ Designed a class that efficiently populates the x and y axes of the bar graphs <br />
+‣ Constructed a backend design that stores the location information of each transaction <br />
+‣ Developed an efficient method for retrieving data by relying on the fast lookup of Swift dictionaries when dealing with transaction history <br />
 ‣ Constructed a dictionary that maps the current date to the total amount spent on that particular day <br />
 ‣ Buttons enable and disable dynamically based on the validity of input: <br />
 &nbsp;&nbsp;&nbsp;&nbsp;– Balance must be between $0 and $1,000,000 <br />
