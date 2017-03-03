@@ -29,6 +29,7 @@ class HistoryAndMapViewController: UIViewController, CLLocationManagerDelegate, 
     // Global variables for manipulating the map
     var mapView = GMSMapView()
     var camera = GMSCameraPosition()
+    var markerArray = [GMSMarker]()
     
     // When the screen loads, display the table
     override func viewDidLoad()
@@ -87,10 +88,10 @@ class HistoryAndMapViewController: UIViewController, CLLocationManagerDelegate, 
         self.historyTable.reloadData()
     }
     
-    // Only refresh when the subviews have been set
+    // Only initialize the markers when the subviews have been set
     override func viewDidLayoutSubviews()
     {
-        self.refreshMarkers()
+        self.initializeMarkers()
     }
     
     // When the location is updated, show the current location
@@ -100,37 +101,28 @@ class HistoryAndMapViewController: UIViewController, CLLocationManagerDelegate, 
     }
     
     // Show the current location on the Google Map
-    func refreshMarkers()
+    func initializeMarkers()
     {
-        // If there are no latitudes and longitudes, center the camera around the current location
-        if BudgetVariables.budgetArray[BudgetVariables.currentIndex].markerLatitude.isEmpty == true
+        // If the current location cannot be found, set the default camera to be centered at UCLA
+        if self.locationManager.location?.coordinate.latitude == nil || self.locationManager.location?.coordinate.longitude == nil
         {
-            // If the current location cannot be found, set the default camera to be centered at UCLA
-            if self.locationManager.location?.coordinate.latitude == nil || self.locationManager.location?.coordinate.longitude == nil
-            {
-                camera = GMSCameraPosition.camera(withLatitude: 34.068921, longitude: -118.44518110000001, zoom: 15)
-            }
-                
-            // Otherwise if the current location can be found, center the map at the current location
-            else
-            {
-                camera = GMSCameraPosition.camera(withLatitude: (self.locationManager.location?.coordinate.latitude)!, longitude: (self.locationManager.location?.coordinate.longitude)!, zoom: 15)
-            }
+            camera = GMSCameraPosition.camera(withLatitude: 34.068921, longitude: -118.44518110000001, zoom: 15)
         }
-        
-        // If the marker array is not empty, center the camera around the first transaction's location
+            
+        // Otherwise if the current location can be found, center the map at the current location
         else
         {
-            camera = GMSCameraPosition.camera(withLatitude: BudgetVariables.budgetArray[BudgetVariables.currentIndex].markerLatitude[0], longitude: BudgetVariables.budgetArray[BudgetVariables.currentIndex].markerLongitude[0], zoom: 15)
+            camera = GMSCameraPosition.camera(withLatitude: (self.locationManager.location?.coordinate.latitude)!, longitude: (self.locationManager.location?.coordinate.longitude)!, zoom: 15)
         }
         
-        // Create a map view using the current width and height of the view
+        // Create a map view using the current width and height of the view, and the camera determined from above
         mapView = GMSMapView.map(withFrame: CGRect(x: 0, y: 0, width: self.myMapView.frame.size.width, height: self.myMapView.frame.size.height), camera: camera)
         
-        // Clear all markers before loading the new markers
+        // Clear all markers before updating the markers
         mapView.clear()
+        self.markerArray.removeAll()
         
-        // Create markers for all the locations in the array
+        // Append markers for all the locations in the array
         for i in 0..<BudgetVariables.budgetArray[BudgetVariables.currentIndex].markerLatitude.count
         {
             let latitude = BudgetVariables.budgetArray[BudgetVariables.currentIndex].markerLatitude[i]
@@ -156,11 +148,35 @@ class HistoryAndMapViewController: UIViewController, CLLocationManagerDelegate, 
                 marker.tracksInfoWindowChanges = true
                 mapView.selectedMarker = marker
                 marker.map = mapView
+                self.markerArray.append(marker)
+            }
+            
+            // If the latitude or longitude values are invalid, place a marker with no attributes to keep a 1:1 ratio
+            else
+            {
+                let marker = GMSMarker()
+                self.markerArray.append(marker)
             }
         }
         
         // Add the map to the map view
         self.myMapView.addSubview(mapView)
+        
+        // Initialize the selected marker to be the last marker, if a marker exists
+        if self.markerArray.isEmpty == false
+        {
+            self.mapView.selectedMarker = self.markerArray[self.markerArray.count - 1]
+        }
+    }
+    
+    // Remove all markers
+    func removeMarkers()
+    {
+        for marker in self.markerArray
+        {
+            marker.map = nil
+        }
+        self.markerArray.removeAll()
     }
     
     //Calls this function when the tap is recognized.
@@ -199,7 +215,7 @@ class HistoryAndMapViewController: UIViewController, CLLocationManagerDelegate, 
         
         // Reload the table, refresh the markers, and disable the clear history button
         self.historyTable.reloadData()
-        self.refreshMarkers()
+        self.removeMarkers()
         clearHistoryButton.isEnabled = false
     }
     
@@ -353,15 +369,16 @@ class HistoryAndMapViewController: UIViewController, CLLocationManagerDelegate, 
             BudgetVariables.budgetArray[BudgetVariables.currentIndex].markerLatitude.remove(at: indexPath.row)
             BudgetVariables.budgetArray[BudgetVariables.currentIndex].markerLongitude.remove(at: indexPath.row)
             
+            // Delete just the marker associated with this cell
+            self.markerArray[indexPath.row].map = nil
+            self.markerArray.remove(at: indexPath.row)
+            
             // Delete the row
             BudgetVariables.budgetArray[BudgetVariables.currentIndex].historyArray.remove(at: indexPath.row)
             BudgetVariables.budgetArray[BudgetVariables.currentIndex].descriptionArray.remove(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .fade)
             self.sharedDelegate.saveContext()
             BudgetVariables.getData()
-            
-            // Refresh the map
-            self.refreshMarkers()
             
             // Disable the clear history button if the cell deleted was the last item
             if BudgetVariables.budgetArray[BudgetVariables.currentIndex].historyArray.isEmpty == true
@@ -403,14 +420,13 @@ class HistoryAndMapViewController: UIViewController, CLLocationManagerDelegate, 
         // If it is not the last row
         if indexPath.row != BudgetVariables.budgetArray[BudgetVariables.currentIndex].historyArray.count
         {
-            // Create a map view using the current width and height of the view
             let latitude = BudgetVariables.budgetArray[BudgetVariables.currentIndex].markerLatitude[indexPath.row]
             let longitude = BudgetVariables.budgetArray[BudgetVariables.currentIndex].markerLongitude[indexPath.row]
             
             // If the latitude and longitude are valid, animate the camera to that location, otherwise do nothing
             if latitude != 360 && longitude != 360
             {
-                mapView.animate(toLocation: CLLocationCoordinate2D(latitude: latitude, longitude: longitude))
+                mapView.selectedMarker = self.markerArray[indexPath.row]
             }
         }
     }
@@ -458,8 +474,8 @@ class HistoryAndMapViewController: UIViewController, CLLocationManagerDelegate, 
             // Reload the table
             self.historyTable.reloadData()
             
-            // Refresh the map
-            self.refreshMarkers()
+            // Update the snippet for this marker
+            self.markerArray[indexPath.row].snippet = inputDescription!
         })
         
         alert.addAction(save)
