@@ -218,6 +218,7 @@
                     </view>
                     <toolbarItems/>
                     <navigationItem key="navigationItem" id="6ii-ka-d2g">
+                        <nil key="title"/>
                         <barButtonItem key="rightBarButtonItem" systemItem="trash" id="NY8-vB-ySk">
                             <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <connections>
