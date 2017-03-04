@@ -380,10 +380,16 @@
                         <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Total Amount Spent per Budget" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MRV-H3-yAL" userLabel="Net Amount Spent per Budget">
-                                <rect key="frame" x="67" y="35" width="241" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MRV-H3-yAL" userLabel="Net Amount Spent per Budget">
+                                <rect key="frame" x="60.5" y="30" width="254" height="21"/>
+                                <attributedString key="attributedText">
+                                    <fragment content="Total Amount Spent per Budget">
+                                        <attributes>
+                                            <font key="NSFont" size="18" name="KhmerMN"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                </attributedString>
                                 <nil key="highlightedColor"/>
                             </label>
                             <view hidden="YES" opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Uzn-r4-01j">
@@ -394,8 +400,8 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="MRV-H3-yAL" firstAttribute="centerX" secondItem="3oj-VF-CUA" secondAttribute="centerX" id="29a-vj-bTw"/>
-                            <constraint firstItem="MRV-H3-yAL" firstAttribute="centerY" secondItem="3oj-VF-CUA" secondAttribute="centerY" multiplier="0.15" id="MfB-Gg-xt8"/>
                             <constraint firstAttribute="trailingMargin" secondItem="Uzn-r4-01j" secondAttribute="trailing" id="ZLf-XO-lpx"/>
+                            <constraint firstItem="MRV-H3-yAL" firstAttribute="top" secondItem="QeF-jT-se3" secondAttribute="bottom" constant="30" id="fJ9-dM-gbz"/>
                             <constraint firstItem="Uzn-r4-01j" firstAttribute="leading" secondItem="3oj-VF-CUA" secondAttribute="leadingMargin" id="jMi-mW-qF4"/>
                             <constraint firstItem="oSv-kI-Y5L" firstAttribute="top" secondItem="Uzn-r4-01j" secondAttribute="bottom" id="kVC-bI-CDn"/>
                             <constraint firstItem="Uzn-r4-01j" firstAttribute="top" secondItem="QeF-jT-se3" secondAttribute="bottom" constant="-65" id="opA-hx-AVI"/>

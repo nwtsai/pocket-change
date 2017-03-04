@@ -14,6 +14,7 @@
 		9A005ABE1E0D24F10081142A /* BarGraphViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A005ABD1E0D24F10081142A /* BarGraphViewController.swift */; };
 		9A09B72A1E0CB96A00D0F4A4 /* Charts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A09B7291E0CB96A00D0F4A4 /* Charts.framework */; };
 		9A09B72B1E0CB96A00D0F4A4 /* Charts.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 9A09B7291E0CB96A00D0F4A4 /* Charts.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		9A213F101E6A7D2D0037C182 /* Google_Maps_Night_Theme.json in Resources */ = {isa = PBXBuildFile; fileRef = 9A213F0F1E6A7D2D0037C182 /* Google_Maps_Night_Theme.json */; };
 		9A27BF2B1E0A01B100146EEA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A27BF2A1E0A01B100146EEA /* AppDelegate.swift */; };
 		9A27BF2D1E0A01B100146EEA /* SpendViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A27BF2C1E0A01B100146EEA /* SpendViewController.swift */; };
 		9A27BF351E0A01B100146EEA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9A27BF341E0A01B100146EEA /* Assets.xcassets */; };
@@ -90,6 +91,7 @@
 		9A005ABD1E0D24F10081142A /* BarGraphViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BarGraphViewController.swift; sourceTree = "<group>"; };
 		9A09B71D1E0CB92600D0F4A4 /* Charts.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Charts.xcodeproj; path = "Pocket Change/Charts/Charts.xcodeproj"; sourceTree = "<group>"; };
 		9A09B7291E0CB96A00D0F4A4 /* Charts.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Charts.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		9A213F0F1E6A7D2D0037C182 /* Google_Maps_Night_Theme.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Google_Maps_Night_Theme.json; sourceTree = "<group>"; };
 		9A27BF271E0A01B100146EEA /* Pocket Change.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Pocket Change.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9A27BF2A1E0A01B100146EEA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9A27BF2C1E0A01B100146EEA /* SpendViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpendViewController.swift; sourceTree = "<group>"; };
@@ -195,6 +197,7 @@
 				9A27BF341E0A01B100146EEA /* Assets.xcassets */,
 				9A27BF361E0A01B100146EEA /* LaunchScreen.storyboard */,
 				9A27BF391E0A01B100146EEA /* Info.plist */,
+				9A213F0F1E6A7D2D0037C182 /* Google_Maps_Night_Theme.json */,
 			);
 			path = "Pocket Change";
 			sourceTree = "<group>";
@@ -369,6 +372,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9A213F101E6A7D2D0037C182 /* Google_Maps_Night_Theme.json in Resources */,
 				9A27BF381E0A01B100146EEA /* LaunchScreen.storyboard in Resources */,
 				9A27BF351E0A01B100146EEA /* Assets.xcassets in Resources */,
 				9A27BF5C1E0A022A00146EEA /* Main.storyboard in Resources */,

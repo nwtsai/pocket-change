@@ -38,9 +38,8 @@ class HistoryAndMapViewController: UIViewController, CLLocationManagerDelegate, 
         
         // Set up the map
         mapView.delegate = self
-        mapView.isMyLocationEnabled = true
         self.locationManager.delegate = self
-        self.locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
+        self.locationManager.desiredAccuracy = kCLLocationAccuracyBest
         self.locationManager.requestWhenInUseAuthorization()
         self.locationManager.startUpdatingLocation()
         
@@ -144,7 +143,6 @@ class HistoryAndMapViewController: UIViewController, CLLocationManagerDelegate, 
                     marker.icon = GMSMarker.markerImage(with: BudgetVariables.hexStringToUIColor(hex: "00B22C"))
                 }
                 
-                marker.tracksInfoWindowChanges = true
                 marker.map = mapView
                 self.markerArray.append(marker)
             }
@@ -154,6 +152,35 @@ class HistoryAndMapViewController: UIViewController, CLLocationManagerDelegate, 
             {
                 let marker = GMSMarker()
                 self.markerArray.append(marker)
+            }
+        }
+        
+        // Enable current location and add a current location button
+        mapView.isMyLocationEnabled = true
+        mapView.settings.myLocationButton = true
+        
+        // Grab the current hour
+        let date = Date()
+        let calendar = Calendar.current
+        let hour = calendar.component(.hour, from: date)
+
+        // Style the map with a night theme only between 6 PM - 6 AM
+        if hour >= 18 || hour <= 6
+        {
+            do
+            {
+                if let styleURL = Bundle.main.url(forResource: "Google_Maps_Night_Theme", withExtension: "json")
+                {
+                    mapView.mapStyle = try GMSMapStyle(contentsOfFileURL: styleURL)
+                }
+                else
+                {
+                    NSLog("Unable to find style.json")
+                }
+            }
+            catch
+            {
+                NSLog("One or more of the map styles failed to load. \(error)")
             }
         }
         
@@ -319,8 +346,6 @@ class HistoryAndMapViewController: UIViewController, CLLocationManagerDelegate, 
         // Title is the text of the button
         let undo = UITableViewRowAction(style: .normal, title: " Undo")
         { (action, indexPath) in
-            
-            // Undo item at indexPath
             
             // Extract the key to the map in the format "MM/dd/YYYY" into the variable date
             let descripStr = BudgetVariables.budgetArray[BudgetVariables.currentIndex].descriptionArray[indexPath.row]
