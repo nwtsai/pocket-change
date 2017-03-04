@@ -273,13 +273,14 @@ class BudgetListViewController: UIViewController, UITableViewDataSource, UITable
         let myCell:UITableViewCell = self.budgetTable.dequeueReusableCell(withIdentifier: "clickableCell", for: indexPath)
         let count = BudgetVariables.budgetArray.count
         
-        // If it's the last cell, customize the message
+        // If it's the last cell, customize the message and make it unselectable
         if indexPath.row == count
         {
             myCell.textLabel?.textColor = UIColor.lightGray
             myCell.detailTextLabel?.textColor = UIColor.lightGray
             myCell.textLabel?.text = "Budget Name"
             myCell.detailTextLabel?.text = "Balance / Budget"
+            myCell.selectionStyle = UITableViewCellSelectionStyle.none
         }
         else
         {
@@ -352,8 +353,6 @@ class BudgetListViewController: UIViewController, UITableViewDataSource, UITable
         }
         
         // Change the color of the buttons
-        // rename.backgroundColor = BudgetVariables.hexStringToUIColor(hex: "3498DB")
-        // rename.backgroundColor = #colorLiteral(red: 0.2392156869, green: 0.6745098233, blue: 0.9686274529, alpha: 1)
         rename.backgroundColor = BudgetVariables.hexStringToUIColor(hex: "BBB7B0")
         delete.backgroundColor = BudgetVariables.hexStringToUIColor(hex: "E74C3C")
         
