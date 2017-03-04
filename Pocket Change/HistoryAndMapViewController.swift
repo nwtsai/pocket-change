@@ -145,7 +145,6 @@ class HistoryAndMapViewController: UIViewController, CLLocationManagerDelegate, 
                 }
                 
                 marker.tracksInfoWindowChanges = true
-                mapView.selectedMarker = marker
                 marker.map = mapView
                 self.markerArray.append(marker)
             }
@@ -161,10 +160,12 @@ class HistoryAndMapViewController: UIViewController, CLLocationManagerDelegate, 
         // Add the map to the map view
         self.myMapView.addSubview(mapView)
         
-        // Initialize the selected marker to be the last marker, if a marker exists
+        // Initialize the selected marker to be the last marker, if a marker exists, and set the camera to center on the marker
         if self.markerArray.isEmpty == false
         {
-            self.mapView.selectedMarker = self.markerArray[self.markerArray.count - 1]
+            let lastMarker = self.markerArray[self.markerArray.count - 1]
+            mapView.selectedMarker = lastMarker
+            mapView.camera = GMSCameraPosition.camera(withLatitude: lastMarker.position.latitude, longitude: lastMarker.position.longitude, zoom: 15)
         }
     }
     
@@ -422,10 +423,11 @@ class HistoryAndMapViewController: UIViewController, CLLocationManagerDelegate, 
             let latitude = BudgetVariables.budgetArray[BudgetVariables.currentIndex].markerLatitude[indexPath.row]
             let longitude = BudgetVariables.budgetArray[BudgetVariables.currentIndex].markerLongitude[indexPath.row]
             
-            // If the latitude and longitude are valid, animate the camera to that location, otherwise do nothing
+            // If the latitude and longitude are valid, animate the camera to that location and select that marker, otherwise do nothing
             if latitude != 360 && longitude != 360
             {
                 mapView.selectedMarker = self.markerArray[indexPath.row]
+                mapView.animate(toLocation: CLLocationCoordinate2D(latitude: latitude, longitude: longitude))
             }
         }
     }
