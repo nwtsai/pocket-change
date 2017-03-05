@@ -43,11 +43,12 @@ class HistoryAndMapViewController: UIViewController, CLLocationManagerDelegate, 
         self.locationManager.requestWhenInUseAuthorization()
         self.locationManager.startUpdatingLocation()
         
-        // Set Navbar Color
+        // Set navbar color and title
         let color = UIColor.white
         self.navigationController?.navigationBar.tintColor = color
-        
         self.navigationItem.title = "History"
+        
+        // Set delegates
         historyTable.dataSource = self
         historyTable.delegate = self
         

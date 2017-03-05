@@ -139,7 +139,7 @@
                     </view>
                     <toolbarItems/>
                     <navigationItem key="navigationItem" id="14i-Hh-xCb">
-                        <barButtonItem key="rightBarButtonItem" image="Combo Chart Filled-25" id="miQ-3f-I0a">
+                        <barButtonItem key="rightBarButtonItem" image="Combo Chart" id="miQ-3f-I0a">
                             <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <connections>
                                 <action selector="graphsButtonPressed:" destination="sds-LB-aBh" id="RHq-vW-giJ"/>
@@ -281,7 +281,7 @@
                     </tableView>
                     <toolbarItems/>
                     <navigationItem key="navigationItem" id="iGb-BM-5xC">
-                        <barButtonItem key="leftBarButtonItem" image="Pie Chart-23" style="done" id="Wt1-JG-AMk">
+                        <barButtonItem key="leftBarButtonItem" image="Pie Chart" style="done" id="Wt1-JG-AMk">
                             <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <connections>
                                 <action selector="pieChartButtonPressed:" destination="9o8-Ar-hfP" id="yEc-m3-m1p"/>
@@ -412,8 +412,8 @@
         </scene>
     </scenes>
     <resources>
-        <image name="Combo Chart Filled-25" width="25" height="25"/>
-        <image name="Pie Chart-23" width="23" height="23"/>
+        <image name="Combo Chart" width="22" height="22"/>
+        <image name="Pie Chart" width="22" height="22"/>
         <image name="PiggyBank" width="512" height="512"/>
         <image name="button_add" width="84" height="26"/>
         <image name="button_history" width="84" height="26"/>

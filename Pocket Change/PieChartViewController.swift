@@ -27,6 +27,10 @@ class PieChartViewController: UIViewController
         let shDelegate = UIApplication.shared.delegate as! AppDelegate
         sharedDelegate = shDelegate
         
+        // Set back button color
+        let color = UIColor.white
+        self.navigationController?.navigationBar.tintColor = color
+        
         // Set the page title
         self.navigationItem.title = "Amount Spent per Budget"
     }

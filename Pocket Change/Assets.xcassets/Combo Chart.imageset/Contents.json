@@ -2,15 +2,17 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "Coins-35.png",
+      "filename" : "Combo Chart Filled-22.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
+      "filename" : "Combo Chart Filled-44.png",
       "scale" : "2x"
     },
     {
       "idiom" : "universal",
+      "filename" : "Combo Chart Filled-66.png",
       "scale" : "3x"
     }
   ],
