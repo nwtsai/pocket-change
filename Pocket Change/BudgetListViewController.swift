@@ -24,9 +24,12 @@ class BudgetListViewController: UIViewController, UITableViewDataSource, UITable
     {
         super.viewDidLoad()
         
-        // Set Navbar Color
-        let color = UIColor.white
-        self.navigationController?.navigationBar.tintColor = color
+        // Set the logo for the app through an image created with Adobe Illustrator
+        let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 157.11974, height: 35))
+        imageView.contentMode = .scaleAspectFit
+        let image = UIImage(named: "Pocket_Change_Logo")
+        imageView.image = image
+        navigationItem.titleView = imageView
         
         budgetTable.dataSource = self
         budgetTable.delegate = self
@@ -47,7 +50,6 @@ class BudgetListViewController: UIViewController, UITableViewDataSource, UITable
     override func viewWillAppear(_ animated: Bool)
     {
         super.viewWillAppear(animated)
-        self.navigationItem.title = "My Budgets"
         
         // Get data from CoreData
         BudgetVariables.getData()
@@ -258,6 +260,11 @@ class BudgetListViewController: UIViewController, UITableViewDataSource, UITable
         {
             // code for viewing the pie chart
         }
+        
+        // Define the back button's text for the next view
+        let backItem = UIBarButtonItem()
+        backItem.title = ""
+        navigationItem.backBarButtonItem = backItem
     }
     
     // Functions that conform to UITableViewDataSource

@@ -21,6 +21,7 @@ class SpendViewController: UIViewController, UITextFieldDelegate, CLLocationMana
     
     // IB Outlets
     @IBOutlet weak var spendButton: UIButton!
+    @IBOutlet weak var addButton: UIButton!
     @IBOutlet weak var totalBalance: UILabel!
     @IBOutlet weak var inputAmount: UITextField!
     @IBOutlet weak var descriptionText: UITextField!
@@ -71,10 +72,11 @@ class SpendViewController: UIViewController, UITextFieldDelegate, CLLocationMana
         // Refresh the total balance label, in the case that another view modified the balance vaariable
         totalBalance.text = BudgetVariables.numFormat(myNum: BudgetVariables.budgetArray[BudgetVariables.currentIndex].balance)
         
-        // Reset the text fields and disable the spend button
+        // Reset the text fields and disable the buttons
         inputAmount.text = ""
         descriptionText.text = ""
         spendButton.isEnabled = false
+        addButton.isEnabled = false
     }
     
     //Calls this function when the tap is recognized.
@@ -82,117 +84,6 @@ class SpendViewController: UIViewController, UITextFieldDelegate, CLLocationMana
     {
         //Causes the view (or one of its embedded text fields) to resign the first responder status.
         view.endEditing(true)
-    }
-    
-    // When the add to budget balance button is pressed
-    @IBAction func addToBudgetButtonPressed(_ sender: Any)
-    {
-        showEditBalanceAlert()
-    }
-    
-    // Use this variable to enable or disable the Save button
-    weak var amountSaveButton : UIAlertAction?
-    
-    // Show Edit Balance Pop-up
-    func showEditBalanceAlert()
-    {
-        let budgetName = BudgetVariables.budgetArray[BudgetVariables.currentIndex].name
-        let editAlert = UIAlertController(title: "Add to " + budgetName!, message: "", preferredStyle: UIAlertControllerStyle.alert)
-        
-        editAlert.addTextField(configurationHandler: {(textField: UITextField) in
-            textField.placeholder = "$0.00"
-            textField.delegate = self
-            textField.keyboardType = .decimalPad
-            textField.addTarget(self, action: #selector(self.newAmountTextFieldDidChange(_:)), for: .editingChanged)
-        })
-        
-        let cancel = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.cancel, handler: { (_) -> Void in
-        })
-        
-        let add = UIAlertAction(title: "Add", style: UIAlertActionStyle.default, handler: { (_) -> Void in
-            
-            let date = BudgetVariables.todaysDate(format: "MM/dd/YYYY")
-            
-            // Trim the input Amount
-            let inputAmountText = (editAlert.textFields![0].text!).trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
-            let inputAmountNum = (Double(inputAmountText))?.roundTo(places: 2)
-            
-            // If the input amount isn't empty and the new balance doesn't exceed 1M
-            let myBalance = BudgetVariables.budgetArray[BudgetVariables.currentIndex].balance
-            if inputAmountText != "" && (inputAmountNum! + myBalance) <= 1000000
-            {
-                // Update balance and balance label
-                let newBalance = myBalance + inputAmountNum!
-                BudgetVariables.budgetArray[BudgetVariables.currentIndex].balance = newBalance
-                self.totalBalance.text = BudgetVariables.numFormat(myNum: newBalance)
-                
-                // Log this into the history and description arrays, and then update the totalAmountAdded and totalBudgetAmount
-                BudgetVariables.budgetArray[BudgetVariables.currentIndex].historyArray.append("+ $" + String(format: "%.2f", inputAmountNum!))
-                BudgetVariables.budgetArray[BudgetVariables.currentIndex].descriptionArray.append("Added to budget" + "    " + date)
-                BudgetVariables.budgetArray[BudgetVariables.currentIndex].totalAmountAdded += inputAmountNum!
-                BudgetVariables.budgetArray[BudgetVariables.currentIndex].totalBudgetAmount += inputAmountNum!
-                
-                // Log the latitude and longitude of the current transaction if the current location is available
-                let currentPosition = self.locationManager.location?.coordinate
-                if currentPosition != nil
-                {
-                    BudgetVariables.budgetArray[BudgetVariables.currentIndex].markerLatitude.append((currentPosition?.latitude)!)
-                    BudgetVariables.budgetArray[BudgetVariables.currentIndex].markerLongitude.append((currentPosition?.longitude)!)
-                }
-                    
-                // If the current position is nil, set the arrays with placeholders of (360,360)
-                else
-                {
-                    BudgetVariables.budgetArray[BudgetVariables.currentIndex].markerLatitude.append(360)
-                    BudgetVariables.budgetArray[BudgetVariables.currentIndex].markerLongitude.append(360)
-                }
-            }
-            
-            // Save data to coredata
-            self.sharedDelegate.saveContext()
-            
-            // Get data
-            BudgetVariables.getData()
-        })
-        
-        editAlert.addAction(add)
-        editAlert.addAction(cancel)
-        
-        self.amountSaveButton = add
-        add.isEnabled = false
-        self.present(editAlert, animated: true, completion: nil)
-    }
-    
-    // This function disables the save button if the input amount is not valid
-    func newAmountTextFieldDidChange(_ textField: UITextField)
-    {
-        // Trim input first
-        let trimmedInput = (textField.text)?.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
-        let balance = BudgetVariables.budgetArray[BudgetVariables.currentIndex].balance
-        
-        // Disable button if input is empty or just a "."
-        if trimmedInput == "" || trimmedInput == "."
-        {
-            self.amountSaveButton?.isEnabled = false
-        }
-            
-        // If the input is a number
-        else if let input = (Double(trimmedInput!))?.roundTo(places: 2)
-        {
-            if input + balance <= 1000000 && input != 0.00
-            {
-                self.amountSaveButton?.isEnabled = true
-            }
-            else
-            {
-                self.amountSaveButton?.isEnabled = false
-            }
-        }
-        // If the input is not a number
-        else
-        {
-            self.amountSaveButton?.isEnabled = false
-        }
     }
     
     // This function limits the maximum character count for each textField and limits the decimal places input to 2
@@ -316,11 +207,61 @@ class SpendViewController: UIViewController, UITextFieldDelegate, CLLocationMana
         else
         {
             // Our amountEnteredChanged should take into account all non-Number cases and
-            // disable this button before it can be pressed
             totalBalance.text = "If this message is seen check func amountEnteredChanged"
         }
         
         self.sharedDelegate.saveContext()
+        BudgetVariables.getData()
+    }
+    
+    // This function gets called when the Add button is pressed
+    @IBAction func addButtonPressed(_ sender: Any)
+    {
+        // Get current date, append to history Array
+        let date = BudgetVariables.todaysDate(format: "MM/dd/YYYY")
+    
+        // Trim the input Amount
+        let trimmedInput = (inputAmount.text)?.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
+    
+        if let input = (Double(trimmedInput!))?.roundTo(places: 2)
+        {
+            BudgetVariables.budgetArray[BudgetVariables.currentIndex].balance += input
+            totalBalance.text = BudgetVariables.numFormat(myNum: BudgetVariables.budgetArray[BudgetVariables.currentIndex].balance)
+            BudgetVariables.budgetArray[BudgetVariables.currentIndex].historyArray.append("+ $" + String(format: "%.2f", input))
+            
+            // Trim description text before appending
+            let description = (descriptionText.text)?.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
+            BudgetVariables.budgetArray[BudgetVariables.currentIndex].descriptionArray.append(description! + "    " + date)
+            
+            // Log this into the history and description arrays, and then update the totalAmountAdded and totalBudgetAmount
+            BudgetVariables.budgetArray[BudgetVariables.currentIndex].totalAmountAdded += input
+            BudgetVariables.budgetArray[BudgetVariables.currentIndex].totalBudgetAmount += input
+            
+            // Log the latitude and longitude of the current transaction if the current location is available
+            let currentPosition = self.locationManager.location?.coordinate
+            if currentPosition != nil
+            {
+                BudgetVariables.budgetArray[BudgetVariables.currentIndex].markerLatitude.append((currentPosition?.latitude)!)
+                BudgetVariables.budgetArray[BudgetVariables.currentIndex].markerLongitude.append((currentPosition?.longitude)!)
+            }
+                
+            // If the current position is nil, set the arrays with placeholders of (360,360)
+            else
+            {
+                BudgetVariables.budgetArray[BudgetVariables.currentIndex].markerLatitude.append(360)
+                BudgetVariables.budgetArray[BudgetVariables.currentIndex].markerLongitude.append(360)
+            }
+            
+            if BudgetVariables.budgetArray[BudgetVariables.currentIndex].balance + input > 1000000
+            {
+                addButton.isEnabled = false
+            }
+        }
+    
+        // Save data to coredata
+        self.sharedDelegate.saveContext()
+    
+        // Get data
         BudgetVariables.getData()
     }
     
@@ -330,24 +271,15 @@ class SpendViewController: UIViewController, UITextFieldDelegate, CLLocationMana
         // Trim input first
         let trimmedInput = (inputAmount.text)?.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
         
-        // If the input is empty, show current balance and disable buttons
-        // Else if the input is a number and isn't empty, calculate whether or not to disable or enable the buttons
-        // Else if the input is not a number and isn't empty, disable buttons and print error statement
-        if trimmedInput == ""
+        // If the input is empty or a period, show current balance and disable buttons
+        if trimmedInput == "" || trimmedInput == "."
         {
             totalBalance.text = BudgetVariables.numFormat(myNum: BudgetVariables.budgetArray[BudgetVariables.currentIndex].balance)
             spendButton.isEnabled = false
+            addButton.isEnabled = false
         }
-        else if trimmedInput == "-" || trimmedInput == "-."
-        {
-            totalBalance.text = "Must be positive"
-            spendButton.isEnabled = false
-        }
-        else if trimmedInput == "."
-        {
-            totalBalance.text = BudgetVariables.numFormat(myNum: BudgetVariables.budgetArray[BudgetVariables.currentIndex].balance)
-            spendButton.isEnabled = false
-        }
+            
+        // Otherwise, if the input is a positive number, enable or disable buttons based on input value
         else if let input = (Double(trimmedInput!))?.roundTo(places: 2)
         {
             // Print error statement if input exceeeds 1 million
@@ -355,21 +287,21 @@ class SpendViewController: UIViewController, UITextFieldDelegate, CLLocationMana
             {
                 totalBalance.text = "Must be under $1M"
                 spendButton.isEnabled = false
-            }
-            else if input < 0
-            {
-                spendButton.isEnabled = false
-                totalBalance.text = "Must be positive"
+                addButton.isEnabled = false
             }
             else
             {
                 totalBalance.text = BudgetVariables.numFormat(myNum: BudgetVariables.budgetArray[BudgetVariables.currentIndex].balance)
+                
+                // If the input is $0, disable both buttons
                 if input == 0
                 {
                     spendButton.isEnabled = false
+                    addButton.isEnabled = false
                 }
                 else
                 {
+                    // If the input can be spent and still result in a valid balance, enable the spend button
                     if BudgetVariables.budgetArray[BudgetVariables.currentIndex].balance - input < 0
                     {
                         spendButton.isEnabled = false
@@ -378,13 +310,18 @@ class SpendViewController: UIViewController, UITextFieldDelegate, CLLocationMana
                     {
                         spendButton.isEnabled = true
                     }
+                    
+                    // If the input can be added and still result in a valid balance, enable the add button
+                    if BudgetVariables.budgetArray[BudgetVariables.currentIndex].balance + input > 1000000
+                    {
+                        addButton.isEnabled = false
+                    }
+                    else
+                    {
+                        addButton.isEnabled = true
+                    }
                 }
             }
-        }
-        else
-        {
-            spendButton.isEnabled = false
-            totalBalance.text = "Numbers only"
         }
     }
     
@@ -397,10 +334,9 @@ class SpendViewController: UIViewController, UITextFieldDelegate, CLLocationMana
         
         // Show the view controller with history and the map
         performSegue(withIdentifier: "showHistoryAndMap", sender: nil)
-        
     }
     
-    // When the Graphs button gets pressed segue to the HistoryViewController file
+    // When the Graphs icon gets pressed segue to the graphs view
     @IBAction func graphsButtonPressed(_ sender: Any)
     {
         // Save context and get data
@@ -412,22 +348,21 @@ class SpendViewController: UIViewController, UITextFieldDelegate, CLLocationMana
     // Prepare for segue
     override func prepare(for segue: UIStoryboardSegue, sender: Any?)
     {
-        // Define the back button's text for the next view
-        let backItem = UIBarButtonItem()
-        
         // If we are going to the bar graph view, set button text to be empty
         if segue.identifier == "showGraphs"
         {
-            backItem.title = ""
+            
         }
             
         // If we are going to the history and map view, set button text to be the name of the budget
         else if (segue.identifier == "showHistoryAndMap")
         {
-            backItem.title = BudgetVariables.budgetArray[BudgetVariables.currentIndex].name
+            
         }
         
-        // Set the back bar button item
+        // Define the back button's text for the next view        
+        let backItem = UIBarButtonItem()
+        backItem.title = ""
         navigationItem.backBarButtonItem = backItem
     }
 }

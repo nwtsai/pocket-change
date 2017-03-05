@@ -23,14 +23,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Iyv-Ff-OpV" userLabel="Spend Button">
-                                <rect key="frame" x="145" y="254" width="84" height="26"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                <state key="normal" image="button_spend"/>
-                                <connections>
-                                    <action selector="spendButtonPressed:" destination="sds-LB-aBh" eventType="touchUpInside" id="Jg9-t0-LST"/>
-                                </connections>
-                            </button>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" clearsOnBeginEditing="YES" adjustsFontSizeToFit="NO" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="aJg-CV-vGt">
                                 <rect key="frame" x="16" y="68" width="343" height="30"/>
                                 <constraints>
@@ -83,66 +75,80 @@
                             <view hidden="YES" opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ykY-JB-tUb" userLabel="Spacer">
                                 <rect key="frame" x="16" y="472" width="343" height="151"/>
                             </view>
-                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="IyT-re-OVV">
-                                <rect key="frame" x="16" y="535" width="343" height="26"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5tw-ZV-IXc" userLabel="History Button">
+                                <rect key="frame" x="145.5" y="534.5" width="84" height="26"/>
+                                <state key="normal" image="button_history"/>
+                                <connections>
+                                    <action selector="historyButtonPressed:" destination="sds-LB-aBh" eventType="touchUpInside" id="16H-KH-r9r"/>
+                                </connections>
+                            </button>
+                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="Mx3-6j-yLz" userLabel="Spend Add Stack View">
+                                <rect key="frame" x="16" y="254" width="343" height="26"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5tw-ZV-IXc" userLabel="History Button">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Iyv-Ff-OpV" userLabel="Spend Button">
                                         <rect key="frame" x="0.0" y="0.0" width="171.5" height="26"/>
-                                        <state key="normal" image="button_history"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                        <state key="normal" image="button_spend"/>
                                         <connections>
-                                            <action selector="historyButtonPressed:" destination="sds-LB-aBh" eventType="touchUpInside" id="16H-KH-r9r"/>
+                                            <action selector="spendButtonPressed:" destination="sds-LB-aBh" eventType="touchUpInside" id="Jg9-t0-LST"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KOJ-SF-gm5" userLabel="Graphs Button">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ubd-DZ-KkV" userLabel="Add Button">
                                         <rect key="frame" x="171.5" y="0.0" width="171.5" height="26"/>
-                                        <state key="normal" image="button_graphs"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                        <state key="normal" image="button_add"/>
                                         <connections>
-                                            <action selector="graphsButtonPressed:" destination="sds-LB-aBh" eventType="touchUpInside" id="fyS-ia-JYj"/>
+                                            <action selector="addButtonPressed:" destination="sds-LB-aBh" eventType="touchUpInside" id="yDA-JV-aT9"/>
                                         </connections>
                                     </button>
                                 </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="height" secondItem="Iyv-Ff-OpV" secondAttribute="height" id="Y5L-3n-Lk9"/>
+                                </constraints>
                             </stackView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="d04-w1-rW6" firstAttribute="top" secondItem="TRe-by-rFq" secondAttribute="bottom" id="1Ep-nE-wl6"/>
                             <constraint firstItem="TRe-by-rFq" firstAttribute="centerX" secondItem="nub-g2-jhT" secondAttribute="centerX" id="2xY-wN-Ae0"/>
-                            <constraint firstItem="Iyv-Ff-OpV" firstAttribute="centerX" secondItem="nub-g2-jhT" secondAttribute="centerX" id="3Gi-x1-Uz6"/>
                             <constraint firstAttribute="trailingMargin" secondItem="5ah-Fv-utU" secondAttribute="trailing" constant="-16" id="40u-Ac-raX"/>
                             <constraint firstAttribute="trailingMargin" secondItem="SCB-3r-rSq" secondAttribute="trailing" constant="-16" id="5kH-CP-Sjw"/>
                             <constraint firstItem="aJg-CV-vGt" firstAttribute="top" secondItem="M3A-vS-Q4U" secondAttribute="bottom" constant="4" id="7Da-fz-AGo"/>
                             <constraint firstItem="aJg-CV-vGt" firstAttribute="leading" secondItem="nub-g2-jhT" secondAttribute="leadingMargin" id="7SB-bA-ugZ"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="IyT-re-OVV" secondAttribute="trailing" id="EqB-Bk-7WO"/>
+                            <constraint firstItem="Mx3-6j-yLz" firstAttribute="leading" secondItem="nub-g2-jhT" secondAttribute="leadingMargin" id="7ww-bF-YbY"/>
                             <constraint firstItem="ykY-JB-tUb" firstAttribute="top" secondItem="d04-w1-rW6" secondAttribute="bottom" constant="-25" id="GEF-Bu-8Bi"/>
                             <constraint firstAttribute="trailingMargin" secondItem="ykY-JB-tUb" secondAttribute="trailing" id="GLN-Or-2DF"/>
+                            <constraint firstItem="Mx3-6j-yLz" firstAttribute="centerY" secondItem="nub-g2-jhT" secondAttribute="centerY" multiplier="0.8" id="GeM-pD-MAv"/>
                             <constraint firstItem="ykY-JB-tUb" firstAttribute="leading" secondItem="nub-g2-jhT" secondAttribute="leadingMargin" id="HjF-BS-s0d"/>
-                            <constraint firstItem="IyT-re-OVV" firstAttribute="leading" secondItem="nub-g2-jhT" secondAttribute="leadingMargin" id="NS3-vS-FMd"/>
                             <constraint firstAttribute="trailingMargin" secondItem="ZPn-X5-MWC" secondAttribute="trailing" id="NaG-3k-BZ0"/>
-                            <constraint firstItem="IyT-re-OVV" firstAttribute="centerY" secondItem="ykY-JB-tUb" secondAttribute="centerY" id="Q4x-5F-bZj"/>
-                            <constraint firstItem="TRe-by-rFq" firstAttribute="top" secondItem="Iyv-Ff-OpV" secondAttribute="bottom" constant="50" id="XGt-1h-ybs"/>
+                            <constraint firstItem="Mx3-6j-yLz" firstAttribute="centerX" secondItem="nub-g2-jhT" secondAttribute="centerX" id="T5l-vF-Zva"/>
+                            <constraint firstItem="Mx3-6j-yLz" firstAttribute="top" secondItem="SCB-3r-rSq" secondAttribute="bottom" constant="50" id="XAu-wQ-rt3"/>
                             <constraint firstItem="5ah-Fv-utU" firstAttribute="top" secondItem="aJg-CV-vGt" secondAttribute="bottom" constant="4" id="Y4g-ks-JTv"/>
                             <constraint firstItem="SCB-3r-rSq" firstAttribute="leading" secondItem="nub-g2-jhT" secondAttribute="leadingMargin" constant="-16" id="YNx-Nw-3rL"/>
                             <constraint firstAttribute="trailingMargin" secondItem="aJg-CV-vGt" secondAttribute="trailing" id="ab2-Zj-c9z"/>
-                            <constraint firstItem="Iyv-Ff-OpV" firstAttribute="centerY" secondItem="nub-g2-jhT" secondAttribute="centerY" multiplier="0.8" id="bQL-6L-FPj"/>
                             <constraint firstItem="ZPn-X5-MWC" firstAttribute="leading" secondItem="nub-g2-jhT" secondAttribute="leadingMargin" id="bzy-df-BSN"/>
+                            <constraint firstItem="TRe-by-rFq" firstAttribute="top" secondItem="Mx3-6j-yLz" secondAttribute="bottom" constant="50" id="jIa-oq-3gg"/>
                             <constraint firstItem="d04-w1-rW6" firstAttribute="centerX" secondItem="nub-g2-jhT" secondAttribute="centerX" id="kcr-dg-eKP"/>
-                            <constraint firstItem="Iyv-Ff-OpV" firstAttribute="top" secondItem="SCB-3r-rSq" secondAttribute="bottom" constant="50" id="oac-Y1-R7Z"/>
+                            <constraint firstItem="5tw-ZV-IXc" firstAttribute="centerY" secondItem="ykY-JB-tUb" secondAttribute="centerY" id="pGD-dp-GKP"/>
                             <constraint firstItem="5ah-Fv-utU" firstAttribute="leading" secondItem="nub-g2-jhT" secondAttribute="leadingMargin" constant="-16" id="pss-c4-C2k"/>
+                            <constraint firstItem="5tw-ZV-IXc" firstAttribute="centerX" secondItem="nub-g2-jhT" secondAttribute="centerX" id="q9L-W8-oEm"/>
                             <constraint firstItem="ZPn-X5-MWC" firstAttribute="top" secondItem="5ah-Fv-utU" secondAttribute="bottom" constant="4" id="r7h-Fw-C9z"/>
                             <constraint firstItem="Jcm-fI-l1A" firstAttribute="top" secondItem="ykY-JB-tUb" secondAttribute="bottom" id="wQk-ja-JFg"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="Mx3-6j-yLz" secondAttribute="trailing" id="xU0-Bl-DuE"/>
                         </constraints>
                     </view>
                     <toolbarItems/>
                     <navigationItem key="navigationItem" id="14i-Hh-xCb">
-                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="miQ-3f-I0a">
+                        <barButtonItem key="rightBarButtonItem" image="Bar Chart-23" id="miQ-3f-I0a">
                             <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <connections>
-                                <action selector="addToBudgetButtonPressed:" destination="sds-LB-aBh" id="VcF-74-buq"/>
+                                <action selector="graphsButtonPressed:" destination="sds-LB-aBh" id="RHq-vW-giJ"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
+                        <outlet property="addButton" destination="Ubd-DZ-KkV" id="ZOM-et-OYO"/>
                         <outlet property="descriptionText" destination="ZPn-X5-MWC" id="FbE-cA-cNT"/>
                         <outlet property="inputAmount" destination="aJg-CV-vGt" id="QfG-b6-s9W"/>
                         <outlet property="spendButton" destination="Iyv-Ff-OpV" id="DA7-qO-4aU"/>
@@ -275,7 +281,7 @@
                     </tableView>
                     <toolbarItems/>
                     <navigationItem key="navigationItem" id="iGb-BM-5xC">
-                        <barButtonItem key="leftBarButtonItem" title="π" style="done" id="Wt1-JG-AMk">
+                        <barButtonItem key="leftBarButtonItem" image="Pie Chart-23" style="done" id="Wt1-JG-AMk">
                             <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <connections>
                                 <action selector="pieChartButtonPressed:" destination="9o8-Ar-hfP" id="yEc-m3-m1p"/>
@@ -299,14 +305,14 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gaP-kE-o7l" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1956" y="-99.400299850074973"/>
+            <point key="canvasLocation" x="-2022" y="-99"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="RrZ-Mr-58E">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="OXd-cA-3Lr" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="koO-cn-31M">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="koO-cn-31M">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -381,18 +387,6 @@
                         <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MRV-H3-yAL" userLabel="Net Amount Spent per Budget">
-                                <rect key="frame" x="60.5" y="30" width="254" height="21"/>
-                                <attributedString key="attributedText">
-                                    <fragment content="Total Amount Spent per Budget">
-                                        <attributes>
-                                            <font key="NSFont" size="18" name="KhmerMN"/>
-                                            <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
-                                        </attributes>
-                                    </fragment>
-                                </attributedString>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <view hidden="YES" opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Uzn-r4-01j">
                                 <rect key="frame" x="16" y="-65" width="343" height="624"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -400,9 +394,7 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="MRV-H3-yAL" firstAttribute="centerX" secondItem="3oj-VF-CUA" secondAttribute="centerX" id="29a-vj-bTw"/>
                             <constraint firstAttribute="trailingMargin" secondItem="Uzn-r4-01j" secondAttribute="trailing" id="ZLf-XO-lpx"/>
-                            <constraint firstItem="MRV-H3-yAL" firstAttribute="top" secondItem="QeF-jT-se3" secondAttribute="bottom" constant="30" id="fJ9-dM-gbz"/>
                             <constraint firstItem="Uzn-r4-01j" firstAttribute="leading" secondItem="3oj-VF-CUA" secondAttribute="leadingMargin" id="jMi-mW-qF4"/>
                             <constraint firstItem="oSv-kI-Y5L" firstAttribute="top" secondItem="Uzn-r4-01j" secondAttribute="bottom" id="kVC-bI-CDn"/>
                             <constraint firstItem="Uzn-r4-01j" firstAttribute="top" secondItem="QeF-jT-se3" secondAttribute="bottom" constant="-65" id="opA-hx-AVI"/>
@@ -420,8 +412,10 @@
         </scene>
     </scenes>
     <resources>
+        <image name="Bar Chart-23" width="23" height="23"/>
+        <image name="Pie Chart-23" width="23" height="23"/>
         <image name="PiggyBank" width="512" height="512"/>
-        <image name="button_graphs" width="84" height="26"/>
+        <image name="button_add" width="84" height="26"/>
         <image name="button_history" width="84" height="26"/>
         <image name="button_spend" width="84" height="26"/>
     </resources>

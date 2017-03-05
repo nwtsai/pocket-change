@@ -28,7 +28,7 @@ class PieChartViewController: UIViewController
         sharedDelegate = shDelegate
         
         // Set the page title
-        self.navigationItem.title = "π"
+        self.navigationItem.title = "Amount Spent per Budget"
     }
     
     // Load the graph before view appears. We do this here because data may change

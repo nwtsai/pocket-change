@@ -39,7 +39,7 @@ class HistoryAndMapViewController: UIViewController, CLLocationManagerDelegate, 
         // Set up the map
         mapView.delegate = self
         self.locationManager.delegate = self
-        self.locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        self.locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
         self.locationManager.requestWhenInUseAuthorization()
         self.locationManager.startUpdatingLocation()
         
