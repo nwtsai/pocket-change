@@ -299,6 +299,7 @@ class BudgetListViewController: UIViewController, UITableViewDataSource, UITable
             let totalBudgetAmt = lround((BudgetVariables.budgetArray[indexPath.row].totalBudgetAmount))
             let totalBudgetAmtString = String(totalBudgetAmt)
             myCell.detailTextLabel?.text = currentBalanceString + " / $" + totalBudgetAmtString
+            myCell.selectionStyle = UITableViewCellSelectionStyle.default
         }
         
         return myCell

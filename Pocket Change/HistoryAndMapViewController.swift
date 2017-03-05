@@ -300,6 +300,7 @@ class HistoryAndMapViewController: UIViewController, CLLocationManagerDelegate, 
             // Display text
             let displayText = detailText + dateText
             myCell.detailTextLabel?.text = displayText
+            myCell.selectionStyle = UITableViewCellSelectionStyle.default
         }
         
         return myCell
