@@ -76,7 +76,7 @@
                                 <rect key="frame" x="16" y="472" width="343" height="151"/>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5tw-ZV-IXc" userLabel="History Button">
-                                <rect key="frame" x="145.5" y="534.5" width="84" height="26"/>
+                                <rect key="frame" x="145.5" y="535" width="84" height="26"/>
                                 <state key="normal" image="button_history"/>
                                 <connections>
                                     <action selector="historyButtonPressed:" destination="sds-LB-aBh" eventType="touchUpInside" id="16H-KH-r9r"/>
@@ -139,7 +139,7 @@
                     </view>
                     <toolbarItems/>
                     <navigationItem key="navigationItem" id="14i-Hh-xCb">
-                        <barButtonItem key="rightBarButtonItem" image="Bar Chart-23" id="miQ-3f-I0a">
+                        <barButtonItem key="rightBarButtonItem" image="Combo Chart Filled-25" id="miQ-3f-I0a">
                             <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <connections>
                                 <action selector="graphsButtonPressed:" destination="sds-LB-aBh" id="RHq-vW-giJ"/>
@@ -312,7 +312,7 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="OXd-cA-3Lr" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="koO-cn-31M">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="koO-cn-31M">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -412,7 +412,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="Bar Chart-23" width="23" height="23"/>
+        <image name="Combo Chart Filled-25" width="25" height="25"/>
         <image name="Pie Chart-23" width="23" height="23"/>
         <image name="PiggyBank" width="512" height="512"/>
         <image name="button_add" width="84" height="26"/>
