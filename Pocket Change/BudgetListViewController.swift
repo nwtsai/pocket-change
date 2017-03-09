@@ -43,7 +43,7 @@ class BudgetListViewController: UIViewController, UITableViewDataSource, UITable
         
         //Uncomment the line below if you want the tap not not interfere and cancel other interactions.
         tap.cancelsTouchesInView = false
-        view.addGestureRecognizer(tap)
+        view.addGestureRecognizer(tap)        
     }
     
     // Reload table data everytime the view is about to appear
