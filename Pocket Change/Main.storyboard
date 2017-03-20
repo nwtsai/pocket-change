@@ -86,7 +86,7 @@
                                 <rect key="frame" x="16" y="254" width="343" height="26"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Iyv-Ff-OpV" userLabel="Spend Button">
-                                        <rect key="frame" x="0.0" y="0.0" width="172" height="26"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="171.5" height="26"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                         <state key="normal" image="button_spend"/>
                                         <connections>
@@ -94,7 +94,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ubd-DZ-KkV" userLabel="Add Button">
-                                        <rect key="frame" x="172" y="0.0" width="171" height="26"/>
+                                        <rect key="frame" x="171.5" y="0.0" width="171.5" height="26"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                         <state key="normal" image="button_add"/>
                                         <connections>
@@ -179,6 +179,7 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="308" id="wWq-hW-oJA"/>
                                 </constraints>
+                                <inset key="separatorInset" minX="15" minY="0.0" maxX="15" maxY="0.0"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="historyCell" textLabel="mXO-xm-9ja" detailTextLabel="DS5-Cq-I6G" style="IBUITableViewCellStyleValue1" id="NBP-Vd-7z0">
                                         <rect key="frame" x="0.0" y="28" width="375" height="44"/>
@@ -251,6 +252,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <inset key="separatorInset" minX="15" minY="0.0" maxX="15" maxY="0.0"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="clickableCell" textLabel="uyg-Q0-VGI" detailTextLabel="Cub-ds-4N5" style="IBUITableViewCellStyleValue1" id="xV3-fU-JcU">
                                 <rect key="frame" x="0.0" y="28" width="375" height="44"/>

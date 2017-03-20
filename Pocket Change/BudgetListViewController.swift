@@ -38,12 +38,15 @@ class BudgetListViewController: UIViewController, UITableViewDataSource, UITable
         let shDelegate = UIApplication.shared.delegate as! AppDelegate
         sharedDelegate = shDelegate
         
-        //Looks for single or multiple taps.
+        // Looks for single or multiple taps.
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(SpendViewController.dismissKeyboard))
         
-        //Uncomment the line below if you want the tap not not interfere and cancel other interactions.
+        // Uncomment the line below if you want the tap not not interfere and cancel other interactions.
         tap.cancelsTouchesInView = false
         view.addGestureRecognizer(tap)
+        
+        // Gets rid of the empty cells
+        budgetTable.tableFooterView = UIView(frame: CGRect.zero)
     }
     
     // Reload table data everytime the view is about to appear
@@ -270,7 +273,7 @@ class BudgetListViewController: UIViewController, UITableViewDataSource, UITable
     // Functions that conform to UITableViewDataSource
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
     {
-        // represents the number of rows the UITableView should have
+        // Represents the number of rows the UITableView should have
         return BudgetVariables.budgetArray.count + 1
     }
     
@@ -280,7 +283,7 @@ class BudgetListViewController: UIViewController, UITableViewDataSource, UITable
         let myCell:UITableViewCell = self.budgetTable.dequeueReusableCell(withIdentifier: "clickableCell", for: indexPath)
         let count = BudgetVariables.budgetArray.count
         
-        // If it's the last cell, customize the message and make it unselectable
+        // If it's the last cell, customize the message, make it unselectable, and remove the last separator
         if indexPath.row == count
         {
             myCell.textLabel?.textColor = UIColor.lightGray
@@ -288,6 +291,7 @@ class BudgetListViewController: UIViewController, UITableViewDataSource, UITable
             myCell.textLabel?.text = "Budget Name"
             myCell.detailTextLabel?.text = "Balance / Budget"
             myCell.selectionStyle = UITableViewCellSelectionStyle.none
+            myCell.separatorInset = UIEdgeInsetsMake(0.0, 0.0, 0.0, myCell.bounds.size.width)
         }
         else
         {
@@ -300,6 +304,7 @@ class BudgetListViewController: UIViewController, UITableViewDataSource, UITable
             let totalBudgetAmtString = String(totalBudgetAmt)
             myCell.detailTextLabel?.text = currentBalanceString + " / $" + totalBudgetAmtString
             myCell.selectionStyle = UITableViewCellSelectionStyle.default
+            myCell.separatorInset = UIEdgeInsetsMake(0.0, 15.0, 0.0, 15.0)
         }
         
         return myCell

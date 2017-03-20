@@ -250,7 +250,7 @@ class HistoryAndMapViewController: UIViewController, CLLocationManagerDelegate, 
     // Functions that conform to UITableViewDataSource
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
     {
-        // represents the number of rows the UITableView should have
+        // Represents the number of rows the UITableView should have
         return BudgetVariables.budgetArray[BudgetVariables.currentIndex].historyArray.count + 1
     }
     
@@ -303,6 +303,9 @@ class HistoryAndMapViewController: UIViewController, CLLocationManagerDelegate, 
             myCell.detailTextLabel?.text = displayText
             myCell.selectionStyle = UITableViewCellSelectionStyle.default
         }
+        
+        // Custom insets for the separators
+        myCell.separatorInset = UIEdgeInsetsMake(0.0, 15.0, 0.0, 15.0)
         
         return myCell
     }
