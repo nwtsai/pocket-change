@@ -66,10 +66,10 @@ class HistoryAndMapViewController: UIViewController, CLLocationManagerDelegate, 
         let shDelegate = UIApplication.shared.delegate as! AppDelegate
         sharedDelegate = shDelegate
         
-        //Looks for single or multiple taps.
+        // Looks for single or multiple taps.
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(SpendViewController.dismissKeyboard))
         
-        //Uncomment the line below if you want the tap not not interfere and cancel other interactions.
+        // Uncomment the line below if you want the tap not not interfere and cancel other interactions.
         tap.cancelsTouchesInView = false
         
         view.addGestureRecognizer(tap)
@@ -233,9 +233,6 @@ class HistoryAndMapViewController: UIViewController, CLLocationManagerDelegate, 
         BudgetVariables.budgetArray[BudgetVariables.currentIndex].markerLatitude.removeAll()
         BudgetVariables.budgetArray[BudgetVariables.currentIndex].markerLongitude.removeAll()
         BudgetVariables.budgetArray[BudgetVariables.currentIndex].amountSpentOnDate.removeAll()
-        
-        // Zero out the total amount spent
-        BudgetVariables.budgetArray[BudgetVariables.currentIndex].totalAmountSpent = 0.0
         
         // Save context and get data
         self.sharedDelegate.saveContext()

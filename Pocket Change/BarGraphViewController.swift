@@ -528,7 +528,6 @@ class BarGraphViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
         // Select the color scheme
         let colorSelector = BudgetVariables.budgetArray[BudgetVariables.currentIndex].barGraphColor
         chartDataSet.colors = ColorArray[colorSelector]
-        
         chartDataSet.axisDependency = .right
         let chartData = BarChartData(dataSet: chartDataSet)
         barGraphView.data = chartData
