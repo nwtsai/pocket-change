@@ -24,7 +24,7 @@ class BudgetVariables: UIViewController
     // CoreData maintains this array even when app isn't running
     static var budgetArray = [MyBudget]()
     
-    // The current index always gets initialized as the index of the last budget
+    // The current index always gets initialized to 0 when the app opens
     static var currentIndex = 0
     
     // This function fetches from CoreData
@@ -109,7 +109,6 @@ class BudgetVariables: UIViewController
     {
         let date = Date()
         let formatter = DateFormatter()
-        
         formatter.dateFormat = format
         return formatter.string(from: date)
     }
@@ -117,10 +116,10 @@ class BudgetVariables: UIViewController
     // Grab the past 7 days or past 31 days into a String array
     class func pastInterval(interval: String) -> [String]
     {
-        var size = 7;
+        var size = 7
         if (interval == "Month")
         {
-            size = 31;
+            size = 31
         }
         let cal = Calendar.current
         let today = cal.startOfDay(for: Date())
@@ -139,7 +138,7 @@ class BudgetVariables: UIViewController
         return days
     }
     
-    // Grab the past 12 months into a String array
+    // Grab the past X months into a String array
     class func pastXMonths(X: Int) -> [String]
     {
         let cal = Calendar.current
