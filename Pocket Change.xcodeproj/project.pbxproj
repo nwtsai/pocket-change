@@ -19,8 +19,6 @@
 		9A27BF2D1E0A01B100146EEA /* SpendViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A27BF2C1E0A01B100146EEA /* SpendViewController.swift */; };
 		9A27BF351E0A01B100146EEA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9A27BF341E0A01B100146EEA /* Assets.xcassets */; };
 		9A27BF381E0A01B100146EEA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9A27BF361E0A01B100146EEA /* LaunchScreen.storyboard */; };
-		9A27BF431E0A01B100146EEA /* Pocket_ChangeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A27BF421E0A01B100146EEA /* Pocket_ChangeTests.swift */; };
-		9A27BF4E1E0A01B100146EEA /* Pocket_ChangeUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A27BF4D1E0A01B100146EEA /* Pocket_ChangeUITests.swift */; };
 		9A27BF5C1E0A022A00146EEA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9A27BF5B1E0A022A00146EEA /* Main.storyboard */; };
 		9AA401401E681F2B006D4D70 /* HistoryAndMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AA4013F1E681F2B006D4D70 /* HistoryAndMapViewController.swift */; };
 		9AA401431E683F95006D4D70 /* Pocket_Change.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 9AA401411E683F95006D4D70 /* Pocket_Change.xcdatamodeld */; };
@@ -49,20 +47,6 @@
 			proxyType = 2;
 			remoteGlobalIDString = 06165F2E1D8110E600722320;
 			remoteInfo = ChartsTests;
-		};
-		9A27BF3F1E0A01B100146EEA /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 9A27BF1F1E0A01B100146EEA /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 9A27BF261E0A01B100146EEA;
-			remoteInfo = "Pocket Change";
-		};
-		9A27BF4A1E0A01B100146EEA /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 9A27BF1F1E0A01B100146EEA /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 9A27BF261E0A01B100146EEA;
-			remoteInfo = "Pocket Change";
 		};
 /* End PBXContainerItemProxy section */
 
@@ -98,12 +82,6 @@
 		9A27BF341E0A01B100146EEA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		9A27BF371E0A01B100146EEA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		9A27BF391E0A01B100146EEA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		9A27BF3E1E0A01B100146EEA /* Pocket ChangeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Pocket ChangeTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		9A27BF421E0A01B100146EEA /* Pocket_ChangeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pocket_ChangeTests.swift; sourceTree = "<group>"; };
-		9A27BF441E0A01B100146EEA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		9A27BF491E0A01B100146EEA /* Pocket ChangeUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Pocket ChangeUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		9A27BF4D1E0A01B100146EEA /* Pocket_ChangeUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pocket_ChangeUITests.swift; sourceTree = "<group>"; };
-		9A27BF4F1E0A01B100146EEA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9A27BF5B1E0A022A00146EEA /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		9AA4013F1E681F2B006D4D70 /* HistoryAndMapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HistoryAndMapViewController.swift; sourceTree = "<group>"; };
 		9AA401421E683F95006D4D70 /* Pocket_Change.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Pocket_Change.xcdatamodel; sourceTree = "<group>"; };
@@ -117,20 +95,6 @@
 			files = (
 				9A09B72A1E0CB96A00D0F4A4 /* Charts.framework in Frameworks */,
 				9BEEB8B3237E9316D22EC5F1 /* libPods-Pocket Change.a in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		9A27BF3B1E0A01B100146EEA /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		9A27BF461E0A01B100146EEA /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -162,8 +126,6 @@
 				9A09B7291E0CB96A00D0F4A4 /* Charts.framework */,
 				9A27BF291E0A01B100146EEA /* Pocket Change */,
 				9A09B71D1E0CB92600D0F4A4 /* Charts.xcodeproj */,
-				9A27BF411E0A01B100146EEA /* Pocket ChangeTests */,
-				9A27BF4C1E0A01B100146EEA /* Pocket ChangeUITests */,
 				9A27BF281E0A01B100146EEA /* Products */,
 				5F66FB100FF091CBE3C4C024 /* Pods */,
 				F282B2119CEA6BD34C6FD349 /* Frameworks */,
@@ -174,8 +136,6 @@
 			isa = PBXGroup;
 			children = (
 				9A27BF271E0A01B100146EEA /* Pocket Change.app */,
-				9A27BF3E1E0A01B100146EEA /* Pocket ChangeTests.xctest */,
-				9A27BF491E0A01B100146EEA /* Pocket ChangeUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -200,24 +160,6 @@
 				9A213F0F1E6A7D2D0037C182 /* Google_Maps_Night_Theme.json */,
 			);
 			path = "Pocket Change";
-			sourceTree = "<group>";
-		};
-		9A27BF411E0A01B100146EEA /* Pocket ChangeTests */ = {
-			isa = PBXGroup;
-			children = (
-				9A27BF421E0A01B100146EEA /* Pocket_ChangeTests.swift */,
-				9A27BF441E0A01B100146EEA /* Info.plist */,
-			);
-			path = "Pocket ChangeTests";
-			sourceTree = "<group>";
-		};
-		9A27BF4C1E0A01B100146EEA /* Pocket ChangeUITests */ = {
-			isa = PBXGroup;
-			children = (
-				9A27BF4D1E0A01B100146EEA /* Pocket_ChangeUITests.swift */,
-				9A27BF4F1E0A01B100146EEA /* Info.plist */,
-			);
-			path = "Pocket ChangeUITests";
 			sourceTree = "<group>";
 		};
 		F282B2119CEA6BD34C6FD349 /* Frameworks */ = {
@@ -252,42 +194,6 @@
 			productReference = 9A27BF271E0A01B100146EEA /* Pocket Change.app */;
 			productType = "com.apple.product-type.application";
 		};
-		9A27BF3D1E0A01B100146EEA /* Pocket ChangeTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 9A27BF551E0A01B100146EEA /* Build configuration list for PBXNativeTarget "Pocket ChangeTests" */;
-			buildPhases = (
-				9A27BF3A1E0A01B100146EEA /* Sources */,
-				9A27BF3B1E0A01B100146EEA /* Frameworks */,
-				9A27BF3C1E0A01B100146EEA /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				9A27BF401E0A01B100146EEA /* PBXTargetDependency */,
-			);
-			name = "Pocket ChangeTests";
-			productName = "Pocket ChangeTests";
-			productReference = 9A27BF3E1E0A01B100146EEA /* Pocket ChangeTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
-		9A27BF481E0A01B100146EEA /* Pocket ChangeUITests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 9A27BF581E0A01B100146EEA /* Build configuration list for PBXNativeTarget "Pocket ChangeUITests" */;
-			buildPhases = (
-				9A27BF451E0A01B100146EEA /* Sources */,
-				9A27BF461E0A01B100146EEA /* Frameworks */,
-				9A27BF471E0A01B100146EEA /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				9A27BF4B1E0A01B100146EEA /* PBXTargetDependency */,
-			);
-			name = "Pocket ChangeUITests";
-			productName = "Pocket ChangeUITests";
-			productReference = 9A27BF491E0A01B100146EEA /* Pocket ChangeUITests.xctest */;
-			productType = "com.apple.product-type.bundle.ui-testing";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -302,18 +208,6 @@
 						CreatedOnToolsVersion = 8.0;
 						DevelopmentTeam = QDXV9N79EB;
 						ProvisioningStyle = Automatic;
-					};
-					9A27BF3D1E0A01B100146EEA = {
-						CreatedOnToolsVersion = 8.0;
-						DevelopmentTeam = QDXV9N79EB;
-						ProvisioningStyle = Automatic;
-						TestTargetID = 9A27BF261E0A01B100146EEA;
-					};
-					9A27BF481E0A01B100146EEA = {
-						CreatedOnToolsVersion = 8.0;
-						DevelopmentTeam = QDXV9N79EB;
-						ProvisioningStyle = Automatic;
-						TestTargetID = 9A27BF261E0A01B100146EEA;
 					};
 				};
 			};
@@ -337,8 +231,6 @@
 			projectRoot = "";
 			targets = (
 				9A27BF261E0A01B100146EEA /* Pocket Change */,
-				9A27BF3D1E0A01B100146EEA /* Pocket ChangeTests */,
-				9A27BF481E0A01B100146EEA /* Pocket ChangeUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -376,20 +268,6 @@
 				9A27BF381E0A01B100146EEA /* LaunchScreen.storyboard in Resources */,
 				9A27BF351E0A01B100146EEA /* Assets.xcassets in Resources */,
 				9A27BF5C1E0A022A00146EEA /* Main.storyboard in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		9A27BF3C1E0A01B100146EEA /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		9A27BF471E0A01B100146EEA /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -461,36 +339,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		9A27BF3A1E0A01B100146EEA /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				9A27BF431E0A01B100146EEA /* Pocket_ChangeTests.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		9A27BF451E0A01B100146EEA /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				9A27BF4E1E0A01B100146EEA /* Pocket_ChangeUITests.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		9A27BF401E0A01B100146EEA /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 9A27BF261E0A01B100146EEA /* Pocket Change */;
-			targetProxy = 9A27BF3F1E0A01B100146EEA /* PBXContainerItemProxy */;
-		};
-		9A27BF4B1E0A01B100146EEA /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 9A27BF261E0A01B100146EEA /* Pocket Change */;
-			targetProxy = 9A27BF4A1E0A01B100146EEA /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		9A27BF361E0A01B100146EEA /* LaunchScreen.storyboard */ = {
@@ -631,64 +480,6 @@
 			};
 			name = Release;
 		};
-		9A27BF561E0A01B100146EEA /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				DEVELOPMENT_TEAM = QDXV9N79EB;
-				INFOPLIST_FILE = "Pocket ChangeTests/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "nwtsai.Pocket-ChangeTests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Pocket Change.app/Pocket Change";
-			};
-			name = Debug;
-		};
-		9A27BF571E0A01B100146EEA /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				DEVELOPMENT_TEAM = QDXV9N79EB;
-				INFOPLIST_FILE = "Pocket ChangeTests/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "nwtsai.Pocket-ChangeTests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Pocket Change.app/Pocket Change";
-			};
-			name = Release;
-		};
-		9A27BF591E0A01B100146EEA /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				DEVELOPMENT_TEAM = QDXV9N79EB;
-				INFOPLIST_FILE = "Pocket ChangeUITests/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "nwtsai.Pocket-ChangeUITests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
-				TEST_TARGET_NAME = "Pocket Change";
-			};
-			name = Debug;
-		};
-		9A27BF5A1E0A01B100146EEA /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				DEVELOPMENT_TEAM = QDXV9N79EB;
-				INFOPLIST_FILE = "Pocket ChangeUITests/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "nwtsai.Pocket-ChangeUITests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
-				TEST_TARGET_NAME = "Pocket Change";
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -706,24 +497,6 @@
 			buildConfigurations = (
 				9A27BF531E0A01B100146EEA /* Debug */,
 				9A27BF541E0A01B100146EEA /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		9A27BF551E0A01B100146EEA /* Build configuration list for PBXNativeTarget "Pocket ChangeTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				9A27BF561E0A01B100146EEA /* Debug */,
-				9A27BF571E0A01B100146EEA /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		9A27BF581E0A01B100146EEA /* Build configuration list for PBXNativeTarget "Pocket ChangeUITests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				9A27BF591E0A01B100146EEA /* Debug */,
-				9A27BF5A1E0A01B100146EEA /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
