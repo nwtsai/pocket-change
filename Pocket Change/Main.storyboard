@@ -59,24 +59,30 @@
                                 </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="d04-w1-rW6" userLabel="Piggy Bank Icon">
-                                <rect key="frame" x="125" y="372" width="125" height="125"/>
+                                <rect key="frame" x="125" y="381" width="125" height="125"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="125" id="9zf-hq-7ye"/>
                                     <constraint firstAttribute="height" constant="125" id="doT-ao-IWp"/>
                                 </constraints>
                                 <state key="normal" title="Button" image="PiggyBank"/>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$00.00" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TRe-by-rFq">
-                                <rect key="frame" x="129" y="330" width="117" height="42"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="35"/>
-                                <nil key="textColor"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TRe-by-rFq">
+                                <rect key="frame" x="128" y="330" width="120" height="51"/>
+                                <attributedString key="attributedText">
+                                    <fragment content="$00.00">
+                                        <attributes>
+                                            <font key="NSFont" size="37" name="AvenirNext-Medium"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                </attributedString>
                                 <nil key="highlightedColor"/>
                             </label>
                             <view hidden="YES" opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ykY-JB-tUb" userLabel="Spacer">
-                                <rect key="frame" x="16" y="472" width="343" height="151"/>
+                                <rect key="frame" x="16" y="481" width="343" height="142"/>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5tw-ZV-IXc" userLabel="History Button">
-                                <rect key="frame" x="146" y="535" width="84" height="26"/>
+                                <rect key="frame" x="146" y="539" width="84" height="26"/>
                                 <state key="normal" image="button_history"/>
                                 <connections>
                                     <action selector="historyButtonPressed:" destination="sds-LB-aBh" eventType="touchUpInside" id="16H-KH-r9r"/>
@@ -314,7 +320,7 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="OXd-cA-3Lr" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="koO-cn-31M">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="koO-cn-31M">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -357,7 +363,7 @@
                         </segmentedControl>
                         <barButtonItem key="rightBarButtonItem" width="10" style="plain" id="PRn-xk-tnA">
                             <textField key="customView" opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="center" adjustsFontSizeToFit="NO" minimumFontSize="17" id="kEC-AX-fNa" userLabel="PickerTextField">
-                                <rect key="frame" x="300" y="7" width="59" height="30"/>
+                                <rect key="frame" x="294" y="7" width="65" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -382,35 +388,68 @@
             <objects>
                 <viewController id="MoQ-Ps-lSU" userLabel="Pie Chart View Controller" customClass="PieChartViewController" customModule="Pocket_Change" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="QeF-jT-se3"/>
-                        <viewControllerLayoutGuide type="bottom" id="oSv-kI-Y5L"/>
+                        <viewControllerLayoutGuide type="top" id="DVM-Os-6Bc"/>
+                        <viewControllerLayoutGuide type="bottom" id="dm0-0V-W8p"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="3oj-VF-CUA" customClass="PieChartView" customModule="Charts">
+                    <view key="view" contentMode="scaleToFill" id="Rjf-PG-KxZ" customClass="PieChartView" customModule="Charts">
                         <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <view hidden="YES" opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Uzn-r4-01j">
-                                <rect key="frame" x="16" y="-65" width="343" height="624"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                            </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DCC-TP-hvg" userLabel="Chart Label">
+                                <rect key="frame" x="127" y="30" width="121" height="32"/>
+                                <attributedString key="attributedText">
+                                    <fragment content="Chart Label">
+                                        <attributes>
+                                            <font key="NSFont" size="23" name="AvenirNext-Regular"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                </attributedString>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="trailingMargin" secondItem="Uzn-r4-01j" secondAttribute="trailing" id="ZLf-XO-lpx"/>
-                            <constraint firstItem="Uzn-r4-01j" firstAttribute="leading" secondItem="3oj-VF-CUA" secondAttribute="leadingMargin" id="jMi-mW-qF4"/>
-                            <constraint firstItem="oSv-kI-Y5L" firstAttribute="top" secondItem="Uzn-r4-01j" secondAttribute="bottom" id="kVC-bI-CDn"/>
-                            <constraint firstItem="Uzn-r4-01j" firstAttribute="top" secondItem="QeF-jT-se3" secondAttribute="bottom" constant="-65" id="opA-hx-AVI"/>
+                            <constraint firstItem="DCC-TP-hvg" firstAttribute="top" secondItem="DVM-Os-6Bc" secondAttribute="bottom" constant="30" id="CZe-Jn-IB3"/>
+                            <constraint firstItem="DCC-TP-hvg" firstAttribute="centerX" secondItem="Rjf-PG-KxZ" secondAttribute="centerX" id="eRi-rO-BIW"/>
                         </constraints>
                     </view>
                     <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
-                    <navigationItem key="navigationItem" id="I3Y-yD-oGX"/>
+                    <toolbarItems/>
+                    <navigationItem key="navigationItem" id="I3Y-yD-oGX">
+                        <nil key="title"/>
+                        <segmentedControl key="titleView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="0" id="ykX-FD-jtK">
+                            <rect key="frame" x="113" y="7" width="150" height="30"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <segments>
+                                <segment title="$"/>
+                                <segment title="#"/>
+                            </segments>
+                            <connections>
+                                <action selector="indexChanged:" destination="MoQ-Ps-lSU" eventType="valueChanged" id="WQ4-S7-o1B"/>
+                            </connections>
+                        </segmentedControl>
+                        <barButtonItem key="rightBarButtonItem" width="10" style="plain" id="UDh-bH-k3Q">
+                            <textField key="customView" opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="center" adjustsFontSizeToFit="NO" minimumFontSize="17" id="NRV-kq-Ajk" userLabel="pickerTextField">
+                                <rect key="frame" x="300" y="7" width="59" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
-                        <outlet property="pieChartView" destination="3oj-VF-CUA" id="0oa-eX-iJ2"/>
+                        <outlet property="chartLabel" destination="DCC-TP-hvg" id="pmC-Hd-bVm"/>
+                        <outlet property="pickerTextField" destination="NRV-kq-Ajk" id="F0w-gw-gwc"/>
+                        <outlet property="pieChartView" destination="Rjf-PG-KxZ" id="msO-Wp-RIJ"/>
+                        <outlet property="segmentedControl" destination="ykX-FD-jtK" id="FYd-ps-E7V"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6Za-Gq-abm" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2023" y="775"/>
+            <point key="canvasLocation" x="-2023.2" y="743.47826086956525"/>
         </scene>
     </scenes>
     <resources>

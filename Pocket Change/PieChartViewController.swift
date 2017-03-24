@@ -11,13 +11,154 @@ import Charts
 import CoreData
 import Foundation
 
-class PieChartViewController: UIViewController
+class PieChartViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource, UITextFieldDelegate
 {
     // Clean code
     var sharedDelegate: AppDelegate!
 
     // IB Outlets
     @IBOutlet var pieChartView: PieChartView!
+    @IBOutlet weak var chartLabel: UILabel!
+    @IBOutlet weak var segmentedControl: UISegmentedControl!
+    @IBOutlet weak var pickerTextField: UITextField!
+    
+    // ColorPicker
+    var ColorPicker = UIPickerView()
+    
+    // Spring
+    var color0 =
+    [
+        BudgetVariables.hexStringToUIColor(hex: "AF7575"),
+        BudgetVariables.hexStringToUIColor(hex: "EFD8A1"),
+        BudgetVariables.hexStringToUIColor(hex: "BCD693"),
+        BudgetVariables.hexStringToUIColor(hex: "AFD7DB"),
+        BudgetVariables.hexStringToUIColor(hex: "3D9CA8")
+    ]
+    
+    // Marie Antoinette
+    var color1 =
+    [
+        BudgetVariables.hexStringToUIColor(hex: "C44C51"),
+        BudgetVariables.hexStringToUIColor(hex: "FFB6B8"),
+        BudgetVariables.hexStringToUIColor(hex: "FFEFB6"),
+        BudgetVariables.hexStringToUIColor(hex: "A2B5BF"),
+        BudgetVariables.hexStringToUIColor(hex: "5F8CA3")
+    ]
+    
+    // Flat Rainbow
+    var color2 =
+    [
+        BudgetVariables.hexStringToUIColor(hex: "F15A5A"),
+        BudgetVariables.hexStringToUIColor(hex: "F0C419"),
+        BudgetVariables.hexStringToUIColor(hex: "4EBA6F"),
+        BudgetVariables.hexStringToUIColor(hex: "2D95BF"),
+        BudgetVariables.hexStringToUIColor(hex: "955BA5")
+    ]
+
+    // Autumn Berries
+    var color3 =
+    [
+        BudgetVariables.hexStringToUIColor(hex: "588C7E"),
+        BudgetVariables.hexStringToUIColor(hex: "F2E394"),
+        BudgetVariables.hexStringToUIColor(hex: "F2AE72"),
+        BudgetVariables.hexStringToUIColor(hex: "D96459"),
+        BudgetVariables.hexStringToUIColor(hex: "8C4646")
+    ]
+
+    // Cultural Element
+    var color4 =
+    [
+        BudgetVariables.hexStringToUIColor(hex: "0067A6"),
+        BudgetVariables.hexStringToUIColor(hex: "00ABD8"),
+        BudgetVariables.hexStringToUIColor(hex: "008972"),
+        BudgetVariables.hexStringToUIColor(hex: "EFC028"),
+        BudgetVariables.hexStringToUIColor(hex: "F2572D")
+    ]
+    
+    // Pear Lemon Fizz
+    var color5 =
+    [
+        BudgetVariables.hexStringToUIColor(hex: "588F27"),
+        BudgetVariables.hexStringToUIColor(hex: "04BFBF"),
+        BudgetVariables.hexStringToUIColor(hex: "CAFCD8"),
+        BudgetVariables.hexStringToUIColor(hex: "A9CF54"),
+        BudgetVariables.hexStringToUIColor(hex: "F7E967")
+    ]
+    
+    // Friendly Flat Design
+    var color6 =
+    [
+        BudgetVariables.hexStringToUIColor(hex: "FF716A"),
+        BudgetVariables.hexStringToUIColor(hex: "FF9441"),
+        BudgetVariables.hexStringToUIColor(hex: "FFED5E"),
+        BudgetVariables.hexStringToUIColor(hex: "6593FF"),
+        BudgetVariables.hexStringToUIColor(hex: "AC71FF")
+    ]
+
+    // Miami Sunset
+    var color7 =
+    [
+        BudgetVariables.hexStringToUIColor(hex: "FFAA5C"),
+        BudgetVariables.hexStringToUIColor(hex: "DA727E"),
+        BudgetVariables.hexStringToUIColor(hex: "AC6C82"),
+        BudgetVariables.hexStringToUIColor(hex: "685C79"),
+        BudgetVariables.hexStringToUIColor(hex: "455C7B")
+    ]
+    
+    // Nam
+    var color8 =
+    [
+        BudgetVariables.hexStringToUIColor(hex: "425957"),
+        BudgetVariables.hexStringToUIColor(hex: "81AC8B"),
+        BudgetVariables.hexStringToUIColor(hex: "F2E5A2"),
+        BudgetVariables.hexStringToUIColor(hex: "F89883"),
+        BudgetVariables.hexStringToUIColor(hex: "D96666")
+    ]
+    
+    // Ramo
+    var color9 =
+    [
+        BudgetVariables.hexStringToUIColor(hex: "E15B64"),
+        BudgetVariables.hexStringToUIColor(hex: "F27F62"),
+        BudgetVariables.hexStringToUIColor(hex: "FBB36B"),
+        BudgetVariables.hexStringToUIColor(hex: "ABBC85"),
+        BudgetVariables.hexStringToUIColor(hex: "849B89")
+    ]
+
+    // Expo
+    var color10 =
+    [
+        BudgetVariables.hexStringToUIColor(hex: "CF2257"),
+        BudgetVariables.hexStringToUIColor(hex: "FD6041"),
+        BudgetVariables.hexStringToUIColor(hex: "FEAA3A"),
+        BudgetVariables.hexStringToUIColor(hex: "2DA4A8"),
+        BudgetVariables.hexStringToUIColor(hex: "435772")
+    ]
+    
+    // Firenze
+    var color11 =
+    [
+        BudgetVariables.hexStringToUIColor(hex: "468966"),
+        BudgetVariables.hexStringToUIColor(hex: "FFF0A5"),
+        BudgetVariables.hexStringToUIColor(hex: "FFB03B"),
+        BudgetVariables.hexStringToUIColor(hex: "B64926"),
+        BudgetVariables.hexStringToUIColor(hex: "8E2800")
+    ]
+    
+    // Aviator
+    var color12 =
+    [
+        BudgetVariables.hexStringToUIColor(hex: "6A7059"),
+        BudgetVariables.hexStringToUIColor(hex: "FDEEA7"),
+        BudgetVariables.hexStringToUIColor(hex: "9BCC93"),
+        BudgetVariables.hexStringToUIColor(hex: "1A9481"),
+        BudgetVariables.hexStringToUIColor(hex: "003D5C")
+    ]
+    
+    // Color Array
+    var ColorArray = [[UIColor]]()
+    var ColorArrayLabels = ["Spring", "Marie", "Rainbow", "Berries", "Element", "Fizz", "Flat", "Miami", "Nam", "Ramo", "Expo", "Firenze", "Aviator"]
+    var CurrentColorIndex = 0
     
     override func viewDidLoad()
     {
@@ -31,8 +172,25 @@ class PieChartViewController: UIViewController
         let color = UIColor.white
         self.navigationController?.navigationBar.tintColor = color
         
-        // Set the page title
-        self.navigationItem.title = "Amount Spent per Budget"
+        // Initializing picker view
+        ColorPicker.delegate = self
+        ColorPicker.dataSource = self
+        
+        // Customize the textfield
+        pickerTextField.delegate = self
+        pickerTextField.inputView = ColorPicker
+        pickerTextField.tintColor = UIColor.clear
+        pickerTextField.layer.borderColor = UIColor.white.cgColor
+        pickerTextField.layer.borderWidth = 1.0
+        pickerTextField.layer.cornerRadius = 4.5
+        
+        //Looks for single or multiple taps.
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(PieChartViewController.dismissKeyboard))
+        tap.cancelsTouchesInView = false
+        view.addGestureRecognizer(tap)
+        
+        // Initialize the color array
+        ColorArray = [color0, color1, color2, color3, color4, color5, color6, color7, color8, color9, color10, color11, color12]
     }
     
     // Load the graph before view appears. We do this here because data may change
@@ -44,8 +202,43 @@ class PieChartViewController: UIViewController
         self.sharedDelegate.saveContext()
         BudgetVariables.getData()
         
-        // Grab names and amount spent to populate the Pie Chart
-        let map = BudgetVariables.nameToNetAmtSpentMap()
+        // Set the no data text message
+        if BudgetVariables.budgetArray.isEmpty == true
+        {
+            pieChartView.noDataText = "You must have at least one budget."
+        }
+        else if BudgetVariables.isAllHistoryEmpty() == true
+        {
+            pieChartView.noDataText = "You must have at least one transaction."
+        }
+        
+        // Set the chart label text
+        updateChartLabel()
+        
+        // Update the pie graph
+        updatePieGraph()
+        
+        // Set textfield label for color, and initialize the picker to start at a certain value
+        pickerTextField.text = ColorArrayLabels[CurrentColorIndex]
+        ColorPicker.selectRow(CurrentColorIndex, inComponent: 0, animated: true)
+    }
+    
+    // Update the Pie Graph data
+    func updatePieGraph()
+    {
+        var map = [String:Double]()
+        
+        // The segmented controller determines what data gets passed to the pie chart
+        if segmentedControl.selectedSegmentIndex == 0
+        {
+            map = BudgetVariables.nameToNetAmtSpentMap()
+        }
+        else
+        {
+            map = BudgetVariables.nameToTransactionCount()
+        }
+        
+        // Grab correct values to populate the Pie Chart
         var budgetNames = BudgetVariables.getBudgetNames(map: map)
         let amountSpent = BudgetVariables.getAmtSpent(map: map)
         
@@ -64,27 +257,17 @@ class PieChartViewController: UIViewController
             budgetNames[budgetNames.count - 1] = " " + budgetNames[budgetNames.count - 1]
         }
         
-        // Set the no data text message
-        if BudgetVariables.budgetArray.isEmpty == true
-        {
-            pieChartView.noDataText = "You must have at least one budget."
-        }
-        else if BudgetVariables.isAllHistoryEmpty() == true
-        {
-            pieChartView.noDataText = "You must have at least one transaction."
-        }
-        
         if budgetNames.isEmpty == false && amountSpent.isEmpty == false
         {
             if BudgetVariables.isAllZeros(array: amountSpent) == false
             {
-                setPieGraph(names: budgetNames, values: amountSpent)
+                setPieGraphForAmountSpent(names: budgetNames, values: amountSpent)
             }
         }
     }
 
-    // Set Pie Graph
-    func setPieGraph(names: [String], values: [Double])
+    // Set Pie Graph for amount spent
+    func setPieGraphForAmountSpent(names: [String], values: [Double])
     {
         var dataEntries: [ChartDataEntry] = []
         
@@ -94,182 +277,23 @@ class PieChartViewController: UIViewController
             let dataEntry = ChartDataEntry(x: Double(i), y: values[i])
             dataEntries.append(dataEntry)
         }
+                
+        var pieChartLabel = ""
+        if segmentedControl.selectedSegmentIndex == 0
+        {
+            pieChartLabel = "Amount Spent Per Budget"
+        }
+        else
+        {
+            pieChartLabel = "Transactions Per Budget"
+        }
         
-        let pieChartDataSet = PieChartDataSet(values: dataEntries, label: "Amount Spent Per Budget")
+        let pieChartDataSet = PieChartDataSet(values: dataEntries, label: pieChartLabel)
         let pieChartData = PieChartData(dataSet: pieChartDataSet)
         pieChartView.data = pieChartData
         
         var customEntries: [LegendEntry] = []
-        var colors = [UIColor]()
-        
-        // Pick a random UIColor Scheme
-        let randNum = Int(arc4random_uniform(16) + 1)
-        switch randNum
-        {
-        case 1:
-            // Pear Lemon Fizz
-            colors =
-            [
-                BudgetVariables.hexStringToUIColor(hex: "588F27"),
-                BudgetVariables.hexStringToUIColor(hex: "04BFBF"),
-                BudgetVariables.hexStringToUIColor(hex: "CAFCD8"),
-                BudgetVariables.hexStringToUIColor(hex: "A9CF54"),
-                BudgetVariables.hexStringToUIColor(hex: "F7E967")
-            ]
-        case 2:
-            // Vintage Card
-            colors =
-            [
-                BudgetVariables.hexStringToUIColor(hex: "5C4B51"),
-                BudgetVariables.hexStringToUIColor(hex: "8CBEB2"),
-                BudgetVariables.hexStringToUIColor(hex: "F2EBBF"),
-                BudgetVariables.hexStringToUIColor(hex: "F3B562"),
-                BudgetVariables.hexStringToUIColor(hex: "F06060")
-            ]
-        case 3:
-            // Marie Antoinette
-            colors =
-            [
-                BudgetVariables.hexStringToUIColor(hex: "C44C51"),
-                BudgetVariables.hexStringToUIColor(hex: "FFB6B8"),
-                BudgetVariables.hexStringToUIColor(hex: "FFEFB6"),
-                BudgetVariables.hexStringToUIColor(hex: "A2B5BF"),
-                BudgetVariables.hexStringToUIColor(hex: "5F8CA3")
-            ]
-        case 4:
-            // Autumn Berries
-            colors =
-            [
-                BudgetVariables.hexStringToUIColor(hex: "588C7E"),
-                BudgetVariables.hexStringToUIColor(hex: "F2E394"),
-                BudgetVariables.hexStringToUIColor(hex: "F2AE72"),
-                BudgetVariables.hexStringToUIColor(hex: "D96459"),
-                BudgetVariables.hexStringToUIColor(hex: "8C4646")
-            ]
-        case 5:
-            // Appalachian Spring
-            colors =
-            [
-                BudgetVariables.hexStringToUIColor(hex: "C24704"),
-                BudgetVariables.hexStringToUIColor(hex: "D9CC3C"),
-                BudgetVariables.hexStringToUIColor(hex: "FFEB79"),
-                BudgetVariables.hexStringToUIColor(hex: "A0E0A9"),
-                BudgetVariables.hexStringToUIColor(hex: "00ADA7")
-            ]
-        case 6:
-            // Cultural Element
-            colors =
-            [
-                BudgetVariables.hexStringToUIColor(hex: "0067A6"),
-                BudgetVariables.hexStringToUIColor(hex: "00ABD8"),
-                BudgetVariables.hexStringToUIColor(hex: "008972"),
-                BudgetVariables.hexStringToUIColor(hex: "EFC028"),
-                BudgetVariables.hexStringToUIColor(hex: "F2572D")
-            ]
-        case 7:
-            // Aviator
-            colors =
-            [
-                BudgetVariables.hexStringToUIColor(hex: "6A7059"),
-                BudgetVariables.hexStringToUIColor(hex: "FDEEA7"),
-                BudgetVariables.hexStringToUIColor(hex: "9BCC93"),
-                BudgetVariables.hexStringToUIColor(hex: "1A9481"),
-                BudgetVariables.hexStringToUIColor(hex: "003D5C")
-            ]
-        case 8:
-            // Firenze
-            colors =
-            [
-                BudgetVariables.hexStringToUIColor(hex: "468966"),
-                BudgetVariables.hexStringToUIColor(hex: "FFF0A5"),
-                BudgetVariables.hexStringToUIColor(hex: "FFB03B"),
-                BudgetVariables.hexStringToUIColor(hex: "B64926"),
-                BudgetVariables.hexStringToUIColor(hex: "8E2800")
-            ]
-        case 9:
-            // Phaedra
-            colors =
-            [
-                BudgetVariables.hexStringToUIColor(hex: "FF6138"),
-                BudgetVariables.hexStringToUIColor(hex: "FFFF9D"),
-                BudgetVariables.hexStringToUIColor(hex: "BEEB9F"),
-                BudgetVariables.hexStringToUIColor(hex: "79BD8F"),
-                BudgetVariables.hexStringToUIColor(hex: "00A388")
-            ]
-        case 10:
-            // Ocean Sunset
-            colors =
-            [
-                BudgetVariables.hexStringToUIColor(hex: "F54F29"),
-                BudgetVariables.hexStringToUIColor(hex: "FF974F"),
-                BudgetVariables.hexStringToUIColor(hex: "FFD393"),
-                BudgetVariables.hexStringToUIColor(hex: "9C9B7A"),
-                BudgetVariables.hexStringToUIColor(hex: "405952")
-            ]
-        case 11:
-            // Miami Sunset
-            colors =
-            [
-                BudgetVariables.hexStringToUIColor(hex: "FFAA5C"),
-                BudgetVariables.hexStringToUIColor(hex: "DA727E"),
-                BudgetVariables.hexStringToUIColor(hex: "AC6C82"),
-                BudgetVariables.hexStringToUIColor(hex: "685C79"),
-                BudgetVariables.hexStringToUIColor(hex: "455C7B")
-            ]
-        case 12:
-            // Nam
-            colors =
-            [
-                BudgetVariables.hexStringToUIColor(hex: "425957"),
-                BudgetVariables.hexStringToUIColor(hex: "81AC8B"),
-                BudgetVariables.hexStringToUIColor(hex: "F2E5A2"),
-                BudgetVariables.hexStringToUIColor(hex: "F89883"),
-                BudgetVariables.hexStringToUIColor(hex: "D96666")
-            ]
-        case 13:
-            // Spring
-            colors =
-            [
-                BudgetVariables.hexStringToUIColor(hex: "AF7575"),
-                BudgetVariables.hexStringToUIColor(hex: "EFD8A1"),
-                BudgetVariables.hexStringToUIColor(hex: "BCD693"),
-                BudgetVariables.hexStringToUIColor(hex: "AFD7DB"),
-                BudgetVariables.hexStringToUIColor(hex: "3D9CA8")
-            ]
-        case 14:
-            // Flat Rainbow
-            colors =
-            [
-                BudgetVariables.hexStringToUIColor(hex: "F15A5A"),
-                BudgetVariables.hexStringToUIColor(hex: "F0C419"),
-                BudgetVariables.hexStringToUIColor(hex: "4EBA6F"),
-                BudgetVariables.hexStringToUIColor(hex: "2D95BF"),
-                BudgetVariables.hexStringToUIColor(hex: "955BA5")
-            ]
-        case 15:
-            // Ramo
-            colors =
-            [
-                BudgetVariables.hexStringToUIColor(hex: "E15B64"),
-                BudgetVariables.hexStringToUIColor(hex: "F27F62"),
-                BudgetVariables.hexStringToUIColor(hex: "FBB36B"),
-                BudgetVariables.hexStringToUIColor(hex: "ABBC85"),
-                BudgetVariables.hexStringToUIColor(hex: "849B89")
-            ]
-        case 16:
-            // Expo
-            colors =
-            [
-                BudgetVariables.hexStringToUIColor(hex: "CF2257"),
-                BudgetVariables.hexStringToUIColor(hex: "FD6041"),
-                BudgetVariables.hexStringToUIColor(hex: "FEAA3A"),
-                BudgetVariables.hexStringToUIColor(hex: "2DA4A8"),
-                BudgetVariables.hexStringToUIColor(hex: "435772")
-            ]
-        default:
-            colors = ChartColorTemplates.colorful()
-            break
-        }
+        var colors = ColorArray[CurrentColorIndex]
         
         for i in 0..<names.count
         {
@@ -286,9 +310,18 @@ class PieChartViewController: UIViewController
         // Custom Entries
         pieChartView.legend.setCustom(entries: customEntries)
         
-        // Format the labels to be of currency format
         let format = NumberFormatter()
-        format.numberStyle = .currency
+        
+        // Format the labels to be of currency format if the segment selected is for dollars
+        if segmentedControl.selectedSegmentIndex == 0
+        {
+            format.numberStyle = .currency
+        }
+        else
+        {
+            format.numberStyle = .none
+        }
+        
         let formatter = DefaultValueFormatter(formatter: format)
         pieChartData.setValueFormatter(formatter)
         
@@ -296,13 +329,129 @@ class PieChartViewController: UIViewController
         pieChartView.legend.font = UIFont.systemFont(ofSize: 18)
         pieChartView.legend.formSize = 11
         
-        // Set description texts
+        // Set description text
         pieChartView.chartDescription?.text = ""
         
         // Set Font Size and Color
         pieChartData.setValueFont(UIFont.systemFont(ofSize: 18))
         pieChartData.setValueTextColor(UIColor.black)
         
+        // Calculate average
+        let average = BudgetVariables.calculateAverage(nums: values).roundTo(places: 2)
+        var averageString = String(average)
+        if segmentedControl.selectedSegmentIndex == 0
+        {
+            averageString = BudgetVariables.numFormat(myNum: average)
+        }
+        
+        // Style the center text and display the average
+        let paragraph = NSMutableParagraphStyle()
+        paragraph.alignment = .center
+        let myAttributes: [String:Any] =
+        [
+            NSForegroundColorAttributeName: UIColor.gray,
+            NSFontAttributeName: UIFont(name: "AvenirNext-Regular", size: 27)!,
+            NSParagraphStyleAttributeName: paragraph
+        ]
+        pieChartView.centerAttributedText = NSAttributedString(string: "Average:\n" + averageString, attributes: myAttributes)
+        
+        // Animate the pie chart
         pieChartView.animate(xAxisDuration: 1.5, yAxisDuration: 1.5)
+    }
+    
+    // Update the label of the pie chart
+    func updateChartLabel()
+    {
+        if segmentedControl.selectedSegmentIndex == 0
+        {
+            chartLabel.text = "Amount Spent"
+        }
+        else
+        {
+            chartLabel.text = "Transactions"
+        }
+    }
+    
+    // If the index of the segmented controller changes
+    @IBAction func indexChanged(_ sender: Any)
+    {
+        updateChartLabel()
+        updatePieGraph()
+    }
+    
+    // Conform to picker view protocol
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String?
+    {
+        return ColorArrayLabels[row]
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int
+    {
+        return ColorArrayLabels.count
+    }
+    
+    // When a row is selected, update color index and update the pie chart
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int)
+    {
+        pickerTextField.text = ColorArrayLabels[row]
+        CurrentColorIndex = row
+        
+        // Save and get data to coredata
+        self.sharedDelegate.saveContext()
+        BudgetVariables.getData()
+        
+        // Update the graph once a new color is chosen
+        updatePieGraph()
+    }
+    
+    // There is only one component for the pickerView
+    func numberOfComponents(in pickerView: UIPickerView) -> Int
+    {
+        return 1
+    }
+    
+    // A user cannot edit the text that is in the UITextField. Only the pickerView can modify the text in the UITextField
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool
+    {
+        return false
+    }
+    
+    // A view that dims the background while the user selects a color
+    let blackView = UIView()
+    
+    // When a user presses the text field picker, dim the background with an animation
+    func textFieldDidBeginEditing(_ textField: UITextField)
+    {
+        if let window = UIApplication.shared.keyWindow
+        {
+            blackView.backgroundColor = UIColor(white: 0, alpha: 0.45)
+            
+            blackView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleDismiss)))
+            
+            window.addSubview(blackView)
+            blackView.frame = window.frame
+            blackView.alpha = 0
+            UIView.animate(withDuration: 0.6, animations:
+                {
+                    self.blackView.alpha = 1
+            })
+        }
+    }
+    
+    // When a user taps the black view, animate and fade the view back to normal
+    func handleDismiss()
+    {
+        UIView.animate(withDuration: 0.6)
+        {
+            self.blackView.alpha = 0
+        }
+        dismissKeyboard()
+    }
+    
+    //Calls this function when the tap is recognized.
+    func dismissKeyboard()
+    {
+        //Causes the view (or one of its embedded text fields) to resign the first responder status.
+        pickerTextField.endEditing(true)
     }
 }

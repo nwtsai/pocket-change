@@ -340,7 +340,7 @@ class BudgetVariables: UIViewController
             }
         }
         
-        // Sort the dictionary by its value, so keys holds the greatest to least Budget in terms of net amount spent
+        // Sort the dictionary by its value, so keys holds the greatest to least
         if keys.count > 5
         {
             keys.sort { (o1, o2) -> Bool in
@@ -406,6 +406,20 @@ class BudgetVariables: UIViewController
         return nameToNetAmountMap
     }
     
+    // Return a map that maps the budget name to its corresponding number of total transactions
+    class func nameToTransactionCount() -> [String:Double]
+    {
+        var nameToTransactionCountMap = [String:Double]()
+        if BudgetVariables.budgetArray.isEmpty == false
+        {
+            for i in 0...BudgetVariables.budgetArray.count - 1
+            {
+                nameToTransactionCountMap[BudgetVariables.budgetArray[i].name!] = Double(BudgetVariables.budgetArray[i].historyArray.count)
+            }
+        }
+        return nameToTransactionCountMap
+    }
+        
     // This takes a hex color (IE: #ffffff) and returns a UIColor
     class func hexStringToUIColor(hex:String) -> UIColor
     {
