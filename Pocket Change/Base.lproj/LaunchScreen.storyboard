@@ -23,11 +23,11 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="plh-eC-QP6" userLabel="Pocket Change">
-                                <rect key="frame" x="60.5" y="118.5" width="255" height="43.5"/>
+                                <rect key="frame" x="61" y="111" width="254.5" height="51"/>
                                 <attributedString key="attributedText">
                                     <fragment content="Pocket Change">
                                         <attributes>
-                                            <font key="NSFont" size="37" name=".SFNSDisplay"/>
+                                            <font key="NSFont" size="37" name="AvenirNext-Regular"/>
                                         </attributes>
                                     </fragment>
                                 </attributedString>
@@ -41,10 +41,16 @@
                                 </constraints>
                                 <state key="normal" image="PiggyBank"/>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Created by Nathan Tsai" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RHt-uF-sfa" userLabel="Created By">
-                                <rect key="frame" x="112" y="382" width="151" height="17"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RHt-uF-sfa" userLabel="Created By">
+                                <rect key="frame" x="109" y="382" width="158.5" height="20.5"/>
+                                <attributedString key="attributedText">
+                                    <fragment content="Created by Nathan Tsai">
+                                        <attributes>
+                                            <color key="NSColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                            <font key="NSFont" size="15" name="AvenirNext-Regular"/>
+                                        </attributes>
+                                    </fragment>
+                                </attributedString>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>

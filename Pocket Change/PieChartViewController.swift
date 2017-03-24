@@ -157,7 +157,7 @@ class PieChartViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
     
     // Color Array
     var ColorArray = [[UIColor]]()
-    var ColorArrayLabels = ["Spring", "Marie", "Rainbow", "Berries", "Element", "Fizz", "Flat", "Miami", "Nam", "Ramo", "Expo", "Firenze", "Aviator"]
+    var ColorArrayLabels = ["Spring", "Blossom", "Rainbow", "Berries", "Element", "Fizz", "Flat", "Miami", "Vietnam", "Ramo", "Expo", "Firenze", "Aviator"]
     var CurrentColorIndex = 0
     
     override func viewDidLoad()

@@ -165,7 +165,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="weC-fA-FtV" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1036" y="-99.400299850074973"/>
+            <point key="canvasLocation" x="-1359" y="-101"/>
         </scene>
         <!--History and Map View Controller-->
         <scene sceneID="STd-v6-pbN">
@@ -248,7 +248,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eJA-IF-3JI" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="129" y="-379"/>
+            <point key="canvasLocation" x="-616" y="-413"/>
         </scene>
         <!--Budget List View Controller-->
         <scene sceneID="Ibv-9A-dme">
@@ -320,7 +320,7 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="OXd-cA-3Lr" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="koO-cn-31M">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="koO-cn-31M">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -331,7 +331,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ODR-Td-dVN" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2895.1999999999998" y="-99.400299850074973"/>
+            <point key="canvasLocation" x="-2678" y="-100"/>
         </scene>
         <!--Bar Graph View Controller-->
         <scene sceneID="iAB-AN-GUb">
@@ -363,7 +363,7 @@
                         </segmentedControl>
                         <barButtonItem key="rightBarButtonItem" width="10" style="plain" id="PRn-xk-tnA">
                             <textField key="customView" opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="center" adjustsFontSizeToFit="NO" minimumFontSize="17" id="kEC-AX-fNa" userLabel="PickerTextField">
-                                <rect key="frame" x="294" y="7" width="65" height="30"/>
+                                <rect key="frame" x="300" y="7" width="59" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -381,7 +381,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6K8-ea-Mj3" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="128.80000000000001" y="328.78560719640183"/>
+            <point key="canvasLocation" x="-617" y="483"/>
         </scene>
         <!--Pie Chart View Controller-->
         <scene sceneID="aeD-Nb-p0U">
@@ -419,11 +419,11 @@
                     <navigationItem key="navigationItem" id="I3Y-yD-oGX">
                         <nil key="title"/>
                         <segmentedControl key="titleView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="0" id="ykX-FD-jtK">
-                            <rect key="frame" x="113" y="7" width="150" height="30"/>
+                            <rect key="frame" x="121" y="7" width="134" height="30"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <segments>
-                                <segment title="$"/>
-                                <segment title="#"/>
+                                <segment title="$" width="66"/>
+                                <segment title="#" width="66"/>
                             </segments>
                             <connections>
                                 <action selector="indexChanged:" destination="MoQ-Ps-lSU" eventType="valueChanged" id="WQ4-S7-o1B"/>
@@ -431,7 +431,7 @@
                         </segmentedControl>
                         <barButtonItem key="rightBarButtonItem" width="10" style="plain" id="UDh-bH-k3Q">
                             <textField key="customView" opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="center" adjustsFontSizeToFit="NO" minimumFontSize="17" id="NRV-kq-Ajk" userLabel="pickerTextField">
-                                <rect key="frame" x="300" y="7" width="59" height="30"/>
+                                <rect key="frame" x="293" y="7" width="66" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
