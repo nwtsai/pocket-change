@@ -358,7 +358,7 @@ class BudgetVariables: UIViewController
     // If there are more than 5 budgets, return the top 4 amount spent values in sorted order,
     // and then sum the values of the remaining budgets and append it as the fifth item in the Double array
     // If there are 5 or less budgets, just return the Double array of amount spent
-    class func getAmtSpent(map: [String:Double]) -> [Double]
+    class func getPieValues(map: [String:Double]) -> [Double]
     {
         var valuesArray = [Double]()
         

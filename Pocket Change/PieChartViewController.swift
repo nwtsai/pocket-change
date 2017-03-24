@@ -240,7 +240,7 @@ class PieChartViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
         
         // Grab correct values to populate the Pie Chart
         var budgetNames = BudgetVariables.getBudgetNames(map: map)
-        let amountSpent = BudgetVariables.getAmtSpent(map: map)
+        let pieValues = BudgetVariables.getPieValues(map: map)
         
         // Format all names except the last name in the budgetNames array
         if budgetNames.count >= 2
@@ -257,11 +257,11 @@ class PieChartViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
             budgetNames[budgetNames.count - 1] = " " + budgetNames[budgetNames.count - 1]
         }
         
-        if budgetNames.isEmpty == false && amountSpent.isEmpty == false
+        if budgetNames.isEmpty == false && pieValues.isEmpty == false
         {
-            if BudgetVariables.isAllZeros(array: amountSpent) == false
+            if BudgetVariables.isAllZeros(array: pieValues) == false
             {
-                setPieGraphForAmountSpent(names: budgetNames, values: amountSpent)
+                setPieGraphForAmountSpent(names: budgetNames, values: pieValues)
             }
         }
     }
@@ -377,6 +377,7 @@ class PieChartViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
     {
         updateChartLabel()
         updatePieGraph()
+        pieChartView.notifyDataSetChanged()
     }
     
     // Conform to picker view protocol
@@ -432,8 +433,8 @@ class PieChartViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
             blackView.frame = window.frame
             blackView.alpha = 0
             UIView.animate(withDuration: 0.6, animations:
-                {
-                    self.blackView.alpha = 1
+            {
+                self.blackView.alpha = 1
             })
         }
     }
