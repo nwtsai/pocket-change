@@ -76,7 +76,7 @@ class BudgetListViewController: UIViewController, UITableViewDataSource, UITable
     {
         let alert = UIAlertController(title: "Create a Budget", message: "", preferredStyle: UIAlertControllerStyle.alert)
         alert.addTextField(configurationHandler: {(textField: UITextField) in
-            textField.placeholder = "Budget Name (Optional)"
+            textField.placeholder = "Budget Name"
             textField.delegate = self
             textField.autocapitalizationType = .words
         })
@@ -150,7 +150,7 @@ class BudgetListViewController: UIViewController, UITableViewDataSource, UITable
         {
             maxLength = 10
         }
-        else if textField.placeholder == "Budget Name (Optional)" || textField.placeholder == "New Name"
+        else if textField.placeholder == "Budget Name" || textField.placeholder == "New Name"
         {
             maxLength = 18
         }
@@ -288,7 +288,7 @@ class BudgetListViewController: UIViewController, UITableViewDataSource, UITable
         {
             myCell.textLabel?.textColor = UIColor.lightGray
             myCell.detailTextLabel?.textColor = UIColor.lightGray
-            myCell.textLabel?.text = "Budget Name"
+            myCell.textLabel?.text = "Budget"
             myCell.detailTextLabel?.text = "Balance / Budget"
             myCell.selectionStyle = UITableViewCellSelectionStyle.none
             myCell.separatorInset = UIEdgeInsetsMake(0.0, 0.0, 0.0, myCell.bounds.size.width)
@@ -378,7 +378,7 @@ class BudgetListViewController: UIViewController, UITableViewDataSource, UITable
     // Show Edit Name Pop-up
     func showEditNameAlert(indexPath: IndexPath)
     {
-        let editAlert = UIAlertController(title: "Edit Budget Name", message: "", preferredStyle: UIAlertControllerStyle.alert)
+        let editAlert = UIAlertController(title: "Rename Budget", message: "", preferredStyle: UIAlertControllerStyle.alert)
         
         editAlert.addTextField(configurationHandler: {(textField: UITextField) in
             textField.placeholder = "New Name"
