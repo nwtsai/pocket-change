@@ -175,6 +175,9 @@ class PieChartViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
         let color = UIColor.white
         self.navigationController?.navigationBar.tintColor = color
         
+        // Set chart label color
+        chartLabel.textColor = BudgetVariables.hexStringToUIColor(hex: "#045973")
+        
         // Setting the delegate for the ChartView
         pieChartView.delegate = self
         
@@ -357,11 +360,11 @@ class PieChartViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
         centerAlignment.alignment = .center
         let myAttributes: [String:Any] =
         [
-            NSForegroundColorAttributeName: BudgetVariables.hexStringToUIColor(hex: "#979C9C"),
-            NSFontAttributeName: UIFont(name: "AvenirNext-Regular", size: 27)!,
+            NSForegroundColorAttributeName: BudgetVariables.hexStringToUIColor(hex: "#045973"),
+            NSFontAttributeName: UIFont(name: "AvenirNext-Regular", size: 26)!,
             NSParagraphStyleAttributeName: centerAlignment
         ]
-        pieChartView.centerAttributedText = NSAttributedString(string: "Average:\n" + averageString, attributes: myAttributes)
+        pieChartView.centerAttributedText = NSAttributedString(string: "Average\n" + averageString, attributes: myAttributes)
         
         // Animate the pie chart
         pieChartView.animate(xAxisDuration: 1.5, yAxisDuration: 1.5)

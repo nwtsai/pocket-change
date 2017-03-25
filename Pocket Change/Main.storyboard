@@ -92,7 +92,7 @@
                                 <rect key="frame" x="16" y="254" width="343" height="26"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Iyv-Ff-OpV" userLabel="Spend Button">
-                                        <rect key="frame" x="0.0" y="0.0" width="171.5" height="26"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="172" height="26"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                         <state key="normal" image="button_spend"/>
                                         <connections>
@@ -100,7 +100,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ubd-DZ-KkV" userLabel="Add Button">
-                                        <rect key="frame" x="171.5" y="0.0" width="171.5" height="26"/>
+                                        <rect key="frame" x="172" y="0.0" width="171" height="26"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                         <state key="normal" image="button_add"/>
                                         <connections>
@@ -165,7 +165,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="weC-fA-FtV" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1359" y="-101"/>
+            <point key="canvasLocation" x="-1167" y="-99"/>
         </scene>
         <!--History and Map View Controller-->
         <scene sceneID="STd-v6-pbN">
@@ -248,7 +248,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eJA-IF-3JI" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-616" y="-413"/>
+            <point key="canvasLocation" x="-212" y="-497"/>
         </scene>
         <!--Budget List View Controller-->
         <scene sceneID="Ibv-9A-dme">
@@ -320,7 +320,7 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="OXd-cA-3Lr" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="koO-cn-31M">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="koO-cn-31M">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -331,7 +331,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ODR-Td-dVN" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2678" y="-100"/>
+            <point key="canvasLocation" x="-2958" y="-99"/>
         </scene>
         <!--Bar Graph View Controller-->
         <scene sceneID="iAB-AN-GUb">
@@ -381,7 +381,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6K8-ea-Mj3" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-617" y="483"/>
+            <point key="canvasLocation" x="-212" y="436"/>
         </scene>
         <!--Pie Chart View Controller-->
         <scene sceneID="aeD-Nb-p0U">
@@ -396,11 +396,11 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DCC-TP-hvg" userLabel="Chart Label">
-                                <rect key="frame" x="127" y="30" width="121" height="32"/>
+                                <rect key="frame" x="124" y="25" width="127" height="33"/>
                                 <attributedString key="attributedText">
                                     <fragment content="Chart Label">
                                         <attributes>
-                                            <font key="NSFont" size="23" name="AvenirNext-Regular"/>
+                                            <font key="NSFont" size="24" name="AvenirNext-Regular"/>
                                             <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                         </attributes>
                                     </fragment>
@@ -410,7 +410,7 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="DCC-TP-hvg" firstAttribute="top" secondItem="DVM-Os-6Bc" secondAttribute="bottom" constant="30" id="CZe-Jn-IB3"/>
+                            <constraint firstItem="DCC-TP-hvg" firstAttribute="top" secondItem="DVM-Os-6Bc" secondAttribute="bottom" constant="25" id="CZe-Jn-IB3"/>
                             <constraint firstItem="DCC-TP-hvg" firstAttribute="centerX" secondItem="Rjf-PG-KxZ" secondAttribute="centerX" id="eRi-rO-BIW"/>
                         </constraints>
                     </view>
