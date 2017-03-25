@@ -7,7 +7,7 @@ iOS App made from scratch that helps users visualize their personal expenses and
 ‣ When a user taps on a transaction, the map animates and centers on the location of where the transaction happened <br /> 
 ‣ Create a budget with a name and starting balance <br />
 ‣ Spend or add money to any budget, adding to your history <br />
-‣ Check your pie chart to see the net amount spent per budget; everytime you view the pie chart it is drawn with 1 out of the 10 color schemes included in my design, offering visibility and clarity on up-to-date data <br />
+‣ Check your pie chart to see the net amount spent per budget; every time you view the pie chart it is drawn with 1 out of the 10 color schemes included in my design, offering visibility and clarity on up-to-date data <br />
 ‣ View your transaction history within a specified time interval (past week, month, or year) on a bar graph <br />
 &nbsp;&nbsp;&nbsp;&nbsp;– A horizontal line details the average amount spent per day for the specified time interval <br />
 &nbsp;&nbsp;&nbsp;&nbsp;– The user can customize each budget's bar graph with 11 different color schemes <br />
