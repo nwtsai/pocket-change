@@ -11,7 +11,7 @@ import Charts
 import CoreData
 import Foundation
 
-class PieChartViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource, UITextFieldDelegate
+class PieChartViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource, UITextFieldDelegate, ChartViewDelegate
 {
     // Clean code
     var sharedDelegate: AppDelegate!
@@ -160,6 +160,9 @@ class PieChartViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
     var ColorArrayLabels = ["Spring", "Blossom", "Rainbow", "Berries", "Element", "Fizz", "Flat", "Miami", "Vietnam", "Ramo", "Expo", "Firenze", "Aviator"]
     var CurrentColorIndex = 0
     
+    // Reference to PieChartDataSet object 
+    var pieChartDataSet = PieChartDataSet()
+    
     override func viewDidLoad()
     {
         super.viewDidLoad()
@@ -172,6 +175,9 @@ class PieChartViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
         let color = UIColor.white
         self.navigationController?.navigationBar.tintColor = color
         
+        // Setting the delegate for the ChartView
+        pieChartView.delegate = self
+        
         // Initializing picker view
         ColorPicker.delegate = self
         ColorPicker.dataSource = self
@@ -183,11 +189,6 @@ class PieChartViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
         pickerTextField.layer.borderColor = UIColor.white.cgColor
         pickerTextField.layer.borderWidth = 1.0
         pickerTextField.layer.cornerRadius = 4.5
-        
-        //Looks for single or multiple taps.
-        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(PieChartViewController.dismissKeyboard))
-        tap.cancelsTouchesInView = false
-        view.addGestureRecognizer(tap)
         
         // Initialize the color array
         ColorArray = [color0, color1, color2, color3, color4, color5, color6, color7, color8, color9, color10, color11, color12]
@@ -211,9 +212,6 @@ class PieChartViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
         {
             pieChartView.noDataText = "You must have at least one transaction."
         }
-        
-        // Set the chart label text
-        updateChartLabel()
         
         // Update the pie graph
         updatePieGraph()
@@ -257,38 +255,48 @@ class PieChartViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
             budgetNames[budgetNames.count - 1] = " " + budgetNames[budgetNames.count - 1]
         }
         
-        if budgetNames.isEmpty == false && pieValues.isEmpty == false
+        // Only set the chart label and pie chart if there are transactions and budgets to dusplay
+        if budgetNames.isEmpty == false && pieValues.isEmpty == false && BudgetVariables.isAllZeros(array: pieValues) == false
         {
-            if BudgetVariables.isAllZeros(array: pieValues) == false
-            {
-                setPieGraphForAmountSpent(names: budgetNames, values: pieValues)
-            }
+            setPieGraphForAmountSpent(names: budgetNames, values: pieValues)
+            updateChartLabel()
+        }
+        else
+        {
+            chartLabel.text = ""
+        }
+    }
+    
+    // Update the label of the pie chart
+    func updateChartLabel()
+    {
+        if segmentedControl.selectedSegmentIndex == 0
+        {
+            chartLabel.text = "Amount Spent"
+        }
+        else
+        {
+            chartLabel.text = "Transactions"
         }
     }
 
     // Set Pie Graph for amount spent
     func setPieGraphForAmountSpent(names: [String], values: [Double])
     {
-        var dataEntries: [ChartDataEntry] = []
+        // Clear old selections
+        pieChartView.clear()
+        
+        var pieChartDataEntries: [PieChartDataEntry] = []
         
         for i in 0..<names.count
         {
             // Set corresponding data
-            let dataEntry = ChartDataEntry(x: Double(i), y: values[i])
-            dataEntries.append(dataEntry)
-        }
-                
-        var pieChartLabel = ""
-        if segmentedControl.selectedSegmentIndex == 0
-        {
-            pieChartLabel = "Amount Spent Per Budget"
-        }
-        else
-        {
-            pieChartLabel = "Transactions Per Budget"
+            let pieDataEntry = PieChartDataEntry(value: values[i], label: "")
+            pieChartDataEntries.append(pieDataEntry)
         }
         
-        let pieChartDataSet = PieChartDataSet(values: dataEntries, label: pieChartLabel)
+        // let pieChartDataSet = PieChartDataSet(values: dataEntries, label: pieChartLabel)
+        pieChartDataSet = PieChartDataSet(values: pieChartDataEntries, label: "")
         let pieChartData = PieChartData(dataSet: pieChartDataSet)
         pieChartView.data = pieChartData
         
@@ -332,8 +340,9 @@ class PieChartViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
         // Set description text
         pieChartView.chartDescription?.text = ""
         
-        // Set Font Size and Color
+        // Set Font Size and Color of labels and data
         pieChartData.setValueFont(UIFont.systemFont(ofSize: 18))
+        pieChartDataSet.entryLabelFont = UIFont.systemFont(ofSize: 12)
         pieChartData.setValueTextColor(UIColor.black)
         
         // Calculate average
@@ -345,13 +354,13 @@ class PieChartViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
         }
         
         // Style the center text and display the average
-        let paragraph = NSMutableParagraphStyle()
-        paragraph.alignment = .center
+        let centerAlignment = NSMutableParagraphStyle()
+        centerAlignment.alignment = .center
         let myAttributes: [String:Any] =
         [
-            NSForegroundColorAttributeName: UIColor.gray,
+            NSForegroundColorAttributeName: BudgetVariables.hexStringToUIColor(hex: "#979C9C"),
             NSFontAttributeName: UIFont(name: "AvenirNext-Regular", size: 27)!,
-            NSParagraphStyleAttributeName: paragraph
+            NSParagraphStyleAttributeName: centerAlignment
         ]
         pieChartView.centerAttributedText = NSAttributedString(string: "Average:\n" + averageString, attributes: myAttributes)
         
@@ -359,23 +368,23 @@ class PieChartViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
         pieChartView.animate(xAxisDuration: 1.5, yAxisDuration: 1.5)
     }
     
-    // Update the label of the pie chart
-    func updateChartLabel()
+    func chartValueSelected(_ chartView: ChartViewBase, entry: ChartDataEntry, highlight: Highlight)
     {
-        if segmentedControl.selectedSegmentIndex == 0
-        {
-            chartLabel.text = "Amount Spent"
-        }
-        else
-        {
-            chartLabel.text = "Transactions"
-        }
+        //let myTempChartDataSet = PieChartDataSet(values: [entry], label: "")
+        //let pieChartData = PieChartData(dataSet: myTempChartDataSet)
+        //pieChartView.data = pieChartData
+        //myTempChartDataSet.sliceSpace = 10.0
+        pieChartDataSet.sliceSpace = 8.0
+    }
+    
+    func chartValueNothingSelected(_ chartView: ChartViewBase)
+    {
+        pieChartDataSet.sliceSpace = 0.0
     }
     
     // If the index of the segmented controller changes
     @IBAction func indexChanged(_ sender: Any)
     {
-        updateChartLabel()
         updatePieGraph()
         pieChartView.notifyDataSetChanged()
     }

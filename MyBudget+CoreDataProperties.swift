@@ -15,7 +15,7 @@ extension MyBudget
 {
     @nonobjc public class func fetchRequest() -> NSFetchRequest<MyBudget>
     {
-        return NSFetchRequest<MyBudget>(entityName: "MyBudget");
+        return NSFetchRequest<MyBudget>(entityName: "MyBudget")
     }
 
     @NSManaged public var name: String?
