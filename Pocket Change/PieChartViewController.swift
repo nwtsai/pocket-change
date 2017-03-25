@@ -295,7 +295,6 @@ class PieChartViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
             pieChartDataEntries.append(pieDataEntry)
         }
         
-        // let pieChartDataSet = PieChartDataSet(values: dataEntries, label: pieChartLabel)
         pieChartDataSet = PieChartDataSet(values: pieChartDataEntries, label: "")
         let pieChartData = PieChartData(dataSet: pieChartDataSet)
         pieChartView.data = pieChartData
@@ -368,7 +367,7 @@ class PieChartViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
         pieChartView.animate(xAxisDuration: 1.5, yAxisDuration: 1.5)
     }
     
-    func chartValueSelected(_ chartView: ChartViewBase, entry: ChartDataEntry, highlight: Highlight)
+    /*func chartValueSelected(_ chartView: ChartViewBase, entry: ChartDataEntry, highlight: Highlight)
     {
         //let myTempChartDataSet = PieChartDataSet(values: [entry], label: "")
         //let pieChartData = PieChartData(dataSet: myTempChartDataSet)
@@ -380,7 +379,7 @@ class PieChartViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
     func chartValueNothingSelected(_ chartView: ChartViewBase)
     {
         pieChartDataSet.sliceSpace = 0.0
-    }
+    }*/
     
     // If the index of the segmented controller changes
     @IBAction func indexChanged(_ sender: Any)
