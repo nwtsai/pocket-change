@@ -289,7 +289,8 @@ class BudgetListViewController: UIViewController, UITableViewDataSource, UITable
             myCell.textLabel?.textColor = UIColor.lightGray
             myCell.detailTextLabel?.textColor = UIColor.lightGray
             myCell.textLabel?.text = "Budget"
-            myCell.detailTextLabel?.text = "Balance / Budget"
+            // myCell.detailTextLabel?.text = "Balance / Budget"
+            myCell.detailTextLabel?.text = "Balance"
             myCell.selectionStyle = UITableViewCellSelectionStyle.none
             myCell.separatorInset = UIEdgeInsetsMake(0.0, 0.0, 0.0, myCell.bounds.size.width)
         }
@@ -300,9 +301,10 @@ class BudgetListViewController: UIViewController, UITableViewDataSource, UITable
             myCell.textLabel?.text = BudgetVariables.budgetArray[indexPath.row].name
             let currentBalance = (BudgetVariables.budgetArray[indexPath.row].balance).roundTo(places: 2)
             let currentBalanceString = BudgetVariables.numFormat(myNum: currentBalance)
-            let totalBudgetAmt = lround((BudgetVariables.budgetArray[indexPath.row].totalBudgetAmount))
-            let totalBudgetAmtString = String(totalBudgetAmt)
-            myCell.detailTextLabel?.text = currentBalanceString + " / $" + totalBudgetAmtString
+            // let totalBudgetAmt = lround((BudgetVariables.budgetArray[indexPath.row].totalBudgetAmount))
+            // let totalBudgetAmtString = String(totalBudgetAmt)
+            // myCell.detailTextLabel?.text = currentBalanceString + " / $" + totalBudgetAmtString
+            myCell.detailTextLabel?.text = currentBalanceString
             myCell.selectionStyle = UITableViewCellSelectionStyle.default
             myCell.separatorInset = UIEdgeInsetsMake(0.0, 15.0, 0.0, 15.0)
         }
