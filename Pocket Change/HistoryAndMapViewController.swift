@@ -262,7 +262,7 @@ class HistoryAndMapViewController: UIViewController, CLLocationManagerDelegate, 
         {
             myCell.textLabel?.textColor = UIColor.lightGray
             myCell.detailTextLabel?.textColor = UIColor.lightGray
-            myCell.textLabel?.text = "Swipe left to edit"
+            myCell.textLabel?.text = "Swipe to edit"
             myCell.detailTextLabel?.text = "Tap to locate"
             myCell.selectionStyle = UITableViewCellSelectionStyle.none
         }

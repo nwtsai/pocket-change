@@ -206,16 +206,6 @@ class PieChartViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
         self.sharedDelegate.saveContext()
         BudgetVariables.getData()
         
-        // Set the no data text message
-        if BudgetVariables.budgetArray.isEmpty == true
-        {
-            pieChartView.noDataText = "You must have at least one budget."
-        }
-        else if BudgetVariables.isAllHistoryEmpty() == true
-        {
-            pieChartView.noDataText = "You must have at least one transaction."
-        }
-        
         // Update the pie graph
         updatePieGraph()
         
@@ -258,21 +248,36 @@ class PieChartViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
             budgetNames[budgetNames.count - 1] = " " + budgetNames[budgetNames.count - 1]
         }
         
-        // Only set the chart label and pie chart if there are transactions and budgets to dusplay
+        // Only set the chart label and pie chart if there are transactions and budgets to display
         if budgetNames.isEmpty == false && pieValues.isEmpty == false && BudgetVariables.isAllZeros(array: pieValues) == false
         {
+            updateChartLabels()
             setPieGraphForAmountSpent(names: budgetNames, values: pieValues)
-            updateChartLabel()
         }
         else
         {
+            // Set the no data message
+            if BudgetVariables.budgetArray.isEmpty == true
+            {
+                pieChartView.noDataText = "You must have at least one budget."
+            }
+            else if pieValues.isEmpty == true
+            {
+                pieChartView.noDataText = "You must have at least one transaction."
+            }
+            else if BudgetVariables.isAllZeros(array: pieValues) == true
+            {
+                pieChartView.noDataText = "You must spend at least once."
+            }
+            
             chartLabel.text = ""
         }
     }
     
-    // Update the label of the pie chart
-    func updateChartLabel()
+    // Update the labels of the pie chart
+    func updateChartLabels()
     {
+        // Set the chart label
         if segmentedControl.selectedSegmentIndex == 0
         {
             chartLabel.text = "Amount Spent"
@@ -282,7 +287,7 @@ class PieChartViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
             chartLabel.text = "Transactions"
         }
     }
-
+    
     // Set Pie Graph for amount spent
     func setPieGraphForAmountSpent(names: [String], values: [Double])
     {
