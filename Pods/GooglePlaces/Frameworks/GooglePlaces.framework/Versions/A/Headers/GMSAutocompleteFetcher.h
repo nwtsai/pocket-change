@@ -60,8 +60,7 @@ NS_ASSUME_NONNULL_BEGIN
  * @param filter The filter to apply to the results. This parameter may be nil.
  */
 - (instancetype)initWithBounds:(nullable GMSCoordinateBounds *)bounds
-                        filter:(nullable GMSAutocompleteFilter *)filter
-    NS_DESIGNATED_INITIALIZER;
+                        filter:(nullable GMSAutocompleteFilter *)filter NS_DESIGNATED_INITIALIZER;
 
 /** Delegate to be notified with autocomplete prediction results. */
 @property(nonatomic, weak, nullable) id<GMSAutocompleteFetcherDelegate> delegate;

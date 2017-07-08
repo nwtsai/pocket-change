@@ -16,7 +16,11 @@ NS_ASSUME_NONNULL_BEGIN
 @class GMSCoordinateBounds;
 
 
-/** Describes the current open status of a place. */
+/**
+ * Describes the current open status of a place.
+ *
+ * @related GMSPlace
+ */
 typedef NS_ENUM(NSInteger, GMSPlacesOpenNowStatus) {
   /** The place is open now. */
   kGMSPlacesOpenNowStatusYes,
@@ -26,6 +30,11 @@ typedef NS_ENUM(NSInteger, GMSPlacesOpenNowStatus) {
   kGMSPlacesOpenNowStatusUnknown,
 };
 
+/**
+ * Describes the price level of a place.
+ *
+ * @related GMSPlace
+ */
 typedef NS_ENUM(NSInteger, GMSPlacesPriceLevel) {
   kGMSPlacesPriceLevelUnknown = -1,
   kGMSPlacesPriceLevelFree = 0,

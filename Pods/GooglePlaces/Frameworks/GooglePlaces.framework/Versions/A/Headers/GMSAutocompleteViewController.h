@@ -33,6 +33,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 /**
  * Called when a place has been selected from the available autocomplete predictions.
+ *
+ * Implementations of this method should dismiss the view controller as the view controller will not
+ * dismiss itself.
+ *
  * @param viewController The |GMSAutocompleteViewController| that generated the event.
  * @param place The |GMSPlace| that was returned.
  */
@@ -41,9 +45,11 @@ NS_ASSUME_NONNULL_BEGIN
 
 /**
  * Called when a non-retryable error occurred when retrieving autocomplete predictions or place
- * details. A non-retryable error is defined as one that is unlikely to be fixed by immediately
- * retrying the operation.
- * <p>
+ * details.
+ *
+ * A non-retryable error is defined as one that is unlikely to be fixed by immediately retrying the
+ * operation.
+ *
  * Only the following values of |GMSPlacesErrorCode| are retryable:
  * <ul>
  * <li>kGMSPlacesNetworkError
@@ -51,6 +57,7 @@ NS_ASSUME_NONNULL_BEGIN
  * <li>kGMSPlacesInternalError
  * </ul>
  * All other error codes are non-retryable.
+ *
  * @param viewController The |GMSAutocompleteViewController| that generated the event.
  * @param error The |NSError| that was returned.
  */
@@ -59,6 +66,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 /**
  * Called when the user taps the Cancel button in a |GMSAutocompleteViewController|.
+ *
+ * Implementations of this method should dismiss the view controller as the view controller will not
+ * dismiss itself.
+ *
  * @param viewController The |GMSAutocompleteViewController| that generated the event.
  */
 - (void)wasCancelled:(GMSAutocompleteViewController *)viewController;
@@ -67,8 +78,11 @@ NS_ASSUME_NONNULL_BEGIN
 
 /**
  * Called when the user selects an autocomplete prediction from the list but before requesting
- * place details. Returning NO from this method will suppress the place details fetch and
- * didAutocompleteWithPlace will not be called.
+ * place details.
+ *
+ * Returning NO from this method will suppress the place details fetch and didAutocompleteWithPlace
+ * will not be called.
+ *
  * @param viewController The |GMSAutocompleteViewController| that generated the event.
  * @param prediction The |GMSAutocompletePrediction| that was selected.
  */
@@ -77,18 +91,19 @@ NS_ASSUME_NONNULL_BEGIN
 
 /**
  * Called once every time new autocomplete predictions are received.
+ *
  * @param viewController The |GMSAutocompleteViewController| that generated the event.
  */
 - (void)didUpdateAutocompletePredictions:(GMSAutocompleteViewController *)viewController;
 
 /**
- * @param viewController The |GMSAutocompleteViewController| that generated the event.
  * Called once immediately after a request for autocomplete predictions is made.
+ *
+ * @param viewController The |GMSAutocompleteViewController| that generated the event.
  */
 - (void)didRequestAutocompletePredictions:(GMSAutocompleteViewController *)viewController;
 
 @end
-
 
 /**
  * GMSAutocompleteViewController provides an interface that displays a table of autocomplete

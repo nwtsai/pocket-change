@@ -85,7 +85,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
-
 /**
  * GMSAutocompleteTableDataSource provides an interface for providing place autocomplete
  * predictions to populate a UITableView by implementing the UITableViewDataSource and
@@ -94,9 +93,8 @@ NS_ASSUME_NONNULL_BEGIN
  * GMSAutocompleteTableDataSource is designed to be used as the data source for a
  * UISearchDisplayController.
  *
- * NOTE: Unless iOS 7 compatibility is required, using UISearchController with
- * |GMSAutocompleteResultsViewController| instead of UISearchDisplayController is highly
- * recommended.
+ * NOTE: Using UISearchController with |GMSAutocompleteResultsViewController| instead of
+ * UISearchDisplayController is highly recommended.
  *
  * Set an instance of GMSAutocompleteTableDataSource as the searchResultsDataSource and
  * searchResultsDelegate properties of UISearchDisplayController. In your implementation of
@@ -108,8 +106,7 @@ NS_ASSUME_NONNULL_BEGIN
  * UISearchDisplayController's table view.
  *
  */
-@interface GMSAutocompleteTableDataSource : NSObject <
-    UITableViewDataSource, UITableViewDelegate>
+@interface GMSAutocompleteTableDataSource : NSObject <UITableViewDataSource, UITableViewDelegate>
 
 /** Delegate to be notified when a place is selected or picking is cancelled. */
 @property(nonatomic, weak, nullable) IBOutlet id<GMSAutocompleteTableDataSourceDelegate> delegate;

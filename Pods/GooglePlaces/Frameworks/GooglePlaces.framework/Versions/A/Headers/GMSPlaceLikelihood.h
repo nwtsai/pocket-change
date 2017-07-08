@@ -20,7 +20,7 @@ NS_ASSUME_NONNULL_BEGIN
  * list of returned places for a single request. For more information about place likelihoods, see
  * |GMSPlaceLikelihoodList|.
  */
-@interface GMSPlaceLikelihood : NSObject<NSCopying>
+@interface GMSPlaceLikelihood : NSObject <NSCopying>
 
 /**
  * The place contained in this place likelihood.

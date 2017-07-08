@@ -1,3 +1,18 @@
+Version 2.3.1 - June 2017
+========================
+Resolved Issues:
+  - Fixed an issue resulting in a crash when receiving photos for certain
+    places.
+
+Version 2.3.0 - May 2017
+========================
+Notes:
+  - Dropped support for iOS 7.
+  - The armv7s architecture in the frameworks will be removed in 2.4. Devices
+    which previously used armv7s can continue to be supported using the armv7
+    architecture. All applications using the default architecture settings
+    in any supported version of Xcode shouldn't notice any change.
+
 Version 2.2.0 - February 2017
 =============================
 Resolved Issues:

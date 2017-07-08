@@ -25,50 +25,55 @@
 NS_ASSUME_NONNULL_BEGIN
 
 /**
- * @relates GMSPlacesClient
  * Callback type for receiving place details lookups. If an error occurred,
  * |result| will be nil and |error| will contain information about the error.
  * @param result The |GMSPlace| that was returned.
  * @param error The error that occurred, if any.
+ *
+ * @related GMSPlacesClient
  */
 typedef void (^GMSPlaceResultCallback)(GMSPlace *_Nullable result, NSError *_Nullable error);
 
 /**
- * @relates GMSPlacesClient
  * Callback type for receiving place likelihood lists. If an error occurred, |likelihoodList| will
  * be nil and |error| will contain information about the error.
  * @param likelihoodList The list of place likelihoods.
  * @param error The error that occurred, if any.
+ *
+ * @related GMSPlacesClient
  */
 typedef void (^GMSPlaceLikelihoodListCallback)(GMSPlaceLikelihoodList *_Nullable likelihoodList,
                                                NSError *_Nullable error);
 
 /**
- * @relates GMSPlacesClient
  * Callback type for receiving autocompletion results. |results| is an array of
  * GMSAutocompletePredictions representing candidate completions of the query.
  * @param results An array of |GMSAutocompletePrediction|s.
  * @param error The error that occurred, if any.
+ *
+ * @related GMSPlacesClient
  */
 typedef void (^GMSAutocompletePredictionsCallback)(
     NSArray<GMSAutocompletePrediction *> *_Nullable results, NSError *_Nullable error);
 
 /**
- * @relates GMSPlacesClient
  * Callback type for receiving place photos results. If an error occurred, |photos| will be nil and
  * |error| will contain information about the error.
  * @param photos The result containing |GMSPlacePhotoMetadata| objects.
  * @param error The error that occurred, if any.
+ *
+ * @related GMSPlacesClient
  */
-typedef void (^GMSPlacePhotoMetadataResultCallback)(
-    GMSPlacePhotoMetadataList *_Nullable photos, NSError *_Nullable error);
+typedef void (^GMSPlacePhotoMetadataResultCallback)(GMSPlacePhotoMetadataList *_Nullable photos,
+                                                    NSError *_Nullable error);
 
 /**
- * @relates GMSPlacesClient
  * Callback type for receiving |UIImage| objects from a |GMSPlacePhotoMetadata| object. If an error
  * occurred, |photo| will be nil and |error| will contain information about the error.
  * @param photo The |UIImage| which was loaded.
  * @param error The error that occurred, if any.
+ *
+ * @related GMSPlacesClient
  */
 typedef void (^GMSPlacePhotoImageResultCallback)(UIImage *_Nullable photo,
                                                  NSError *_Nullable error);
@@ -222,8 +227,7 @@ typedef void (^GMSPlacePhotoImageResultCallback)(UIImage *_Nullable photo,
  * @param place The details of the place to be added.
  * @param callback The callback to invoke with the place that was added.
  */
-- (void)addPlace:(GMSUserAddedPlace *)place
-        callback:(GMSPlaceResultCallback)callback;
+- (void)addPlace:(GMSUserAddedPlace *)place callback:(GMSPlaceResultCallback)callback;
 
 @end
 
