@@ -1,6 +1,17 @@
 # Pocket Change
 iOS App made from scratch that helps users visualize their personal expenses and log their day-to-day transactions
 
+# Screenshots
+![alt tag](http://i.imgur.com/AI1XpSu.jpg)
+![alt tag](http://i.imgur.com/Um9GGPG.jpg)
+![alt tag](http://i.imgur.com/XvlLNAy.png)
+![alt tag](http://i.imgur.com/SpD5mU6.jpg)
+![alt tag](http://i.imgur.com/MORRDR7.jpg)
+![alt tag](http://i.imgur.com/WzapKJJ.png)
+![alt tag](http://i.imgur.com/nUnKxzp.jpg)
+![alt tag](http://i.imgur.com/xU8B3eQ.png)
+![alt tag](http://i.imgur.com/1cCDaJq.png)
+
 # Features
 ‣ View your entire, color-coded history log of <i>how much</i>, <i>why</i>, <i>where</i>, and <i>when</i> money was spent <br />
 ‣ Integrated the application with the Google Maps API to visualize where money was spent when the user travels <br />
@@ -37,16 +48,4 @@ iOS App made from scratch that helps users visualize their personal expenses and
 ‣ Programmatically utilized alerts to record user input <br />
 ‣ List of budgets and each budget's history is displayed using a UITableview <br />
 ‣ Used IBOutlets to programmatically interact with user interface elements <br />
-‣ Defined an IBAction function that corrects button-enabling every time the user types or deletes a character <br /> 
-
-# Screenshots
-![alt tag](http://i.imgur.com/AI1XpSu.jpg)
-![alt tag](http://i.imgur.com/Um9GGPG.jpg)
-![alt tag](http://i.imgur.com/XvlLNAy.png)
-![alt tag](http://i.imgur.com/SpD5mU6.jpg)
-![alt tag](http://i.imgur.com/MORRDR7.jpg)
-![alt tag](http://i.imgur.com/WzapKJJ.png)
-![alt tag](http://i.imgur.com/nUnKxzp.jpg)
-![alt tag](http://i.imgur.com/xU8B3eQ.png)
-![alt tag](http://i.imgur.com/1cCDaJq.png)
-
+‣ Defined an IBAction function that corrects button-enabling every time the user types or deletes a character <br />
